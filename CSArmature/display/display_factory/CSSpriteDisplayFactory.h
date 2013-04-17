@@ -1,0 +1,64 @@
+/*
+ * Copyright (c) 2012 Chukong Technologies, Inc.
+ *
+ * http://www.cocostudio.com
+ * http://tools.cocoachina.com
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a
+ * copy of this software and associated documentation files (the
+ * "Software"), to deal in the Software without restriction, including
+ * without limitation the rights to use, copy, modify, merge, publish,
+ * distribute, sublicense, and/or sell copies of the Software, and to permit
+ * persons to whom the Software is furnished to do so, subject to the
+ * following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included
+ * in all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
+ * OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+ * MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN
+ * NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
+ * DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
+ * OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE
+ * USE OR OTHER DEALINGS IN THE SOFTWARE.
+ */
+
+#ifndef COCOSTUDIO_CSSPRITEDISPLAYFACTORY_H
+#define COCOSTUDIO_CSSPRITEDISPLAYFACTORY_H
+
+#include "cocos2d.h"
+#include "CSDisplayFactory.h"
+#include "CSDecorativeDisplay.h"
+#include "CCTexture2DMutable.h"
+using namespace cocos2d;
+
+namespace cs {
+   
+
+class SpriteDisplayFactory : public DisplayFactory
+{
+public:
+    virtual CCObject *addDisplay(Bone *bone, DecorativeDisplay *decoDisplay, DisplayData *_DisplayData);
+    virtual CCObject *createDisplay(Bone *bone, DecorativeDisplay *decoDisplay);
+    virtual void changeDisplay(Bone *bone, DecorativeDisplay *decoDisplay);
+    
+	virtual CCNode *getRenderNode(Bone *bone, DecorativeDisplay *decoDisplay);
+	virtual void updateDisplay(Bone *bone, DecorativeDisplay *decoDisplay, FrameData *_frameData);
+    
+    /**
+     *  @brief  create a CCTexture2DMutable, CCTexture2DMutable used for checking whether or not you click on the transparent pixel .
+     */
+    CCTexture2DMutable *createTexture2DMutable(float _width, float _height, const char *_imageFile);
+
+	virtual CCRect getBoundingBox(Bone *bone, DecorativeDisplay *decoDisplay);
+	virtual CCSize getContentSize(Bone *bone, DecorativeDisplay *decoDisplay);
+    
+    virtual CCPoint getAnchorPoint(Bone *bone, DecorativeDisplay *decoDisplay);
+    virtual CCPoint getAnchorPointInPoints(Bone *bone, DecorativeDisplay *decoDisplay);
+};
+		
+
+}
+
+#endif
