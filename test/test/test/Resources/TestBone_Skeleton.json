@@ -1,0 +1,673 @@
+{
+   "animation_data" : [
+      {
+         "mov_data" : [
+            {
+               "dr" : 101,
+               "drTW" : 0,
+               "lp" : true,
+               "mov_bone_data" : [
+                  {
+                     "dl" : 0.0,
+                     "frame_data" : [
+                        {
+                           "cX" : 1.0,
+                           "cY" : 1.0,
+                           "dI" : 0,
+                           "dr" : 50,
+                           "kX" : -0.0,
+                           "kY" : 0.0,
+                           "twE" : 0,
+                           "x" : 144.0,
+                           "y" : 117.0,
+                           "z" : 8
+                        },
+                        {
+                           "cX" : 1.0,
+                           "cY" : 1.0,
+                           "dI" : 0,
+                           "dr" : 50,
+                           "kX" : 0.9155001044273377,
+                           "kY" : -0.9155001044273377,
+                           "twE" : 0,
+                           "x" : 144.0,
+                           "y" : 117.0,
+                           "z" : 8
+                        },
+                        {
+                           "cX" : 1.0,
+                           "cY" : 1.0,
+                           "dI" : 0,
+                           "dr" : 1,
+                           "kX" : -0.0,
+                           "kY" : 0.0,
+                           "twE" : 0,
+                           "x" : 144.0,
+                           "y" : 117.0,
+                           "z" : 8
+                        }
+                     ],
+                     "name" : "Layer102",
+                     "sc" : 1.0
+                  },
+                  {
+                     "dl" : 0.0,
+                     "frame_data" : [
+                        {
+                           "cX" : 1.0,
+                           "cY" : 1.0,
+                           "dI" : 0,
+                           "dr" : 50,
+                           "kX" : 0.0,
+                           "kY" : 0.0,
+                           "twE" : 0,
+                           "x" : 66.0,
+                           "y" : 2.0,
+                           "z" : 6
+                        },
+                        {
+                           "cX" : 1.0,
+                           "cY" : 1.0,
+                           "dI" : 0,
+                           "dr" : 50,
+                           "kX" : 0.2309219390153885,
+                           "kY" : -0.2309219390153885,
+                           "twE" : 0,
+                           "x" : 66.0,
+                           "y" : 2.0,
+                           "z" : 6
+                        },
+                        {
+                           "cX" : 1.0,
+                           "cY" : 1.0,
+                           "dI" : 0,
+                           "dr" : 1,
+                           "kX" : 0.0,
+                           "kY" : 0.0,
+                           "twE" : 0,
+                           "x" : 66.0,
+                           "y" : 2.0,
+                           "z" : 6
+                        }
+                     ],
+                     "name" : "Layer104",
+                     "sc" : 1.0
+                  },
+                  {
+                     "dl" : 0.0,
+                     "frame_data" : [
+                        {
+                           "cX" : 1.0,
+                           "cY" : 1.0,
+                           "dI" : 0,
+                           "dr" : 50,
+                           "kX" : -0.0,
+                           "kY" : 0.0,
+                           "twE" : 0,
+                           "x" : -33.0,
+                           "y" : -94.0,
+                           "z" : 3
+                        },
+                        {
+                           "cX" : 1.0,
+                           "cY" : 1.0,
+                           "dI" : 0,
+                           "dr" : 50,
+                           "kX" : -0.3267896175384522,
+                           "kY" : 0.3267896175384522,
+                           "twE" : 0,
+                           "x" : -33.0,
+                           "y" : -94.0,
+                           "z" : 3
+                        },
+                        {
+                           "cX" : 1.0,
+                           "cY" : 1.0,
+                           "dI" : 0,
+                           "dr" : 1,
+                           "kX" : 0.0,
+                           "kY" : 0.0,
+                           "twE" : 0,
+                           "x" : -33.0,
+                           "y" : -94.0,
+                           "z" : 3
+                        }
+                     ],
+                     "name" : "Layer108",
+                     "sc" : 1.0
+                  },
+                  {
+                     "dl" : 0.0,
+                     "frame_data" : [
+                        {
+                           "cX" : 1.0,
+                           "cY" : 1.0,
+                           "dI" : 0,
+                           "dr" : 50,
+                           "kX" : 0.0,
+                           "kY" : 0.0,
+                           "twE" : 0,
+                           "x" : -48.0,
+                           "y" : -161.0,
+                           "z" : 5
+                        },
+                        {
+                           "cX" : 1.0,
+                           "cY" : 1.0,
+                           "dI" : 0,
+                           "dr" : 50,
+                           "kX" : -0.2564904689788818,
+                           "kY" : 0.2564904689788818,
+                           "twE" : 0,
+                           "x" : -48.0,
+                           "y" : -161.0,
+                           "z" : 5
+                        },
+                        {
+                           "cX" : 1.0,
+                           "cY" : 1.0,
+                           "dI" : 0,
+                           "dr" : 1,
+                           "kX" : 0.0,
+                           "kY" : 0.0,
+                           "twE" : 0,
+                           "x" : -48.0,
+                           "y" : -161.0,
+                           "z" : 5
+                        }
+                     ],
+                     "name" : "Layer110",
+                     "sc" : 1.0
+                  },
+                  {
+                     "dl" : 0.0,
+                     "frame_data" : [
+                        {
+                           "cX" : 1.0,
+                           "cY" : 1.0,
+                           "dI" : 0,
+                           "dr" : 50,
+                           "kX" : 0.0,
+                           "kY" : 0.0,
+                           "twE" : 0,
+                           "x" : -24.0,
+                           "y" : -13.0,
+                           "z" : 2
+                        },
+                        {
+                           "cX" : 1.0,
+                           "cY" : 1.0,
+                           "dI" : 0,
+                           "dr" : 50,
+                           "kX" : 0.1277788430452347,
+                           "kY" : -0.1277788430452347,
+                           "twE" : 0,
+                           "x" : -24.0,
+                           "y" : -13.0,
+                           "z" : 2
+                        },
+                        {
+                           "cX" : 1.0,
+                           "cY" : 1.0,
+                           "dI" : 0,
+                           "dr" : 1,
+                           "kX" : 0.0,
+                           "kY" : 0.0,
+                           "twE" : 0,
+                           "x" : -24.0,
+                           "y" : -13.0,
+                           "z" : 2
+                        }
+                     ],
+                     "name" : "Layer112",
+                     "sc" : 1.0
+                  },
+                  {
+                     "dl" : 0.0,
+                     "frame_data" : [
+                        {
+                           "cX" : 1.0,
+                           "cY" : 1.0,
+                           "dI" : 0,
+                           "dr" : 50,
+                           "kX" : 0.0,
+                           "kY" : 0.0,
+                           "twE" : 0,
+                           "x" : -41.0,
+                           "y" : -46.0,
+                           "z" : 4
+                        },
+                        {
+                           "cX" : 1.0,
+                           "cY" : 1.0,
+                           "dI" : 0,
+                           "dr" : 50,
+                           "kX" : 0.0,
+                           "kY" : 0.0,
+                           "twE" : 0,
+                           "x" : -41.0,
+                           "y" : -46.0,
+                           "z" : 4
+                        },
+                        {
+                           "cX" : 1.0,
+                           "cY" : 1.0,
+                           "dI" : 0,
+                           "dr" : 1,
+                           "kX" : 0.0,
+                           "kY" : 0.0,
+                           "twE" : 0,
+                           "x" : -41.0,
+                           "y" : -46.0,
+                           "z" : 4
+                        }
+                     ],
+                     "name" : "Layer114",
+                     "sc" : 1.0
+                  },
+                  {
+                     "dl" : 0.0,
+                     "frame_data" : [
+                        {
+                           "cX" : 1.0,
+                           "cY" : 1.0,
+                           "dI" : 0,
+                           "dr" : 50,
+                           "kX" : -0.0,
+                           "kY" : 0.0,
+                           "twE" : 0,
+                           "x" : 75.0,
+                           "y" : -174.0,
+                           "z" : 7
+                        },
+                        {
+                           "cX" : 1.0,
+                           "cY" : 1.0,
+                           "dI" : 0,
+                           "dr" : 50,
+                           "kX" : -0.1799303889274597,
+                           "kY" : 0.1799303889274597,
+                           "twE" : 0,
+                           "x" : 75.0,
+                           "y" : -174.0,
+                           "z" : 7
+                        },
+                        {
+                           "cX" : 1.0,
+                           "cY" : 1.0,
+                           "dI" : 0,
+                           "dr" : 1,
+                           "kX" : -0.0,
+                           "kY" : 0.0,
+                           "twE" : 0,
+                           "x" : 75.0,
+                           "y" : -174.0,
+                           "z" : 7
+                        }
+                     ],
+                     "name" : "Layer116",
+                     "sc" : 1.0
+                  },
+                  {
+                     "dl" : 0.0,
+                     "frame_data" : [
+                        {
+                           "cX" : 1.0,
+                           "cY" : 1.0,
+                           "dI" : 0,
+                           "dr" : 50,
+                           "kX" : -0.0,
+                           "kY" : 0.0,
+                           "twE" : 0,
+                           "x" : -60.0,
+                           "y" : 112.0,
+                           "z" : 1
+                        },
+                        {
+                           "cX" : 1.0,
+                           "cY" : 1.0,
+                           "dI" : 0,
+                           "dr" : 50,
+                           "kX" : 0.2071309834718704,
+                           "kY" : -0.2071309834718704,
+                           "twE" : 0,
+                           "x" : -60.0,
+                           "y" : 112.0,
+                           "z" : 1
+                        },
+                        {
+                           "cX" : 1.0,
+                           "cY" : 1.0,
+                           "dI" : 0,
+                           "dr" : 1,
+                           "kX" : -0.0,
+                           "kY" : 0.0,
+                           "twE" : 0,
+                           "x" : -60.0,
+                           "y" : 112.0,
+                           "z" : 1
+                        }
+                     ],
+                     "name" : "Layer118",
+                     "sc" : 1.0
+                  },
+                  {
+                     "dl" : 0.0,
+                     "frame_data" : [
+                        {
+                           "cX" : 1.0,
+                           "cY" : 1.0,
+                           "dI" : 0,
+                           "dr" : 50,
+                           "kX" : -0.0,
+                           "kY" : 0.0,
+                           "twE" : 0,
+                           "x" : -44.0,
+                           "y" : 162.0,
+                           "z" : 9
+                        },
+                        {
+                           "cX" : 1.0,
+                           "cY" : 1.0,
+                           "dI" : 0,
+                           "dr" : 50,
+                           "kX" : 0.1890949904918671,
+                           "kY" : -0.1890949904918671,
+                           "twE" : 0,
+                           "x" : -44.0,
+                           "y" : 162.0,
+                           "z" : 9
+                        },
+                        {
+                           "cX" : 1.0,
+                           "cY" : 1.0,
+                           "dI" : 0,
+                           "dr" : 1,
+                           "kX" : 0.0,
+                           "kY" : 0.0,
+                           "twE" : 0,
+                           "x" : -44.0,
+                           "y" : 162.0,
+                           "z" : 9
+                        }
+                     ],
+                     "name" : "Layer120",
+                     "sc" : 1.0
+                  }
+               ],
+               "name" : "Action1",
+               "to" : 0,
+               "twE" : 0
+            }
+         ],
+         "name" : "TestBone_Skeleton"
+      }
+   ],
+   "armature_data" : [
+      {
+         "bone_data" : [
+            {
+               "arrow_x" : -42.0,
+               "arrow_y" : 176.0,
+               "cX" : 1.0,
+               "cY" : 1.0,
+               "display_data" : [
+                  {
+                     "displayType" : 0,
+                     "name" : "testAnimationResource\\6.png"
+                  }
+               ],
+               "effectbyskeleton" : true,
+               "kX" : 0.0,
+               "kY" : 0.0,
+               "name" : "Layer114",
+               "parent" : "",
+               "x" : 110.0,
+               "y" : 148.0,
+               "z" : 4
+            },
+            {
+               "arrow_x" : 92.0,
+               "arrow_y" : -284.0,
+               "cX" : 1.0,
+               "cY" : 1.0,
+               "display_data" : [
+                  {
+                     "displayType" : 0,
+                     "name" : "testAnimationResource\\1.png"
+                  }
+               ],
+               "effectbyskeleton" : true,
+               "kX" : 0.0,
+               "kY" : 0.0,
+               "name" : "Layer102",
+               "parent" : "Layer114",
+               "x" : 64.0,
+               "y" : -141.0,
+               "z" : 8
+            },
+            {
+               "arrow_x" : 67.0,
+               "arrow_y" : -171.0,
+               "cX" : 1.0,
+               "cY" : 1.0,
+               "display_data" : [
+                  {
+                     "displayType" : 0,
+                     "name" : "testAnimationResource\\2.png"
+                  }
+               ],
+               "effectbyskeleton" : true,
+               "kX" : 0.0,
+               "kY" : 0.0,
+               "name" : "Layer104",
+               "parent" : "Layer114",
+               "x" : 32.0,
+               "y" : -75.0,
+               "z" : 6
+            },
+            {
+               "arrow_x" : -71.0,
+               "arrow_y" : -118.0,
+               "cX" : 1.0,
+               "cY" : 1.0,
+               "display_data" : [
+                  {
+                     "displayType" : 0,
+                     "name" : "testAnimationResource\\8.png"
+                  }
+               ],
+               "effectbyskeleton" : true,
+               "kX" : 0.0,
+               "kY" : 0.0,
+               "name" : "Layer118",
+               "parent" : "Layer114",
+               "x" : -27.0,
+               "y" : -52.0,
+               "z" : 1
+            },
+            {
+               "arrow_x" : -73.0,
+               "arrow_y" : 270.0,
+               "cX" : 1.0,
+               "cY" : 1.0,
+               "display_data" : [
+                  {
+                     "displayType" : 0,
+                     "name" : "testAnimationResource\\3.png"
+                  }
+               ],
+               "effectbyskeleton" : true,
+               "kX" : 0.0,
+               "kY" : 0.0,
+               "name" : "Layer108",
+               "parent" : "Layer118",
+               "x" : 0.0,
+               "y" : 185.0,
+               "z" : 3
+            },
+            {
+               "arrow_x" : -44.0,
+               "arrow_y" : -157.0,
+               "cX" : 1.0,
+               "cY" : 1.0,
+               "display_data" : [
+                  {
+                     "displayType" : 0,
+                     "name" : "testAnimationResource\\5.png"
+                  }
+               ],
+               "effectbyskeleton" : true,
+               "kX" : 0.0,
+               "kY" : 0.0,
+               "name" : "Layer112",
+               "parent" : "Layer114",
+               "x" : -8.0,
+               "y" : -48.0,
+               "z" : 2
+            },
+            {
+               "arrow_x" : -18.0,
+               "arrow_y" : -82.0,
+               "cX" : 1.0,
+               "cY" : 1.0,
+               "display_data" : [
+                  {
+                     "displayType" : 0,
+                     "name" : "testAnimationResource\\4.png"
+                  }
+               ],
+               "effectbyskeleton" : true,
+               "kX" : 0.0,
+               "kY" : 0.0,
+               "name" : "Layer110",
+               "parent" : "Layer112",
+               "x" : -20.0,
+               "y" : -42.0,
+               "z" : 5
+            },
+            {
+               "arrow_x" : 8.0,
+               "arrow_y" : -84.0,
+               "cX" : 1.0,
+               "cY" : 1.0,
+               "display_data" : [
+                  {
+                     "displayType" : 0,
+                     "name" : "testAnimationResource\\7.png"
+                  }
+               ],
+               "effectbyskeleton" : true,
+               "kX" : 0.0,
+               "kY" : 0.0,
+               "name" : "Layer116",
+               "parent" : "Layer104",
+               "x" : 16.0,
+               "y" : -46.0,
+               "z" : 7
+            },
+            {
+               "arrow_x" : -109.0,
+               "arrow_y" : 273.0,
+               "cX" : 1.0,
+               "cY" : 1.0,
+               "display_data" : [
+                  {
+                     "displayType" : 0,
+                     "name" : "testAnimationResource\\hat.png"
+                  }
+               ],
+               "effectbyskeleton" : true,
+               "kX" : 0.0,
+               "kY" : 0.0,
+               "name" : "Layer120",
+               "parent" : "Layer114",
+               "x" : -72.0,
+               "y" : 208.0,
+               "z" : 9
+            }
+         ],
+         "name" : "TestBone_Skeleton"
+      }
+   ],
+   "config_file_path" : [ "TestBone_Skeleton0.plist" ],
+   "texture_data" : [
+      {
+         "height" : 0.0,
+         "name" : "DefaultBone",
+         "pX" : 0.50,
+         "pY" : 0.50,
+         "width" : 0.0
+      },
+      {
+         "height" : 0.0,
+         "name" : "testAnimationResource\\1",
+         "pX" : 0.50,
+         "pY" : 0.50,
+         "width" : 0.0
+      },
+      {
+         "height" : 0.0,
+         "name" : "testAnimationResource\\2",
+         "pX" : 0.50,
+         "pY" : 0.50,
+         "width" : 0.0
+      },
+      {
+         "height" : 0.0,
+         "name" : "testAnimationResource\\2man",
+         "pX" : 0.50,
+         "pY" : 0.50,
+         "width" : 0.0
+      },
+      {
+         "height" : 0.0,
+         "name" : "testAnimationResource\\3",
+         "pX" : 0.50,
+         "pY" : 0.50,
+         "width" : 0.0
+      },
+      {
+         "height" : 0.0,
+         "name" : "testAnimationResource\\4",
+         "pX" : 0.50,
+         "pY" : 0.50,
+         "width" : 0.0
+      },
+      {
+         "height" : 0.0,
+         "name" : "testAnimationResource\\5",
+         "pX" : 0.50,
+         "pY" : 0.50,
+         "width" : 0.0
+      },
+      {
+         "height" : 0.0,
+         "name" : "testAnimationResource\\6",
+         "pX" : 0.50,
+         "pY" : 0.50,
+         "width" : 0.0
+      },
+      {
+         "height" : 0.0,
+         "name" : "testAnimationResource\\7",
+         "pX" : 0.50,
+         "pY" : 0.50,
+         "width" : 0.0
+      },
+      {
+         "height" : 0.0,
+         "name" : "testAnimationResource\\8",
+         "pX" : 0.50,
+         "pY" : 0.50,
+         "width" : 0.0
+      },
+      {
+         "height" : 0.0,
+         "name" : "testAnimationResource\\hat",
+         "pX" : 0.50,
+         "pY" : 0.50,
+         "width" : 0.0
+      }
+   ]
+}

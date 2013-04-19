@@ -189,6 +189,8 @@ CCD_Result CalcIK_CCD(Bone *startBone, Bone *endBone, CCPoint &targetPoint, floa
 		// Rotate the current bone in local space (this value is output to the user)
 		if (dynamic_cast<EditorTween*>(currentBone->getTween()) != 0)
 		{
+#if CS_DEBUG_FOR_EDIT
+
 			EditorTween *tween = ((EditorTween*)currentBone->getTween());
 
 			if(currentBone == endBone || currentBone->getChildren()->count() > 1)
@@ -206,6 +208,8 @@ CCD_Result CalcIK_CCD(Bone *startBone, Bone *endBone, CCPoint &targetPoint, floa
 
 				((EditorTween*)currentBone->getTween())->editRotation(rotAng);
 			}
+
+#endif
 
 		}
 		else

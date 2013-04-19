@@ -1,0 +1,430 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="source">
+      <UniqueIdentifier>{4a1fa870-6ef7-4d08-a2a7-3f19253f8296}</UniqueIdentifier>
+      <Extensions>cpp;c;cxx;def;odl;idl;hpj;bat;asm</Extensions>
+    </Filter>
+    <Filter Include="include">
+      <UniqueIdentifier>{f51b0395-3bca-4eff-802a-ef1a44e7ae37}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc</Extensions>
+    </Filter>
+    <Filter Include="resource">
+      <UniqueIdentifier>{a359b213-1706-4408-b687-eb15bdcaf82a}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;jpg;jpeg;jpe;png;manifest</Extensions>
+    </Filter>
+    <Filter Include="CSArmature">
+      <UniqueIdentifier>{357f081b-f677-4c04-b8c2-b331cd4d84d8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CSArmature\animation">
+      <UniqueIdentifier>{86649833-836e-4f26-bb97-516802ad785d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CSArmature\datas">
+      <UniqueIdentifier>{d2b17fb0-e53f-42de-bf6c-74d4f1796434}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CSArmature\display">
+      <UniqueIdentifier>{ba586b1c-4df5-4302-999d-753c6a88ac59}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CSArmature\external_tool">
+      <UniqueIdentifier>{af2f868a-3953-4d2a-bbd5-a51f9f8d44ec}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CSArmature\physics">
+      <UniqueIdentifier>{ab8530a9-c1b5-4e44-8973-d6b77f1566ec}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CSArmature\utils">
+      <UniqueIdentifier>{fd390761-3df0-4c13-89ef-dbe51ea4e7d2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CSArmature\datas\display_data">
+      <UniqueIdentifier>{65764da6-3df0-4292-9670-9c08c216bfd4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CSArmature\display\display_factory">
+      <UniqueIdentifier>{d5bcd44b-634c-4209-affb-6972b554216e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CSArmature\external_tool\Json">
+      <UniqueIdentifier>{1d20e252-ef8a-4c79-a18d-5f0ef92a5be2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CSArmature\external_tool\tinyxml">
+      <UniqueIdentifier>{db7a4461-77cc-4b2a-bc7c-eff6a4fa4122}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="res\test.ico">
+      <Filter>resource</Filter>
+    </None>
+    <None Include="..\Resources\CloseSelected.png">
+      <Filter>resource</Filter>
+    </None>
+    <None Include="..\Resources\CloseNormal.png">
+      <Filter>resource</Filter>
+    </None>
+    <None Include="..\Resources\HelloWorld.png">
+      <Filter>resource</Filter>
+    </None>
+    <None Include="..\..\..\..\CSArmature\external_tool\Json\lib_json\json_internalarray.inl">
+      <Filter>CSArmature\external_tool\Json</Filter>
+    </None>
+    <None Include="..\..\..\..\CSArmature\external_tool\Json\lib_json\json_internalmap.inl">
+      <Filter>CSArmature\external_tool\Json</Filter>
+    </None>
+    <None Include="..\..\..\..\CSArmature\external_tool\Json\lib_json\json_valueiterator.inl">
+      <Filter>CSArmature\external_tool\Json</Filter>
+    </None>
+    <None Include="..\..\..\..\CSArmature\external_tool\Json\lib_json\sconscript">
+      <Filter>CSArmature\external_tool\Json</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="test.rc">
+      <Filter>resource</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="resource.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="main.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\AppDelegate.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\HelloWorldScene.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\CSArmature\animation\CSAnimation.h">
+      <Filter>CSArmature\animation</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\CSArmature\animation\CSProcessBase.h">
+      <Filter>CSArmature\animation</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\CSArmature\animation\CSTween.h">
+      <Filter>CSArmature\animation</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\CSArmature\datas\CSAnimationData.h">
+      <Filter>CSArmature\datas</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\CSArmature\datas\CSArmatureData.h">
+      <Filter>CSArmature\datas</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\CSArmature\datas\CSBoneData.h">
+      <Filter>CSArmature\datas</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\CSArmature\datas\CSContourData.h">
+      <Filter>CSArmature\datas</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\CSArmature\datas\CSFrameData.h">
+      <Filter>CSArmature\datas</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\CSArmature\datas\CSJsonData.h">
+      <Filter>CSArmature\datas</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\CSArmature\datas\CSMovementBoneData.h">
+      <Filter>CSArmature\datas</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\CSArmature\datas\CSMovementData.h">
+      <Filter>CSArmature\datas</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\CSArmature\datas\CSMovementFrameData.h">
+      <Filter>CSArmature\datas</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\CSArmature\datas\CSNode.h">
+      <Filter>CSArmature\datas</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\CSArmature\datas\CSTextureData.h">
+      <Filter>CSArmature\datas</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\CSArmature\datas\display_data\CSArmatureDisplayData.h">
+      <Filter>CSArmature\datas\display_data</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\CSArmature\datas\display_data\CSDisplayData.h">
+      <Filter>CSArmature\datas\display_data</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\CSArmature\datas\display_data\CSParticleDisplayData.h">
+      <Filter>CSArmature\datas\display_data</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\CSArmature\datas\display_data\CSShaderDisplayData.h">
+      <Filter>CSArmature\datas\display_data</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\CSArmature\datas\display_data\CSSpriteDisplayData.h">
+      <Filter>CSArmature\datas\display_data</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\CSArmature\display\CSDecorativeDisplay.h">
+      <Filter>CSArmature\display</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\CSArmature\display\CSDisplayManager.h">
+      <Filter>CSArmature\display</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\CSArmature\display\CSShaderNode.h">
+      <Filter>CSArmature\display</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\CSArmature\display\display_factory\CSArmatureDisplayFactory.h">
+      <Filter>CSArmature\display\display_factory</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\CSArmature\display\display_factory\CSDisplayFactory.h">
+      <Filter>CSArmature\display\display_factory</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\CSArmature\display\display_factory\CSDisplayFactoryManager.h">
+      <Filter>CSArmature\display\display_factory</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\CSArmature\display\display_factory\CSParticleDisplayFactory.h">
+      <Filter>CSArmature\display\display_factory</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\CSArmature\display\display_factory\CSShaderDisplayFactory.h">
+      <Filter>CSArmature\display\display_factory</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\CSArmature\display\display_factory\CSSpriteDisplayFactory.h">
+      <Filter>CSArmature\display\display_factory</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\CSArmature\external_tool\Json\CSContentJsonDictionary.h">
+      <Filter>CSArmature\external_tool\Json</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\CSArmature\external_tool\Json\lib_json\json_batchallocator.h">
+      <Filter>CSArmature\external_tool\Json</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\CSArmature\external_tool\Json\lib_json\json_tool.h">
+      <Filter>CSArmature\external_tool\Json</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\CSArmature\external_tool\Json\json\autolink.h">
+      <Filter>CSArmature\external_tool\Json</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\CSArmature\external_tool\Json\json\config.h">
+      <Filter>CSArmature\external_tool\Json</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\CSArmature\external_tool\Json\json\features.h">
+      <Filter>CSArmature\external_tool\Json</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\CSArmature\external_tool\Json\json\forwards.h">
+      <Filter>CSArmature\external_tool\Json</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\CSArmature\external_tool\Json\json\json_lib.h">
+      <Filter>CSArmature\external_tool\Json</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\CSArmature\external_tool\Json\json\reader.h">
+      <Filter>CSArmature\external_tool\Json</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\CSArmature\external_tool\Json\json\value.h">
+      <Filter>CSArmature\external_tool\Json</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\CSArmature\external_tool\Json\json\writer.h">
+      <Filter>CSArmature\external_tool\Json</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\CSArmature\external_tool\tinyxml\tinystr.h">
+      <Filter>CSArmature\external_tool\tinyxml</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\CSArmature\external_tool\tinyxml\tinyxml.h">
+      <Filter>CSArmature\external_tool\tinyxml</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\CSArmature\external_tool\CCTexture2DMutable.h">
+      <Filter>CSArmature\external_tool</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\CSArmature\external_tool\GLES-Render.h">
+      <Filter>CSArmature\external_tool</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\CSArmature\external_tool\sigslot.h">
+      <Filter>CSArmature\external_tool</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\CSArmature\physics\CSColliderDetector.h">
+      <Filter>CSArmature\physics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\CSArmature\physics\CSPhysicsWorld.h">
+      <Filter>CSArmature\physics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\CSArmature\utils\CSArmatureDataManager.h">
+      <Filter>CSArmature\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\CSArmature\utils\CSArmatureDefine.h">
+      <Filter>CSArmature\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\CSArmature\utils\CSBatchNode.h">
+      <Filter>CSArmature\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\CSArmature\utils\CSBatchNodeManager.h">
+      <Filter>CSArmature\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\CSArmature\utils\CSConstValue.h">
+      <Filter>CSArmature\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\CSArmature\utils\CSDataReaderHelper.h">
+      <Filter>CSArmature\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\CSArmature\utils\CSSpriteFrameCacheHelper.h">
+      <Filter>CSArmature\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\CSArmature\utils\CSTransformHelp.h">
+      <Filter>CSArmature\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\CSArmature\utils\CSTweenFunction.h">
+      <Filter>CSArmature\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\CSArmature\utils\CSUtilMath.h">
+      <Filter>CSArmature\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\CSArmature\CSArmature.h">
+      <Filter>CSArmature</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\CSArmature\CSBone.h">
+      <Filter>CSArmature</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="main.cpp">
+      <Filter>source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\AppDelegate.cpp">
+      <Filter>source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\HelloWorldScene.cpp">
+      <Filter>source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\CSArmature\animation\CSAnimation.cpp">
+      <Filter>CSArmature\animation</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\CSArmature\animation\CSProcessBase.cpp">
+      <Filter>CSArmature\animation</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\CSArmature\animation\CSTween.cpp">
+      <Filter>CSArmature\animation</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\CSArmature\datas\CSAnimationData.cpp">
+      <Filter>CSArmature\datas</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\CSArmature\datas\CSArmatureData.cpp">
+      <Filter>CSArmature\datas</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\CSArmature\datas\CSBoneData.cpp">
+      <Filter>CSArmature\datas</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\CSArmature\datas\CSContourData.cpp">
+      <Filter>CSArmature\datas</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\CSArmature\datas\CSFrameData.cpp">
+      <Filter>CSArmature\datas</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\CSArmature\datas\CSJsonData.cpp">
+      <Filter>CSArmature\datas</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\CSArmature\datas\CSMovementBoneData.cpp">
+      <Filter>CSArmature\datas</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\CSArmature\datas\CSMovementData.cpp">
+      <Filter>CSArmature\datas</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\CSArmature\datas\CSMovementFrameData.cpp">
+      <Filter>CSArmature\datas</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\CSArmature\datas\CSNode.cpp">
+      <Filter>CSArmature\datas</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\CSArmature\datas\CSTextureData.cpp">
+      <Filter>CSArmature\datas</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\CSArmature\datas\display_data\CSArmatureDisplayData.cpp">
+      <Filter>CSArmature\datas\display_data</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\CSArmature\datas\display_data\CSDisplayData.cpp">
+      <Filter>CSArmature\datas\display_data</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\CSArmature\datas\display_data\CSParticleDisplayData.cpp">
+      <Filter>CSArmature\datas\display_data</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\CSArmature\datas\display_data\CSShaderDisplayData.cpp">
+      <Filter>CSArmature\datas\display_data</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\CSArmature\datas\display_data\CSSpriteDisplayData.cpp">
+      <Filter>CSArmature\datas\display_data</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\CSArmature\display\CSDecorativeDisplay.cpp">
+      <Filter>CSArmature\display</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\CSArmature\display\CSDisplayManager.cpp">
+      <Filter>CSArmature\display</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\CSArmature\display\CSShaderNode.cpp">
+      <Filter>CSArmature\display</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\CSArmature\display\display_factory\CSArmatureDisplayFactory.cpp">
+      <Filter>CSArmature\display\display_factory</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\CSArmature\display\display_factory\CSDisplayFactory.cpp">
+      <Filter>CSArmature\display\display_factory</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\CSArmature\display\display_factory\CSDisplayFactoryManager.cpp">
+      <Filter>CSArmature\display\display_factory</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\CSArmature\display\display_factory\CSParticleDisplayFactory.cpp">
+      <Filter>CSArmature\display\display_factory</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\CSArmature\display\display_factory\CSShaderDisplayFactory.cpp">
+      <Filter>CSArmature\display\display_factory</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\CSArmature\display\display_factory\CSSpriteDisplayFactory.cpp">
+      <Filter>CSArmature\display\display_factory</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\CSArmature\external_tool\Json\CSContentJsonDictionary.cpp">
+      <Filter>CSArmature\external_tool\Json</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\CSArmature\external_tool\Json\lib_json\json_reader.cpp">
+      <Filter>CSArmature\external_tool\Json</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\CSArmature\external_tool\Json\lib_json\json_value.cpp">
+      <Filter>CSArmature\external_tool\Json</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\CSArmature\external_tool\Json\lib_json\json_writer.cpp">
+      <Filter>CSArmature\external_tool\Json</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\CSArmature\external_tool\tinyxml\tinystr.cpp">
+      <Filter>CSArmature\external_tool\tinyxml</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\CSArmature\external_tool\tinyxml\tinyxml.cpp">
+      <Filter>CSArmature\external_tool\tinyxml</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\CSArmature\external_tool\tinyxml\tinyxmlerror.cpp">
+      <Filter>CSArmature\external_tool\tinyxml</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\CSArmature\external_tool\tinyxml\tinyxmlparser.cpp">
+      <Filter>CSArmature\external_tool\tinyxml</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\CSArmature\external_tool\CCTexture2DMutable.cpp">
+      <Filter>CSArmature\external_tool</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\CSArmature\external_tool\GLES-Render.cpp">
+      <Filter>CSArmature\external_tool</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\CSArmature\physics\CSColliderDetector.cpp">
+      <Filter>CSArmature\physics</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\CSArmature\physics\CSPhysicsWorld.cpp">
+      <Filter>CSArmature\physics</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\CSArmature\utils\CSArmatureDataManager.cpp">
+      <Filter>CSArmature\utils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\CSArmature\utils\CSBatchNode.cpp">
+      <Filter>CSArmature\utils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\CSArmature\utils\CSBatchNodeManager.cpp">
+      <Filter>CSArmature\utils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\CSArmature\utils\CSDataReaderHelper.cpp">
+      <Filter>CSArmature\utils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\CSArmature\utils\CSSpriteFrameCacheHelper.cpp">
+      <Filter>CSArmature\utils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\CSArmature\utils\CSTransformHelp.cpp">
+      <Filter>CSArmature\utils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\CSArmature\utils\CSTweenFunction.cpp">
+      <Filter>CSArmature\utils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\CSArmature\utils\CSUtilMath.cpp">
+      <Filter>CSArmature\utils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\CSArmature\CSArmature.cpp">
+      <Filter>CSArmature</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\CSArmature\CSBone.cpp">
+      <Filter>CSArmature</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

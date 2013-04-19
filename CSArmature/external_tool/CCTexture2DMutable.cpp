@@ -9,11 +9,9 @@
 
 
 #include "CCTexture2DMutable.h"
-#include "SimpleAudioEngine.h"
 
 
 using namespace cocos2d;
-using namespace CocosDenshion;
 
 #if CC_MUTABLE_TEXTURE_SAVE_ORIGINAL_DATA
 void* CCTexture2DMutable::getOriginalTexData() {

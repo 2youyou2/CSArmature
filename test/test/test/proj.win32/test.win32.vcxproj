@@ -1,0 +1,259 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{B6F0CB6C-FD4B-4B12-8979-86C4C8881330}</ProjectGuid>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <OutDir>$(SolutionDir)$(Configuration).win32\</OutDir>
+    <IntDir>$(Configuration).win32\</IntDir>
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <OutDir>$(SolutionDir)$(Configuration).win32\</OutDir>
+    <IntDir>$(Configuration).win32\</IntDir>
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>.;..\Classes;$(SolutionDir)cocos2dx;$(SolutionDir)cocos2dx\include;$(SolutionDir)cocos2dx\kazmath\include;$(SolutionDir)cocos2dx\platform\win32;$(SolutionDir)cocos2dx\platform\third_party\win32;$(SolutionDir)cocos2dx\platform\third_party\win32\OGLES;$(SolutionDir)external;$(SolutionDir)CocosDenshion\include;$(SolutionDir)..\..\CSArmature;$(SolutionDir)..\..\CSArmature\animation;$(SolutionDir)..\..\CSArmature\datas;$(SolutionDir)..\..\CSArmature\datas\display_data;$(SolutionDir)..\..\CSArmature\display;$(SolutionDir)..\..\CSArmature\display\display_factory;$(SolutionDir)..\..\CSArmature\editor;$(SolutionDir)..\..\CSArmature\external_tool;$(SolutionDir)..\..\CSArmature\external_tool\Json;$(SolutionDir)..\..\CSArmature\external_tool\Json\json;$(SolutionDir)..\..\CSArmature\external_tool\Json\lib_json;$(SolutionDir)..\..\CSArmature\external_tool\tinyxml;$(SolutionDir)..\..\CSArmature\physics;$(SolutionDir)..\..\CSArmature\utils;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <MinimalRebuild>true</MinimalRebuild>
+      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;STRICT;_CRT_SECURE_NO_WARNINGS;_SCL_SECURE_NO_WARNINGS_DEBUG;COCOS2D_DEBUG=1;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <DisableSpecificWarnings>4267;4251;4244;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <TargetMachine>MachineX86</TargetMachine>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>$(OutDir);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>libcocos2d.lib;opengl32.lib;glew32.lib;libBox2d.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+    <ResourceCompile>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>$(IntDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ResourceCompile>
+    <Midl>
+      <MkTypLibCompatible>false</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <HeaderFileName>test.h</HeaderFileName>
+      <InterfaceIdentifierFileName>test_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>test_p.c</ProxyFileName>
+      <GenerateStublessProxies>true</GenerateStublessProxies>
+      <TypeLibraryName>$(IntDir)/test.tlb</TypeLibraryName>
+      <DllDataFileName>
+      </DllDataFileName>
+    </Midl>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>.;..\Classes;$(SolutionDir)cocos2dx;$(SolutionDir)cocos2dx\include;$(SolutionDir)cocos2dx\kazmath\include;$(SolutionDir)cocos2dx\platform\win32;$(SolutionDir)cocos2dx\platform\third_party\win32;$(SolutionDir)cocos2dx\platform\third_party\win32\OGLES;$(SolutionDir)external;$(SolutionDir)CocosDenshion\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <ExceptionHandling>
+      </ExceptionHandling>
+      <DebugInformationFormat>
+      </DebugInformationFormat>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;STRICT;_CRT_SECURE_NO_WARNINGS;_SCL_SECURE_NO_WARNINGSNDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <DisableSpecificWarnings>4267;4251;4244;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <TargetMachine>MachineX86</TargetMachine>
+      <AdditionalLibraryDirectories>$(OutDir);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>libcocos2d.lib;opengl32.lib;glew32.lib;libBox2d.lib;libCocosDenshion.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+    <ResourceCompile>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>$(IntDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ResourceCompile>
+    <Midl>
+      <MkTypLibCompatible>false</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <HeaderFileName>test.h</HeaderFileName>
+      <InterfaceIdentifierFileName>test_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>test_p.c</ProxyFileName>
+      <GenerateStublessProxies>true</GenerateStublessProxies>
+      <TypeLibraryName>$(IntDir)/test.tlb</TypeLibraryName>
+      <DllDataFileName>
+      </DllDataFileName>
+    </Midl>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <None Include="..\..\..\..\CSArmature\external_tool\Json\lib_json\json_internalarray.inl" />
+    <None Include="..\..\..\..\CSArmature\external_tool\Json\lib_json\json_internalmap.inl" />
+    <None Include="..\..\..\..\CSArmature\external_tool\Json\lib_json\json_valueiterator.inl" />
+    <None Include="..\..\..\..\CSArmature\external_tool\Json\lib_json\sconscript" />
+    <None Include="..\Resources\CloseNormal.png" />
+    <None Include="..\Resources\CloseSelected.png" />
+    <None Include="..\Resources\HelloWorld.png" />
+    <None Include="res\test.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="test.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\..\CSArmature\animation\CSAnimation.h" />
+    <ClInclude Include="..\..\..\..\CSArmature\animation\CSProcessBase.h" />
+    <ClInclude Include="..\..\..\..\CSArmature\animation\CSTween.h" />
+    <ClInclude Include="..\..\..\..\CSArmature\CSArmature.h" />
+    <ClInclude Include="..\..\..\..\CSArmature\CSBone.h" />
+    <ClInclude Include="..\..\..\..\CSArmature\datas\CSAnimationData.h" />
+    <ClInclude Include="..\..\..\..\CSArmature\datas\CSArmatureData.h" />
+    <ClInclude Include="..\..\..\..\CSArmature\datas\CSBoneData.h" />
+    <ClInclude Include="..\..\..\..\CSArmature\datas\CSContourData.h" />
+    <ClInclude Include="..\..\..\..\CSArmature\datas\CSFrameData.h" />
+    <ClInclude Include="..\..\..\..\CSArmature\datas\CSJsonData.h" />
+    <ClInclude Include="..\..\..\..\CSArmature\datas\CSMovementBoneData.h" />
+    <ClInclude Include="..\..\..\..\CSArmature\datas\CSMovementData.h" />
+    <ClInclude Include="..\..\..\..\CSArmature\datas\CSMovementFrameData.h" />
+    <ClInclude Include="..\..\..\..\CSArmature\datas\CSNode.h" />
+    <ClInclude Include="..\..\..\..\CSArmature\datas\CSTextureData.h" />
+    <ClInclude Include="..\..\..\..\CSArmature\datas\display_data\CSArmatureDisplayData.h" />
+    <ClInclude Include="..\..\..\..\CSArmature\datas\display_data\CSDisplayData.h" />
+    <ClInclude Include="..\..\..\..\CSArmature\datas\display_data\CSParticleDisplayData.h" />
+    <ClInclude Include="..\..\..\..\CSArmature\datas\display_data\CSShaderDisplayData.h" />
+    <ClInclude Include="..\..\..\..\CSArmature\datas\display_data\CSSpriteDisplayData.h" />
+    <ClInclude Include="..\..\..\..\CSArmature\display\CSDecorativeDisplay.h" />
+    <ClInclude Include="..\..\..\..\CSArmature\display\CSDisplayManager.h" />
+    <ClInclude Include="..\..\..\..\CSArmature\display\CSShaderNode.h" />
+    <ClInclude Include="..\..\..\..\CSArmature\display\display_factory\CSArmatureDisplayFactory.h" />
+    <ClInclude Include="..\..\..\..\CSArmature\display\display_factory\CSDisplayFactory.h" />
+    <ClInclude Include="..\..\..\..\CSArmature\display\display_factory\CSDisplayFactoryManager.h" />
+    <ClInclude Include="..\..\..\..\CSArmature\display\display_factory\CSParticleDisplayFactory.h" />
+    <ClInclude Include="..\..\..\..\CSArmature\display\display_factory\CSShaderDisplayFactory.h" />
+    <ClInclude Include="..\..\..\..\CSArmature\display\display_factory\CSSpriteDisplayFactory.h" />
+    <ClInclude Include="..\..\..\..\CSArmature\external_tool\CCTexture2DMutable.h" />
+    <ClInclude Include="..\..\..\..\CSArmature\external_tool\GLES-Render.h" />
+    <ClInclude Include="..\..\..\..\CSArmature\external_tool\Json\CSContentJsonDictionary.h" />
+    <ClInclude Include="..\..\..\..\CSArmature\external_tool\Json\json\autolink.h" />
+    <ClInclude Include="..\..\..\..\CSArmature\external_tool\Json\json\config.h" />
+    <ClInclude Include="..\..\..\..\CSArmature\external_tool\Json\json\features.h" />
+    <ClInclude Include="..\..\..\..\CSArmature\external_tool\Json\json\forwards.h" />
+    <ClInclude Include="..\..\..\..\CSArmature\external_tool\Json\json\json_lib.h" />
+    <ClInclude Include="..\..\..\..\CSArmature\external_tool\Json\json\reader.h" />
+    <ClInclude Include="..\..\..\..\CSArmature\external_tool\Json\json\value.h" />
+    <ClInclude Include="..\..\..\..\CSArmature\external_tool\Json\json\writer.h" />
+    <ClInclude Include="..\..\..\..\CSArmature\external_tool\Json\lib_json\json_batchallocator.h" />
+    <ClInclude Include="..\..\..\..\CSArmature\external_tool\Json\lib_json\json_tool.h" />
+    <ClInclude Include="..\..\..\..\CSArmature\external_tool\sigslot.h" />
+    <ClInclude Include="..\..\..\..\CSArmature\external_tool\tinyxml\tinystr.h" />
+    <ClInclude Include="..\..\..\..\CSArmature\external_tool\tinyxml\tinyxml.h" />
+    <ClInclude Include="..\..\..\..\CSArmature\physics\CSColliderDetector.h" />
+    <ClInclude Include="..\..\..\..\CSArmature\physics\CSPhysicsWorld.h" />
+    <ClInclude Include="..\..\..\..\CSArmature\utils\CSArmatureDataManager.h" />
+    <ClInclude Include="..\..\..\..\CSArmature\utils\CSArmatureDefine.h" />
+    <ClInclude Include="..\..\..\..\CSArmature\utils\CSBatchNode.h" />
+    <ClInclude Include="..\..\..\..\CSArmature\utils\CSBatchNodeManager.h" />
+    <ClInclude Include="..\..\..\..\CSArmature\utils\CSConstValue.h" />
+    <ClInclude Include="..\..\..\..\CSArmature\utils\CSDataReaderHelper.h" />
+    <ClInclude Include="..\..\..\..\CSArmature\utils\CSSpriteFrameCacheHelper.h" />
+    <ClInclude Include="..\..\..\..\CSArmature\utils\CSTransformHelp.h" />
+    <ClInclude Include="..\..\..\..\CSArmature\utils\CSTweenFunction.h" />
+    <ClInclude Include="..\..\..\..\CSArmature\utils\CSUtilMath.h" />
+    <ClInclude Include="..\Classes\AppDelegate.h" />
+    <ClInclude Include="..\Classes\HelloWorldScene.h" />
+    <ClInclude Include="main.h" />
+    <ClInclude Include="resource.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\..\CSArmature\animation\CSAnimation.cpp" />
+    <ClCompile Include="..\..\..\..\CSArmature\animation\CSProcessBase.cpp" />
+    <ClCompile Include="..\..\..\..\CSArmature\animation\CSTween.cpp" />
+    <ClCompile Include="..\..\..\..\CSArmature\CSArmature.cpp" />
+    <ClCompile Include="..\..\..\..\CSArmature\CSBone.cpp" />
+    <ClCompile Include="..\..\..\..\CSArmature\datas\CSAnimationData.cpp" />
+    <ClCompile Include="..\..\..\..\CSArmature\datas\CSArmatureData.cpp" />
+    <ClCompile Include="..\..\..\..\CSArmature\datas\CSBoneData.cpp" />
+    <ClCompile Include="..\..\..\..\CSArmature\datas\CSContourData.cpp" />
+    <ClCompile Include="..\..\..\..\CSArmature\datas\CSFrameData.cpp" />
+    <ClCompile Include="..\..\..\..\CSArmature\datas\CSJsonData.cpp" />
+    <ClCompile Include="..\..\..\..\CSArmature\datas\CSMovementBoneData.cpp" />
+    <ClCompile Include="..\..\..\..\CSArmature\datas\CSMovementData.cpp" />
+    <ClCompile Include="..\..\..\..\CSArmature\datas\CSMovementFrameData.cpp" />
+    <ClCompile Include="..\..\..\..\CSArmature\datas\CSNode.cpp" />
+    <ClCompile Include="..\..\..\..\CSArmature\datas\CSTextureData.cpp" />
+    <ClCompile Include="..\..\..\..\CSArmature\datas\display_data\CSArmatureDisplayData.cpp" />
+    <ClCompile Include="..\..\..\..\CSArmature\datas\display_data\CSDisplayData.cpp" />
+    <ClCompile Include="..\..\..\..\CSArmature\datas\display_data\CSParticleDisplayData.cpp" />
+    <ClCompile Include="..\..\..\..\CSArmature\datas\display_data\CSShaderDisplayData.cpp" />
+    <ClCompile Include="..\..\..\..\CSArmature\datas\display_data\CSSpriteDisplayData.cpp" />
+    <ClCompile Include="..\..\..\..\CSArmature\display\CSDecorativeDisplay.cpp" />
+    <ClCompile Include="..\..\..\..\CSArmature\display\CSDisplayManager.cpp" />
+    <ClCompile Include="..\..\..\..\CSArmature\display\CSShaderNode.cpp" />
+    <ClCompile Include="..\..\..\..\CSArmature\display\display_factory\CSArmatureDisplayFactory.cpp" />
+    <ClCompile Include="..\..\..\..\CSArmature\display\display_factory\CSDisplayFactory.cpp" />
+    <ClCompile Include="..\..\..\..\CSArmature\display\display_factory\CSDisplayFactoryManager.cpp" />
+    <ClCompile Include="..\..\..\..\CSArmature\display\display_factory\CSParticleDisplayFactory.cpp" />
+    <ClCompile Include="..\..\..\..\CSArmature\display\display_factory\CSShaderDisplayFactory.cpp" />
+    <ClCompile Include="..\..\..\..\CSArmature\display\display_factory\CSSpriteDisplayFactory.cpp" />
+    <ClCompile Include="..\..\..\..\CSArmature\external_tool\CCTexture2DMutable.cpp" />
+    <ClCompile Include="..\..\..\..\CSArmature\external_tool\GLES-Render.cpp" />
+    <ClCompile Include="..\..\..\..\CSArmature\external_tool\Json\CSContentJsonDictionary.cpp" />
+    <ClCompile Include="..\..\..\..\CSArmature\external_tool\Json\lib_json\json_reader.cpp" />
+    <ClCompile Include="..\..\..\..\CSArmature\external_tool\Json\lib_json\json_value.cpp" />
+    <ClCompile Include="..\..\..\..\CSArmature\external_tool\Json\lib_json\json_writer.cpp" />
+    <ClCompile Include="..\..\..\..\CSArmature\external_tool\tinyxml\tinystr.cpp" />
+    <ClCompile Include="..\..\..\..\CSArmature\external_tool\tinyxml\tinyxml.cpp" />
+    <ClCompile Include="..\..\..\..\CSArmature\external_tool\tinyxml\tinyxmlerror.cpp" />
+    <ClCompile Include="..\..\..\..\CSArmature\external_tool\tinyxml\tinyxmlparser.cpp" />
+    <ClCompile Include="..\..\..\..\CSArmature\physics\CSColliderDetector.cpp" />
+    <ClCompile Include="..\..\..\..\CSArmature\physics\CSPhysicsWorld.cpp" />
+    <ClCompile Include="..\..\..\..\CSArmature\utils\CSArmatureDataManager.cpp" />
+    <ClCompile Include="..\..\..\..\CSArmature\utils\CSBatchNode.cpp" />
+    <ClCompile Include="..\..\..\..\CSArmature\utils\CSBatchNodeManager.cpp" />
+    <ClCompile Include="..\..\..\..\CSArmature\utils\CSDataReaderHelper.cpp" />
+    <ClCompile Include="..\..\..\..\CSArmature\utils\CSSpriteFrameCacheHelper.cpp" />
+    <ClCompile Include="..\..\..\..\CSArmature\utils\CSTransformHelp.cpp" />
+    <ClCompile Include="..\..\..\..\CSArmature\utils\CSTweenFunction.cpp" />
+    <ClCompile Include="..\..\..\..\CSArmature\utils\CSUtilMath.cpp" />
+    <ClCompile Include="..\Classes\AppDelegate.cpp" />
+    <ClCompile Include="..\Classes\HelloWorldScene.cpp" />
+    <ClCompile Include="main.cpp" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
