@@ -38,7 +38,7 @@ namespace cs {
 /*
  * TextureData include a texture's information 
  */
-class CS_EXTERN TextureData : public CCObject, public JsonData
+class CS_EXTERN TextureData : public CCObject
 {
 public:
     static TextureData *createWithJson(const char *pszDescription);

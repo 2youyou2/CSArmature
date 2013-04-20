@@ -28,7 +28,7 @@
 #define COCOSTUDIO_CSCONTOURDATA_H
 
 #include "cocos2d.h"
-#include "CSJsonData.h"
+
 
 using namespace cocos2d;
 
@@ -49,7 +49,7 @@ struct ContourVertex2 : public CCObject
 /*
  * ContourData include a contour vertex information 
  */
-class  ContourData : public CCObject, public JsonData
+class  ContourData : public CCObject
 {
 public:
     static ContourData *createWithJson(const char *pszDescription);

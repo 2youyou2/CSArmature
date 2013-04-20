@@ -28,6 +28,7 @@
 #define COCOSTUDIO_CSDATAREADERHELPER_H
 
 #include "cocos2d.h"
+#include "CSDatas.h"
 #include "CSConstValue.h"
 #include "CSDisplayData.h"
 #include "CSBoneData.h"
@@ -35,7 +36,6 @@
 #include "CSMovementBoneData.h"
 #include "CSMovementFrameData.h"
 #include "CSMovementData.h"
-#include "CSArmatureData.h"
 #include "CSTextureData.h"
 #include "CSArmature.h"
 #include "CSContourData.h"
@@ -122,7 +122,21 @@ public:
     static void addDataFromJson(const char *filePath);
 	static void addDataFromJsonCache(const char *fileContent);
 
-	static std::string convertFlashToSP(const char *fileName);
+	static ArmatureData *decodeArmature(CSJsonDictionary &json);
+	static BoneData *decodeBone(CSJsonDictionary &json);
+	static DisplayData *decodeBoneDisplay(CSJsonDictionary &json);
+    
+	static AnimationData *decodeAnimation(CSJsonDictionary &json);
+	static MovementData *decodeMovement(CSJsonDictionary &json);
+	static MovementBoneData *decodeMovementBone(CSJsonDictionary &json);
+	static FrameData *decodeFrame(CSJsonDictionary &json);
+    
+	static TextureData *decodeTexture(CSJsonDictionary &json);
+    
+    static ContourData *decodeContour(CSJsonDictionary &json);
+
+	//static std::string convertFlashToSP(const char *fileName);
+
 #pragma endregion
 
 private:

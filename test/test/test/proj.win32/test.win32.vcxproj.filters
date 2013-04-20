@@ -103,19 +103,10 @@
     <ClInclude Include="..\..\..\..\CSArmature\datas\CSAnimationData.h">
       <Filter>CSArmature\datas</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\..\CSArmature\datas\CSArmatureData.h">
-      <Filter>CSArmature\datas</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\CSArmature\datas\CSBoneData.h">
-      <Filter>CSArmature\datas</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\..\CSArmature\datas\CSContourData.h">
       <Filter>CSArmature\datas</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\..\CSArmature\datas\CSFrameData.h">
-      <Filter>CSArmature\datas</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\CSArmature\datas\CSJsonData.h">
       <Filter>CSArmature\datas</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\..\CSArmature\datas\CSMovementBoneData.h">
@@ -134,9 +125,6 @@
       <Filter>CSArmature\datas</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\..\CSArmature\datas\display_data\CSArmatureDisplayData.h">
-      <Filter>CSArmature\datas\display_data</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\CSArmature\datas\display_data\CSDisplayData.h">
       <Filter>CSArmature\datas\display_data</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\..\CSArmature\datas\display_data\CSParticleDisplayData.h">
@@ -265,6 +253,9 @@
     <ClInclude Include="..\..\..\..\CSArmature\CSBone.h">
       <Filter>CSArmature</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\..\CSArmature\datas\CSDataS.h">
+      <Filter>CSArmature\datas</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -288,19 +279,10 @@
     <ClCompile Include="..\..\..\..\CSArmature\datas\CSAnimationData.cpp">
       <Filter>CSArmature\datas</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\CSArmature\datas\CSArmatureData.cpp">
-      <Filter>CSArmature\datas</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\CSArmature\datas\CSBoneData.cpp">
-      <Filter>CSArmature\datas</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\..\CSArmature\datas\CSContourData.cpp">
       <Filter>CSArmature\datas</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\..\CSArmature\datas\CSFrameData.cpp">
-      <Filter>CSArmature\datas</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\CSArmature\datas\CSJsonData.cpp">
       <Filter>CSArmature\datas</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\..\CSArmature\datas\CSMovementBoneData.cpp">
@@ -319,9 +301,6 @@
       <Filter>CSArmature\datas</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\..\CSArmature\datas\display_data\CSArmatureDisplayData.cpp">
-      <Filter>CSArmature\datas\display_data</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\CSArmature\datas\display_data\CSDisplayData.cpp">
       <Filter>CSArmature\datas\display_data</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\..\CSArmature\datas\display_data\CSParticleDisplayData.cpp">
@@ -425,6 +404,9 @@
     </ClCompile>
     <ClCompile Include="..\..\..\..\CSArmature\CSBone.cpp">
       <Filter>CSArmature</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\CSArmature\datas\CSDatas.cpp">
+      <Filter>CSArmature\datas</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

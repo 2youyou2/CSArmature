@@ -246,13 +246,20 @@ void Tween::setBetween(FrameData *from, FrameData *to)
 {
 	do 
 	{
-		m_pFrom->copy(from);
-
 		if(to->getDisplayIndex() < 0)
 		{
+			m_pFrom->copy(from);
 			m_pBetween->subtract(to, to);
 			break;
 		}
+		else if(from->getDisplayIndex() < 0)
+		{
+			m_pFrom->copy(to);
+			m_pBetween->subtract(to, to);
+			break;
+		}
+
+		m_pFrom->copy(from);
 		m_pBetween->subtract(from, to);
 	} while (0);
 

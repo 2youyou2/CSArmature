@@ -28,7 +28,7 @@
 #define COCOSTUDIO_CSSHADERDISPLAYDATA_H
 
 #include "cocos2d.h"
-#include "CSJsonData.h"
+
 #include "CSDisplayData.h"
 
 using namespace cocos2d;

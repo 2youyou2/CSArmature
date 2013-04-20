@@ -199,34 +199,34 @@ bool Armature::init(const char *_name)
 
 		initRootBone();
 
-        ArmatureDataManager *_armatureDataManager = ArmatureDataManager::sharedArmatureDataManager();
+        ArmatureDataManager *armatureDataManager = ArmatureDataManager::sharedArmatureDataManager();
         
         if(m_strName.compare("") != 0)
         {
             m_strName = _name;
             
-            AnimationData* _animationData = _armatureDataManager->getAnimationData(_name);
-            CCAssert(_animationData, "AnimationData not exist! ");
+            AnimationData* animationData = armatureDataManager->getAnimationData(_name);
+            CCAssert(animationData, "AnimationData not exist! ");
             
-            m_pAnimation->setAnimationData(_animationData);
+            m_pAnimation->setAnimationData(animationData);
             
             
-            ArmatureData *_armatureData = _armatureDataManager->getArmatureData(_name);
-            CCAssert(_armatureData, "");
+            ArmatureData *armatureData = armatureDataManager->getArmatureData(_name);
+            CCAssert(armatureData, "");
             
-            m_pArmatureData = _armatureData;
+            m_pArmatureData = armatureData;
             
             
             CCDictElement *_element = NULL;
-            CCDictionary *_boneDataDic = _armatureData->getBoneDic();
-            CCDICT_FOREACH(_boneDataDic, _element)
+			CCDictionary *boneDataDic = &armatureData->boneDataDic;
+            CCDICT_FOREACH(boneDataDic, _element)
             {
                 Bone *bone = createBone(_element->getStrKey());
                 
                 //! init bone's  Tween to 1st movement's 1st frame
                 do {
                     
-                    MovementData *_movData = _animationData->getMovement(_animationData->getMovNames().at(0).c_str());
+                    MovementData *_movData = animationData->getMovement(animationData->getMovNames().at(0).c_str());
                     CC_BREAK_IF(!_movData);
                     
                     MovementBoneData *_movBoneData = _movData->getMovementBoneData(bone->getName().c_str());
@@ -244,16 +244,15 @@ bool Armature::init(const char *_name)
         {
             m_strName = "new_armature";
             m_pArmatureData = ArmatureData::create();
-            m_pArmatureData->setName(m_strName);
+            m_pArmatureData->name = m_strName;
             
-            AnimationData *_animationData = AnimationData::create();
-            _animationData->setName(m_strName);
+            AnimationData *animationData = AnimationData::create();
+            animationData->setName(m_strName);
             
+            armatureDataManager->addArmatureData(m_strName.c_str(), m_pArmatureData);
+            armatureDataManager->addAnimationData(m_strName.c_str(), animationData);
             
-            _armatureDataManager->addArmatureData(m_strName.c_str(), m_pArmatureData);
-            _armatureDataManager->addAnimationData(m_strName.c_str(), _animationData);
-            
-            m_pAnimation->setAnimationData(_animationData);
+            m_pAnimation->setAnimationData(animationData);
            
         }
 

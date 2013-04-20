@@ -63,7 +63,6 @@ void DataReaderHelper::addDataFromFile(const char *filePath)
     m_arrConfigFileList.push_back(filePath);
 
 
-
     std::string filePathStr = filePath;
     size_t startPos = filePathStr.find_last_of(".");
     std::string str = &filePathStr[startPos];
@@ -757,7 +756,7 @@ void DataReaderHelper::addDataFromJsonCache(const char *fileContent)
 	for (int i = 0; i<length; i++)
 	{
 		CSJsonDictionary *armatureDic = json.getSubItemFromArray(ARMATURE_DATA, i);
-		ArmatureData *armatureData = ArmatureData::createWithJson(armatureDic->getDescription().c_str());
+		ArmatureData *armatureData = decodeArmature(*armatureDic);
 		ArmatureDataManager::sharedArmatureDataManager()->addArmatureData(armatureData->getName().c_str(), armatureData);
 	}
 
@@ -782,23 +781,132 @@ void DataReaderHelper::addDataFromJsonCache(const char *fileContent)
 
 }
 
-std::string DataReaderHelper::convertFlashToSP(const char *fileName)
+
+ArmatureData *DataReaderHelper::decodeArmature(CSJsonDictionary &json)
 {
-// 	clearJson();
-// 
-// 	addDataFromXML(fileName);
-// 
-// 	addAllArmatureDataToJsonList();
-// 	addAllAnimationDataToJsonList();
-// 	addAllTextureDataToJsonList();
-// 
-// 	deleteDictElements(ArmatureDataManager::sharedArmatureDataManager()->getArmarureDatas());
-// 	deleteDictElements(ArmatureDataManager::sharedArmatureDataManager()->getAnimationDatas());
-// 	deleteDictElements(ArmatureDataManager::sharedArmatureDataManager()->getTextureDatas());
-// 
-// 	return getExportJson();
-	return "";
+	ArmatureData *armatureData = ArmatureData::create();
+
+	const char * name = json.getItemStringValue(A_NAME);
+	if(name != NULL)
+	{
+		armatureData->name = name;
+	}
+
+	int length = json.getArrayItemCount(BONE_DATA);
+	for (int i = 0; i<length; i++)
+	{
+		CSJsonDictionary *dic = json.getSubItemFromArray(BONE_DATA, i);
+		armatureData->addBoneData(decodeBone(*dic));
+	}
 }
+
+BoneData *DataReaderHelper::decodeBone(CSJsonDictionary &json)
+{
+	BoneData *boneData = BoneData::create();
+
+	const char * str = json.getItemStringValue(A_NAME);
+	if(str != NULL)
+	{
+		boneData->name = str;
+	}
+
+	str = json.getItemStringValue(A_PARENT);
+	if(str != NULL)
+	{
+		boneData->parentName = str;
+	}
+
+	int length = json.getArrayItemCount(DISPLAY_DATA);
+
+	for (int i = 0; i<length; i++)
+	{
+		CSJsonDictionary *dic = json.getSubItemFromArray(DISPLAY_DATA, i);
+		boneData->addDisplayData(decodeBoneDisplay(*dic));
+	}
+}
+
+DisplayData *DataReaderHelper::decodeBoneDisplay(CSJsonDictionary &json)
+{
+	DisplayType displayType = (DisplayType)json.getItemIntValue(A_DISPLAY_TYPE, CS_DISPLAY_SPRITE);
+
+	DisplayData *displayData = NULL;
+    
+    switch (displayType) {
+        case CS_DISPLAY_SPRITE:
+            displayData = SpriteDisplayData::create();
+            break;
+        case CS_DISPLAY_ARMATURE:
+            displayData = ArmatureDisplayData::create();
+            break;
+		case CS_DISPLAY_PARTICLE:
+			displayData = ParticleDisplayData::create();
+			break;
+		case CS_DISPLAY_SHADER:
+			displayData = ShaderDisplayData::create();
+			break;
+        default:
+            displayData = SpriteDisplayData::create();
+            break;
+    }
+
+	displayData->setDisplayTyp
+
+	const char * str = m_JsonDic.getItemStringValue(A_NAME);
+        if(str != NULL)
+        {
+            m_strDisplayName = str;
+        }
+}
+
+AnimationData *DataReaderHelper::decodeAnimation(CSJsonDictionary &json)
+{
+
+}
+
+MovementData *DataReaderHelper::decodeMovement(CSJsonDictionary &json)
+{
+
+}
+
+MovementBoneData *DataReaderHelper::decodeMovementBone(CSJsonDictionary &json)
+{
+
+}
+
+FrameData *DataReaderHelper::decodeFrame(CSJsonDictionary &json)
+{
+
+}
+
+TextureData *DataReaderHelper::decodeTexture(CSJsonDictionary &json)
+{
+
+}
+
+ContourData *DataReaderHelper::decodeContour(CSJsonDictionary &json)
+{
+
+}
+
+
+
+// std::string DataReaderHelper::convertFlashToSP(const char *fileName)
+// {
+// // 	clearJson();
+// // 
+// // 	addDataFromXML(fileName);
+// // 
+// // 	addAllArmatureDataToJsonList();
+// // 	addAllAnimationDataToJsonList();
+// // 	addAllTextureDataToJsonList();
+// // 
+// // 	deleteDictElements(ArmatureDataManager::sharedArmatureDataManager()->getArmarureDatas());
+// // 	deleteDictElements(ArmatureDataManager::sharedArmatureDataManager()->getAnimationDatas());
+// // 	deleteDictElements(ArmatureDataManager::sharedArmatureDataManager()->getTextureDatas());
+// // 
+// // 	return getExportJson();
+// 	return "";
+// }
 #pragma endregion
 
 }

@@ -37,7 +37,7 @@ namespace cs {
  *  The struct is AnimationData -> MovementData -> MovementBoneData -> FrameData
  *                                              -> MovementFrameData
  */
-class CS_EXTERN AnimationData : public CCObject, public JsonData, public sigslot::has_slots<>  {
+class CS_EXTERN AnimationData : public CCObject, public sigslot::has_slots<>  {
 public:
     static AnimationData *createWithJson(const char *pszDescription);
     static AnimationData *create();
