@@ -94,8 +94,8 @@ bool HelloWorld::init()
 
 		armature = cs::Armature::create("TestBone");
 		armature->getAnimation()->playByIndex(0);
-		armature->setScaleX(-0.3);
-		armature->setScaleY(0.3);
+		armature->setScaleX(-0.3f);
+		armature->setScaleY(0.3f);
 		armature->setPosition(250, 50);
 		armature->setColor(ccc3(0,0,0));
 		armature->setOpacity(200);

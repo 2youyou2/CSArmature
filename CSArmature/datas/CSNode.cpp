@@ -125,20 +125,20 @@ void Node::subtract(Node *from, Node *to)
 
     if (m_fSkewX > CS_PI)
     {
-        m_fSkewX -= CS_DOUBLE_PI;
+        m_fSkewX -= (float)CS_DOUBLE_PI;
     }
     if (m_fSkewX < -CS_PI)
     {
-        m_fSkewX += CS_DOUBLE_PI;
+        m_fSkewX += (float)CS_DOUBLE_PI;
     }
 
     if (m_fSkewY > CS_PI)
     {
-        m_fSkewY -= CS_DOUBLE_PI;
+        m_fSkewY -= (float)CS_DOUBLE_PI;
     }
     if (m_fSkewY < -CS_PI)
     {
-        m_fSkewY += CS_DOUBLE_PI;
+        m_fSkewY += (float)CS_DOUBLE_PI;
     }
 
 

@@ -34,71 +34,72 @@
 
 namespace cs {
 
-std::vector<std::string> DataReaderHelper::m_arrXMLFileList;
-CSJsonDictionary *DataReaderHelper::m_pJson = new CSJsonDictionary();
+std::vector<std::string> DataReaderHelper::m_arrConfigFileList;
 float DataReaderHelper::m_fPositionReadScale = 1;
-    
-    
-void DataReaderHelper::addDataFromFile(const char *_filePath)
-{
-    std::string _filePathStr = _filePath;
-    size_t startPos = _filePathStr.find_last_of(".");
-    std::string _str = &_filePathStr[startPos];
-    
-    if (_str.compare(".xml") == 0)
-    {
 
-        
-#if CS_TOOL_PLATFORM
-        if(Game::sharedGame()->isUsePackage())
-        {
-            DataReaderHelper::addDataFromXMLPak(_filePathStr.c_str());
-        }
-        else
-        {
-            DataReaderHelper::addDataFromXML(_filePathStr.c_str());
-        }
-#else
-        DataReaderHelper::addDataFromXML(_filePathStr.c_str());
-#endif
-    }
-    else if(_str.compare(".json") == 0)
-    {
-        DataReaderHelper::addDataFromJson(_filePathStr.c_str());
-    }
-}
-    
 void DataReaderHelper::setPositionReadScale(float scale)
 {
-    m_fPositionReadScale = scale;
+	m_fPositionReadScale = scale;
 }
 
 float DataReaderHelper::getPositionReadScale()
 {
-    return m_fPositionReadScale;
+	return m_fPositionReadScale;
 }
+
     
-    
-void DataReaderHelper::addDataFromXML(const char* _xml)
+void DataReaderHelper::addDataFromFile(const char *filePath)
 {
     /*
-     *	check if xml is already added to ArmatureDataManager, if then return.
+     * Check if file is already added to ArmatureDataManager, if then return.
      */
-    for(int _i = 0; _i<m_arrXMLFileList.size(); _i++)
+    for(unsigned int i = 0; i<m_arrConfigFileList.size(); i++)
     {
-        if (m_arrXMLFileList[_i].compare(_xml) == 0)
+        if (m_arrConfigFileList[i].compare(filePath) == 0)
         {
             return;
         }
     }
+    m_arrConfigFileList.push_back(filePath);
+
+
+
+    std::string filePathStr = filePath;
+    size_t startPos = filePathStr.find_last_of(".");
+    std::string str = &filePathStr[startPos];
     
-    
-    m_arrXMLFileList.push_back(_xml);
+    if (str.compare(".xml") == 0)
+    {
+        
+#if CS_TOOL_PLATFORM
+        if(Game::sharedGame()->isUsePackage())
+        {
+            DataReaderHelper::addDataFromXMLPak(filePathStr.c_str());
+        }
+        else
+        {
+            DataReaderHelper::addDataFromXML(filePathStr.c_str());
+        }
+#else
+        DataReaderHelper::addDataFromXML(filePathStr.c_str());
+#endif
+    }
+    else if(str.compare(".json") == 0)
+    {
+        DataReaderHelper::addDataFromJson(filePathStr.c_str());
+    }
+}
+
+
+#pragma region Decode Data From XML   
+
+void DataReaderHelper::addDataFromXML(const char* xmlPath)
+{
     
     /*
      *  Need to get the full path of the xml file, or the Tiny XML can't find the xml at IOS
      */
-    std::string fullPath = CCFileUtils::sharedFileUtils()->fullPathForFilename(_xml);
+    std::string fullPath = CCFileUtils::sharedFileUtils()->fullPathForFilename(xmlPath);
     
     /*
      *  Need to read the tiny xml into memory first, or the Tiny XML can't find the xml at IOS
@@ -112,25 +113,12 @@ void DataReaderHelper::addDataFromXML(const char* _xml)
     }
 }
     
-void DataReaderHelper::addDataFromXMLPak(const char *_xml)
+void DataReaderHelper::addDataFromXMLPak(const char *xmlPakPath)
 {
 #if CS_TOOL_PLATFORM
-    /*
-     *	check if xml is already added to ArmatureDataManager, if then return.
-     */
-    for(int _i = 0; _i<m_arrXMLFileList.size(); _i++)
-    {
-        if (m_arrXMLFileList[_i].compare(_xml) == 0)
-        {
-            return;
-        }
-    }
-    
-    
-    m_arrXMLFileList.push_back(_xml);
     
     char *_pFileContent = NULL;
-    JsonReader::getFileBuffer(_xml, &_pFileContent);
+    JsonReader::getFileBuffer(xmlPakPath, &_pFileContent);
     
     if (_pFileContent)
     {
@@ -141,205 +129,143 @@ void DataReaderHelper::addDataFromXMLPak(const char *_xml)
 
 void DataReaderHelper::addDataFromCache(const char *_pFileContent)
 {
-    TiXmlDocument	_document;
-    _document.Parse(_pFileContent, 0, TIXML_ENCODING_UTF8);
+    TiXmlDocument document;
+    document.Parse(_pFileContent, 0, TIXML_ENCODING_UTF8);
     
-    TiXmlElement	*_root = _document.RootElement();
-    CCAssert(_root, "XML error  or  XML is empty.");
+    TiXmlElement	*root = document.RootElement();
+    CCAssert(root, "XML error  or  XML is empty.");
     
     /*
-     *  begin decode armature data from xml
+     * Begin decode armature data from xml
      */
-    TiXmlElement *_armaturesXML = _root->FirstChildElement(ARMATURES);
-    TiXmlElement *_armatureXML = _armaturesXML->FirstChildElement(ARMATURE);
-    while(_armatureXML)
+    TiXmlElement *armaturesXML = root->FirstChildElement(ARMATURES);
+    TiXmlElement *armatureXML = armaturesXML->FirstChildElement(ARMATURE);
+    while(armatureXML)
     {
-        ArmatureData *_armatureData = DataReaderHelper::decodeArmature(_armatureXML);
-        ArmatureDataManager::sharedArmatureDataManager()->addArmatureData(_armatureData->getName().c_str(), _armatureData);
+        ArmatureData *armatureData = DataReaderHelper::decodeArmature(armatureXML);
+        ArmatureDataManager::sharedArmatureDataManager()->addArmatureData(armatureData->getName().c_str(), armatureData);
         
-        //saveArmatureDataToJson("armature.json", _armatureData);
-        
-        _armatureXML = _armatureXML->NextSiblingElement(ARMATURE);
+        armatureXML = armatureXML->NextSiblingElement(ARMATURE);
     }
     
     /*
-     *  begin decode animation data from xml
+     * Begin decode animation data from xml
      */
-    TiXmlElement *_animationsXML = _root->FirstChildElement(ANIMATIONS);
-    TiXmlElement *_animationXML = _animationsXML->FirstChildElement(ANIMATION);
-    while(_animationXML)
+    TiXmlElement *animationsXML = root->FirstChildElement(ANIMATIONS);
+    TiXmlElement *animationXML = animationsXML->FirstChildElement(ANIMATION);
+    while(animationXML)
     {
-        AnimationData *_animationData = DataReaderHelper::decodeAnimation(_animationXML);
-        ArmatureDataManager::sharedArmatureDataManager()->addAnimationData(_animationData->getName().c_str(), _animationData);
+        AnimationData *animationData = DataReaderHelper::decodeAnimation(animationXML);
+        ArmatureDataManager::sharedArmatureDataManager()->addAnimationData(animationData->getName().c_str(), animationData);
         
-        //saveAnimationDataToJson("armature.json", _animationData);
-        
-        _animationXML = _animationXML->NextSiblingElement(ANIMATION);
+        animationXML = animationXML->NextSiblingElement(ANIMATION);
     }
     
     /*
-     *  begin decode texture data from xml
+     * Begin decode texture data from xml
      */
-    TiXmlElement *_texturesXML = _root->FirstChildElement(TEXTURE_ATLAS);
-    TiXmlElement *_textureXML = _texturesXML->FirstChildElement(SUB_TEXTURE);
-    while(_textureXML)
+    TiXmlElement *texturesXML = root->FirstChildElement(TEXTURE_ATLAS);
+    TiXmlElement *textureXML = texturesXML->FirstChildElement(SUB_TEXTURE);
+    while(textureXML)
     {
-        TextureData *_textureData = DataReaderHelper::decodeTexture(_textureXML);
-        ArmatureDataManager::sharedArmatureDataManager()->addTextureData(_textureData->getName().c_str(), _textureData);
+        TextureData *textureData = DataReaderHelper::decodeTexture(textureXML);
+        ArmatureDataManager::sharedArmatureDataManager()->addTextureData(textureData->getName().c_str(), textureData);
         
-        //saveTextureDataToJson("armature.json", _textureData);
-        
-        _textureXML = _textureXML->NextSiblingElement(SUB_TEXTURE);
+        textureXML = textureXML->NextSiblingElement(SUB_TEXTURE);
     }
     
-    
-    _document.Clear();
-    
+    document.Clear();
 }
 
-void DataReaderHelper::addTextureDataFromXML(const char *_xmlPath)
+ArmatureData *DataReaderHelper::decodeArmature(TiXmlElement *armatureXML)
 {
-    /*
-     *	check if xml is already added to ArmatureDataManager, if then return.
-     */
-    for(int _i = 0; _i<m_arrXMLFileList.size(); _i++)
-    {
-        if (m_arrXMLFileList[_i].compare(_xmlPath) == 0)
-        {
-            return;
-        }
-    }
-    
-    /*
-     *  Need to get the full path of the xml file, or the Tiny XML can't find the xml at IOS
-     */
-	std::string fullPath = CCFileUtils::sharedFileUtils()->fullPathForFilename(_xmlPath);
-    
-    /*
-     *  Need to read the tiny xml into memory first, or the Tiny XML can't find the xml at IOS
-     */
-    unsigned long	_size;
-    const char *_pFileContent = (char*)CCFileUtils::sharedFileUtils()->getFileData(fullPath.c_str(), "r", &_size);
+    const char*	name = armatureXML->Attribute(A_NAME);
     
     
-    TiXmlDocument	_document;
-    _document.Parse(_pFileContent, 0, TIXML_ENCODING_UTF8);
-    
-    TiXmlElement	*_root = _document.RootElement();
-    CCAssert(_root, "XML error  or  XML is empty.");
-    
-    /*
-     *  begin decode texture data from xml
-     */
-    TiXmlElement *_texturesXML = _root->FirstChildElement(TEXTURE_ATLAS);
-    TiXmlElement *_textureXML = _texturesXML->FirstChildElement(SUB_TEXTURE);
-    while(_textureXML)
-    {
-        TextureData *_textureData = DataReaderHelper::decodeTexture(_textureXML);
-        ArmatureDataManager::sharedArmatureDataManager()->addTextureData(_textureData->getName().c_str(), _textureData);
-        
-        //saveTextureDataToJson("armature.json", _textureData);
-        
-        _textureXML = _textureXML->NextSiblingElement(SUB_TEXTURE);
-    }
+    ArmatureData *armatureData = ArmatureData::create();
+    armatureData->setName(name);
     
     
-    _document.Clear();
+    TiXmlElement* boneXML = armatureXML->FirstChildElement(BONE);
     
-    m_arrXMLFileList.push_back(_xmlPath);
-}
-
-    
-ArmatureData *DataReaderHelper::decodeArmature(TiXmlElement *_armatureXML)
-{
-    const char*	_name = _armatureXML->Attribute(A_NAME);
-    
-    
-    ArmatureData *_armatureData = ArmatureData::create();
-    _armatureData->setName(_name);
-    //m_pArmarureDatas->setObject(_armatureData, _name);
-    
-    
-    TiXmlElement* _boneXML = _armatureXML->FirstChildElement(BONE);
-    
-    while( _boneXML )
+    while( boneXML )
     {
         /*
          *  If this bone have parent, then get the parent bone xml
          */
-        const char *_parentName = _boneXML->Attribute(A_PARENT);
-        TiXmlElement *_parentXML = NULL;
-        if (_parentName)
+        const char *parentName = boneXML->Attribute(A_PARENT);
+        TiXmlElement *parentXML = NULL;
+        if (parentName)
         {
-            _parentXML = _armatureXML->FirstChildElement(BONE);
-            std::string _name = _parentName;
-            while (_parentXML)
+            parentXML = armatureXML->FirstChildElement(BONE);
+            std::string name = parentName;
+            while (parentXML)
             {
-                if (_name.compare(_parentXML->Attribute(A_NAME)) == 0)
+                if (name.compare(parentXML->Attribute(A_NAME)) == 0)
                 {
                     break;
                 }
-                _parentXML = _parentXML->NextSiblingElement(BONE);
+                parentXML = parentXML->NextSiblingElement(BONE);
             }
         }
         
-        BoneData *_boneData = decodeBone(_boneXML, _parentXML);
-        _armatureData->addBoneData(_boneData);
+        BoneData *boneData = decodeBone(boneXML, parentXML);
+        armatureData->addBoneData(boneData);
         
-        _boneXML = _boneXML->NextSiblingElement(BONE);
+        boneXML = boneXML->NextSiblingElement(BONE);
     }
   
-    return _armatureData;
+    return armatureData;
 }
 
 
 
-BoneData *DataReaderHelper::decodeBone(TiXmlElement *_boneXML, TiXmlElement *_parentXML)
+BoneData *DataReaderHelper::decodeBone(TiXmlElement *boneXML, TiXmlElement *_parentXML)
 {
     
-    std::string _name = _boneXML->Attribute(A_NAME);
+    std::string name = boneXML->Attribute(A_NAME);
     
-    CCAssert(_name.compare("") != 0, "");
+    CCAssert(name.compare("") != 0, "");
 
     
-    BoneData *_boneData = BoneData::create();
+    BoneData *boneData = BoneData::create();
     
-    _boneData->m_strName = _name;
+    boneData->m_strName = name;
     
-    if( _boneXML->Attribute(A_PARENT) != NULL )
+    if( boneXML->Attribute(A_PARENT) != NULL )
     {
-        _boneData->m_strParent = _boneXML->Attribute(A_PARENT);
+        boneData->m_strParent = boneXML->Attribute(A_PARENT);
     }
     
-//     _boneXML->QueryFloatAttribute(A_X,		&(_boneData->m_fX));
-//     _boneXML->QueryFloatAttribute(A_Y,		&(_boneData->m_fY));
-//     _boneXML->QueryFloatAttribute(A_SKEW_X, &(_boneData->m_fSkewX));
-//     _boneXML->QueryFloatAttribute(A_SKEW_Y, &(_boneData->m_fSkewY));
-//     _boneXML->QueryFloatAttribute(A_SCALE_X,&(_boneData->m_fScaleX));
-//     _boneXML->QueryFloatAttribute(A_SCALE_Y,&(_boneData->m_fScaleY));
-//     _boneXML->QueryIntAttribute(A_Z,		&(_boneData->m_iZOrder));
+//     boneXML->QueryFloatAttribute(A_X,		&(boneData->m_fX));
+//     boneXML->QueryFloatAttribute(A_Y,		&(boneData->m_fY));
+//     boneXML->QueryFloatAttribute(A_SKEW_X, &(boneData->m_fSkewX));
+//     boneXML->QueryFloatAttribute(A_SKEW_Y, &(boneData->m_fSkewY));
+//     boneXML->QueryFloatAttribute(A_SCALE_X,&(boneData->m_fScaleX));
+//     boneXML->QueryFloatAttribute(A_SCALE_Y,&(boneData->m_fScaleY));
+//     boneXML->QueryIntAttribute(A_Z,		&(boneData->m_iZOrder));
 //     
-//     _boneXML->QueryIntAttribute(A_ALPHA,	&(_boneData->m_iAlpha));
-//     _boneXML->QueryIntAttribute(A_RED,		&(_boneData->m_iRed));
-//     _boneXML->QueryIntAttribute(A_GREEN,	&(_boneData->m_iGreen));
-//     _boneXML->QueryIntAttribute(A_BLUE,		&(_boneData->m_iBlue));
+//     boneXML->QueryIntAttribute(A_ALPHA,	&(boneData->m_iAlpha));
+//     boneXML->QueryIntAttribute(A_RED,		&(boneData->m_iRed));
+//     boneXML->QueryIntAttribute(A_GREEN,	&(boneData->m_iGreen));
+//     boneXML->QueryIntAttribute(A_BLUE,		&(boneData->m_iBlue));
 //     
 //     // flash export data is a percent value, so wo change it
-//     _boneData->m_iAlpha *= 2.55;
-//     _boneData->m_iRed *= 2.55;
-//     _boneData->m_iGreen *= 2.55;
-//     _boneData->m_iBlue *= 2.55;
+//     boneData->m_iAlpha *= 2.55;
+//     boneData->m_iRed *= 2.55;
+//     boneData->m_iGreen *= 2.55;
+//     boneData->m_iBlue *= 2.55;
 //     
 //     /*
 //      *  Note : Flash's Y value contrary to Cocos2dX's Y value
 //      */
-//     _boneData->m_fY = -_boneData->m_fY;
+//     boneData->m_fY = -boneData->m_fY;
 //     
 //     /*
 //      *  Note : Flash export datas are DEGREE values, and our matrix use RADIAN values
 //      */
-//     _boneData->m_fSkewX = CC_DEGREES_TO_RADIANS(_boneData->m_fSkewX);
-//     _boneData->m_fSkewY = CC_DEGREES_TO_RADIANS(-_boneData->m_fSkewY);
+//     boneData->m_fSkewX = CC_DEGREES_TO_RADIANS(boneData->m_fSkewX);
+//     boneData->m_fSkewY = CC_DEGREES_TO_RADIANS(-boneData->m_fSkewY);
 //     
 //     
 //     if(_parentXML)
@@ -357,162 +283,156 @@ BoneData *DataReaderHelper::decodeBone(TiXmlElement *_boneXML, TiXmlElement *_pa
 //         _helpNode.m_fSkewX = CC_DEGREES_TO_RADIANS(_helpNode.m_fSkewX);
 //         _helpNode.m_fSkewY = CC_DEGREES_TO_RADIANS(-_helpNode.m_fSkewY);
 //         
-//         TransformHelp::transformFromParent(*_boneData, _helpNode);
+//         TransformHelp::transformFromParent(*boneData, _helpNode);
 //     }
     
     
-    TiXmlElement *_displayXML = _boneXML->FirstChildElement(DISPLAY);
-    while(_displayXML)
+    TiXmlElement *displayXML = boneXML->FirstChildElement(DISPLAY);
+    while(displayXML)
     {
-        DisplayData *_displayData = decodeBoneDisplay(_displayXML);
-        _boneData->addDisplayData(_displayData);
+        DisplayData *displayData = decodeBoneDisplay(displayXML);
+        boneData->addDisplayData(displayData);
         
-        _displayXML = _displayXML->NextSiblingElement(DISPLAY);
+        displayXML = displayXML->NextSiblingElement(DISPLAY);
     }
     
     
-    return _boneData;
+    return boneData;
     
 }
 
-DisplayData *DataReaderHelper::decodeBoneDisplay(TiXmlElement *_displayXML)
+DisplayData *DataReaderHelper::decodeBoneDisplay(TiXmlElement *displayXML)
 {
     int _isArmature = 0;
     
-    DisplayData *_displayData;
+    DisplayData *displayData;
     
     
-    if( _displayXML->QueryIntAttribute(A_IS_ARMATURE, &(_isArmature)) == TIXML_SUCCESS )
+    if( displayXML->QueryIntAttribute(A_IS_ARMATURE, &(_isArmature)) == TIXML_SUCCESS )
     {
         if(!_isArmature)
         {
-            _displayData = SpriteDisplayData::create();
-            _displayData->setDisplayType(CS_DISPLAY_SPRITE);
+            displayData = SpriteDisplayData::create();
+            displayData->setDisplayType(CS_DISPLAY_SPRITE);
         }
         else
         {
-            _displayData = ArmatureDisplayData::create();
-            _displayData->setDisplayType(CS_DISPLAY_ARMATURE);
+            displayData = ArmatureDisplayData::create();
+            displayData->setDisplayType(CS_DISPLAY_ARMATURE);
         }
         
     }else{
-        _displayData = SpriteDisplayData::create();
-        _displayData->setDisplayType(CS_DISPLAY_SPRITE);
+        displayData = SpriteDisplayData::create();
+        displayData->setDisplayType(CS_DISPLAY_SPRITE);
     }
     
-    if(_displayXML->Attribute(A_NAME) != NULL )
+    if(displayXML->Attribute(A_NAME) != NULL )
     {
         if(!_isArmature)
         {
-            ((SpriteDisplayData*)_displayData)->setDisplayName(_displayXML->Attribute(A_NAME));
+            ((SpriteDisplayData*)displayData)->setDisplayName(displayXML->Attribute(A_NAME));
         }
         else
         {
-            ((ArmatureDisplayData*)_displayData)->setDisplayName(_displayXML->Attribute(A_NAME));
+            ((ArmatureDisplayData*)displayData)->setDisplayName(displayXML->Attribute(A_NAME));
         }
         
     }
     
     
-    return _displayData;
+    return displayData;
 }
     
-AnimationData *DataReaderHelper::decodeAnimation(TiXmlElement *_animationXML)
+AnimationData *DataReaderHelper::decodeAnimation(TiXmlElement *animationXML)
 {
-    const char*	_name = _animationXML->Attribute(A_NAME);
+    const char*	name = animationXML->Attribute(A_NAME);
     
-//    AnimationData *_aniData = (AnimationData*)m_pAnimationDatas->objectForKey(_name);
-//    if (_aniData)
-//    {
-//        //CCLOG("AnimationData (%s) is already exit", _name);
-//        return;
-//    }
     
-    AnimationData *_aniData =  AnimationData::create();
+    AnimationData *aniData =  AnimationData::create();
     
-    ArmatureData *_armatureData = ArmatureDataManager::sharedArmatureDataManager()->getArmatureData(_name);
+    ArmatureData *armatureData = ArmatureDataManager::sharedArmatureDataManager()->getArmatureData(name);
     
-    _aniData->setName(_name);
+    aniData->setName(name);
     
-    TiXmlElement* _movementXML = _animationXML->FirstChildElement(MOVEMENT);
+    TiXmlElement* movementXML = animationXML->FirstChildElement(MOVEMENT);
     
-    while( _movementXML )
+    while( movementXML )
     {
-        MovementData *_movementData = decodeMovement(_movementXML, _armatureData);
-        _aniData->addMovement(_movementData);
+        MovementData *movementData = decodeMovement(movementXML, armatureData);
+        aniData->addMovement(movementData);
         
-        _movementXML = _movementXML->NextSiblingElement(MOVEMENT);
+        movementXML = movementXML->NextSiblingElement(MOVEMENT);
         
     }
     
-    return _aniData;
+    return aniData;
     
 }
     
-MovementData *DataReaderHelper::decodeMovement(TiXmlElement *_movementXML, ArmatureData *_armatureData)
+MovementData *DataReaderHelper::decodeMovement(TiXmlElement *movementXML, ArmatureData *armatureData)
 {
-    const char* _movName = _movementXML->Attribute(A_NAME);
+    const char* _movName = movementXML->Attribute(A_NAME);
     
-    MovementData *_movementData = MovementData::create();
+    MovementData *movementData = MovementData::create();
     
-    _movementData->setName(_movName);
+    movementData->setName(_movName);
     
     
     int _duration, _durationTo, _durationTween, _loop, _tweenEasing = 0;
     
-    if( _movementXML->QueryIntAttribute(A_DURATION, &(_duration)) == TIXML_SUCCESS)
+    if( movementXML->QueryIntAttribute(A_DURATION, &(_duration)) == TIXML_SUCCESS)
     {
-        _movementData->setDuration(_duration);
+        movementData->setDuration(_duration);
     }
-    if( _movementXML->QueryIntAttribute(A_DURATION_TO, &(_durationTo)) == TIXML_SUCCESS)
+    if( movementXML->QueryIntAttribute(A_DURATION_TO, &(_durationTo)) == TIXML_SUCCESS)
     {
-        _movementData->setDurationTo(_durationTo);
+        movementData->setDurationTo(_durationTo);
     }
-    if( _movementXML->QueryIntAttribute(A_DURATION_TWEEN, &(_durationTween)) == TIXML_SUCCESS)
+    if( movementXML->QueryIntAttribute(A_DURATION_TWEEN, &(_durationTween)) == TIXML_SUCCESS)
     {
-        _movementData->setDurationTween(_durationTween);
+        movementData->setDurationTween(_durationTween);
     }
-    if( _movementXML->QueryIntAttribute(A_LOOP, &(_loop)) == TIXML_SUCCESS)
+    if( movementXML->QueryIntAttribute(A_LOOP, &(_loop)) == TIXML_SUCCESS)
     {
-        _movementData->setLoop((bool)_loop);
+        movementData->setLoop((bool)_loop);
     }
     
-    const char * _easing= _movementXML->Attribute(A_TWEEN_EASING);
+    const char * _easing= movementXML->Attribute(A_TWEEN_EASING);
     if(_easing != NULL)
     {
         std::string str = _easing;
         if(str.compare(FL_NAN) != 0)
         {
-            if( _movementXML->QueryIntAttribute(A_TWEEN_EASING, &(_tweenEasing)) == TIXML_SUCCESS)
+            if( movementXML->QueryIntAttribute(A_TWEEN_EASING, &(_tweenEasing)) == TIXML_SUCCESS)
             {
-                _movementData->setTweenEasing((TweenType)_tweenEasing);
+                movementData->setTweenEasing((TweenType)_tweenEasing);
             }
         }else{
-            _movementData->setTweenEasing(TWEEN_EASING_MAX);
+            movementData->setTweenEasing(TWEEN_EASING_MAX);
         }
     }
     
-    TiXmlElement *_movBoneXml = _movementXML->FirstChildElement(BONE);
-    while(_movBoneXml)
+    TiXmlElement *movBoneXml = movementXML->FirstChildElement(BONE);
+    while(movBoneXml)
     {
-        const char* _boneName = _movBoneXml->Attribute(A_NAME);
+        const char* _boneName = movBoneXml->Attribute(A_NAME);
         
-        if (_movementData->getMovementBoneData(_boneName))
+        if (movementData->getMovementBoneData(_boneName))
         {
-            _movBoneXml = _movBoneXml->NextSiblingElement();
+            movBoneXml = movBoneXml->NextSiblingElement();
             continue;
         }
         
         
-        BoneData *_boneData = (BoneData*)_armatureData->getBoneData(_boneName);
+        BoneData *boneData = (BoneData*)armatureData->getBoneData(_boneName);
         
-        std::string _parentName = _boneData->m_strParent;
+        std::string _parentName = boneData->m_strParent;
         
         
         TiXmlElement *_parentXML = NULL;
         if (_parentName.compare("") != 0)
         {
-            _parentXML = _movementXML->FirstChildElement(BONE);
+            _parentXML = movementXML->FirstChildElement(BONE);
             
             while (_parentXML)
             {
@@ -524,28 +444,28 @@ MovementData *DataReaderHelper::decodeMovement(TiXmlElement *_movementXML, Armat
             }
         }
         
-        MovementBoneData *_moveBoneData = decodeMovementBone(_movBoneXml, _parentXML, _boneData);
-        _movementData->addMovementBoneData(NULL, _moveBoneData);
+        MovementBoneData *_moveBoneData = decodeMovementBone(movBoneXml, _parentXML, boneData);
+        movementData->addMovementBoneData(NULL, _moveBoneData);
         
-        _movBoneXml = _movBoneXml->NextSiblingElement(BONE);
+        movBoneXml = movBoneXml->NextSiblingElement(BONE);
     }
     
-    return _movementData;
+    return movementData;
 }
 
 
-MovementBoneData *DataReaderHelper::decodeMovementBone(TiXmlElement* _movBoneXml, TiXmlElement* _parentXml, BoneData *_boneData)
+MovementBoneData *DataReaderHelper::decodeMovementBone(TiXmlElement* movBoneXml, TiXmlElement* _parentXml, BoneData *boneData)
 {
     MovementBoneData* _movBoneData = MovementBoneData::create();
     float _scale, _delay;
     
-    if( _movBoneXml )
+    if( movBoneXml )
     {
-        if( _movBoneXml->QueryFloatAttribute(A_MOVEMENT_SCALE, &_scale) == TIXML_SUCCESS )
+        if( movBoneXml->QueryFloatAttribute(A_MOVEMENT_SCALE, &_scale) == TIXML_SUCCESS )
         {
             _movBoneData->setScale(_scale);
         }
-        if( _movBoneXml->QueryFloatAttribute(A_MOVEMENT_DELAY, &_delay) == TIXML_SUCCESS )
+        if( movBoneXml->QueryFloatAttribute(A_MOVEMENT_DELAY, &_delay) == TIXML_SUCCESS )
         {
             if(_delay > 0)
             {
@@ -560,7 +480,7 @@ MovementBoneData *DataReaderHelper::decodeMovementBone(TiXmlElement* _movBoneXml
     int _parentTotalDuration = 0;
     int _currentDuration = 0;
     
-    TiXmlElement *_parentFrameXML = NULL;
+    TiXmlElement *parentFrameXML = NULL;
     
     std::vector<TiXmlElement*> _parentXMLList;
     
@@ -569,14 +489,14 @@ MovementBoneData *DataReaderHelper::decodeMovementBone(TiXmlElement* _movBoneXml
      */
     if( _parentXml != NULL )
     {
-        _parentFrameXML = _parentXml->FirstChildElement(FRAME);
-        while (_parentFrameXML)
+        parentFrameXML = _parentXml->FirstChildElement(FRAME);
+        while (parentFrameXML)
         {
-            _parentXMLList.push_back(_parentFrameXML);
-            _parentFrameXML = _parentFrameXML->NextSiblingElement(FRAME);
+            _parentXMLList.push_back(parentFrameXML);
+            parentFrameXML = parentFrameXML->NextSiblingElement(FRAME);
         }
         
-        _parentFrameXML = NULL;
+        parentFrameXML = NULL;
         
         _length = _parentXMLList.size();
     }
@@ -584,11 +504,11 @@ MovementBoneData *DataReaderHelper::decodeMovementBone(TiXmlElement* _movBoneXml
     
     int _totalDuration =0;
     
-    std::string name = _movBoneXml->Attribute(A_NAME);
+    std::string name = movBoneXml->Attribute(A_NAME);
     
     _movBoneData->setName(name);
     
-    TiXmlElement *frameXML= _movBoneXml->FirstChildElement(FRAME);
+    TiXmlElement *frameXML= movBoneXml->FirstChildElement(FRAME);
     
     while( frameXML )
     {
@@ -597,17 +517,17 @@ MovementBoneData *DataReaderHelper::decodeMovementBone(TiXmlElement* _movBoneXml
             /*
              *  in this loop we get the corresponding parent frame xml
              */
-            while(_i < _length && (_parentFrameXML?(_totalDuration < _parentTotalDuration || _totalDuration >= _parentTotalDuration + _currentDuration):true))
+            while(_i < _length && (parentFrameXML?(_totalDuration < _parentTotalDuration || _totalDuration >= _parentTotalDuration + _currentDuration):true))
             {
-                _parentFrameXML = _parentXMLList[_i];
+                parentFrameXML = _parentXMLList[_i];
                 _parentTotalDuration += _currentDuration;
-                _parentFrameXML->QueryIntAttribute(A_DURATION, &_currentDuration);
+                parentFrameXML->QueryIntAttribute(A_DURATION, &_currentDuration);
                 _i++;
                 
             }
         }
         
-        FrameData * _frameData = decodeFrame( frameXML, _parentFrameXML, _boneData);
+        FrameData * _frameData = decodeFrame( frameXML, parentFrameXML, boneData);
         
         _movBoneData->addFrameData(_frameData);
         
@@ -620,7 +540,7 @@ MovementBoneData *DataReaderHelper::decodeMovementBone(TiXmlElement* _movBoneXml
     return _movBoneData;
 }
 
-FrameData * DataReaderHelper::decodeFrame(TiXmlElement* frameXML,  TiXmlElement* _parentFrameXml, BoneData *_boneData)
+FrameData * DataReaderHelper::decodeFrame(TiXmlElement* frameXML,  TiXmlElement* _parentFrameXml, BoneData *boneData)
 {
     float _x, _y, _scale_x, _scale_y, _skew_x, _skew_y = 0;
     int _duration, _displayIndex, _zOrder, _tweenEasing = 0;
@@ -743,334 +663,142 @@ FrameData * DataReaderHelper::decodeFrame(TiXmlElement* frameXML,  TiXmlElement*
         TransformHelp::transformFromParent(*frameData, _helpNode);
     }
     
-//    frameData->m_fX -= _boneData->m_fX;
-//    frameData->m_fY -= _boneData->m_fY;
-//    frameData->m_fSkewX -= _boneData->m_fSkewX;
-//    frameData->m_fSkewY -= _boneData->m_fSkewY;
+//    frameData->m_fX -= boneData->m_fX;
+//    frameData->m_fY -= boneData->m_fY;
+//    frameData->m_fSkewX -= boneData->m_fSkewX;
+//    frameData->m_fSkewY -= boneData->m_fSkewY;
     
     
     return frameData;
 }
 
-TextureData *DataReaderHelper::decodeTexture(TiXmlElement *_textureXML)
+TextureData *DataReaderHelper::decodeTexture(TiXmlElement *textureXML)
 {
-    TextureData *_textureData = TextureData::create();
+    TextureData *textureData = TextureData::create();
     
-	if( _textureXML->Attribute(A_NAME) != NULL)
+	if( textureXML->Attribute(A_NAME) != NULL)
 	{
-		_textureData->setName(_textureXML->Attribute(A_NAME));
+		textureData->setName(textureXML->Attribute(A_NAME));
 	}
     
 	float px, py, width, height = 0;
 
-	_textureXML->QueryFloatAttribute(A_PIVOT_X, &px);
-	_textureXML->QueryFloatAttribute(A_PIVOT_Y, &py);
-	_textureXML->QueryFloatAttribute(A_WIDTH, &width);
-	_textureXML->QueryFloatAttribute(A_HEIGHT, &height);
+	textureXML->QueryFloatAttribute(A_PIVOT_X, &px);
+	textureXML->QueryFloatAttribute(A_PIVOT_Y, &py);
+	textureXML->QueryFloatAttribute(A_WIDTH, &width);
+	textureXML->QueryFloatAttribute(A_HEIGHT, &height);
 
 	float _anchorPointX = px / width;
 	float _anchorPointY = (height - py) / height;
 
-	_textureData->setPivotX(_anchorPointX);
-	_textureData->setPivotY(_anchorPointY);
+	textureData->setPivotX(_anchorPointX);
+	textureData->setPivotY(_anchorPointY);
     
-    TiXmlElement *_contourXML = _textureXML->FirstChildElement(CONTOUR);
+    TiXmlElement *contourXML = textureXML->FirstChildElement(CONTOUR);
     
-    while (_contourXML) {
+    while (contourXML) {
         
-        ContourData *_contourData = decodeContour(_contourXML);
-        _textureData->addContourData(_contourData);
+        ContourData *contourData = decodeContour(contourXML);
+        textureData->addContourData(contourData);
         
-        _contourXML = _contourXML->NextSiblingElement(CONTOUR);
+        contourXML = contourXML->NextSiblingElement(CONTOUR);
     }
     
     
-    return _textureData;
+    return textureData;
 }
 
-ContourData *DataReaderHelper::decodeContour(TiXmlElement *_contourXML)
+ContourData *DataReaderHelper::decodeContour(TiXmlElement *contourXML)
 {
-    ContourData *_contourData = ContourData::create();
+    ContourData *contourData = ContourData::create();
     
-    TiXmlElement *_vertexDataXML = _contourXML->FirstChildElement(CONTOUR_VERTEX);
+    TiXmlElement *vertexDataXML = contourXML->FirstChildElement(CONTOUR_VERTEX);
     
-	while (_vertexDataXML) {
+	while (vertexDataXML) {
 
 		ContourVertex2 *_vertex = new ContourVertex2(0, 0);
 		_vertex->autorelease();
 
-		_vertexDataXML->QueryFloatAttribute(A_X, &_vertex->x);
-		_vertexDataXML->QueryFloatAttribute(A_Y, &_vertex->y);
+		vertexDataXML->QueryFloatAttribute(A_X, &_vertex->x);
+		vertexDataXML->QueryFloatAttribute(A_Y, &_vertex->y);
 
 		_vertex->y = -_vertex->y;
-		_contourData->addVertex(_vertex);
+		contourData->addVertex(_vertex);
 
-		_vertexDataXML = _vertexDataXML->NextSiblingElement(CONTOUR_VERTEX);
+		vertexDataXML = vertexDataXML->NextSiblingElement(CONTOUR_VERTEX);
 	}
     
     
-    return _contourData;
+    return contourData;
     
 }
+#pragma endregion
     
-void DataReaderHelper::readConfigJson(const char* _filePath)
-{
-	std::string fullPath = CCFileUtils::sharedFileUtils()->fullPathForFilename(_filePath);
-    
-    /*
-     *  Need to read the tiny xml into memory first, or the Tiny XML can't find the xml at IOS
-     */
-    unsigned long	_size;
-    const char *_pFileContent = (char*)CCFileUtils::sharedFileUtils()->getFileData(fullPath.c_str() , "r", &_size);
-	
-	m_pJson->initWithDescription(_pFileContent);
 
-}
+#pragma region Decode Data From JSON
     
-void DataReaderHelper::saveConfigToJson(const char *_filePath, const char *_json, int _length)
+void DataReaderHelper::addDataFromJson(const char *filePath)
 {
-#if CS_TOOL_PLATFORM
-    File _file;
+	unsigned long size;
+	std::string fullPath = CCFileUtils::sharedFileUtils()->fullPathForFilename(filePath);
+	const char *pFileContent = (char*)CCFileUtils::sharedFileUtils()->getFileData(fullPath.c_str() , "r", &size);
 
-//  _file.writeNormally(_filePath, _json);
-    _file.write(_filePath, _json);
-#endif
-}
-    
-void DataReaderHelper::addDataFromJson(const char *_filePath)
-{
-    readConfigJson(_filePath);
-    
-    addArmatureDataFromJson(_filePath);
-    addAnimationDataFromJson(_filePath);
-    addTextureDataFromJson(_filePath);
-}
-
-void DataReaderHelper::addArmatureDataFromJson(const char *_filePath)
-{
-    
-    int _length = m_pJson->getArrayItemCount(ARMATURE_DATA);
-    
-    for (int i = 0; i<_length; i++)
-    {
-        CSJsonDictionary *_armatureDic = m_pJson->getSubItemFromArray(ARMATURE_DATA, i);
-        
-        ArmatureData *_armatureData = ArmatureData::createWithJson(_armatureDic->getDescription().c_str());
-        
-        ArmatureDataManager::sharedArmatureDataManager()->addArmatureData(_armatureData->getName().c_str(), _armatureData);
-    }
-    
-}
-    
-void DataReaderHelper::addAnimationDataFromJson(const char *_filePath)
-{
-    
-    int _length = m_pJson->getArrayItemCount(ANIMATION_DATA);
-    
-    for (int i = 0; i<_length; i++)
-    {
-        CSJsonDictionary *_animationDic = m_pJson->getSubItemFromArray(ANIMATION_DATA, i);
-        
-        AnimationData *_animationData = AnimationData::createWithJson(_animationDic->getDescription().c_str());
-        
-        ArmatureDataManager::sharedArmatureDataManager()->addAnimationData(_animationData->getName().c_str(), _animationData);
-    }
-    
-}
-    
-    
-void DataReaderHelper::addTextureDataFromJson(const char *_filePath)
-{
-    
-    int _length = m_pJson->getArrayItemCount(TEXTURE_DATA);
-    
-    for (int i = 0; i<_length; i++)
-    {
-        CSJsonDictionary *_textureDic = m_pJson->getSubItemFromArray(TEXTURE_DATA, i);
-        
-        TextureData *_textureData = TextureData::createWithJson(_textureDic->getDescription().c_str());
-        
-		ArmatureDataManager::sharedArmatureDataManager()->addTextureData(_textureData->getName().c_str(), _textureData);
-    }
-    
+	addDataFromJsonCache(pFileContent);
 }
 
 
-
-bool DataReaderHelper::saveArmatureDataToJson(const char *_filePath, ArmatureData *_armatureData)
+void DataReaderHelper::addDataFromJsonCache(const char *fileContent)
 {
-	readConfigJson(_filePath);
+	CSJsonDictionary json;
+	json.initWithDescription(fileContent);
 
-	int _length = m_pJson->getArrayItemCount(ARMATURE_DATA);
-
-	CSJsonDictionary _dic;
-	_dic.initWithDescription(m_pJson->getDescription().c_str());
-	_dic.deleteItem(ARMATURE_DATA);
-
-	for (int i = 0; i<_length; i++)
+	// Decode armatures
+	int length = json.getArrayItemCount(ARMATURE_DATA);
+	for (int i = 0; i<length; i++)
 	{
-		CSJsonDictionary *_armatureDic = m_pJson->getSubItemFromArray(ARMATURE_DATA, i);
-
-
-		if (_armatureData->getName().compare(_armatureDic->getItemStringValue(A_NAME)) != 0)
-		{
-			_dic.insertItemToArray(ARMATURE_DATA, _armatureDic);
-		}
+		CSJsonDictionary *armatureDic = json.getSubItemFromArray(ARMATURE_DATA, i);
+		ArmatureData *armatureData = ArmatureData::createWithJson(armatureDic->getDescription().c_str());
+		ArmatureDataManager::sharedArmatureDataManager()->addArmatureData(armatureData->getName().c_str(), armatureData);
 	}
 
-	_dic.insertItemToArray(ARMATURE_DATA, &_armatureData->getJsonDic());
-
-	m_pJson->initWithDescription(_dic.getDescription().c_str());
-
-	saveConfigToJson(_filePath, m_pJson->getDescription().c_str(), m_pJson->getDescription().size());
-
-	return true;
-}
-
-bool DataReaderHelper::saveAnimationDataToJson(const char *_filePath, AnimationData *_animationData)
-{
-	readConfigJson(_filePath);
-
-	int _length = m_pJson->getArrayItemCount(ANIMATION_DATA);
-
-	CSJsonDictionary _dic;
-	_dic.initWithDescription(m_pJson->getDescription().c_str());
-	_dic.deleteItem(ANIMATION_DATA);
-
-	for (int i = 0; i<_length; i++)
+	// Decode animations
+	length = json.getArrayItemCount(ANIMATION_DATA);
+	for (int i = 0; i<length; i++)
 	{
-		CSJsonDictionary *_animationDic = m_pJson->getSubItemFromArray(ANIMATION_DATA, i);
-
-
-		if (_animationData->getName().compare(_animationDic->getItemStringValue(A_NAME)) != 0)
-		{
-			_dic.insertItemToArray(ANIMATION_DATA, _animationDic);
-		}
+		CSJsonDictionary *animationDic = json.getSubItemFromArray(ANIMATION_DATA, i);
+		AnimationData *animationData = AnimationData::createWithJson(animationDic->getDescription().c_str());
+		ArmatureDataManager::sharedArmatureDataManager()->addAnimationData(animationData->getName().c_str(), animationData);
 	}
 
-	_dic.insertItemToArray(ANIMATION_DATA, &_animationData->getJsonDic());
-
-	m_pJson->initWithDescription(_dic.getDescription().c_str());
-
-	saveConfigToJson(_filePath, m_pJson->getDescription().c_str(), m_pJson->getDescription().size());
-
-	return true;
-}
-
-bool DataReaderHelper::saveTextureDataToJson(const char *_filePath, TextureData *_textureData)
-{
-	readConfigJson(_filePath);
-
-	int _length = m_pJson->getArrayItemCount(TEXTURE_DATA);
-
-	CSJsonDictionary _dic;
-	_dic.initWithDescription(m_pJson->getDescription().c_str());
-	_dic.deleteItem(TEXTURE_DATA);
-
-	for (int i = 0; i<_length; i++)
+	// Decode textures
+	length = json.getArrayItemCount(TEXTURE_DATA);
+	for (int i = 0; i<length; i++)
 	{
-		CSJsonDictionary *_textureDic = m_pJson->getSubItemFromArray(TEXTURE_DATA, i);
-
-
-		if (_textureData->getName().compare(_textureDic->getItemStringValue(A_NAME)) != 0)
-		{
-			_dic.insertItemToArray(TEXTURE_DATA, _textureDic);
-		}
+		CSJsonDictionary *textureDic = json.getSubItemFromArray(TEXTURE_DATA, i);
+		TextureData *textureData = TextureData::createWithJson(textureDic->getDescription().c_str());
+		ArmatureDataManager::sharedArmatureDataManager()->addTextureData(textureData->getName().c_str(), textureData);
 	}
 
-	_dic.insertItemToArray(TEXTURE_DATA, &_textureData->getJsonDic());
 
-	m_pJson->initWithDescription(_dic.getDescription().c_str());
-	saveConfigToJson(_filePath, m_pJson->getDescription().c_str(), m_pJson->getDescription().size());
-
-	return true;
-}
-
-void DataReaderHelper::clearJson()
-{
-	m_pJson->initWithDescription("");
-}
-
-void DataReaderHelper::addArmatureDataToJsonList(ArmatureData *_armatureData)
-{
-	m_pJson->insertItemToArray(ARMATURE_DATA, &_armatureData->getJsonDic());
-}
-
-void DataReaderHelper::addAnimationDataToJsonList(AnimationData *_animationData)
-{
-	m_pJson->insertItemToArray(ANIMATION_DATA, &_animationData->getJsonDic());
-}
-
-void DataReaderHelper::addTextureDataToJsonList(TextureData *_textureData)
-{
-	m_pJson->insertItemToArray(TEXTURE_DATA, &_textureData->getJsonDic());
-}
-
-
-void DataReaderHelper::addAllTextureDataToJsonList()
-{
-	CCDictElement *element = NULL;
-	CCDictionary *textures = ArmatureDataManager::sharedArmatureDataManager()->getTextureDatas();
-	CCDICT_FOREACH(textures, element)
-	{
-		addTextureDataToJsonList((TextureData*)element->getObject());
-	}
-
-}
-
-void DataReaderHelper::addAllArmatureDataToJsonList()
-{
-	CCDictElement *element = NULL;
-	CCDictionary *armatures = ArmatureDataManager::sharedArmatureDataManager()->getArmarureDatas();
-	CCDICT_FOREACH(armatures, element)
-	{
-		addArmatureDataToJsonList((ArmatureData*)element->getObject());
-	}
-}
-
-void DataReaderHelper::addAllAnimationDataToJsonList()
-{
-	CCDictElement *element = NULL;
-	CCDictionary *animations = ArmatureDataManager::sharedArmatureDataManager()->getAnimationDatas();
-	CCDICT_FOREACH(animations, element)
-	{
-		addAnimationDataToJsonList((AnimationData*)element->getObject());
-	}
-}
-
-std::string DataReaderHelper::getExportJson()
-{
-	return m_pJson->getDescription();
-}
-
-
-void deleteDictElements(CCDictionary *dict)
-{
-	CCDictElement *element = NULL;
-	CCDICT_FOREACH(dict, element)
-	{
-		CCObject *object = element->getObject();
-		int reference = object->retainCount();
-		dict->removeObjectForElememt(element);
-		if(reference > 1)
-			CC_SAFE_DELETE(object);
-	}
 }
 
 std::string DataReaderHelper::convertFlashToSP(const char *fileName)
 {
-	clearJson();
-
-	addDataFromXML(fileName);
-
-	addAllArmatureDataToJsonList();
-	addAllAnimationDataToJsonList();
-	addAllTextureDataToJsonList();
-
-	deleteDictElements(ArmatureDataManager::sharedArmatureDataManager()->getArmarureDatas());
-	deleteDictElements(ArmatureDataManager::sharedArmatureDataManager()->getAnimationDatas());
-	deleteDictElements(ArmatureDataManager::sharedArmatureDataManager()->getTextureDatas());
-
-	return getExportJson();
+// 	clearJson();
+// 
+// 	addDataFromXML(fileName);
+// 
+// 	addAllArmatureDataToJsonList();
+// 	addAllAnimationDataToJsonList();
+// 	addAllTextureDataToJsonList();
+// 
+// 	deleteDictElements(ArmatureDataManager::sharedArmatureDataManager()->getArmarureDatas());
+// 	deleteDictElements(ArmatureDataManager::sharedArmatureDataManager()->getAnimationDatas());
+// 	deleteDictElements(ArmatureDataManager::sharedArmatureDataManager()->getTextureDatas());
+// 
+// 	return getExportJson();
+	return "";
 }
+#pragma endregion
+
 }
