@@ -1,3 +1,8 @@
-/test/test/test.suo
-
-/test/test/test.sln.docstates.suo
+cocos2dx
+/test/test/external
+Debug.win32
+ipch
+/test/test/*.sdf
+/test/test/*.opensdf
+/test/test/*.suo
+/test/test/*.suo

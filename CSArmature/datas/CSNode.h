@@ -30,7 +30,7 @@
 #include "cocos2d.h"
 
 #include "reader.h"
-#include "CSJsonData.h"
+
 #include "CSArmatureDefine.h"
 
 using namespace cocos2d;
@@ -40,7 +40,7 @@ namespace cs {
 /**
  * the base node include a lot of attribute.
  */
-class CS_EXTERN Node : public CCObject, public JsonData
+class CS_EXTERN Node : public CCObject
 {
 public:
     static Node *createWithJson(const char *pszDescription);

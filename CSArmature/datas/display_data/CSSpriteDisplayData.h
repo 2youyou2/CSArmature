@@ -29,7 +29,7 @@
 #define COCOSTUDIO_CSSPRITEDISPLAYDATA_H
 
 #include "cocos2d.h"
-#include "CSJsonData.h"
+
 #include "CSDisplayData.h"
 
 using namespace cocos2d;
@@ -37,54 +37,7 @@ using namespace cocos2d;
 namespace cs {
 
     
-class CS_EXTERN SpriteDisplayData : public DisplayData
-{
-public:
-    static SpriteDisplayData *createWithJson(const char *pszDescription);
-	static SpriteDisplayData *create();
-public:
-    SpriteDisplayData();
-    virtual ~SpriteDisplayData();
-    
-    
-    virtual bool init();
-    
-    virtual bool initWithJson(const char *pszDescription);
-    
-    /*
-     *  @brief   update data's json value
-     *
-     */
-    virtual void updateJson();
-    
-    
-    void setParam(const char *_displayName)
-    {
-        m_strDisplayName = _displayName;
-        //m_strImageName = _imageName;
-    }
-    
-    void setDisplayName(const char *str){ m_strDisplayName = str; }
-    //void setImageName(const char *str){ m_strImageName = str; }
-    std::string &getDisplayName(){ return m_strDisplayName; }
-    //std::string &getImageName(){ return m_strImageName; }
-    
-    
-    void copy(SpriteDisplayData *_displayData);
-    
-private:
-    
-    /**
-     *  @brief  If DisplayType is CS_DISPLAY_SPRITE, then Bone will use this image name to create a CCSprite from CCSpriteFrameCache.
-     *          It should note that when use this name to create CCSprite from CCSpriteFrameCache, you should use m_strDisplayName + ".png", because when use Texture Packer to pack single image file, the name have ".png".
-     *
-     *          If DisplayType is CS_DISPLAY_ARMATURE, the name is the Armature's name. When Bone init display and type is CS_DISPLAY_ARMATURE,
-     *          then Bone will create a Armature.
-     */
-    std::string m_strDisplayName;
 
-    
-};
 
 
 }

@@ -29,65 +29,12 @@
 
 #include "CSNode.h"
 
-#include "CSJsonData.h"
+
 #include "CSDisplayData.h"
 
 namespace cs {
 
-/**
- *  @brief  BoneData used to init a Bone.
- *  BoneData keeps a DisplayData list, a Bone can have many display to change.
- *  The display information saved in the DisplayData
- */
-class CS_EXTERN BoneData : public Node
-{
-public:
-    static BoneData *createWithJson(const char *_pszDescription);
-	static BoneData *create();
-public:
-	BoneData(void);
-	~BoneData(void);
 
-
-	virtual bool init();
-    
-    virtual bool initWithJson(const char *pszDescription);
-    
-    /*
-     * Update data's json value
-     */
-    virtual void updateJson();
-    
-    
-    /*
-     * Depth copy the information from the given data to self
-     *
-     * @param  the data you want to copy
-     */
-	//void copy(BoneData *_data);
-    
-    
-    DisplayData *addDisplayData(DisplayData *_displayData);
-    DisplayData *addDisplayData(DisplayType _displayType, const char *_pszDescription = NULL);
-    DisplayData *insertDisplayData(DisplayData *_displayData, int _index);
-    DisplayData *removeDisplayData(int _index);
-    DisplayData *changeDisplayDataAtIndex(int _index, DisplayData *_displayData);
-    
-    
-    DisplayData *getDisplayData(int _index);
-    CCArray *getDisplayList();
-    int getDisplayCount();
-
-public:
-    //! the bone's name
-	std::string m_strName;
-    //! the bone parent's name
-	std::string m_strParent;
-
-private:
-    //! save DisplayData informations for the Bone
-	CCArray *m_pDisplayDataList;
-};
 
 
 

@@ -34,7 +34,7 @@
 namespace cs {
 
 
-class CS_EXTERN MovementBoneData : public CCObject, public JsonData, public sigslot::has_slots<>
+class CS_EXTERN MovementBoneData : public CCObject, public sigslot::has_slots<>
 {
 public:
     static MovementBoneData *createWithJson(const char *_pszDescription);

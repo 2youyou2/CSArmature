@@ -29,7 +29,7 @@
 
 #include "cocos2d.h"
 
-#include "CSJsonData.h"
+
 
 #include "CSDisplayFactory.h"
 
@@ -38,39 +38,6 @@ using namespace cocos2d;
 namespace cs {
 
 
-class CS_EXTERN DisplayData : public CCObject, public JsonData
-{
-public:
-    static DisplayData *createWithJson(const char *pszDescription);
-	static DisplayData *create();
-    
-    static const char *changeDisplayToTexture(const char *);
-public:
-//    DisplayData(DEFINE_JS obj){}
-    DisplayData();
-    virtual ~DisplayData(void);
-    
-    virtual bool init();
-    
-    virtual bool initWithJson(const char *pszDescription);
-    
-    /*
-     *  @brief   update data's json value
-     *
-     */
-    virtual void updateJson();
-    
-    
-    
-    void setDisplayType(int _displayType){ m_eDisplayType = (DisplayType)_displayType; }
-    int getDisplayType(){ return m_eDisplayType; }
-    
-protected:
-	//! mark which type your display is
-    DisplayType m_eDisplayType;
-    
-    
-};
 
 
 }

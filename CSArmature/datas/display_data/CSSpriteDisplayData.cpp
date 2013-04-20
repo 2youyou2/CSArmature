@@ -30,35 +30,11 @@
 
 namespace cs {
 
-    
-SpriteDisplayData *SpriteDisplayData::createWithJson(const char *pszDescription)
-{
-    SpriteDisplayData *pDisplayData = new SpriteDisplayData();
-    if (pDisplayData && pDisplayData->initWithJson(pszDescription))
-    {
-        pDisplayData->autorelease();
-        return pDisplayData;
-    }
-    CC_SAFE_DELETE(pDisplayData);
-    return NULL;
-}
-    
-SpriteDisplayData *SpriteDisplayData::create()
-{
-	SpriteDisplayData *pDisplayData = new SpriteDisplayData();
-	if (pDisplayData && pDisplayData->init()){
-		pDisplayData->autorelease();
-		return pDisplayData;
-	}
-	CC_SAFE_DELETE(pDisplayData);
-	return NULL;
-}
-    
+   
 
 
 SpriteDisplayData::SpriteDisplayData(void)
     :m_strDisplayName("")
-    //,m_strImageName("")
 {
     m_eDisplayType = CS_DISPLAY_SPRITE;
 }
@@ -72,12 +48,6 @@ bool SpriteDisplayData::init()
     return true;
 }
  
-void SpriteDisplayData::updateJson()
-{
-    DisplayData::updateJson();
-    
-    m_JsonDic.insertItem(A_NAME, m_strDisplayName.c_str());
-}
 
 bool SpriteDisplayData::initWithJson(const char *pszDescription)
 {
