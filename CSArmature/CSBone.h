@@ -167,7 +167,6 @@ public:
 	virtual void setOpacity(GLubyte value);
 	virtual void setColor(const ccColor4B &color);
 	virtual void setColor(const ccColor3B &color);
-	virtual const ccColor4B &getColor();
 
 
 	CCArray *getChildren();

@@ -311,10 +311,10 @@ FrameData *Tween::tweenNodeTo(float percent, FrameData *node)
 
 	if(m_pBetween->m_bUseColorInfo)
 	{
-		node->m_cColor.a = m_pFrom->m_cColor.a + percent * m_pBetween->m_cColor.a;
-		node->m_cColor.r = m_pFrom->m_cColor.r + percent * m_pBetween->m_cColor.r;
-		node->m_cColor.g = m_pFrom->m_cColor.g + percent * m_pBetween->m_cColor.g;
-		node->m_cColor.b = m_pFrom->m_cColor.b + percent * m_pBetween->m_cColor.b;
+		node->m_iA = m_pFrom->m_iA + percent * m_pBetween->m_iA;
+		node->m_iR = m_pFrom->m_iR + percent * m_pBetween->m_iR;
+		node->m_iG = m_pFrom->m_iG + percent * m_pBetween->m_iG;
+		node->m_iB = m_pFrom->m_iB + percent * m_pBetween->m_iB;
 
 		m_pBone->setColorDirty(true);
 	}

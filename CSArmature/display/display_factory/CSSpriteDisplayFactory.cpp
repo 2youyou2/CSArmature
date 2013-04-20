@@ -181,9 +181,10 @@ void SpriteDisplayFactory::updateDisplay(Bone *bone, DecorativeDisplay *decoDisp
     do 
     {
 		CC_BREAK_IF(!bone->isColorDirty());
-		const ccColor4B &c = bone->getCombinedData()->m_cColor;
-		renderNode->setColor(ccc3(c.r, c.g, c.b));
-		renderNode->setOpacity(c.a);
+
+		FrameData *data = bone->getCombinedData();
+		renderNode->setColor(ccc3(data->m_iR, data->m_iG, data->m_iB));
+		renderNode->setOpacity(data->m_iA);
     } while (0);
 }
   
