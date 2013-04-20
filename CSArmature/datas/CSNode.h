@@ -76,9 +76,9 @@ public:
 
 	
     /**
-     *  @brief  m_fX m_fY m_fSkewX m_fSkewY m_fScaleX m_fScaleY used to calculate transform matrix
-     *  m_fSkewX, m_fSkewY can have rotation effect
-     *  To get more matrix information, you can have a look at this pape : http://www.senocular.com/flash/tutorials/transformmatrix/
+     * m_fX m_fY m_fSkewX m_fSkewY m_fScaleX m_fScaleY used to calculate transform matrix
+     * m_fSkewX, m_fSkewY can have rotation effect
+     * To get more matrix information, you can have a look at this pape : http://www.senocular.com/flash/tutorials/transformmatrix/
      */
 	float m_fSkewX;
 	float m_fSkewY;
@@ -88,7 +88,7 @@ public:
     float m_fTweenRotate;		//! SkewX, SkewY, and TweenRotate effect the rotation
 
 	float m_bUseColorInfo;		//! Whether or not this frame have the color changed Info
-	ccColor4B m_cColor;			//! Color infomation
+	int m_iA, m_iR, m_iG, m_iB;
 
 	float m_fX;					//! position x attribute
 	float m_fY;					//! position y attribute

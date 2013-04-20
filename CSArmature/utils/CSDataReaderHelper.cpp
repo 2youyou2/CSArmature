@@ -701,10 +701,10 @@ FrameData * DataReaderHelper::decodeFrame(TiXmlElement* frameXML,  TiXmlElement*
 		colorTransformXML->QueryIntAttribute(A_GREEN_OFFSET, &greenOffset);
 		colorTransformXML->QueryIntAttribute(A_BLUE_OFFSET, &blueOffset) ;
 
-		frameData->m_cColor.a = 2.55 * alphaOffset +alpha;
-		frameData->m_cColor.r = 2.55 * redOffset + red;
-		frameData->m_cColor.g = 2.55 * greenOffset + green;
-		frameData->m_cColor.b = 2.55 * blueOffset + blue;
+		frameData->m_iA = 2.55 * alphaOffset +alpha;
+		frameData->m_iR = 2.55 * redOffset + red;
+		frameData->m_iG = 2.55 * greenOffset + green;
+		frameData->m_iB = 2.55 * blueOffset + blue;
 
 		frameData->m_bUseColorInfo = true;
 	}

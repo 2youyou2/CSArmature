@@ -70,8 +70,11 @@ Node::Node()
     ,m_fTweenRotate(0.0f)
 
 	,m_bUseColorInfo(false)
+	,m_iA(255)
+	,m_iR(255)
+	,m_iG(255)
+	,m_iB(255)
 {
-	m_cColor = ccc4(255, 255, 255, 255);
 }
 
 Node::~Node()
@@ -92,8 +95,11 @@ void Node::copy(const Node* node )
 
 	m_fTweenRotate = node->m_fTweenRotate;
 
-	m_cColor = node->m_cColor;
 	m_bUseColorInfo = node->m_bUseColorInfo;
+	m_iR = node->m_iR;
+	m_iG = node->m_iG;
+	m_iB = node->m_iB;
+	m_iA = node->m_iA;
 }
 
 
@@ -108,10 +114,10 @@ void Node::subtract(Node *from, Node *to)
 
 	if(from->m_bUseColorInfo || to->m_bUseColorInfo)
 	{
-		m_cColor.a = to->m_cColor.a - from->m_cColor.a;
-		m_cColor.r = to->m_cColor.r - from->m_cColor.r;
-		m_cColor.g = to->m_cColor.g - from->m_cColor.g;
-		m_cColor.b = to->m_cColor.b - from->m_cColor.b;
+		m_iA = to->m_iA - from->m_iA;
+		m_iR = to->m_iR - from->m_iR;
+		m_iG = to->m_iG - from->m_iG;
+		m_iB = to->m_iB - from->m_iB;
 
 		m_bUseColorInfo = true;
 	}
@@ -162,10 +168,10 @@ void Node::updateJson()
 		CSJsonDictionary jsonDic;
 		jsonDic.initWithDescription("");
 
-		jsonDic.insertItem(A_ALPHA, m_cColor.a);
-		jsonDic.insertItem(A_RED, m_cColor.r);
-		jsonDic.insertItem(A_GREEN, m_cColor.g);
-		jsonDic.insertItem(A_BLUE, m_cColor.b);
+		jsonDic.insertItem(A_ALPHA, m_iA);
+		jsonDic.insertItem(A_RED, m_iR);
+		jsonDic.insertItem(A_GREEN, m_iG);
+		jsonDic.insertItem(A_BLUE, m_iB);
 
 		m_JsonDic.insertItemToArray(COLOR_INFO, &jsonDic);
 	}
@@ -195,10 +201,10 @@ bool Node::initWithJson(const char *pszDescription)
 
 		if (colorDic)
 		{
-			m_cColor.a = colorDic->getItemIntValue(A_ALPHA, 255);
-			m_cColor.r = colorDic->getItemIntValue(A_RED, 255);
-			m_cColor.g = colorDic->getItemIntValue(A_GREEN, 255);
-			m_cColor.b = colorDic->getItemIntValue(A_BLUE, 255);
+			m_iA = colorDic->getItemIntValue(A_ALPHA, 255);
+			m_iR = colorDic->getItemIntValue(A_RED, 255);
+			m_iG = colorDic->getItemIntValue(A_GREEN, 255);
+			m_iB = colorDic->getItemIntValue(A_BLUE, 255);
 
 			m_bUseColorInfo = true;
 		}

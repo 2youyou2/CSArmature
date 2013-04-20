@@ -97,6 +97,8 @@ bool HelloWorld::init()
 		armature->setScaleX(-0.3);
 		armature->setScaleY(0.3);
 		armature->setPosition(250, 50);
+		armature->setColor(ccc3(0,0,0));
+		armature->setOpacity(200);
 		addChild(armature);
 
         bRet = true;

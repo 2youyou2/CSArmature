@@ -262,10 +262,10 @@ void Bone::updateColor()
 {
 	if(m_bColorDirty)
 	{
-		m_pCombinedData->m_cColor.a = m_pUserData->m_cColor.a  + m_pTweenData->m_cColor.a;
-		m_pCombinedData->m_cColor.r = m_pUserData->m_cColor.r + m_pTweenData->m_cColor.r;
-		m_pCombinedData->m_cColor.g = m_pUserData->m_cColor.g + m_pTweenData->m_cColor.g;
-		m_pCombinedData->m_cColor.b = m_pUserData->m_cColor.b + m_pTweenData->m_cColor.b;
+		m_pCombinedData->m_iA = m_pUserData->m_iA  + m_pTweenData->m_iA;
+		m_pCombinedData->m_iR = m_pUserData->m_iR + m_pTweenData->m_iR;
+		m_pCombinedData->m_iG = m_pUserData->m_iG + m_pTweenData->m_iG;
+		m_pCombinedData->m_iB = m_pUserData->m_iB + m_pTweenData->m_iB;
 	}
 }
 
@@ -458,27 +458,25 @@ float Bone::getScaleY()
 }
 
 
-
 void Bone::setOpacity(GLubyte value)
 {
-	m_pUserData->m_cColor.a = value;
+	m_pUserData->m_iA = value;
 	m_bColorDirty = true;
 }
 void Bone::setColor(const ccColor4B &color)
 {
-	m_pUserData->m_cColor = color;
+	m_pUserData->m_iA = color.a;
+	m_pUserData->m_iR = color.r;
+	m_pUserData->m_iG = color.g;
+	m_pUserData->m_iB = color.b;
 	m_bColorDirty = true;
 }
 void Bone::setColor(const ccColor3B &color)
 {
-	m_pUserData->m_cColor.r = color.r;
-	m_pUserData->m_cColor.g = color.g;
-	m_pUserData->m_cColor.b = color.b;
+	m_pUserData->m_iR = color.r;
+	m_pUserData->m_iG = color.g;
+	m_pUserData->m_iB = color.b;
 	m_bColorDirty = true;
-}
-const ccColor4B & Bone::getColor()
-{
-	return m_pUserData->m_cColor;
 }
 
 
