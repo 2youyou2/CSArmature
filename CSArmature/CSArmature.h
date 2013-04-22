@@ -29,9 +29,7 @@
 
 #include "CSBatchNode.h"
 #include "CSAnimation.h"
-#include "CSBoneData.h"
-#include "CSDisplayData.h"
-#include "CSArmatureData.h"
+#include "CSDatas.h"
 #include "CSBone.h"
 #include "cocos2d.h"
 #include "CSArmatureDefine.h"

@@ -31,7 +31,7 @@
 #include "cocos2d.h"
 
 #include "CSDisplayFactory.h"
-#include "CSDisplayData.h"
+#include "CSDatas.h"
 #include "sigslot.h"
 
 

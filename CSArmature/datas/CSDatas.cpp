@@ -25,11 +25,104 @@
  */
 
 #include "CSDatas.h"
+#include "CSUtilMath.h"
 
 namespace cs {
 
-#pragma region BoneData
+#pragma region Node
+Node::Node()
+	:x(0.0f)
+	,y(0.0f)
+	,zOrder(0)
 
+	,skewX(0.0f)
+	,skewY(0.0f)
+	,scaleX(1.0f)
+	,scaleY(1.0f)
+
+	,tweenRotate(0.0f)
+
+	,isUseColorInfo(false)
+	,a(255)
+	,r(255)
+	,g(255)
+	,b(255)
+{
+}
+
+Node::~Node()
+{
+}
+
+
+void Node::copy(const Node* node )
+{
+	x = node->x;
+	y = node->y;
+	zOrder = node->zOrder;
+
+	scaleX = node->scaleX;
+	scaleY = node->scaleY;
+	skewX = node->skewX;
+	skewY = node->skewY;
+
+	tweenRotate = node->tweenRotate;
+
+	isUseColorInfo = node->isUseColorInfo;
+	r = node->r;
+	g = node->g;
+	b = node->b;
+	a = node->a;
+}
+
+
+void Node::subtract(Node *from, Node *to)
+{
+	x = to->x - from->x;
+	y = to->y - from->y;
+	scaleX = to->scaleX - from->scaleX;
+	scaleY = to->scaleY - from->scaleY;
+	skewX = to->skewX - from->skewX;
+	skewY = to->skewY - from->skewY;
+
+	if(from->isUseColorInfo || to->isUseColorInfo)
+	{
+		a = to->a - from->a;
+		r = to->r - from->r;
+		g = to->g - from->g;
+		b = to->b - from->b;
+
+		isUseColorInfo = true;
+	}
+
+
+	if (skewX > CS_PI)
+	{
+		skewX -= (float)CS_DOUBLE_PI;
+	}
+	if (skewX < -CS_PI)
+	{
+		skewX += (float)CS_DOUBLE_PI;
+	}
+
+	if (skewY > CS_PI)
+	{
+		skewY -= (float)CS_DOUBLE_PI;
+	}
+	if (skewY < -CS_PI)
+	{
+		skewY += (float)CS_DOUBLE_PI;
+	}
+
+	if (to->tweenRotate)
+	{
+		skewX += to->tweenRotate;
+		skewY -= to->tweenRotate;
+	}
+}
+#pragma endregion
+
+#pragma region BoneData
 BoneData::BoneData(void)
     :name("")
     ,parentName("")
@@ -52,7 +145,6 @@ DisplayData *BoneData::addDisplayData(DisplayData *displayData)
     return displayData;
 }
 #pragma endregion
-
 
 #pragma region ArmatureData
 ArmatureData::ArmatureData()
@@ -85,8 +177,136 @@ BoneData *ArmatureData::removeBoneData(const char *boneName)
 }
 #pragma endregion
 
+#pragma region FrameData
+
+FrameData::FrameData(void)
+	:duration(1)
+	,tweenEasing(Linear)
+	,displayIndex(0)
+
+	,m_strMovement("")
+	,m_strEvent("")
+	,m_strSound("")
+	,m_strSoundEffect("")
+{
+}
+
+FrameData::~FrameData(void)
+{
+}
+
+void FrameData::copy(FrameData *frameData)
+{
+	Node::copy(frameData);
+
+	duration = frameData->duration;
+	displayIndex = frameData->displayIndex;
+	tweenEasing = frameData->tweenEasing;
+}    
+#pragma endregion
+
+#pragma region MovementBoneData
+MovementBoneData::MovementBoneData()
+	:delay(0.0f)
+	,scale(1.0f)
+	,duration(0)
+	,name("")
+{
+}
+
+MovementBoneData::~MovementBoneData(void)
+{
+}
+
+bool MovementBoneData::init()
+{
+	frameList.init();
+}
+#pragma endregion
+
+#pragma region MovementData
+MovementData::MovementData(void)
+	:m_pMovBoneDataDic(NULL)
+	,m_pMovFrameDataArr(NULL)
+	,m_strName("")
+	,m_iDuration(0)
+	,m_iDurationTo(0)
+	,m_iDurationTween(0)
+	,m_bLoop(true)
+	,m_eTweenEasing(Linear)
+{
+}
+
+MovementData::~MovementData(void)
+{
+}
+
+void MovementData::addMovementBoneData(MovementBoneData *movBoneData)
+{
+	m_pMovBoneDataDic->setObject(movBoneData, movBoneData->getName());
+	m_MovBoneDataVec.push_back(movBoneData);
+}
+#pragma endregion
+
+#pragma region AnimationData
+
+AnimationData::AnimationData(void)
+{
+}
+
+AnimationData::~AnimationData(void)
+{
+}
+
+void AnimationData::addMovement(MovementData *movData)
+{
+	movementDataDic->setObject(movData, movData->name);
+	movementNames.push_back(movData->name);
+}
+int AnimationData::getMovementCount()
+{
+	return movementDataDic.count();
+}
+#pragma endregion
+
+#pragma region ContourData
+ContourData::ContourData()
+{
+}
+
+ContourData::~ContourData()
+{
+}
+
+bool ContourData::init()
+{
+	return vertexList.init();
+}
+#pragma endregion
+
+#pragma region TextureData
+
+TextureData::TextureData()
+	:height(0.0f)
+	,width(0.0f)
+	,pivotX(0.5f)
+	,pivotY(0.5f)
+	,name("")
+{
+}
+
+TextureData::~TextureData()
+{
+}
+
+bool TextureData::init()
+{
+	return contourDataList.init();
+}
+#pragma endregion
+
 #pragma region DisplayData
-const char *DisplayData::changeDisplayToTexture(const char * displayName)
+const char *DisplayData::changeDisplayToTexture(const char *displayName)
 {
     // remove .xxx
     std::string textureName = displayName;
@@ -105,11 +325,78 @@ DisplayData::DisplayData(void)
 {
 }
 
-
 DisplayData::~DisplayData(void)
 {
 }
+#pragma endregion
 
+#pragma region SpriteDisplayData
+SpriteDisplayData::SpriteDisplayData(void)
+	:displayName("")
+{
+	displayType = CS_DISPLAY_SPRITE;
+}
+
+SpriteDisplayData::~SpriteDisplayData()
+{
+}
+
+void SpriteDisplayData::copy(SpriteDisplayData *displayData)
+{
+	displayName = displayData->displayName;
+	displayType = displayData->displayType;
+}
+#pragma endregion
+
+#pragma region ArmatureDisplayData
+ArmatureDisplayData::ArmatureDisplayData(void)
+	:displayName("")
+{
+	displayType = CS_DISPLAY_ARMATURE;
+}
+
+ArmatureDisplayData::~ArmatureDisplayData()
+{
+}
+
+void ArmatureDisplayData::copy(ArmatureDisplayData *displayData)
+{
+	displayName = displayData->displayName;
+	displayType = displayData->displayType;
+}
+
+#pragma endregion
+
+#pragma region ParticleDisplayData
+ParticleDisplayData::ParticleDisplayData(void)
+	:plist("")
+{
+	displayType = CS_DISPLAY_PARTICLE;
+}
+
+void ParticleDisplayData::copy(ParticleDisplayData *displayData)
+{
+	plist = displayData->plist;
+	displayType = displayData->displayType;
+}
+
+
+#pragma endregion
+
+#pragma region ShaderDisplayData
+ShaderDisplayData::ShaderDisplayData(void)
+	:vert("")
+	,frag("")
+{
+	displayType = CS_DISPLAY_SHADER;
+}
+
+void ShaderDisplayData::copy(ShaderDisplayData *displayData)
+{
+	vert = displayData->vert;
+	frag = displayData->frag;
+	displayType = displayData->displayType;
+}
 #pragma endregion
 
 }

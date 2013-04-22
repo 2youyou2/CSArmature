@@ -34,9 +34,6 @@
     <Filter Include="CSArmature\utils">
       <UniqueIdentifier>{fd390761-3df0-4c13-89ef-dbe51ea4e7d2}</UniqueIdentifier>
     </Filter>
-    <Filter Include="CSArmature\datas\display_data">
-      <UniqueIdentifier>{65764da6-3df0-4292-9670-9c08c216bfd4}</UniqueIdentifier>
-    </Filter>
     <Filter Include="CSArmature\display\display_factory">
       <UniqueIdentifier>{d5bcd44b-634c-4209-affb-6972b554216e}</UniqueIdentifier>
     </Filter>
@@ -99,42 +96,6 @@
     </ClInclude>
     <ClInclude Include="..\..\..\..\CSArmature\animation\CSTween.h">
       <Filter>CSArmature\animation</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\CSArmature\datas\CSAnimationData.h">
-      <Filter>CSArmature\datas</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\CSArmature\datas\CSContourData.h">
-      <Filter>CSArmature\datas</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\CSArmature\datas\CSFrameData.h">
-      <Filter>CSArmature\datas</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\CSArmature\datas\CSMovementBoneData.h">
-      <Filter>CSArmature\datas</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\CSArmature\datas\CSMovementData.h">
-      <Filter>CSArmature\datas</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\CSArmature\datas\CSMovementFrameData.h">
-      <Filter>CSArmature\datas</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\CSArmature\datas\CSNode.h">
-      <Filter>CSArmature\datas</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\CSArmature\datas\CSTextureData.h">
-      <Filter>CSArmature\datas</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\CSArmature\datas\display_data\CSArmatureDisplayData.h">
-      <Filter>CSArmature\datas\display_data</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\CSArmature\datas\display_data\CSParticleDisplayData.h">
-      <Filter>CSArmature\datas\display_data</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\CSArmature\datas\display_data\CSShaderDisplayData.h">
-      <Filter>CSArmature\datas\display_data</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\CSArmature\datas\display_data\CSSpriteDisplayData.h">
-      <Filter>CSArmature\datas\display_data</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\..\CSArmature\display\CSDecorativeDisplay.h">
       <Filter>CSArmature\display</Filter>
@@ -253,7 +214,7 @@
     <ClInclude Include="..\..\..\..\CSArmature\CSBone.h">
       <Filter>CSArmature</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\..\CSArmature\datas\CSDataS.h">
+    <ClInclude Include="..\..\..\..\CSArmature\datas\CSDatas.h">
       <Filter>CSArmature\datas</Filter>
     </ClInclude>
   </ItemGroup>
@@ -275,42 +236,6 @@
     </ClCompile>
     <ClCompile Include="..\..\..\..\CSArmature\animation\CSTween.cpp">
       <Filter>CSArmature\animation</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\CSArmature\datas\CSAnimationData.cpp">
-      <Filter>CSArmature\datas</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\CSArmature\datas\CSContourData.cpp">
-      <Filter>CSArmature\datas</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\CSArmature\datas\CSFrameData.cpp">
-      <Filter>CSArmature\datas</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\CSArmature\datas\CSMovementBoneData.cpp">
-      <Filter>CSArmature\datas</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\CSArmature\datas\CSMovementData.cpp">
-      <Filter>CSArmature\datas</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\CSArmature\datas\CSMovementFrameData.cpp">
-      <Filter>CSArmature\datas</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\CSArmature\datas\CSNode.cpp">
-      <Filter>CSArmature\datas</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\CSArmature\datas\CSTextureData.cpp">
-      <Filter>CSArmature\datas</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\CSArmature\datas\display_data\CSArmatureDisplayData.cpp">
-      <Filter>CSArmature\datas\display_data</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\CSArmature\datas\display_data\CSParticleDisplayData.cpp">
-      <Filter>CSArmature\datas\display_data</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\CSArmature\datas\display_data\CSShaderDisplayData.cpp">
-      <Filter>CSArmature\datas\display_data</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\CSArmature\datas\display_data\CSSpriteDisplayData.cpp">
-      <Filter>CSArmature\datas\display_data</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\..\CSArmature\display\CSDecorativeDisplay.cpp">
       <Filter>CSArmature\display</Filter>

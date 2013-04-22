@@ -28,7 +28,7 @@
 #ifndef COCOSTUDIO_CSPROCESSBASE_H
 #define COCOSTUDIO_CSPROCESSBASE_H
 
-#include "CSNode.h"
+#include "CSDatas.h"
 #include "CSTweenFunction.h"
 #include "CSArmatureDefine.h"
 

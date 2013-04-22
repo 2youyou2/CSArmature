@@ -27,10 +27,8 @@
 #ifndef COCOSTUDIO_CSBONE_H
 #define COCOSTUDIO_CSBONE_H
 
-#include "CSNode.h"
-#include "CSBoneData.h"
-#include "CSTween.h"
-#include "CSDisplayData.h"
+#include "CSDatas.h"
+#include "CSTween.h"x
 
 #include "CSArmatureDefine.h"
 #include "CCTexture2DMutable.h"

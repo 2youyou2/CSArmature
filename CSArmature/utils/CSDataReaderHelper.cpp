@@ -781,7 +781,6 @@ void DataReaderHelper::addDataFromJsonCache(const char *fileContent)
 
 }
 
-
 ArmatureData *DataReaderHelper::decodeArmature(CSJsonDictionary &json)
 {
 	ArmatureData *armatureData = ArmatureData::create();
@@ -798,11 +797,15 @@ ArmatureData *DataReaderHelper::decodeArmature(CSJsonDictionary &json)
 		CSJsonDictionary *dic = json.getSubItemFromArray(BONE_DATA, i);
 		armatureData->addBoneData(decodeBone(*dic));
 	}
+
+	return armatureData;
 }
 
 BoneData *DataReaderHelper::decodeBone(CSJsonDictionary &json)
 {
 	BoneData *boneData = BoneData::create();
+
+	DecodeNode(boneData, json);
 
 	const char * str = json.getItemStringValue(A_NAME);
 	if(str != NULL)
@@ -823,6 +826,8 @@ BoneData *DataReaderHelper::decodeBone(CSJsonDictionary &json)
 		CSJsonDictionary *dic = json.getSubItemFromArray(DISPLAY_DATA, i);
 		boneData->addDisplayData(decodeBoneDisplay(*dic));
 	}
+
+	return boneData;
 }
 
 DisplayData *DataReaderHelper::decodeBoneDisplay(CSJsonDictionary &json)
@@ -834,61 +839,211 @@ DisplayData *DataReaderHelper::decodeBoneDisplay(CSJsonDictionary &json)
     switch (displayType) {
         case CS_DISPLAY_SPRITE:
             displayData = SpriteDisplayData::create();
+			const char *name = json.getItemStringValue(A_NAME);
+			if(name != NULL)
+			{
+				((SpriteDisplayData*)displayData)->displayName = name;
+			}
             break;
         case CS_DISPLAY_ARMATURE:
             displayData = ArmatureDisplayData::create();
+			const char *name = json.getItemStringValue(A_NAME);
+			if(name != NULL)
+			{
+				((ArmatureDisplayData*)displayData)->displayName = name;
+			}
             break;
 		case CS_DISPLAY_PARTICLE:
 			displayData = ParticleDisplayData::create();
+			const char *plist = json.getItemStringValue(A_PLIST);
+			if(plist != NULL)
+			{
+				((ParticleDisplayData*)displayData)->plist = plist;
+			}
 			break;
 		case CS_DISPLAY_SHADER:
 			displayData = ShaderDisplayData::create();
+
+			const char *vert = json.getItemStringValue(A_VERT);
+			if(vert != NULL)
+			{
+				((ShaderDisplayData*)displayData)->vert = vert;
+			}
+
+			const char *frag = json.getItemStringValue(A_FRAG);
+			if(frag != NULL)
+			{
+				((ShaderDisplayData*)displayData)->frag = vert;
+			}
+
 			break;
         default:
             displayData = SpriteDisplayData::create();
             break;
     }
 
-	displayData->setDisplayTyp
+	displayData->displayType = displayType;
 
-	const char * str = m_JsonDic.getItemStringValue(A_NAME);
-        if(str != NULL)
-        {
-            m_strDisplayName = str;
-        }
+	return displayData;
 }
 
 AnimationData *DataReaderHelper::decodeAnimation(CSJsonDictionary &json)
 {
+	AnimationData *aniData = AnimationData::create();
 
+	const char * name = json.getItemStringValue(A_NAME);
+	if(name != NULL)
+	{
+		aniData->name = name;
+	}
+
+	int length = json.getArrayItemCount(MOVEMENT_DATA);
+
+	for (int i = 0; i<length; i++)
+	{
+		CSJsonDictionary *dic = json.getSubItemFromArray(MOVEMENT_DATA, i);
+		aniData->addMovement(decodeMovement(*dic));
+	}
+
+	return aniData;
 }
 
 MovementData *DataReaderHelper::decodeMovement(CSJsonDictionary &json)
 {
+	MovementData *movementData = MovementData::create();
 
+	movementData->loop = json.getItemBoolvalue(A_LOOP, true);
+	movementData->durationTween = json.getItemIntValue(A_DURATION_TWEEN, 0);
+	movementData->durationTo = json.getItemIntValue(A_DURATION_TO, 0);
+	movementData->duration = json.getItemIntValue(A_DURATION, 0);
+	movementData->tweenEasing = (TweenType)json.getItemIntValue(A_TWEEN_EASING, Linear);
+
+	const char *name = movementData.getItemStringValue(A_NAME);
+	if(name != NULL)
+	{
+		movementData->name = name;
+	}
+
+	int length = json.getArrayItemCount(MOVEMENT_BONE_DATA);
+	for (int i = 0; i<length; i++)
+	{
+		CSJsonDictionary *dic = json.getSubItemFromArray(MOVEMENT_BONE_DATA, i);
+		movementData->addMovementBoneData(decodeMovementBone(*dic));
+	}
+
+	return movementData;
 }
 
 MovementBoneData *DataReaderHelper::decodeMovementBone(CSJsonDictionary &json)
 {
+	MovementBoneData *movementBoneData = MovementBoneData::create();
 
+	movementBoneData->delay = json.getItemFloatValue(A_MOVEMENT_DELAY, 0);
+	movementBoneData->scale = json.getItemFloatValue(A_MOVEMENT_SCALE, 1);
+
+	const char *name = json.getItemStringValue(A_NAME);
+	if(name != NULL)
+	{
+		movementBoneData->name = name;
+	}
+
+	int length = json.getArrayItemCount(FRAME_DATA);
+	for (int i = 0; i<length; i++)
+	{
+		CSJsonDictionary *dic = json.getSubItemFromArray(FRAME_DATA, i);
+		FrameData *frameData = decodeFrame(*dic);
+		movementBoneData->frameList.addObject(frameData);
+		movementBoneData->duration += frameData->duration;
+	}
+
+	return movementBoneData;
 }
 
 FrameData *DataReaderHelper::decodeFrame(CSJsonDictionary &json)
 {
+	FrameData *frameData = FrameData::create();
 
+	DecodeNode(frameData, json);
+
+	frameData->duration = json.getItemIntValue(A_DURATION, 1);
+	frameData->tweenEasing = (TweenType)json.getItemIntValue(A_TWEEN_EASING, Linear);
+	frameData->displayIndex = json.getItemIntValue(A_DISPLAY_INDEX, 0);
+
+	return frameData;
 }
 
 TextureData *DataReaderHelper::decodeTexture(CSJsonDictionary &json)
 {
+	TextureData *textureData = TextureData::create();
 
+	const char *name = json.getItemStringValue(A_NAME);
+	if(name != NULL)
+	{
+		textureData->name = name;
+	}
+
+	textureData->width = json.getItemFloatValue(A_WIDTH, 0);
+	textureData->height = json.getItemFloatValue(A_HEIGHT, 0);
+	textureData->pivotX = json.getItemFloatValue(A_PIVOT_X, 0);
+	textureData->pivotY = json.getItemFloatValue(A_PIVOT_Y, 0);
+
+	int length = json.getArrayItemCount(CONTOUR_DATA);
+	for (int i = 0; i<length; i++)
+	{
+		CSJsonDictionary *dic = json.getSubItemFromArray(CONTOUR_DATA, i);
+		textureData->contourDataList.addObject(decodeContour(*dic));
+	}
+
+	return textureData;
 }
 
 ContourData *DataReaderHelper::decodeContour(CSJsonDictionary &json)
 {
+	ContourData *contourData = ContourData::create();
 
+	int length = json.getArrayItemCount(VERTEX_POINT);
+	for (int i = 0; i<length; i++)
+	{
+		CSJsonDictionary *dic = json.getSubItemFromArray(VERTEX_POINT, i);
+
+		ContourVertex2 *vertex = new ContourVertex2(0, 0);
+		vertex->autorelease();
+
+		vertex->x = dic->getItemFloatValue(A_X, 0);
+		vertex->y = dic->getItemFloatValue(A_Y, 0);
+
+		vertex->y = -vertex->y;
+
+		contourData->vertexList.addObject(vertex);
+	}
+
+	return contourData;
 }
 
+void DataReaderHelper::DecodeNode(Node *node, CSJsonDictionary &json)
+{
+	node->x = json.getItemFloatValue(A_X, 0);
+	node->y = json.getItemFloatValue(A_Y, 0);
+	node->zOrder = json.getItemIntValue(A_Z, 0);
 
+	node->skewX = json.getItemFloatValue(A_SKEW_X, 0);
+	node->skewY = json.getItemFloatValue(A_SKEW_Y, 0);
+	node->scaleX = json.getItemFloatValue(A_SCALE_X, 1);
+	node->scaleY = json.getItemFloatValue(A_SCALE_Y, 1);
+
+
+	CSJsonDictionary *colorDic = json.getSubItemFromArray(COLOR_INFO, 0);
+
+	if (colorDic)
+	{
+		node->a = colorDic->getItemIntValue(A_ALPHA, 255);
+		node->r = colorDic->getItemIntValue(A_RED, 255);
+		node->g = colorDic->getItemIntValue(A_GREEN, 255);
+		node->b = colorDic->getItemIntValue(A_BLUE, 255);
+
+		node->isUseColorInfo = true;
+	}
+}
 
 // std::string DataReaderHelper::convertFlashToSP(const char *fileName)
 // {

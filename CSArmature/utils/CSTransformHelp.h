@@ -28,7 +28,7 @@
 #define COCOSTUDIO_CSTRANSFORMHELP_H
 
 #include "cocos2d.h"
-#include "CSNode.h"
+#include "CSDatas.h"
 
 using namespace cocos2d;
 

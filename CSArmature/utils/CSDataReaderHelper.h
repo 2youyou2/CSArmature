@@ -135,6 +135,7 @@ public:
     
     static ContourData *decodeContour(CSJsonDictionary &json);
 
+	static void DecodeNode(Node *node, CSJsonDictionary &json);
 	//static std::string convertFlashToSP(const char *fileName);
 
 #pragma endregion

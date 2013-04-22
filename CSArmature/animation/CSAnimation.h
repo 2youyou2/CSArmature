@@ -29,7 +29,7 @@
 #define COCOSTUDIO_CSANIMATION_H
 
 #include "CSProcessBase.h"
-#include "CSAnimationData.h"
+#include "CSDatas.h"
 #include "CSArmatureDefine.h"
 
 namespace cs {

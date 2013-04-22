@@ -25,13 +25,11 @@
  */
 
 #include "CSArmatureDefine.h"
-#include "CSTextureData.h"
+#include "CSDatas.h"
 #include "CSSpriteDisplayFactory.h"
-#include "CSDisplayData.h"
 #include "CSArmatureDataManager.h"
 #include "CSDisplayFactoryManager.h"
 #include "CSBatchNodeManager.h"
-#include "CSSpriteDisplayData.h"
 #include "CSSpriteFrameCacheHelper.h"
 #include "CSTransformHelp.h"
 

@@ -28,8 +28,7 @@
 #define COCOSTUDIO_CSDISPLAYFACTORY_H
 
 #include "cocos2d.h"
-#include "CSFrameData.h"
-
+#include "CSDatas.h"
 
 using namespace cocos2d;
 
@@ -39,17 +38,7 @@ class Bone;
 class DecorativeDisplay;
 class DisplayData;
     
-/**
- *  @brief  DisplayType distinguish which type you display is.
- */
-enum DisplayType{
-    CS_DISPLAY_SPRITE,          //! display is a single CCSprite
-    CS_DISPLAY_ARMATURE,        //! display is a Armature
-    CS_DISPLAY_PARTICLE,        //! display is a CCParticle.
-	CS_DISPLAY_SHADER,          //! display is a shader
-    
-    SP_DISPLAY_MAX
-};
+
 
 
 
