@@ -31,8 +31,9 @@
 #include "CSArmatureDefine.h"
 #include "CSDataReaderHelper.h"
 
+#if CS_DEBUG_FOR_EDIT
 #include "CSEditorArmature.h"
-
+#endif
 
 namespace cs {
 
