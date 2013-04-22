@@ -29,7 +29,6 @@
 #define COCOSTUDIO_CSTWEEN_H
 
 #include "CSProcessBase.h"
-#include "CSMovementData.h"
 #include "CSTweenFunction.h"
 
 using namespace cocos2d;
@@ -142,7 +141,7 @@ protected:
     
     
     
-	int m_iBetweenDuration;			//! Current key frame will last m_iBetweenDuration frames
+	int betweenDuration;			//! Current key frame will last betweenDuration frames
 	int m_iTotalDuration;			
 
 

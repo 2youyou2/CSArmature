@@ -29,7 +29,7 @@
 
 #include "cocos2d.h"
 #include "CSDecorativeDisplay.h"
-#include "CSBoneData.h"
+#include "CSDatas.h"
 #include "CSDisplayManager.h"
 #include "sigslot.h"
 

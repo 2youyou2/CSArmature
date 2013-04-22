@@ -26,11 +26,10 @@
 
 #include "CSArmature.h"
 #include "CSArmatureDataManager.h"
-#include "CSDisplayData.h"
+#include "CSDatas.h"
 #include "CSBatchNodeManager.h"
 #include "CSArmatureDefine.h"
 #include "CSDataReaderHelper.h"
-#include "CSSpriteDisplayData.h"
 
 #include "CSEditorArmature.h"
 
@@ -226,13 +225,13 @@ bool Armature::init(const char *_name)
                 //! init bone's  Tween to 1st movement's 1st frame
                 do {
                     
-                    MovementData *_movData = animationData->getMovement(animationData->getMovNames().at(0).c_str());
-                    CC_BREAK_IF(!_movData);
+                    MovementData *movData = animationData->getMovement(animationData->movementNames.at(0).c_str());
+                    CC_BREAK_IF(!movData);
                     
-                    MovementBoneData *_movBoneData = _movData->getMovementBoneData(bone->getName().c_str());
-                    CC_BREAK_IF(!_movBoneData);
+                    MovementBoneData *movBoneData = movData->getMovementBoneData(bone->getName().c_str());
+                    CC_BREAK_IF(!movBoneData);
                     
-                    FrameData *_frameData = _movBoneData->getFrameData(0);
+                    FrameData *_frameData = movBoneData->getFrameData(0);
                     CC_BREAK_IF(!_frameData);
                     
                     bone->getTween()->getTweenNode()->copy(_frameData);
@@ -247,7 +246,7 @@ bool Armature::init(const char *_name)
             m_pArmatureData->name = m_strName;
             
             AnimationData *animationData = AnimationData::create();
-            animationData->setName(m_strName);
+			animationData->name = m_strName;
             
             armatureDataManager->addArmatureData(m_strName.c_str(), m_pArmatureData);
             armatureDataManager->addAnimationData(m_strName.c_str(), animationData);
@@ -270,30 +269,30 @@ bool Armature::init(const char *_name)
     return bRet;
 }
 
-Bone *Armature::createBone(const char *_boneName)
+Bone *Armature::createBone(const char *boneName)
 {
     
-	if(getBone(_boneName) != NULL)
+	if(getBone(boneName) != NULL)
 	{
-		return getBone(_boneName);
+		return getBone(boneName);
 	}
     
-    BoneData *_boneData = (BoneData*)m_pArmatureData->getBoneData(_boneName);
-    std::string parentName = _boneData->m_strParent;
+    BoneData *boneData = (BoneData*)m_pArmatureData->getBoneData(boneName);
+	std::string parentName = boneData->parentName;
 
     Bone *bone = NULL;
     
     if( parentName.compare("") !=0 )
     {
         createBone(parentName.c_str());
-        bone = Bone::create(_boneName);
+        bone = Bone::create(boneName);
         addBone(bone, parentName.c_str());
     }else{
-        bone = Bone::create(_boneName);
+        bone = Bone::create(boneName);
         addBone(bone, "");
     }
     
-    bone->setBoneData(_boneData);
+    bone->setBoneData(boneData);
 	bone->getDisplayManager()->changeDisplayByIndex(-1, false);
     
     return bone;

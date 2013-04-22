@@ -28,11 +28,11 @@
 #define COCOSTUDIO_CSBONE_H
 
 #include "CSDatas.h"
-#include "CSTween.h"x
+#include "CSTween.h"
 
 #include "CSArmatureDefine.h"
 #include "CCTexture2DMutable.h"
-#include "CSDisplayData.h"
+#include "CSDatas.h"
 #include "CSDecorativeDisplay.h"
 #include "CSDisplayManager.h"
 

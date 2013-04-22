@@ -84,13 +84,13 @@ void Tween::play(MovementBoneData *_movementBoneData, int _durationTo, int _dura
     m_bIsTweenKeyFrame = false;
     
     m_iTotalDuration = 0;
-    m_iBetweenDuration = 0;
+    betweenDuration = 0;
     m_iToIndex = 0;
     
     setMovementBoneData(_movementBoneData);
     
 
-    if (m_pMovementBoneData->getFrameDatas()->count() == 1)
+	if (m_pMovementBoneData->frameList.count() == 1)
     {
 		m_eLoopType = SINGLE_FRAME;
 		FrameData *_nextKeyFrame = m_pMovementBoneData->getFrameData(0);
@@ -102,27 +102,27 @@ void Tween::play(MovementBoneData *_movementBoneData, int _durationTo, int _dura
 		}
         m_bIsTweenKeyFrame = true;
         m_eFrameTweenEasing = Linear;
-		m_iRawDuration = m_pMovementBoneData->getDuration();
+		rawDuration = m_pMovementBoneData->duration;
         m_iFromIndex = m_iToIndex =0;
     }
-    else if (m_pMovementBoneData->getFrameDatas()->count() > 1)
+    else if (m_pMovementBoneData->frameList.count() > 1)
     {
 		if (_loop)
 		{
 			m_eLoopType = ANIMATION_TO_LOOP_BACK;
-			m_iRawDuration = m_pMovementBoneData->getDuration();
+			rawDuration = m_pMovementBoneData->duration;
 		}
 		else
 		{
 			m_eLoopType = ANIMATION_NO_LOOP;
-			m_iRawDuration = m_pMovementBoneData->getDuration() - 1;
+			rawDuration = m_pMovementBoneData->duration - 1;
 		}
 
-        m_iDurationTween = _durationTween * m_pMovementBoneData->getScale();
+        m_iDurationTween = _durationTween * m_pMovementBoneData->scale;
 
-        if (_loop && m_pMovementBoneData->getDelay() != 0)
+        if (_loop && m_pMovementBoneData->delay != 0)
         {
-            setBetween(m_pTweenData, tweenNodeTo(updateFrameData(1 - m_pMovementBoneData->getDelay()), m_pBetween));
+            setBetween(m_pTweenData, tweenNodeTo(updateFrameData(1 - m_pMovementBoneData->delay), m_pBetween));
             
         }
         else
@@ -175,7 +175,7 @@ void Tween::updateHandler()
 				m_iNextFrameIndex = m_iDurationTween;
 				m_fCurrentFrame = m_fCurrentPercent * m_iNextFrameIndex;
 				m_iTotalDuration = 0;
-				m_iBetweenDuration = 0;
+				betweenDuration = 0;
 				m_iToIndex = 0;
 				break;
 			}
@@ -184,10 +184,10 @@ void Tween::updateHandler()
 
 			m_iNextFrameIndex = m_iDurationTween > 0 ? m_iDurationTween : 1;
 
-			if (m_pMovementBoneData->getDelay() != 0)
+			if (m_pMovementBoneData->delay != 0)
 			{
 				//
-				m_fCurrentFrame = (1 - m_pMovementBoneData->getDelay()) * (float)m_iNextFrameIndex;
+				m_fCurrentFrame = (1 - m_pMovementBoneData->delay) * (float)m_iNextFrameIndex;
 				m_fCurrentPercent = m_fCurrentFrame / m_iNextFrameIndex;
 
 
@@ -198,7 +198,7 @@ void Tween::updateHandler()
 			}
 
 			m_iTotalDuration = 0;
-			m_iBetweenDuration = 0;
+			betweenDuration = 0;
 			m_iToIndex = 0;
 			break;
 		case ANIMATION_MAX:
@@ -212,7 +212,7 @@ void Tween::updateHandler()
 			m_fCurrentFrame = fmodf(m_fCurrentFrame, m_iNextFrameIndex);
 
 			m_iTotalDuration = 0;
-			m_iBetweenDuration = 0;
+			betweenDuration = 0;
 			m_iToIndex = 0;
 			break;
 		}
@@ -246,13 +246,13 @@ void Tween::setBetween(FrameData *from, FrameData *to)
 {
 	do 
 	{
-		if(to->getDisplayIndex() < 0)
+		if(to->displayIndex < 0)
 		{
 			m_pFrom->copy(from);
 			m_pBetween->subtract(to, to);
 			break;
 		}
-		else if(from->getDisplayIndex() < 0)
+		else if(from->displayIndex < 0)
 		{
 			m_pFrom->copy(to);
 			m_pBetween->subtract(to, to);
@@ -271,7 +271,7 @@ void Tween::arriveKeyFrame(FrameData *keyFrameData)
 {
 	if(keyFrameData)
 	{
-		int displayIndex = keyFrameData->getDisplayIndex();
+		int displayIndex = keyFrameData->displayIndex;
 
 		if (!m_pBone->getDisplayManager()->getForceChangeDisplay())
 		{
@@ -279,7 +279,7 @@ void Tween::arriveKeyFrame(FrameData *keyFrameData)
 		}
 
 
-		m_pBone->setZOrder(keyFrameData->m_iZOrder);
+		m_pBone->setZOrder(keyFrameData->zOrder);
 
 		Armature *childAramture = m_pBone->getChildArmature();
 
@@ -307,33 +307,33 @@ FrameData *Tween::tweenNodeTo(float percent, FrameData *node)
 {
 	node = node == NULL ? m_pTweenData : node;
 
-	node->m_fX = m_pFrom->m_fX + percent * m_pBetween->m_fX;
-	node->m_fY = m_pFrom->m_fY + percent * m_pBetween->m_fY;
-	node->m_fScaleX = m_pFrom->m_fScaleX + percent * m_pBetween->m_fScaleX;
-	node->m_fScaleY = m_pFrom->m_fScaleY + percent * m_pBetween->m_fScaleY;
-	node->m_fSkewX = m_pFrom->m_fSkewX + percent * m_pBetween->m_fSkewX;
-	node->m_fSkewY = m_pFrom->m_fSkewY + percent * m_pBetween->m_fSkewY;
+	node->x = m_pFrom->x + percent * m_pBetween->x;
+	node->y = m_pFrom->y + percent * m_pBetween->y;
+	node->scaleX = m_pFrom->scaleX + percent * m_pBetween->scaleX;
+	node->scaleY = m_pFrom->scaleY + percent * m_pBetween->scaleY;
+	node->skewX = m_pFrom->skewX + percent * m_pBetween->skewX;
+	node->skewY = m_pFrom->skewY + percent * m_pBetween->skewY;
 
 	m_pBone->setTransformDirty(true);
 
-	if(m_pBetween->m_bUseColorInfo)
+	if(m_pBetween->isUseColorInfo)
 	{
-		node->m_iA = m_pFrom->m_iA + percent * m_pBetween->m_iA;
-		node->m_iR = m_pFrom->m_iR + percent * m_pBetween->m_iR;
-		node->m_iG = m_pFrom->m_iG + percent * m_pBetween->m_iG;
-		node->m_iB = m_pFrom->m_iB + percent * m_pBetween->m_iB;
+		node->a = m_pFrom->a + percent * m_pBetween->a;
+		node->r = m_pFrom->r + percent * m_pBetween->r;
+		node->g = m_pFrom->g + percent * m_pBetween->g;
+		node->b = m_pFrom->b + percent * m_pBetween->b;
 
 		m_pBone->setColorDirty(true);
 	}
 
-//    CCPoint p1 = ccp(m_pFrom->m_fX, m_pFrom->m_fY);
+//    CCPoint p1 = ccp(m_pFrom->x, m_pFrom->y);
 //    CCPoint p2 = ccp(100, 0);
 //    CCPoint p3 = ccp(200, 400);
-//    CCPoint p4 = ccp(m_pFrom->m_fX + m_pBetween->m_fX, m_pFrom->m_fY + m_pBetween->m_fY);
+//    CCPoint p4 = ccp(m_pFrom->x + m_pBetween->x, m_pFrom->y + m_pBetween->y);
 //    
 //    CCPoint p = bezierTo(percent, p1, p2, p3, p4);
-//    node->m_fX = p.x;
-//    node->m_fY = p.y;
+//    node->x = p.x;
+//    node->y = p.y;
 
 	return node;
 }
@@ -341,7 +341,7 @@ FrameData *Tween::tweenNodeTo(float percent, FrameData *node)
 float Tween::updateFrameData(float currentPrecent, bool activeFrame)
 {
 
-    float playedTime = (float)m_iRawDuration * currentPrecent;
+    float playedTime = (float)rawDuration * currentPrecent;
     
     
     FrameData *from;
@@ -349,17 +349,17 @@ float Tween::updateFrameData(float currentPrecent, bool activeFrame)
     bool isListEnd;
 
     //! If play to current frame's front or back, then find current frame again
-    if (playedTime >= m_iTotalDuration || playedTime < m_iTotalDuration - m_iBetweenDuration)
+    if (playedTime >= m_iTotalDuration || playedTime < m_iTotalDuration - betweenDuration)
     {
         /*
          *  Get frame length, if m_iToIndex >= _length, then set m_iToIndex to 0, start anew.
          *  m_iToIndex is next index will play
          */
-        int length = m_pMovementBoneData->getFrameCount();
+        int length = m_pMovementBoneData->frameList.count();
         do
         {
-            m_iBetweenDuration = m_pMovementBoneData->getFrameData(m_iToIndex)->getDuration();
-            m_iTotalDuration += m_iBetweenDuration;
+            betweenDuration = m_pMovementBoneData->getFrameData(m_iToIndex)->duration;
+            m_iTotalDuration += betweenDuration;
             m_iFromIndex = m_iToIndex;
             
             if (++m_iToIndex >= length)
@@ -382,12 +382,12 @@ float Tween::updateFrameData(float currentPrecent, bool activeFrame)
             to = m_pMovementBoneData->getFrameData(m_iToIndex);
         }
         
-        m_eFrameTweenEasing = from->getTweenEasing();
+        m_eFrameTweenEasing = from->tweenEasing;
         
         setBetween(from, to);
         
     }
-    currentPrecent = 1 - (m_iTotalDuration - playedTime) / (float)m_iBetweenDuration;
+    currentPrecent = 1 - (m_iTotalDuration - playedTime) / (float)betweenDuration;
 
     
 	/*
@@ -411,27 +411,27 @@ float Tween::updateFrameData(float currentPrecent, bool activeFrame)
 
 CCPoint Tween::getPosition()
 {
-	return ccp(m_pTweenData->m_fX, m_pTweenData->m_fY);
+	return ccp(m_pTweenData->x, m_pTweenData->y);
 }
 float Tween::getPositionX()
 {
-	return m_pTweenData->m_fX;
+	return m_pTweenData->x;
 }
 float Tween::getPositionY()
 {
-	return m_pTweenData->m_fY;
+	return m_pTweenData->y;
 }
 float Tween::getRotation()
 {
-	return m_pTweenData->m_fSkewX;
+	return m_pTweenData->skewX;
 }
 float Tween::getScaleX()
 {
-	return m_pTweenData->m_fScaleX;
+	return m_pTweenData->scaleX;
 }
 float Tween::getScaleY()
 {
-	return m_pTweenData->m_fScaleY;
+	return m_pTweenData->scaleY;
 }
 
 

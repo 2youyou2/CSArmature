@@ -67,8 +67,8 @@ void TransformHelp::transformFromParentWithoutScale(Node &node, const Node &pare
 {
 
 	helpParentNode.copy(&parentNode);
-	helpParentNode.m_fScaleX = 1;
-	helpParentNode.m_fScaleY = 1;
+	helpParentNode.scaleX = 1;
+	helpParentNode.scaleY = 1;
 
 	nodeToMatrix(node, helpMatrix1);
 	nodeToMatrix(helpParentNode, helpMatrix2);
@@ -83,8 +83,8 @@ void TransformHelp::transformToParentWithoutScale(Node &node, const Node &parent
 {
 
 	helpParentNode.copy(&parentNode);
-	helpParentNode.m_fScaleX = 1;
-	helpParentNode.m_fScaleY = 1;
+	helpParentNode.scaleX = 1;
+	helpParentNode.scaleY = 1;
 
 	nodeToMatrix(node, helpMatrix1);
 	nodeToMatrix(helpParentNode, helpMatrix2);
@@ -96,13 +96,13 @@ void TransformHelp::transformToParentWithoutScale(Node &node, const Node &parent
 
 void TransformHelp::nodeToMatrix(const Node &node, CCAffineTransform &matrix)
 {
-	matrix.a = node.m_fScaleX * cos(node.m_fSkewY);
-	matrix.b = node.m_fScaleX * sin(node.m_fSkewY);
-	matrix.c = node.m_fScaleY * sin(node.m_fSkewX);
-	matrix.d = node.m_fScaleY * cos(node.m_fSkewX);
+	matrix.a = node.scaleX * cos(node.skewY);
+	matrix.b = node.scaleX * sin(node.skewY);
+	matrix.c = node.scaleY * sin(node.skewX);
+	matrix.d = node.scaleY * cos(node.skewX);
 
-	matrix.tx = node.m_fX;
-	matrix.ty = node.m_fY;
+	matrix.tx = node.x;
+	matrix.ty = node.y;
 }
 
 void TransformHelp::matrixToNode(const CCAffineTransform &matrix, Node &node)
@@ -125,22 +125,22 @@ void TransformHelp::matrixToNode(const CCAffineTransform &matrix, Node &node)
 
 
 
-	node.m_fSkewX = -(atan2f(helpPoint1.y, helpPoint1.x) - 1.5707964f);
-	node.m_fSkewY = atan2f(helpPoint2.y, helpPoint2.x);
-	node.m_fScaleX = sqrt(matrix.a * matrix.a + matrix.b * matrix.b);
-	node.m_fScaleY = sqrt(matrix.c * matrix.c + matrix.d * matrix.d);
-	node.m_fX = matrix.tx;
-	node.m_fY = matrix.ty;
+	node.skewX = -(atan2f(helpPoint1.y, helpPoint1.x) - 1.5707964f);
+	node.skewY = atan2f(helpPoint2.y, helpPoint2.x);
+	node.scaleX = sqrt(matrix.a * matrix.a + matrix.b * matrix.b);
+	node.scaleY = sqrt(matrix.c * matrix.c + matrix.d * matrix.d);
+	node.x = matrix.tx;
+	node.y = matrix.ty;
 }
 
 void TransformHelp::nodeConcat(Node &target, Node &source)
 {
-	target.m_fX += source.m_fX;
-	target.m_fY += source.m_fY;
-	target.m_fSkewX += source.m_fSkewX;
-	target.m_fSkewY += source.m_fSkewY;
-	target.m_fScaleX += source.m_fScaleX;
-	target.m_fScaleY += source.m_fScaleY;
+	target.x += source.x;
+	target.y += source.y;
+	target.skewX += source.skewX;
+	target.skewY += source.skewY;
+	target.scaleX += source.scaleX;
+	target.scaleY += source.scaleY;
 }
 
 }

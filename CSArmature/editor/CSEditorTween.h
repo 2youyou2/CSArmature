@@ -27,7 +27,7 @@
 #ifndef COCOSTUDIO_CSEDITORTWEEN_H
 #define COCOSTUDIO_CSEDITORTWEEN_H
 
-#include "CSMovementData.h"
+#include "CSDatas.h"
 #include "CSTweenFunction.h"
 #include "sigslot.h"
 #include "CSTween.h"

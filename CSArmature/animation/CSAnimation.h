@@ -31,6 +31,7 @@
 #include "CSProcessBase.h"
 #include "CSDatas.h"
 #include "CSArmatureDefine.h"
+#include "sigslot.h"
 
 namespace cs {
 
@@ -141,7 +142,6 @@ protected:
     
 
     MovementData *m_pMovementData;				//! MovementData save all MovementFrameDatas this animation used.
-	MovementFrameData *m_pCurrentFrameData;	//! MovementFrameData save a whole frame datas, it is different from FrameData, FrameData save a single bone's data for every frame.
 
 	Armature *m_pArmature;				//! A weak reference of armature
 

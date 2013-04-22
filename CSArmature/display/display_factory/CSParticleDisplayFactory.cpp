@@ -26,10 +26,10 @@
 
 #include "CSArmatureDefine.h"
 #include "CSParticleDisplayFactory.h"
-#include "CSDisplayData.h"
+#include "CSDatas.h"
 #include "CSArmature.h"
 #include "CSDisplayFactoryManager.h"
-#include "CSParticleDisplayData.h"
+#include "CSDatas.h"
 #include "CSShaderNode.h"
 #include "CSBatchNodeManager.h"
 
@@ -48,17 +48,17 @@ CCObject *ParticleDisplayFactory::addDisplay(Bone *bone, DecorativeDisplay *deco
     
 CCObject *ParticleDisplayFactory::createDisplay(Bone *bone, DecorativeDisplay *decoDisplay)
 {
-    CCObject *_display = NULL;
+    CCObject *display = NULL;
     
-    ParticleDisplayData *_displayData = (ParticleDisplayData*)decoDisplay->getDisplayData();
+    ParticleDisplayData *displayData = (ParticleDisplayData*)decoDisplay->getDisplayData();
     
-	CCParticleSystem *_system = CCParticleSystemQuad::create(_displayData->getPlist().c_str());
+	CCParticleSystem *system = CCParticleSystemQuad::create(displayData->plist.c_str());
 
-	_display = _system;
+	display = system;
 
-    decoDisplay->setDisplay(_display);
+    decoDisplay->setDisplay(display);
     
-    return _display;
+    return display;
 }
 
 void ParticleDisplayFactory::updateDisplay(Bone *bone, DecorativeDisplay *decoDisplay, FrameData *_frameData)
@@ -68,8 +68,8 @@ void ParticleDisplayFactory::updateDisplay(Bone *bone, DecorativeDisplay *decoDi
 	if(_renderNode)
 	{
 		_renderNode->setPosition(bone->m_tWorldTransform.tx, bone->m_tWorldTransform.ty);
-		_renderNode->setScaleX(_frameData->m_fScaleX);
-		_renderNode->setScaleY(_frameData->m_fScaleY);
+		_renderNode->setScaleX(_frameData->scaleX);
+		_renderNode->setScaleY(_frameData->scaleY);
 	}
 
 }

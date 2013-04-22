@@ -26,10 +26,9 @@
 
 #include "CSArmatureDefine.h"
 #include "CSArmatureDisplayFactory.h"
-#include "CSDisplayData.h"
+#include "CSDatas.h"
 #include "CSArmature.h"
 #include "CSDisplayFactoryManager.h"
-#include "CSArmatureDisplayData.h"
 
 namespace cs {
     
@@ -50,7 +49,7 @@ CCObject *ArmatureDisplayFactory::createDisplay(Bone *bone, DecorativeDisplay *d
     
     ArmatureDisplayData *_displayData = (ArmatureDisplayData*)decoDisplay->getDisplayData();
     
-    Armature *armature = Armature::create(_displayData->getDisplayName().c_str());
+    Armature *armature = Armature::create(_displayData->displayName.c_str());
     
     /*
      *  here use the whole Armature to be a display

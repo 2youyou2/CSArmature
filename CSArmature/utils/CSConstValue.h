@@ -122,29 +122,17 @@ static const char *FL_NAN = "NaN";
 
 
 static const char *DATA_TYPE = "data_type";
-
 static const char *FRAME_DATA = "frame_data";
-
 static const char *MOVEMENT_BONE_DATA = "mov_bone_data";
-
 static const char *MOVEMENT_FRAME_DATA = "mov_frame_data";
-
 static const char *MOVEMENT_DATA = "mov_data";
-
 static const char *ANIMATION_DATA = "animation_data";
-
 static const char *DISPLAY_DATA = "display_data";
-
 static const char *BONE_DATA = "bone_data";
-
 static const char *ARMATURE_DATA = "armature_data";
-
 static const char *CONTOUR_DATA = "contour_data";
-
 static const char *TEXTURE_DATA = "texture_data";
-
 static const char *VERTEX_POINT = "vertex";
-
 static const char *COLOR_INFO = "color";
 
 

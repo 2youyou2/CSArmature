@@ -26,10 +26,9 @@
 
 #include "CSArmatureDefine.h"
 #include "CSShaderDisplayFactory.h"
-#include "CSDisplayData.h"
+#include "CSDatas.h"
 #include "CSArmature.h"
 #include "CSDisplayFactoryManager.h"
-#include "CSShaderDisplayData.h"
 #include "CSShaderNode.h"
 #include "CSBatchNodeManager.h"
 
@@ -38,7 +37,7 @@ namespace cs {
     
 CCObject *ShaderDisplayFactory::addDisplay(Bone *bone, DecorativeDisplay *decoDisplay, DisplayData *_DisplayData)
 {
-    ShaderDisplayData *_adp = ShaderDisplayData::create(); ;
+    ShaderDisplayData *_adp = ShaderDisplayData::create();
     _adp->copy((ShaderDisplayData*)_DisplayData);
     
     decoDisplay->setDisplayData(_adp);
@@ -53,7 +52,7 @@ CCObject *ShaderDisplayFactory::createDisplay(Bone *bone, DecorativeDisplay *dec
     ShaderDisplayData *_displayData = (ShaderDisplayData*)decoDisplay->getDisplayData();
     
 
-	ShaderNode *_sn = ShaderNode::shaderNodeWithVertex(_displayData->getVert().c_str(), _displayData->getFrag().c_str());
+	ShaderNode *_sn = ShaderNode::shaderNodeWithVertex(_displayData->vert.c_str(), _displayData->frag.c_str());
 
 	_display = _sn;
 

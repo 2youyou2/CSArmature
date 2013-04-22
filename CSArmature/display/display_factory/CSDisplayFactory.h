@@ -38,10 +38,6 @@ class Bone;
 class DecorativeDisplay;
 class DisplayData;
     
-
-
-
-
 class DisplayFactory : public CCObject
 {
 public:

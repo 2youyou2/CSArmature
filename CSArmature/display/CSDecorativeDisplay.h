@@ -43,7 +43,6 @@ using namespace cocos2d;
 
 namespace cs {
 
-
 class CS_EXTERN DecorativeDisplay: public CCObject, public sigslot::has_slots<>
 {
 public:

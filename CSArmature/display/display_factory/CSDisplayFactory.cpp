@@ -25,7 +25,7 @@
  */
 
 #include "CSDisplayFactory.h"
-#include "CSDisplayData.h"
+#include "CSDatas.h"
 #include "CSBone.h"
 #include "CSBatchNodeManager.h"
 #include "CSArmature.h"

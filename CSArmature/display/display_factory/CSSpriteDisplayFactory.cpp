@@ -59,7 +59,7 @@ CCObject *SpriteDisplayFactory::createDisplay(Bone *bone, DecorativeDisplay *dec
         SpriteDisplayData *_displayData = (SpriteDisplayData*)decoDisplay->getDisplayData();
         
         //! remove .xxx
-        std::string _textureName = _displayData->getDisplayName();
+        std::string _textureName = _displayData->displayName;
         size_t startPos = _textureName.find_last_of(".");
         
         if(startPos != std::string::npos)
@@ -87,8 +87,7 @@ CCObject *SpriteDisplayFactory::createDisplay(Bone *bone, DecorativeDisplay *dec
             /*
              *  init display anchorPoint， every Texture have a anchor point
              */
-            ((CCSprite*)_display)->setAnchorPoint(ccp( _textureData->getPivotX(), _textureData->getPivotY()));
-			_textureData->AnchorPointChangedSignal.connect(decoDisplay, &DecorativeDisplay::anchorPointChanged);
+            ((CCSprite*)_display)->setAnchorPoint(ccp( _textureData->pivotX, _textureData->pivotY));
         }
         
 #if ENABLE_PHYSICS_DETECT
@@ -116,7 +115,7 @@ void SpriteDisplayFactory::changeDisplay(Bone *bone, DecorativeDisplay *decoDisp
 	SpriteDisplayData *_displayData = (SpriteDisplayData*)decoDisplay->getDisplayData();
 
 	// remove .xxx
-	std::string _textureName = _displayData->getDisplayName();
+	std::string _textureName = _displayData->displayName;
 	size_t startPos = _textureName.find_last_of(".");
 
 	if(startPos != std::string::npos)
@@ -181,8 +180,8 @@ void SpriteDisplayFactory::updateDisplay(Bone *bone, DecorativeDisplay *decoDisp
 		CC_BREAK_IF(!bone->isColorDirty());
 
 		FrameData *data = bone->getCombinedData();
-		renderNode->setColor(ccc3(data->m_iR, data->m_iG, data->m_iB));
-		renderNode->setOpacity(data->m_iA);
+		renderNode->setColor(ccc3(data->r, data->g, data->b));
+		renderNode->setOpacity(data->a);
     } while (0);
 }
   

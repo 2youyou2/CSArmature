@@ -30,15 +30,7 @@
 #include "cocos2d.h"
 #include "CSDatas.h"
 #include "CSConstValue.h"
-#include "CSDisplayData.h"
-#include "CSBoneData.h"
-#include "CSAnimationData.h"
-#include "CSMovementBoneData.h"
-#include "CSMovementFrameData.h"
-#include "CSMovementData.h"
-#include "CSTextureData.h"
 #include "CSArmature.h"
-#include "CSContourData.h"
 #include "CSContentJsonDictionary.h"
 
 using namespace cocos2d;
