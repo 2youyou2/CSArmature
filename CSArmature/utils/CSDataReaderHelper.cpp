@@ -38,6 +38,7 @@ std::vector<std::string> DataReaderHelper::m_arrXMLFileList;
 CSJsonDictionary *DataReaderHelper::m_pJson = new CSJsonDictionary();
 float DataReaderHelper::m_fPositionReadScale = 1;
     
+static std::string s_FlashToolVersion = VERSION_2_0;
     
 void DataReaderHelper::addDataFromFile(const char *_filePath)
 {
@@ -146,6 +147,10 @@ void DataReaderHelper::addDataFromCache(const char *_pFileContent)
     
     TiXmlElement	*_root = _document.RootElement();
     CCAssert(_root, "XML error  or  XML is empty.");
+
+	const char *version = _root->Attribute(VERSION);
+	if(version)
+		s_FlashToolVersion = version;
     
     /*
      *  begin decode armature data from xml
@@ -644,16 +649,36 @@ FrameData * DataReaderHelper::decodeFrame(TiXmlElement* frameXML,  TiXmlElement*
     {
         frameData->m_strSoundEffect = frameXML->Attribute(A_SOUND_EFFECT);
     }
-    if(frameXML->QueryFloatAttribute(A_X, &_x) == TIXML_SUCCESS)
-    {
-        frameData->m_fX = _x;
-        frameData->m_fX *= m_fPositionReadScale;
-    }
-    if(frameXML->QueryFloatAttribute(A_Y, &_y) == TIXML_SUCCESS)
-    {
-        frameData->m_fY = -_y;
-        frameData->m_fX *= m_fPositionReadScale;
-    }
+    
+	//! version 2.0 is different with other version.
+	if (s_FlashToolVersion.compare(VERSION_2_0) == 0)
+	{
+		if(frameXML->QueryFloatAttribute(A_COCOS2DX_X, &_x) == TIXML_SUCCESS)
+		{
+			frameData->m_fX = _x;
+			frameData->m_fX *= m_fPositionReadScale;
+		}
+		if(frameXML->QueryFloatAttribute(A_COCOS2DX_Y, &_y) == TIXML_SUCCESS)
+		{
+			frameData->m_fY = -_y;
+			frameData->m_fX *= m_fPositionReadScale;
+		}
+	}
+	else
+	{
+		if(frameXML->QueryFloatAttribute(A_X, &_x) == TIXML_SUCCESS)
+		{
+			frameData->m_fX = _x;
+			frameData->m_fX *= m_fPositionReadScale;
+		}
+		if(frameXML->QueryFloatAttribute(A_Y, &_y) == TIXML_SUCCESS)
+		{
+			frameData->m_fY = -_y;
+			frameData->m_fX *= m_fPositionReadScale;
+		}
+	}
+
+
     if( frameXML->QueryFloatAttribute(A_SCALE_X, &_scale_x) == TIXML_SUCCESS )
     {
         frameData->m_fScaleX = _scale_x;
@@ -763,8 +788,31 @@ TextureData *DataReaderHelper::decodeTexture(TiXmlElement *_textureXML)
     
 	float px, py, width, height = 0;
 
-	_textureXML->QueryFloatAttribute(A_PIVOT_X, &px);
-	_textureXML->QueryFloatAttribute(A_PIVOT_Y, &py);
+	//! version 2.0 is different with other version.
+	if (s_FlashToolVersion.compare(VERSION_2_0) == 0)
+	{
+		if (_textureXML->QueryFloatAttribute(A_COCOS2D_PIVOT_X, &px) != TIXML_SUCCESS)
+		{
+			px = 0;
+		}
+		if(_textureXML->QueryFloatAttribute(A_COCOS2D_PIVOT_Y, &py) != TIXML_SUCCESS)
+		{
+			py = 0;
+		}
+	}
+	else
+	{
+		if (_textureXML->QueryFloatAttribute(A_PIVOT_X, &px) != TIXML_SUCCESS)
+		{
+			px = 0;
+		}
+		if(_textureXML->QueryFloatAttribute(A_PIVOT_Y, &py) != TIXML_SUCCESS)
+		{
+			py = 0;
+		}
+	}
+
+
 	_textureXML->QueryFloatAttribute(A_WIDTH, &width);
 	_textureXML->QueryFloatAttribute(A_HEIGHT, &height);
 
