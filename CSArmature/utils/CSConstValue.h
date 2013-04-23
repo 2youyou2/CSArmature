@@ -27,6 +27,8 @@
 #ifndef COCOSTUDIO_CSCONSTVALUE_H
 #define COCOSTUDIO_CSCONSTVALUE_H
 
+static const char *VERSION = "version";
+static const char *VERSION_2_0 = "2.0";
 
 static const char *SKELETON = "skeleton";
 
@@ -78,10 +80,18 @@ static const char *A_MOVEMENT = "mov";
 
 static const char *A_X = "x";
 static const char *A_Y = "y";
+
+static const char *A_COCOS2DX_X = "cocos2d_x";
+static const char *A_COCOS2DX_Y = "cocos2d_y";
+
 static const char *A_WIDTH = "width";
 static const char *A_HEIGHT = "height";
 static const char *A_PIVOT_X = "pX";
 static const char *A_PIVOT_Y = "pY";
+
+static const char *A_COCOS2D_PIVOT_X = "cocos2d_pX";
+static const char *A_COCOS2D_PIVOT_Y = "cocos2d_pY";
+
 static const char *A_ALPHA = "a";
 static const char *A_RED = "r";
 static const char *A_GREEN = "g";
@@ -101,7 +111,6 @@ static const char *V_SOUND_LEFT_TO_RIGHT = "lr";
 static const char *V_SOUND_RIGHT_TO_LEFT = "rl";
 static const char *V_SOUND_FADE_IN = "in";
 static const char *V_SOUND_FADE_OUT = "out";
-
 
 
 static const char *CONTOUR = "con";

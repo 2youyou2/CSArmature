@@ -35,6 +35,7 @@ namespace cs {
 
 	std::vector<std::string> DataReaderHelper::m_arrConfigFileList;
 	float DataReaderHelper::m_fPositionReadScale = 1;
+	static std::string s_FlashToolVersion = VERSION_2_0;
 
 	void DataReaderHelper::setPositionReadScale(float scale)
 	{
@@ -45,7 +46,6 @@ namespace cs {
 	{
 		return m_fPositionReadScale;
 	}
-
 
 	void DataReaderHelper::addDataFromFile(const char *filePath)
 	{
@@ -133,6 +133,8 @@ namespace cs {
 		TiXmlElement	*root = document.RootElement();
 		CCAssert(root, "XML error  or  XML is empty.");
 
+		s_FlashToolVersion = root->Attribute(VERSION);
+
 		/*
 		* Begin decode armature data from xml
 		*/
@@ -216,8 +218,6 @@ namespace cs {
 		return armatureData;
 	}
 
-
-
 	BoneData *DataReaderHelper::decodeBone(TiXmlElement *boneXML, TiXmlElement *_parentXML)
 	{
 
@@ -296,7 +296,6 @@ namespace cs {
 
 
 		return boneData;
-
 	}
 
 	DisplayData *DataReaderHelper::decodeBoneDisplay(TiXmlElement *displayXML)
@@ -526,7 +525,6 @@ namespace cs {
 			}
 
 			FrameData * _frameData = decodeFrame( frameXML, parentFrameXML, boneData);
-
 			_movBoneData->addFrameData(_frameData);
 
 			_totalDuration += _frameData->duration;
@@ -563,15 +561,31 @@ namespace cs {
 			frameData->m_strSoundEffect = frameXML->Attribute(A_SOUND_EFFECT);
 		}
 
-		if(frameXML->QueryFloatAttribute(A_X, &_x) == TIXML_SUCCESS)
+		if (s_FlashToolVersion.compare(VERSION_2_0) == 0)
 		{
-			frameData->x = _x;
-			frameData->x *= m_fPositionReadScale;
+			if(frameXML->QueryFloatAttribute(A_COCOS2DX_X, &_x) == TIXML_SUCCESS)
+			{
+				frameData->x = _x;
+				frameData->x *= m_fPositionReadScale;
+			}
+			if(frameXML->QueryFloatAttribute(A_COCOS2DX_Y, &_y) == TIXML_SUCCESS)
+			{
+				frameData->y = -_y;
+				frameData->y *= m_fPositionReadScale;
+			}
 		}
-		if(frameXML->QueryFloatAttribute(A_Y, &_y) == TIXML_SUCCESS)
+		else
 		{
-			frameData->y = -_y;
-			frameData->y *= m_fPositionReadScale;
+			if(frameXML->QueryFloatAttribute(A_X, &_x) == TIXML_SUCCESS)
+			{
+				frameData->x = _x;
+				frameData->x *= m_fPositionReadScale;
+			}
+			if(frameXML->QueryFloatAttribute(A_Y, &_y) == TIXML_SUCCESS)
+			{
+				frameData->y = -_y;
+				frameData->y *= m_fPositionReadScale;
+			}
 		}
 
 		if( frameXML->QueryFloatAttribute(A_SCALE_X, &_scale_x) == TIXML_SUCCESS )
@@ -602,7 +616,6 @@ namespace cs {
 		{
 			frameData->zOrder = _zOrder;
 		}
-
 
 
 		TiXmlElement *colorTransformXML = frameXML->FirstChildElement(A_COLOR_TRANSFORM);
@@ -683,8 +696,17 @@ namespace cs {
 
 		float px, py, width, height = 0;
 
-		textureXML->QueryFloatAttribute(A_PIVOT_X, &px);
-		textureXML->QueryFloatAttribute(A_PIVOT_Y, &py);
+		if(s_FlashToolVersion.compare(VERSION_2_0) == 0)
+		{
+			textureXML->QueryFloatAttribute(A_COCOS2D_PIVOT_X, &px);
+			textureXML->QueryFloatAttribute(A_COCOS2D_PIVOT_Y, &py);
+		}
+		else
+		{
+			textureXML->QueryFloatAttribute(A_PIVOT_X, &px);
+			textureXML->QueryFloatAttribute(A_PIVOT_Y, &py);
+		}
+		
 		
 		textureXML->QueryFloatAttribute(A_WIDTH, &width);
 		textureXML->QueryFloatAttribute(A_HEIGHT, &height);
@@ -962,8 +984,8 @@ namespace cs {
 		{
 			CSJsonDictionary *dic = json.getSubItemFromArray(FRAME_DATA, i);
 			FrameData *frameData = decodeFrame(*dic);
-			movementBoneData->frameList.addObject(frameData);
-			movementBoneData->duration += frameData->duration;
+			movementBoneData->addFrameData(frameData);
+			//movementBoneData->duration += frameData->duration;
 		}
 
 		return movementBoneData;
