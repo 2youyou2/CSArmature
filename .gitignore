@@ -6,3 +6,4 @@ ipch
 /test/test/*.opensdf
 /test/test/*.suo
 /test/test/*.suo
+/test/test/test.suo
