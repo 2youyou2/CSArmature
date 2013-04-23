@@ -46,6 +46,11 @@ namespace cs {
 	{
 		return m_fPositionReadScale;
 	}
+	
+	void DataReaderHelper::clear()
+	{
+		m_arrConfigFileList.clear();
+	}
 
 	void DataReaderHelper::addDataFromFile(const char *filePath)
 	{

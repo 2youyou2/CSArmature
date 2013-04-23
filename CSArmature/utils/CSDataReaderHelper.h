@@ -52,6 +52,8 @@ public:
     static float getPositionReadScale();
 
     static void addDataFromFile(const char *filePath);
+
+	static void clear();
 public:
    
 #pragma region Decode Data From XML

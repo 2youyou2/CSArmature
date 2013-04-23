@@ -243,6 +243,7 @@ void ArmatureDataManager::removeAll()
         m_pArmatureFileInfoDic->removeAllObjects();
     }
 
+	DataReaderHelper::clear();
 }
 
 
