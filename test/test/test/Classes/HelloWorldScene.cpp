@@ -87,6 +87,7 @@ bool HelloWorld::init()
 		cs::BatchNodeManager::sharedBatchNodeManager()->initWithLayer(this, "TEST_LAYER");
 
 		cs::ArmatureDataManager::sharedArmatureDataManager()->addArmatureFileInfo("TestBone", "", "TestBone0.png", "TestBone0.plist", "TestBone.json");
+		cs::ArmatureDataManager::sharedArmatureDataManager()->addArmatureFileInfo("Zombie_f/Zombie", "", "Example08.png", "Example08.plist", "Example08.xml");
 		//cs::ArmatureDataManager::sharedArmatureDataManager()->addArmatureFileInfo("people", "", "people0.png", "people0.plist", "people.json");
 		//cs::ArmatureDataManager::sharedArmatureDataManager()->addArmatureFileInfo("1", "", "10.png", "10.plist", "1.json");
 
@@ -96,9 +97,14 @@ bool HelloWorld::init()
 		armature->getAnimation()->playByIndex(0);
 		armature->setScaleX(-0.3);
 		armature->setScaleY(0.3);
-		armature->setPosition(250, 50);
+		armature->setPosition(290, 50);
 		armature->setColor(ccc3(0,0,0));
 		armature->setOpacity(200);
+		addChild(armature);
+
+		armature = cs::Armature::create("Zombie_f/Zombie");
+		armature->getAnimation()->playByIndex(0);
+		armature->setPosition(100, 150);
 		addChild(armature);
 
         bRet = true;
