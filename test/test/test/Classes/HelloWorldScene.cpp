@@ -84,21 +84,21 @@ bool HelloWorld::init()
         this->addChild(pSprite, 0);
 
 
-		cs::BatchNodeManager::sharedBatchNodeManager()->initWithLayer(this, "TEST_LAYER");
+		//cs::BatchNodeManager::sharedBatchNodeManager()->initWithLayer(this, "TEST_LAYER");
 
 		cs::ArmatureDataManager::sharedArmatureDataManager()->addArmatureFileInfo("TestBone", "", "TestBone0.png", "TestBone0.plist", "TestBone.json");
 		cs::ArmatureDataManager::sharedArmatureDataManager()->addArmatureFileInfo("Zombie_f/Zombie", "", "Example08.png", "Example08.plist", "Example08.xml");
 
 		cs::Armature *armature = NULL;
 
-		armature = cs::Armature::create("TestBone");
-		armature->getAnimation()->playByIndex(0);
-		armature->setScaleX(-0.3);
-		armature->setScaleY(0.3);
-		armature->setPosition(290, 50);
-		armature->setColor(ccc3(0,0,0));
-		armature->setOpacity(200);
-		addChild(armature);
+// 		armature = cs::Armature::create("TestBone");
+// 		armature->getAnimation()->playByIndex(0);
+// 		armature->setScaleX(-0.3);
+// 		armature->setScaleY(0.3);
+// 		armature->setPosition(290, 50);
+// 		armature->setColor(ccc3(0,0,0));
+// 		armature->setOpacity(200);
+// 		addChild(armature);
 
 		armature = cs::Armature::create("Zombie_f/Zombie");
 		armature->getAnimation()->playByIndex(0);

@@ -178,8 +178,7 @@ void Bone::update(float dt)
         updateTransform(dt);
         updateColor();
 
-        m_pDisplayManager->updateDisplay();
-    
+        //m_pDisplayManager->updateDisplay();
     }
 
     CCObject *_object = NULL;

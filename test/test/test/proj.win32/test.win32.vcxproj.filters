@@ -217,6 +217,9 @@
     <ClInclude Include="..\..\..\..\CSArmature\datas\CSDatas.h">
       <Filter>CSArmature\datas</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\..\CSArmature\display\CSSkin.h">
+      <Filter>CSArmature\display</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -332,6 +335,9 @@
     </ClCompile>
     <ClCompile Include="..\..\..\..\CSArmature\datas\CSDatas.cpp">
       <Filter>CSArmature\datas</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\CSArmature\display\CSSkin.cpp">
+      <Filter>CSArmature\display</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -32,6 +32,7 @@
 #include "CSBatchNodeManager.h"
 #include "CSSpriteFrameCacheHelper.h"
 #include "CSTransformHelp.h"
+#include "CSSkin.h"
 
 #if ENABLE_PHYSICS_DETECT
 #include "CSColliderDetector.h"
@@ -70,24 +71,27 @@ CCObject *SpriteDisplayFactory::createDisplay(Bone *bone, DecorativeDisplay *dec
 		//! create display
 		if(_textureName.compare("") == 0)
 		{
-			_display = CCSprite::create();
+			_display = Skin::create();
 		}
 		else
 		{
-			_display = CCSprite::createWithSpriteFrameName((_textureName + ".png").c_str());
+			_display = Skin::createWithSpriteFrameName((_textureName + ".png").c_str());
 		}
+
+		CCTextureAtlas *atlas = SpriteFrameCacheHelper::sharedSpriteFrameCacheHelper()->getTextureAtlas((_textureName + ".png").c_str());
+		_display->setTextureAtlas(atlas);
 
 		decoDisplay->setDisplay(_display);
 		
    
-        TextureData *_textureData = ArmatureDataManager::sharedArmatureDataManager()->getTextureData(_textureName.c_str());
+        TextureData *textureData = ArmatureDataManager::sharedArmatureDataManager()->getTextureData(_textureName.c_str());
         
-       if(_textureData)
+       if(textureData)
         {
             /*
              *  init display anchorPoint， every Texture have a anchor point
              */
-            ((CCSprite*)_display)->setAnchorPoint(ccp( _textureData->pivotX, _textureData->pivotY));
+            _display->setAnchorPoint(ccp( textureData->pivotX, textureData->pivotY));
         }
         
 #if ENABLE_PHYSICS_DETECT
@@ -131,10 +135,10 @@ void SpriteDisplayFactory::changeDisplay(Bone *bone, DecorativeDisplay *decoDisp
 	}
 	else
 	{
-		std::string imagePath = SpriteFrameCacheHelper::sharedSpriteFrameCacheHelper()->getDisplayImagePath(_textureName.c_str());
-
-		CCSpriteBatchNode *batchNode = BatchNodeManager::sharedBatchNodeManager()->getBatchNode(imagePath);
-		batchNode->addChild(renderNode);
+// 		std::string imagePath = SpriteFrameCacheHelper::sharedSpriteFrameCacheHelper()->getDisplayImagePath(_textureName.c_str());
+// 
+// 		CCSpriteBatchNode *batchNode = BatchNodeManager::sharedBatchNodeManager()->getBatchNode(imagePath);
+// 		batchNode->addChild(renderNode);
 	}
 
     bone->setChildArmature(NULL);
@@ -149,20 +153,20 @@ CCNode *SpriteDisplayFactory::getRenderNode(Bone *bone, DecorativeDisplay *decoD
 
 void SpriteDisplayFactory::updateDisplay(Bone *bone, DecorativeDisplay *decoDisplay, FrameData *_frameData)
 {
-	CCSprite *renderNode = (CCSprite*)decoDisplay->getDisplay();
+	Skin *skin = (Skin*)decoDisplay->getDisplay();
 
 	do 
 	{
-		CC_BREAK_IF(!bone->isTransformDirty());
+		//CC_BREAK_IF(!bone->isTransformDirty());
 
-		
-        CCAffineTransform t = bone->getWorldTransform();
-		CCAffineTransform t2;
-		TransformHelp::nodeToMatrix(*bone->getBoneData(), t2);
-		t = CCAffineTransformConcat(t2, t);
-        
-		renderNode->setAdditionalTransform(t);
-		renderNode->setDirty(true);
+		skin->updateTransform(bone);
+//         CCAffineTransform t = bone->getWorldTransform();
+// 		CCAffineTransform t2;
+// 		TransformHelp::nodeToMatrix(*bone->getBoneData(), t2);
+// 		t = CCAffineTransformConcat(t2, t);
+//         
+// 		renderNode->setAdditionalTransform(t);
+// 		renderNode->setDirty(true);
         
 
 #if ENABLE_PHYSICS_DETECT
@@ -180,8 +184,8 @@ void SpriteDisplayFactory::updateDisplay(Bone *bone, DecorativeDisplay *decoDisp
 		CC_BREAK_IF(!bone->isColorDirty());
 
 		FrameData *data = bone->getCombinedData();
-		renderNode->setColor(ccc3(data->r, data->g, data->b));
-		renderNode->setOpacity(data->a);
+		skin->setColor(ccc3(data->r, data->g, data->b));
+		skin->setOpacity(data->a);
     } while (0);
 }
   

@@ -302,8 +302,6 @@ public:
             return;
         }
         
-        
-        
         CSSAXState curState = m_tStateStack.empty() ? SAX_DICT : m_tStateStack.top();
         cocos2d::CCString *pText = new cocos2d::CCString(std::string((char*)ch,0,len));
         
@@ -352,12 +350,19 @@ public:
      *	@brief	Get this display in which image
      *
      */
-    const char *getDisplayImagePath(const char *_displayName);
+    const char *getDisplayImagePath(const char *displayName);
+
+	void addTextureAtlas(const char *displayName, const char *textureName);
+	CCTextureAtlas *getTextureAtlas(const char *displayName);
+	
 private:
-    
+    SpriteFrameCacheHelper();
+
     std::map<std::string, std::string> m_Display2ImageMap;
+	CCDictionary *m_pDisplay2TextureAtlas;
     
     static SpriteFrameCacheHelper *s_SpriteFrameCacheHelper;
+
 };
 
 }

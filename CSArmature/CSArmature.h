@@ -67,7 +67,7 @@ typedef struct _ArmatureFileInfo : public CCObject
     std::vector<ImageInfo> imageInfoVector;
 }ArmatureFileInfo;
     
-class Armature : public CCNodeRGBA
+class Armature : public CCNodeRGBA, public CCBlendProtocol 
 {
 
 public:
@@ -209,6 +209,8 @@ public:
     void update(float dt);
 	virtual CCAffineTransform nodeToParentTransform();
     
+	virtual void draw();
+
 
     inline virtual void setTransformDirty(bool dirty){ m_bDirty = dirty; }
 	inline virtual bool isTransformDirty(){ return m_bDirty; }
@@ -230,6 +232,9 @@ public:
 	*/
 	virtual void setOpacityModifyRGB(bool bValue);
 	virtual bool isOpacityModifyRGB(void);
+
+	inline void setBlendFunc(ccBlendFunc blendFunc) { m_sBlendFunc = blendFunc; }
+	inline ccBlendFunc getBlendFunc(void) { return m_sBlendFunc; }
 private:
     /*
      * Sort Bones in this Armature, if m_pDisPlayBatchNode used BATCHNODE_VERTEXZ, then order use vertexz, else use cocos2dx zorder 
@@ -280,10 +285,13 @@ protected:
 
 	bool m_bOpacityModifyRGB;
 
+	ccBlendFunc        m_sBlendFunc;            /// It's required for CCTextureProtocol inheritance
+
 	CC_SYNTHESIZE_PASS_BY_REF(std::string, m_strName, Name);
+
+	CC_SYNTHESIZE(CCTextureAtlas*, m_pAtlas, TextureAtlas);
 private:
 	static int m_siMaxArmatureZorder;
-    static CCDictionary *m_sArmatureMap;
     
     ComArmature *m_pComArmature;
 };

@@ -30,6 +30,7 @@
 #include "CSBatchNodeManager.h"
 #include "CSArmatureDefine.h"
 #include "CSDataReaderHelper.h"
+#include "CSSkin.h"
 
 #if CS_DEBUG_FOR_EDIT
 #include "CSEditorArmature.h"
@@ -39,7 +40,6 @@ namespace cs {
 
     
 std::map<int, Armature*> Armature::m_sArmatureIndexDic;
-CCDictionary *Armature::m_sArmatureMap = new CCDictionary();
     
 int Armature::m_siMaxArmatureZorder = 0;
 
@@ -133,6 +133,7 @@ Armature::Armature()
 	,m_pRootBone(NULL)
 	,m_pArmature(NULL)
 	,m_bOpacityModifyRGB(true)
+	,m_pAtlas(NULL)
 {
 }
 
@@ -140,7 +141,7 @@ Armature::Armature()
 Armature::~Armature(void)
 {
     // remove this Armature's m_fInternalZOrder from m_sArmatureMap, so other Armature can use this internal zorder
-    m_sArmatureMap->removeObjectForKey(m_fInternalZOrder);
+    m_sArmatureIndexDic[m_fInternalZOrder] = NULL;
 
     if(NULL != m_pBoneDic)
     {
@@ -187,6 +188,8 @@ bool Armature::init(const char *_name)
         CCAssert(m_pBoneList, "create Armature::m_pBoneList fail!");
         m_pBoneList->retain();
 
+		m_sBlendFunc.src = CC_BLEND_SRC;
+		m_sBlendFunc.dst = CC_BLEND_DST;
         
         if(_name == NULL)
         {
@@ -257,8 +260,8 @@ bool Armature::init(const char *_name)
         }
 
 		internalSort();
-
 		setZOrder(0);
+		setShaderProgram(CCShaderCache::sharedShaderCache()->programForKey(kCCShader_PositionTextureColor));
 
         unscheduleUpdate();
 		scheduleUpdate();
@@ -323,9 +326,7 @@ void Armature::addBone(Bone *bone, const char *parentName)
         }
     }
     
-    
     bone->setArmature(this);
-    
     
     m_pBoneDic->setObject(bone, bone->getName());
     m_pBoneList->addObject(bone);
@@ -341,8 +342,6 @@ void Armature::removeBone(Bone *bone, bool recursion)
     
     m_pBoneDic->removeObjectForKey(bone->getName());
     m_pBoneList->removeObject(bone);
-    
-    
 }
 
 
@@ -472,6 +471,48 @@ CCAffineTransform Armature::nodeToParentTransform()
 	return CCNode::nodeToParentTransform();
 }
 
+void Armature::draw()
+{
+	CC_NODE_DRAW_SETUP();
+	ccGLBlendFunc(m_sBlendFunc.src, m_sBlendFunc.dst);
+
+	CCObject *object = NULL;
+	CCARRAY_FOREACH(m_pBoneList, object)
+	{
+		Bone *bone = (Bone*)object;
+
+		DisplayManager *displayManager = bone->getDisplayManager();
+		CCNode *node = displayManager->getDisplayRenderNode();
+		Skin *skin = dynamic_cast<Skin*>(node);
+		if(skin != 0)
+		{
+			CCTextureAtlas *textureAtlas = skin->getTextureAtlas();
+			if(m_pAtlas != textureAtlas)
+			{
+				if (m_pAtlas) {
+					m_pAtlas->drawQuads();
+					m_pAtlas->removeAllQuads();
+				}
+			}
+
+			m_pAtlas = textureAtlas;
+			if (m_pAtlas->getCapacity() == m_pAtlas->getTotalQuads() ) 
+			{
+				if(!m_pAtlas->resizeCapacity(m_pAtlas->getCapacity() * 2))
+				{
+					return;
+				}
+			}
+			displayManager->updateDisplay();
+		}
+	}
+
+	if(m_pAtlas)
+	{
+		m_pAtlas->drawQuads();
+		m_pAtlas->removeAllQuads();
+	}
+}
 
 void Armature::initRootBone()
 {
@@ -487,7 +528,7 @@ void Armature::initRootBone()
 
 void Armature::internalSort()
 {
-    if (m_sArmatureMap->count() >= ARMATURE_MAX_COUNT)
+    if (m_sArmatureIndexDic.size() >= ARMATURE_MAX_COUNT)
     {
         cocos2d::CCLog("warnning : current Armature count is more than ARMATURE_MAX_COUNT(%i), we will do not sort this Armature!!! ", ARMATURE_MAX_COUNT);
         m_fInternalZOrder = 0;
@@ -505,7 +546,7 @@ void Armature::internalSort()
     /*
      *  Stop until find out a index is not used. 
      */
-    while (m_sArmatureMap->objectForKey(m_siMaxArmatureZorder) != NULL) {
+    while (m_sArmatureIndexDic[m_siMaxArmatureZorder] != NULL) {
         m_siMaxArmatureZorder ++;
     }
     
@@ -513,7 +554,7 @@ void Armature::internalSort()
     
     cocos2d::CCLog("Armature [%s] internal zorder : %f", m_strName.c_str(), m_fInternalZOrder);
     
-    m_sArmatureMap->setObject(this, m_fInternalZOrder);
+    m_sArmatureIndexDic[m_fInternalZOrder] = this;
 }
 
 void Armature::setOpacity(GLubyte value)

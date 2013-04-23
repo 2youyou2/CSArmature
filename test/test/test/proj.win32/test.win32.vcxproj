@@ -144,6 +144,7 @@
     <ClInclude Include="..\..\..\..\CSArmature\display\CSDecorativeDisplay.h" />
     <ClInclude Include="..\..\..\..\CSArmature\display\CSDisplayManager.h" />
     <ClInclude Include="..\..\..\..\CSArmature\display\CSShaderNode.h" />
+    <ClInclude Include="..\..\..\..\CSArmature\display\CSSkin.h" />
     <ClInclude Include="..\..\..\..\CSArmature\display\display_factory\CSArmatureDisplayFactory.h" />
     <ClInclude Include="..\..\..\..\CSArmature\display\display_factory\CSDisplayFactory.h" />
     <ClInclude Include="..\..\..\..\CSArmature\display\display_factory\CSDisplayFactoryManager.h" />
@@ -193,6 +194,7 @@
     <ClCompile Include="..\..\..\..\CSArmature\display\CSDecorativeDisplay.cpp" />
     <ClCompile Include="..\..\..\..\CSArmature\display\CSDisplayManager.cpp" />
     <ClCompile Include="..\..\..\..\CSArmature\display\CSShaderNode.cpp" />
+    <ClCompile Include="..\..\..\..\CSArmature\display\CSSkin.cpp" />
     <ClCompile Include="..\..\..\..\CSArmature\display\display_factory\CSArmatureDisplayFactory.cpp" />
     <ClCompile Include="..\..\..\..\CSArmature\display\display_factory\CSDisplayFactory.cpp" />
     <ClCompile Include="..\..\..\..\CSArmature\display\display_factory\CSDisplayFactoryManager.cpp" />
