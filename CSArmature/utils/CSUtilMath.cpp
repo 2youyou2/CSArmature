@@ -25,8 +25,11 @@
  */
 
 #include "CSUtilMath.h"
+
+#if CS_DEBUG_FOR_EDIT
 #include "CSEditorTween.h"
 #include "CSEditorDisplayManager.h"
+#endif
 
 namespace cs {
 
@@ -186,10 +189,11 @@ CCD_Result CalcIK_CCD(Bone *startBone, Bone *endBone, CCPoint &targetPoint, floa
 		endPoint.x = currentPoint.x + cosRotAng*curToEndX - sinRotAng*curToEndY;
 		endPoint.y = currentPoint.y + sinRotAng*curToEndX + cosRotAng*curToEndY;
 
+#if CS_DEBUG_FOR_EDIT
 		// Rotate the current bone in local space (this value is output to the user)
 		if (dynamic_cast<EditorTween*>(currentBone->getTween()) != 0)
 		{
-#if CS_DEBUG_FOR_EDIT
+
 
 			EditorTween *tween = ((EditorTween*)currentBone->getTween());
 
@@ -209,7 +213,7 @@ CCD_Result CalcIK_CCD(Bone *startBone, Bone *endBone, CCPoint &targetPoint, floa
 				((EditorTween*)currentBone->getTween())->editRotation(rotAng);
 			}
 
-#endif
+
 
 		}
 		else
@@ -225,6 +229,7 @@ CCD_Result CalcIK_CCD(Bone *startBone, Bone *endBone, CCPoint &targetPoint, floa
 // 			}
 			
 		}
+#endif
 		
 
 		// Check for termination

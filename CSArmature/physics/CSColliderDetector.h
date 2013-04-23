@@ -28,7 +28,7 @@
 #define COCOSTUDIO_CSCOLLIDERDETECTOR_H
 
 #include "cocos2d.h"
-#include "CSContourData.h"
+#include "CSDatas.h"
 #include "Box2D/Box2D.h"
 
 using namespace cocos2d;

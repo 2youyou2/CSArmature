@@ -33,7 +33,6 @@ using namespace cocos2d;
 
 namespace cs {
     
-    
 enum RENDER_TYPE
 {
     SIMPLE_ZORDER,          //! use a single png and cocos2dx zorder to order
@@ -71,7 +70,6 @@ public:
 private:
     RENDER_TYPE m_eRenderType;
 };
-
 
 }
 

@@ -82,12 +82,12 @@ bool ColliderDetector::init(Bone *bone)
 	return true;
 }
 
-void ColliderDetector::addContourData(ContourData *_contourData)
+void ColliderDetector::addContourData(ContourData *contourData)
 {
-	const CCArray *array = _contourData->getVertexList();
+	const CCArray *array = &contourData->vertexList;
 	CCObject *object = NULL;
 
-	b2Vec2 *b2bv = new b2Vec2[_contourData->getVertexCount()];
+	b2Vec2 *b2bv = new b2Vec2[contourData->vertexList.count()];
 	
 	int i = 0;
 	CCARRAY_FOREACH(array, object)
@@ -98,7 +98,7 @@ void ColliderDetector::addContourData(ContourData *_contourData)
 	}
 
 	b2PolygonShape polygon;
-	polygon.Set(b2bv, _contourData->getVertexCount());
+	polygon.Set(b2bv, contourData->vertexList.count());
 	
 	CC_SAFE_DELETE(b2bv);
 
@@ -115,7 +115,7 @@ void ColliderDetector::addContourData(ContourData *_contourData)
 	b2Body *body = PhysicsWorld::sharedPhysicsWorld()->getNoGravityWorld()->CreateBody(&bodyDef);
 	body->CreateFixture(&fixtureDef);
 
- 	ColliderBody *colliderBody = new ColliderBody(body, _contourData);
+ 	ColliderBody *colliderBody = new ColliderBody(body, contourData);
     m_pColliderBodyList->addObject(colliderBody);
 }
     
@@ -164,7 +164,7 @@ void ColliderDetector::updateTransform(CCAffineTransform &t)
 		b2PolygonShape *shape = (b2PolygonShape *)body->GetFixtureList()->GetShape();
 		
 		//! update every vertex
-		const CCArray *array = _contourData->getVertexList();
+		const CCArray *array = &_contourData->vertexList;
 		CCObject *object = NULL;
 		int i = 0;
 		CCARRAY_FOREACH(array, object)

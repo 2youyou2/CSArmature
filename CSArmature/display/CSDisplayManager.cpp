@@ -101,7 +101,7 @@ void DisplayManager::addDisplay(DisplayData *_displayData, int _index)
     }
     
     
-    DisplayFactoryManager::getFactory((DisplayType)_displayData->getDisplayType())->addDisplay(m_pBone, decoDisplay, _displayData);
+    DisplayFactoryManager::getFactory((DisplayType)_displayData->displayType)->addDisplay(m_pBone, decoDisplay, _displayData);
     
     //! if changed display index is current display index, then change current display to the new display
     if(_index == m_iDisplayIndex)
@@ -121,7 +121,7 @@ void DisplayManager::insertDisplay(DisplayData *displayData, int index)
     m_pDecoDisplayList->insertObject(decoDisplay, index);
     
     
-    DisplayFactoryManager::getFactory((DisplayType)displayData->getDisplayType())->addDisplay(m_pBone, decoDisplay, displayData);
+	DisplayFactoryManager::getFactory((DisplayType)displayData->displayType)->addDisplay(m_pBone, decoDisplay, displayData);
     
     //! if changed display index is current display index, then change current display to the new display
     if(index == m_iDisplayIndex)
@@ -180,7 +180,7 @@ void DisplayManager::changeDisplayByIndex(int index, bool force)
     
     m_pCurrentDecoDisplay = decoDisplay;
     
-    DisplayFactoryManager::getFactory((DisplayType)decoDisplay->getDisplayData()->getDisplayType())->changeDisplay(m_pBone, decoDisplay);
+    DisplayFactoryManager::getFactory((DisplayType)decoDisplay->getDisplayData()->displayType)->changeDisplay(m_pBone, decoDisplay);
     
 }
     
@@ -231,7 +231,7 @@ void DisplayManager::initDisplayList(BoneData *boneData)
     }
     
     CCObject *object = NULL;
-    CCArray *displayDataList = boneData->getDisplayList();
+    CCArray *displayDataList = &boneData->displayDataList;
     CCARRAY_FOREACH(displayDataList, object)
     {
         DisplayData *displayData = (DisplayData*)object;
@@ -240,7 +240,7 @@ void DisplayManager::initDisplayList(BoneData *boneData)
         decoDisplay->setDisplayData(displayData);
         
         CCObject *display = NULL;
-        display = DisplayFactoryManager::getFactory((DisplayType)displayData->getDisplayType())->createDisplay(m_pBone, decoDisplay);
+        display = DisplayFactoryManager::getFactory((DisplayType)displayData->displayType)->createDisplay(m_pBone, decoDisplay);
         
         m_pDecoDisplayList->addObject(decoDisplay);
     }
@@ -250,7 +250,7 @@ void DisplayManager::updateDisplay()
 {
 	CS_RETURN_IF(!m_pCurrentDecoDisplay);
     DisplayData *displayData = m_pCurrentDecoDisplay->getDisplayData();
-    DisplayFactoryManager::getFactory((DisplayType)displayData->getDisplayType())->updateDisplay(m_pBone, m_pCurrentDecoDisplay, m_pBone->getCombinedData());
+    DisplayFactoryManager::getFactory((DisplayType)displayData->displayType)->updateDisplay(m_pBone, m_pCurrentDecoDisplay, m_pBone->getCombinedData());
 }
     
     
@@ -263,7 +263,7 @@ bool DisplayManager::containPoint(CCPoint &point)
     
     bool ret = false;
     
-    switch (m_pCurrentDecoDisplay->getDisplayData()->getDisplayType())
+    switch (m_pCurrentDecoDisplay->getDisplayData()->displayType)
     {
         case CS_DISPLAY_SPRITE:
         {
@@ -305,7 +305,7 @@ void DisplayManager::setVisible(bool visible)
 
 	m_bVisible = visible;
 
-	DisplayFactoryManager::getFactory((DisplayType)m_pCurrentDecoDisplay->getDisplayData()->getDisplayType())->setVisible(m_pBone, m_pCurrentDecoDisplay, m_bVisible);
+	DisplayFactoryManager::getFactory((DisplayType)m_pCurrentDecoDisplay->getDisplayData()->displayType)->setVisible(m_pBone, m_pCurrentDecoDisplay, m_bVisible);
 }
 
 bool DisplayManager::isVisible()
@@ -318,28 +318,28 @@ CCSize DisplayManager::getContentSize()
 {
 	CS_RETURN_IF(!m_pCurrentDecoDisplay) CCSizeMake(0,0);
     DisplayData *_displayData = m_pCurrentDecoDisplay->getDisplayData();
-    return DisplayFactoryManager::getFactory((DisplayType)_displayData->getDisplayType())->getContentSize(m_pBone, m_pCurrentDecoDisplay);
+    return DisplayFactoryManager::getFactory((DisplayType)_displayData->displayType)->getContentSize(m_pBone, m_pCurrentDecoDisplay);
 }
 
 float DisplayManager::getWidth()
 {
 	CS_RETURN_NULL_IF(!m_pCurrentDecoDisplay);
     DisplayData *_displayData = m_pCurrentDecoDisplay->getDisplayData();
-    return DisplayFactoryManager::getFactory((DisplayType)_displayData->getDisplayType())->getWidth(m_pBone, m_pCurrentDecoDisplay);
+    return DisplayFactoryManager::getFactory((DisplayType)_displayData->displayType)->getWidth(m_pBone, m_pCurrentDecoDisplay);
 }
 
 float DisplayManager::getHeight()
 {
 	CS_RETURN_IF(!m_pCurrentDecoDisplay) 0;
     DisplayData *_displayData = m_pCurrentDecoDisplay->getDisplayData();
-    return DisplayFactoryManager::getFactory((DisplayType)_displayData->getDisplayType())->getHeight(m_pBone, m_pCurrentDecoDisplay);
+    return DisplayFactoryManager::getFactory((DisplayType)_displayData->displayType)->getHeight(m_pBone, m_pCurrentDecoDisplay);
 }
 
 CCRect DisplayManager::getBoundingBox()
 {
 	CS_RETURN_IF(!m_pCurrentDecoDisplay) CCRectMake(0,0,0,0);
     DisplayData *_displayData = m_pCurrentDecoDisplay->getDisplayData();
-    return DisplayFactoryManager::getFactory((DisplayType)_displayData->getDisplayType())->getBoundingBox(m_pBone, m_pCurrentDecoDisplay);
+    return DisplayFactoryManager::getFactory((DisplayType)_displayData->displayType)->getBoundingBox(m_pBone, m_pCurrentDecoDisplay);
 }
 
 
@@ -347,14 +347,14 @@ CCPoint DisplayManager::getAnchorPoint()
 {
 	CS_RETURN_IF(!m_pCurrentDecoDisplay) ccp(0,0);
     DisplayData *_displayData = m_pCurrentDecoDisplay->getDisplayData();
-    return DisplayFactoryManager::getFactory((DisplayType)_displayData->getDisplayType())->getAnchorPoint(m_pBone, m_pCurrentDecoDisplay);;
+    return DisplayFactoryManager::getFactory((DisplayType)_displayData->displayType)->getAnchorPoint(m_pBone, m_pCurrentDecoDisplay);;
 }
 
 CCPoint DisplayManager::getAnchorPointInPoints()
 {
 	CS_RETURN_IF(!m_pCurrentDecoDisplay) ccp(0,0);
     DisplayData *_displayData = m_pCurrentDecoDisplay->getDisplayData();
-    return DisplayFactoryManager::getFactory((DisplayType)_displayData->getDisplayType())->getAnchorPointInPoints(m_pBone, m_pCurrentDecoDisplay);
+    return DisplayFactoryManager::getFactory((DisplayType)_displayData->displayType)->getAnchorPointInPoints(m_pBone, m_pCurrentDecoDisplay);
 }
 
 

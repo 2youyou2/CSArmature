@@ -28,17 +28,9 @@
 #define COCOSTUDIO_CSDATAREADERHELPER_H
 
 #include "cocos2d.h"
+#include "CSDatas.h"
 #include "CSConstValue.h"
-#include "CSDisplayData.h"
-#include "CSBoneData.h"
-#include "CSAnimationData.h"
-#include "CSMovementBoneData.h"
-#include "CSMovementFrameData.h"
-#include "CSMovementData.h"
-#include "CSArmatureData.h"
-#include "CSTextureData.h"
 #include "CSArmature.h"
-#include "CSContourData.h"
 #include "CSContentJsonDictionary.h"
 
 using namespace cocos2d;
@@ -52,128 +44,100 @@ class CS_EXTERN DataReaderHelper
 {
     
 public:
-    
-    static void addDataFromFile(const char *_filePath);
-public:
     /**
-	 *	@brief	Scale the position data, used for multiresolution adapter
-     *          It won't effect the data already read.
-     *          
+	 * Scale the position data, used for multiresolution adapter
+     * It won't effect the data already read.         
      */
     static void setPositionReadScale(float scale);
     static float getPositionReadScale();
+
+    static void addDataFromFile(const char *filePath);
+
+	static void clear();
+public:
+   
+#pragma region Decode Data From XML
+	/**
+	 * Translate XML export from Dragon Bone flash tool to datas, and save them.
+	 * When you add a new xml, the data already saved will be keeped.
+     *
+     * @param xmlPath Path of xml file
+     */
+    static void addDataFromXML(const char *xmlPath);
     
-    ////////////////////////////////////////////////////////////////////////
-    ////                                                                ////
-    ////                 Decode Data From XML                           ////
-    ////                                                                ////
-    ////////////////////////////////////////////////////////////////////////
+    /**
+	 * Translate XML export from Dragon Bone flash tool to datas, and save them.
+	 * When you add a new xml, the data already saved will be keeped.
+     *
+     * @param xmlPath Path of pak file
+     */
+    static void addDataFromXMLPak(const char *xmlPakPath);
+    
+    /**
+	 * Translate XML export from Dragon Bone flash tool to datas, and save them.
+	 * When you add a new xml, the data already saved will be keeped.
+     *
+     * @param xmlPath The cache of the xml
+     */
+    static void addDataFromCache(const char *pFileContent);
+    
+    
+    
+    /**
+	 * Decode Armature Datas from xml export from Dragon Bone flash tool
+     */
+	static ArmatureData *decodeArmature(TiXmlElement *armatureXML);
+	static BoneData *decodeBone(TiXmlElement *boneXML, TiXmlElement *parentXML);
+	static DisplayData *decodeBoneDisplay(TiXmlElement *displayXML);
     
     
 	/**
-	 *	@brief	Translate XML export from Dragon Bone flash tool to datas, and save them.
-	 *          When you add a new xml, the data already saved will be keeped.
-     *
-     *	@param 	_xmlPath path of xml file
+	 * Decode Animation Datas from xml export from Dragon Bone flash tool
      */
-    static void addDataFromXML(const char *_xmlPath);
-    
-    /**
-	 *	@brief	Translate XML export from Dragon Bone flash tool to datas, and save them.
-	 *          When you add a new xml, the data already saved will be keeped.
-     *
-     *	@param 	_xmlPath path of pak file
-     */
-    static void addDataFromXMLPak(const char *_xmlPakPath);
-    
-    /**
-	 *	@brief	Translate XML export from Dragon Bone flash tool to datas, and save them.
-	 *          When you add a new xml, the data already saved will be keeped.
-     *
-     *	@param 	_xmlPath the cache of the xml
-     */
-    static void addDataFromCache(const char *_pFileContent);
-    
-    /**
-	 *	@brief	Just decode the TexutreData info in the xml, used for other texture info
-     *
-     *	@param 	_xmlPath path of xml file
-     */
-    static void addTextureDataFromXML(const char *_xmlPath);
-    
-    
-    
-    /**
-	 *	@brief	decode Armature Datas from xml export from Dragon Bone flash tool
-     */
-	static ArmatureData *decodeArmature(TiXmlElement *_armatureXML);
-	static BoneData *decodeBone(TiXmlElement *_boneXML, TiXmlElement *_parentXML);
-	static DisplayData *decodeBoneDisplay(TiXmlElement *_displayXML);
-    
-    
-	/**
-	 *	@brief	decode Animation Datas from xml export from Dragon Bone flash tool
-     */
-	static AnimationData *decodeAnimation(TiXmlElement *_animationXML);
-	static MovementData *decodeMovement(TiXmlElement *_movementXML, ArmatureData *_armatureData);
-	static MovementBoneData *decodeMovementBone(TiXmlElement* _movBoneXml, TiXmlElement* _parentXml, BoneData *_boneData);
-	static FrameData *decodeFrame(TiXmlElement* _frameXML, TiXmlElement* _parentFrameXml, BoneData *_boneData);
+	static AnimationData *decodeAnimation(TiXmlElement *animationXML);
+	static MovementData *decodeMovement(TiXmlElement *movementXML, ArmatureData *armatureData);
+	static MovementBoneData *decodeMovementBone(TiXmlElement* movBoneXml, TiXmlElement* parentXml, BoneData *boneData);
+	static FrameData *decodeFrame(TiXmlElement* frameXML, TiXmlElement* parentFrameXml, BoneData *boneData);
     
 	
     /**
-	 *	@brief	decode Texture Datas from xml export from Dragon Bone flash tool
+	 * Decode Texture Datas from xml export from Dragon Bone flash tool
      */
-	static TextureData *decodeTexture(TiXmlElement *_textureXML);
+	static TextureData *decodeTexture(TiXmlElement *textureXML);
     
     /**
-	 *	@brief	decode Contour Datas from xml export from Dragon Bone flash tool
+	 * Decode Contour Datas from xml export from Dragon Bone flash tool
      */
-    static ContourData *decodeContour(TiXmlElement *_contourXML);
-    
-public:
-    
-    ////////////////////////////////////////////////////////////////////////
-    ////                                                                ////
-    ////                 Decode Data From JSON                          ////
-    ////                                                                ////
-    ////////////////////////////////////////////////////////////////////////
-    
-    static void readConfigJson(const char *_filePath);
-    static void saveConfigToJson(const char *_filePath, const char *_json, int _length);
-    
-    
-    static void addDataFromJson(const char *_filePath);
-    
-    static void addArmatureDataFromJson(const char *_filePath);
-    static void addAnimationDataFromJson(const char *_filePath);
-    static void addTextureDataFromJson(const char *_filePath);
-    
+    static ContourData *decodeContour(TiXmlElement *contourXML);
+#pragma endregion
 
-	static bool saveArmatureDataToJson(const char *_filePath, ArmatureData *_armatureData);
-	static bool saveAnimationDataToJson(const char *_filePath, AnimationData *_animationData);
-	static bool saveTextureDataToJson(const char *_filePath, TextureData *_textureData);
+#pragma region Decode Data From JSON
+    
+    static void addDataFromJson(const char *filePath);
+	static void addDataFromJsonCache(const char *fileContent);
 
+	static ArmatureData *decodeArmature(CSJsonDictionary &json);
+	static BoneData *decodeBone(CSJsonDictionary &json);
+	static DisplayData *decodeBoneDisplay(CSJsonDictionary &json);
+    
+	static AnimationData *decodeAnimation(CSJsonDictionary &json);
+	static MovementData *decodeMovement(CSJsonDictionary &json);
+	static MovementBoneData *decodeMovementBone(CSJsonDictionary &json);
+	static FrameData *decodeFrame(CSJsonDictionary &json);
+    
+	static TextureData *decodeTexture(CSJsonDictionary &json);
+    
+    static ContourData *decodeContour(CSJsonDictionary &json);
 
-	static void clearJson();
-	static void addArmatureDataToJsonList(ArmatureData *_armatureData);
-	static void addAnimationDataToJsonList(AnimationData *_animationData);
-	static void addTextureDataToJsonList(TextureData *_textureData);
+	static void DecodeNode(Node *node, CSJsonDictionary &json);
+	//static std::string convertFlashToSP(const char *fileName);
 
-	static void addAllTextureDataToJsonList();
-	static void addAllArmatureDataToJsonList();
-	static void addAllAnimationDataToJsonList();
+#pragma endregion
 
-	static std::string getExportJson();
-
-
-public:
-	static std::string convertFlashToSP(const char *fileName);
 private:
     
     //! a std::vector save the xml file already added
-    static std::vector<std::string> m_arrXMLFileList;
-    
-    static CSJsonDictionary *m_pJson;
+    static std::vector<std::string> m_arrConfigFileList;
     
     static float m_fPositionReadScale;
 };

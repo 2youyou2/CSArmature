@@ -27,13 +27,16 @@
 #ifndef COCOSTUDIO_DECORATIVEDISPLAY_H
 #define COCOSTUDIO_DECORATIVEDISPLAY_H
 
-#include "CSContourPoints.h"
 #include "cocos2d.h"
 
 #include "CSDisplayFactory.h"
-#include "CSDisplayData.h"
+#include "CSDatas.h"
 #include "sigslot.h"
 
+
+#if CS_DEBUG_FOR_EDIT
+#include "CSContourPoints.h"
+#endif
 
 #if ENABLE_PHYSICS_DETECT
 #include "CSColliderDetector.h"
@@ -42,7 +45,6 @@
 using namespace cocos2d;
 
 namespace cs {
-
 
 class CS_EXTERN DecorativeDisplay: public CCObject, public sigslot::has_slots<>
 {
@@ -57,9 +59,12 @@ public:
 protected:
 
 	CC_SYNTHESIZE_RETAIN(CCObject*, m_pDisplay, Display);
-	CC_SYNTHESIZE_RETAIN(ContourPoints*, m_pContourPoints, ContourPoints);
 	CC_SYNTHESIZE_RETAIN(DisplayData*, m_pDisplayData, DisplayData);
+	
+#if CS_DEBUG_FOR_EDIT
+	CC_SYNTHESIZE_RETAIN(ContourPoints*, m_pContourPoints, ContourPoints);
 	CC_SYNTHESIZE_RETAIN(CCTexture2DMutable*, m_pTextureMutable, TextureMutable);
+#endif
 
 #if ENABLE_PHYSICS_DETECT
 	CC_SYNTHESIZE_RETAIN(ColliderDetector*, m_pColliderDetector, ColliderDetector);

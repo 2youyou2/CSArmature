@@ -122,8 +122,8 @@ bool Bone::init(const char *name)
 		//! Init m_pUserData
         CC_SAFE_DELETE(m_pUserData);
         m_pUserData = FrameData::create();
-		m_pUserData->m_fScaleX = 0;
-		m_pUserData->m_fScaleY = 0;
+		m_pUserData->scaleX = 0;
+		m_pUserData->scaleY = 0;
         m_pUserData->retain();
         
         CC_SAFE_DELETE(m_pCombinedData);
@@ -156,9 +156,9 @@ void Bone::setBoneData(BoneData *_boneData)
     m_pBoneData->retain();
     
     //! init m_strName
-    m_strName = m_pBoneData->m_strName;
+    m_strName = m_pBoneData->name;
     //! init zorder
-	m_iZOrder = m_pBoneData->m_iZOrder;
+	m_iZOrder = m_pBoneData->zOrder;
     
     m_pDisplayManager->initDisplayList(_boneData);
 }
@@ -178,8 +178,7 @@ void Bone::update(float dt)
         updateTransform(dt);
         updateColor();
 
-        m_pDisplayManager->updateDisplay();
-    
+        //m_pDisplayManager->updateDisplay();
     }
 
     CCObject *_object = NULL;
@@ -203,24 +202,24 @@ void Bone::updateTransform(float dt)
 
 	if (m_bTransformDirty)
 	{
-		m_pCombinedData->m_fX = m_pUserData->m_fX + m_pTweenData->m_fX;
-		m_pCombinedData->m_fY = m_pUserData->m_fY + m_pTweenData->m_fY;
-		m_pCombinedData->m_fSkewX = m_pUserData->m_fSkewX + m_pTweenData->m_fSkewX;
-		m_pCombinedData->m_fSkewY = m_pUserData->m_fSkewY + m_pTweenData->m_fSkewY;
-		m_pCombinedData->m_fScaleX = m_pUserData->m_fScaleX + m_pTweenData->m_fScaleX;
-		m_pCombinedData->m_fScaleY = m_pUserData->m_fScaleY + m_pTweenData->m_fScaleY;
+		m_pCombinedData->x = m_pUserData->x + m_pTweenData->x;
+		m_pCombinedData->y = m_pUserData->y + m_pTweenData->y;
+		m_pCombinedData->skewX = m_pUserData->skewX + m_pTweenData->skewX;
+		m_pCombinedData->skewY = m_pUserData->skewY + m_pTweenData->skewY;
+		m_pCombinedData->scaleX = m_pUserData->scaleX + m_pTweenData->scaleX;
+		m_pCombinedData->scaleY = m_pUserData->scaleY + m_pTweenData->scaleY;
 		
-		float cosX	= cos(m_pCombinedData->m_fSkewX);
-		float cosY	= cos(m_pCombinedData->m_fSkewY);
-		float sinX	= sin(m_pCombinedData->m_fSkewX);
-		float sinY  = sin(m_pCombinedData->m_fSkewY);
+		float cosX	= cos(m_pCombinedData->skewX);
+		float cosY	= cos(m_pCombinedData->skewY);
+		float sinX	= sin(m_pCombinedData->skewX);
+		float sinY  = sin(m_pCombinedData->skewY);
 
-		m_tWorldTransform.a = m_pCombinedData->m_fScaleX * cosY;
-		m_tWorldTransform.b = m_pCombinedData->m_fScaleX * sinY;
-		m_tWorldTransform.c = m_pCombinedData->m_fScaleY * sinX;
-		m_tWorldTransform.d = m_pCombinedData->m_fScaleY * cosX;
-		m_tWorldTransform.tx = m_pCombinedData->m_fX;
-		m_tWorldTransform.ty = m_pCombinedData->m_fY;
+		m_tWorldTransform.a = m_pCombinedData->scaleX * cosY;
+		m_tWorldTransform.b = m_pCombinedData->scaleX * sinY;
+		m_tWorldTransform.c = m_pCombinedData->scaleY * sinX;
+		m_tWorldTransform.d = m_pCombinedData->scaleY * cosX;
+		m_tWorldTransform.tx = m_pCombinedData->x;
+		m_tWorldTransform.ty = m_pCombinedData->y;
 
 		if (m_pChildren && m_pChildren->count() > 0)
 		{
@@ -232,8 +231,8 @@ void Bone::updateTransform(float dt)
 			m_tWorldTransformForChildren.b = sinY;
 			m_tWorldTransformForChildren.c = sinX;
 			m_tWorldTransformForChildren.d = cosX;
-			m_tWorldTransformForChildren.tx = m_pCombinedData->m_fX;
-			m_tWorldTransformForChildren.ty = m_pCombinedData->m_fY;
+			m_tWorldTransformForChildren.tx = m_pCombinedData->x;
+			m_tWorldTransformForChildren.ty = m_pCombinedData->y;
 		}
 
 		if(m_pParent)
@@ -262,10 +261,10 @@ void Bone::updateColor()
 {
 	if(m_bColorDirty)
 	{
-		m_pCombinedData->m_iA = m_pUserData->m_iA  + m_pTweenData->m_iA;
-		m_pCombinedData->m_iR = m_pUserData->m_iR + m_pTweenData->m_iR;
-		m_pCombinedData->m_iG = m_pUserData->m_iG + m_pTweenData->m_iG;
-		m_pCombinedData->m_iB = m_pUserData->m_iB + m_pTweenData->m_iB;
+		m_pCombinedData->a = m_pUserData->a  + m_pTweenData->a;
+		m_pCombinedData->r = m_pUserData->r + m_pTweenData->r;
+		m_pCombinedData->g = m_pUserData->g + m_pTweenData->g;
+		m_pCombinedData->b = m_pUserData->b + m_pTweenData->b;
 	}
 }
 
@@ -390,41 +389,41 @@ int Bone::getZOrder()
  */
 void Bone::setPosition(float x, float y)
 {
-    m_pUserData->m_fX = x;
-    m_pUserData->m_fY = y;
+    m_pUserData->x = x;
+    m_pUserData->y = y;
 
 	m_bTransformDirty = true;
 }
 void Bone::setPositionX(float x)
 {
-    m_pUserData->m_fX = x;
+    m_pUserData->x = x;
 	m_bTransformDirty = true;
 }
 void Bone::setPositionY(float y)
 {
-    m_pUserData->m_fY = y;
+    m_pUserData->y = y;
 	m_bTransformDirty = true;
 }
 void Bone::setRotation(float r)
 {
-    m_pUserData->m_fSkewX = CC_DEGREES_TO_RADIANS(r);
-    m_pUserData->m_fSkewY = CC_DEGREES_TO_RADIANS(-r);
+    m_pUserData->skewX = CC_DEGREES_TO_RADIANS(r);
+    m_pUserData->skewY = CC_DEGREES_TO_RADIANS(-r);
 	m_bTransformDirty = true;
 }
 void Bone::setScale(float scale)
 {
-    m_pUserData->m_fScaleX = scale;
-    m_pUserData->m_fScaleY = scale;
+    m_pUserData->scaleX = scale;
+    m_pUserData->scaleY = scale;
 	m_bTransformDirty = true;
 }
 void Bone::setScaleX(float scaleX)
 {
-    m_pUserData->m_fScaleX = scaleX;
+    m_pUserData->scaleX = scaleX;
 	m_bTransformDirty = true;
 }
 void Bone::setScaleY(float scaleY)
 {
-    m_pUserData->m_fScaleY = scaleY;
+    m_pUserData->scaleY = scaleY;
 	m_bTransformDirty = true;
 }
 
@@ -434,48 +433,48 @@ void Bone::setScaleY(float scaleY)
   */
 CCPoint Bone::getPosition()
 {
-	return ccp(m_pUserData->m_fX, m_pUserData->m_fY);
+	return ccp(m_pUserData->x, m_pUserData->y);
 }
 float Bone::getPositionX()
 {
-    return m_pUserData->m_fX;
+    return m_pUserData->x;
 }
 float Bone::getPositionY()
 {
-    return m_pUserData->m_fY;
+    return m_pUserData->y;
 }
 float Bone::getRotation()
 {
-    return m_pUserData->m_fSkewX;
+    return m_pUserData->skewX;
 }
 float Bone::getScaleX()
 {
-    return m_pUserData->m_fScaleX;
+    return m_pUserData->scaleX;
 }
 float Bone::getScaleY()
 {
-    return m_pUserData->m_fScaleY;
+    return m_pUserData->scaleY;
 }
 
 
 void Bone::setOpacity(GLubyte value)
 {
-	m_pUserData->m_iA = value;
+	m_pUserData->a = value;
 	m_bColorDirty = true;
 }
 void Bone::setColor(const ccColor4B &color)
 {
-	m_pUserData->m_iA = color.a;
-	m_pUserData->m_iR = color.r;
-	m_pUserData->m_iG = color.g;
-	m_pUserData->m_iB = color.b;
+	m_pUserData->a = color.a;
+	m_pUserData->r = color.r;
+	m_pUserData->g = color.g;
+	m_pUserData->b = color.b;
 	m_bColorDirty = true;
 }
 void Bone::setColor(const ccColor3B &color)
 {
-	m_pUserData->m_iR = color.r;
-	m_pUserData->m_iG = color.g;
-	m_pUserData->m_iB = color.b;
+	m_pUserData->r = color.r;
+	m_pUserData->g = color.g;
+	m_pUserData->b = color.b;
 	m_bColorDirty = true;
 }
 

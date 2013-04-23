@@ -29,7 +29,7 @@
 
 #include "cocos2d.h"
 #include "CSDisplayFactory.h"
-#include "CSDisplayData.h"
+#include "CSDatas.h"
 
 using namespace cocos2d;
 

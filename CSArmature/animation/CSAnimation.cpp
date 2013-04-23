@@ -26,7 +26,6 @@ Animation *Animation::create(Armature *armature)
     
 Animation::Animation()
     :m_pAnimationData(NULL)
-    ,m_pCurrentFrameData(NULL)
     ,m_strMovementID("")
     ,m_pArmature(NULL)
     ,m_iToIndex(0)
@@ -140,28 +139,28 @@ void Animation::play(const char *animationName, int durationTo, int durationTwee
 {
     CCAssert(m_pAnimationData, "m_pAnimationData can not be null");
     
-    m_pMovementData = m_pAnimationData->getMovement( animationName );
+	m_pMovementData = m_pAnimationData->getMovement(animationName);
     CCAssert(m_pMovementData, "m_pMovementData can not be null");
     
 	//! Get key frame count
-	m_iRawDuration = m_pMovementData->getDuration();
+	rawDuration = m_pMovementData->duration;
 
     m_strMovementID = animationName;
     
 	//! Further processing parameters
-    durationTo = (durationTo == -1) ? m_pMovementData->getDurationTo() : durationTo;
+    durationTo = (durationTo == -1) ? m_pMovementData->durationTo : durationTo;
     
-    durationTween = (durationTween == -1) ? m_pMovementData->getDurationTween() : durationTween;
-    durationTween = (durationTween == 0) ? m_pMovementData->getDuration() : durationTween;
+    durationTween = (durationTween == -1) ? m_pMovementData->durationTween : durationTween;
+    durationTween = (durationTween == 0) ? m_pMovementData->duration : durationTween;
     
-    tweenEasing	= (tweenEasing == TWEEN_EASING_MAX) ? m_pMovementData->getTweenEasing() : tweenEasing;
-    loop = (loop < 0) ? m_pMovementData->getLoop() : loop;
+    tweenEasing	= (tweenEasing == TWEEN_EASING_MAX) ? m_pMovementData->tweenEasing : tweenEasing;
+    loop = (loop < 0) ? m_pMovementData->loop : loop;
     
     
     ProcessBase::play((void*)animationName, durationTo, durationTween, loop, tweenEasing);
     
     
-	if (m_iRawDuration == 1)
+	if (rawDuration == 1)
 	{
 		m_eLoopType = SINGLE_FRAME;
 	}
@@ -174,23 +173,23 @@ void Animation::play(const char *animationName, int durationTo, int durationTwee
 		else
 		{
 			m_eLoopType = ANIMATION_NO_LOOP;
-			m_iRawDuration --;
+			rawDuration --;
 		}
 		m_iDurationTween = durationTween;
 	}
     
-    MovementBoneData *_movementBoneData = NULL;
+    MovementBoneData *movementBoneData = NULL;
     
     CCDictElement *element = NULL;
     CCDictionary *dict = m_pArmature->getBoneDic();
     CCDICT_FOREACH(dict, element)
     {
         Bone *bone = (Bone*)element->getObject();
-        _movementBoneData = m_pMovementData->getMovementBoneData(bone->getName().c_str());
+        movementBoneData = (MovementBoneData*)m_pMovementData->movBoneDataDic.objectForKey(bone->getName());
 
-        if(_movementBoneData && _movementBoneData->getFrameCount()>0)
+		if(movementBoneData && movementBoneData->frameList.count()>0)
         {
-            bone->getTween()->play(_movementBoneData, durationTo, durationTween, loop, tweenEasing);
+            bone->getTween()->play(movementBoneData, durationTo, durationTween, loop, tweenEasing);
         }
         else
         {
@@ -212,7 +211,7 @@ void Animation::play(const char *animationName, int durationTo, int durationTwee
 
 void Animation::playByIndex(int animationIndex, int durationTo, int durationTween,  int loop, int tweenEasing)
 {
-    std::vector<std::string> &movName = m_pAnimationData->getMovNames();
+    std::vector<std::string> &movName = m_pAnimationData->movementNames;
     CC_ASSERT((animationIndex > -1) && (animationIndex < movName.size()));
     
     
@@ -293,8 +292,8 @@ void Animation::updateHandler()
 void Animation::updateFrameData(float _currentPercent)
 {
 	m_iPrevFrameIndex = m_iCurFrameIndex;
-    m_iCurFrameIndex = m_iRawDuration * _currentPercent;
-    m_iCurFrameIndex = m_iCurFrameIndex % m_iRawDuration;
+    m_iCurFrameIndex = rawDuration * _currentPercent;
+    m_iCurFrameIndex = m_iCurFrameIndex % rawDuration;
 
 // 	if (m_iPrevFrameIndex != m_iCurFrameIndex)
 // 	{
@@ -306,33 +305,33 @@ void Animation::updateFrameData(float _currentPercent)
     
 void Animation::updateMovementFrameData(float _currentPercent)
 {
-    int _length = m_pMovementData->getMovFrameDataArr()->count();
-    
-    if(_length == 0){
-        return;
-    }
-    float _played = m_iRawDuration * _currentPercent;
-    
-    if (!m_pCurrentFrameData || _played >= m_pCurrentFrameData->m_iDuration + m_pCurrentFrameData->m_iStart || _played < m_pCurrentFrameData->m_iStart) {
-        while (true) {
-            m_pCurrentFrameData =  m_pMovementData->getMoveFrameData(m_iToIndex);
-            if (++m_iToIndex >= _length) {
-                m_iToIndex = 0;
-            }
-            if(m_pCurrentFrameData && _played >= m_pCurrentFrameData->m_iStart && _played < m_pCurrentFrameData->m_iDuration + m_pCurrentFrameData->m_iStart){
-                break;
-            }
-        }
-        if(m_pCurrentFrameData->m_strEvent.length() != 0){
-            m_pArmature->onMovementEvent(MOVEMENT_EVENT_FRAME, m_pCurrentFrameData->m_strEvent.c_str());
-        }
-        if(m_pCurrentFrameData->m_strSound.length() != 0){
-            m_pArmature->onMovementEvent(SOUND_FRAME, m_pCurrentFrameData->m_strSound.c_str());
-        }
-        if(m_pCurrentFrameData->m_strMovement.length() != 0){
-            play(m_pCurrentFrameData->m_strMovement.c_str());
-        }
-    }
+//     int _length = m_pMovementData->movBoneDataDic.count();
+//     
+//     if(_length == 0){
+//         return;
+//     }
+//     float _played = rawDuration * _currentPercent;
+//     
+//     if (!m_pCurrentFrameData || _played >= m_pCurrentFrameData->m_iDuration + m_pCurrentFrameData->m_iStart || _played < m_pCurrentFrameData->m_iStart) {
+//         while (true) {
+//             m_pCurrentFrameData =  m_pMovementData->getMoveFrameData(m_iToIndex);
+//             if (++m_iToIndex >= _length) {
+//                 m_iToIndex = 0;
+//             }
+//             if(m_pCurrentFrameData && _played >= m_pCurrentFrameData->m_iStart && _played < m_pCurrentFrameData->m_iDuration + m_pCurrentFrameData->m_iStart){
+//                 break;
+//             }
+//         }
+//         if(m_pCurrentFrameData->m_strEvent.length() != 0){
+//             m_pArmature->onMovementEvent(MOVEMENT_EVENT_FRAME, m_pCurrentFrameData->m_strEvent.c_str());
+//         }
+//         if(m_pCurrentFrameData->m_strSound.length() != 0){
+//             m_pArmature->onMovementEvent(SOUND_FRAME, m_pCurrentFrameData->m_strSound.c_str());
+//         }
+//         if(m_pCurrentFrameData->m_strMovement.length() != 0){
+//             play(m_pCurrentFrameData->m_strMovement.c_str());
+//         }
+//     }
 }
 
  

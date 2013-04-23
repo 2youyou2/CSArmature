@@ -27,6 +27,8 @@
 #ifndef COCOSTUDIO_CSCONSTVALUE_H
 #define COCOSTUDIO_CSCONSTVALUE_H
 
+static const char *VERSION = "version";
+static const char *VERSION_2_0 = "2.0";
 
 static const char *SKELETON = "skeleton";
 
@@ -78,10 +80,18 @@ static const char *A_MOVEMENT = "mov";
 
 static const char *A_X = "x";
 static const char *A_Y = "y";
+
+static const char *A_COCOS2DX_X = "cocos2d_x";
+static const char *A_COCOS2DX_Y = "cocos2d_y";
+
 static const char *A_WIDTH = "width";
 static const char *A_HEIGHT = "height";
 static const char *A_PIVOT_X = "pX";
 static const char *A_PIVOT_Y = "pY";
+
+static const char *A_COCOS2D_PIVOT_X = "cocos2d_pX";
+static const char *A_COCOS2D_PIVOT_Y = "cocos2d_pY";
+
 static const char *A_ALPHA = "a";
 static const char *A_RED = "r";
 static const char *A_GREEN = "g";
@@ -103,7 +113,6 @@ static const char *V_SOUND_FADE_IN = "in";
 static const char *V_SOUND_FADE_OUT = "out";
 
 
-
 static const char *CONTOUR = "con";
 static const char *CONTOUR_VERTEX = "con_vt";
 
@@ -122,29 +131,17 @@ static const char *FL_NAN = "NaN";
 
 
 static const char *DATA_TYPE = "data_type";
-
 static const char *FRAME_DATA = "frame_data";
-
 static const char *MOVEMENT_BONE_DATA = "mov_bone_data";
-
 static const char *MOVEMENT_FRAME_DATA = "mov_frame_data";
-
 static const char *MOVEMENT_DATA = "mov_data";
-
 static const char *ANIMATION_DATA = "animation_data";
-
 static const char *DISPLAY_DATA = "display_data";
-
 static const char *BONE_DATA = "bone_data";
-
 static const char *ARMATURE_DATA = "armature_data";
-
 static const char *CONTOUR_DATA = "contour_data";
-
 static const char *TEXTURE_DATA = "texture_data";
-
 static const char *VERTEX_POINT = "vertex";
-
 static const char *COLOR_INFO = "color";
 
 

@@ -28,16 +28,8 @@
 #define COCOSTUDIO_CSARMATUREDATAMANAGER_H
 
 #include "CSConstValue.h"
-#include "CSDisplayData.h"
-#include "CSBoneData.h"
-#include "CSAnimationData.h"
-#include "CSMovementBoneData.h"
-#include "CSMovementFrameData.h"
-#include "CSMovementData.h"
-#include "CSArmatureData.h"
-#include "CSTextureData.h"
+#include "CSDatas.h"
 #include "CSArmature.h"
-#include "CSContourData.h"
 
 
 class TiXmlElement;
@@ -56,16 +48,14 @@ private:
 
 public:
 	/**
-     *	@brief	init ArmatureDataManager
+     * Init ArmatureDataManager
      */
     virtual bool init();
     
     /**
-     *	@brief	add armature data
-     *
-     *	@param	_id the id of the armature data
-	 *
-	 *  @param	_armatureData   ArmatureData *
+     * Add armature data
+     * @param id The id of the armature data
+	 * @param armatureData ArmatureData *
      */
     void addArmatureData(const char *_id, ArmatureData *_armatureData);
     

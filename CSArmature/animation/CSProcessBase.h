@@ -28,13 +28,14 @@
 #ifndef COCOSTUDIO_CSPROCESSBASE_H
 #define COCOSTUDIO_CSPROCESSBASE_H
 
-#include "CSNode.h"
-#include "CSTweenFunction.h"
 #include "CSArmatureDefine.h"
+#include "cocos2d.h"
+#include "CSDatas.h"
+
+using namespace cocos2d;
 
 namespace cs {
     
-
 enum AnimationType
 {
 	SINGLE_FRAME = -4,          //! the animation just have one frame
@@ -49,7 +50,6 @@ enum AnimationType
 	ANIMATION_MAX,
 
 };
-
 
 
 class CS_EXTERN ProcessBase : public CCObject
@@ -137,7 +137,7 @@ protected:
 	CC_SYNTHESIZE_PASS_BY_REF(float, m_fCurrentPercent, CurrentPercent);
 	
 	//! The raw duration 
-	CC_SYNTHESIZE_PASS_BY_REF(int, m_iRawDuration, RawDuration);
+	CC_SYNTHESIZE_PASS_BY_REF(int, rawDuration, RawDuration);
 	
 	//! The animation whether or not loop
 	CC_SYNTHESIZE_PASS_BY_REF(AnimationType, m_eLoopType, LoopType);

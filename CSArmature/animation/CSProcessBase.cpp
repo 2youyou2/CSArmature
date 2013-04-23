@@ -11,7 +11,7 @@ ProcessBase::ProcessBase(void)
     ,m_fCurrentFrame(0)
 	,m_fCurrentPercent(0.0f)
     ,m_iDurationTween(0)
-    ,m_iRawDuration(0)
+    ,rawDuration(0)
 	,m_eLoopType(ANIMATION_LOOP_BACK)
 	,m_eTweenEasing(Linear)
 	,m_iCurFrameIndex(0)
@@ -48,7 +48,6 @@ void ProcessBase::stop()
     m_fCurrentPercent = 0;
 }
 
-
 void ProcessBase::play(void * animation, int durationTo, int durationTween,  int loop, int tweenEasing)
 {
     m_bIsComplete = false;
@@ -77,7 +76,7 @@ void ProcessBase::update(float dt)
      *  Fileter the m_iDuration <=0 and dt >1
      *  If dt>1, generally speaking  the reason is the device is stuck.
      */
-    if(m_iRawDuration<=0 || dt>1)
+    if(rawDuration<=0 || dt>1)
     {
         return;
     }

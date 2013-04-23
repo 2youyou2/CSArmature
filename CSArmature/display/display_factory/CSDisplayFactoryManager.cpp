@@ -31,10 +31,7 @@
 #include "CSParticleDisplayFactory.h"
 #include "CSShaderDisplayFactory.h"
 
-#include "CSSpriteDisplayData.h"
-#include "CSArmatureDisplayData.h"
-#include "CSParticleDisplayData.h"
-#include "CSShaderDisplayData.h"
+#include "CSDatas.h"
 
 
 
