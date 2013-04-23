@@ -562,6 +562,7 @@ namespace cs {
 		{
 			frameData->m_strSoundEffect = frameXML->Attribute(A_SOUND_EFFECT);
 		}
+
 		if(frameXML->QueryFloatAttribute(A_X, &_x) == TIXML_SUCCESS)
 		{
 			frameData->x = _x;
@@ -570,8 +571,9 @@ namespace cs {
 		if(frameXML->QueryFloatAttribute(A_Y, &_y) == TIXML_SUCCESS)
 		{
 			frameData->y = -_y;
-			frameData->x *= m_fPositionReadScale;
+			frameData->y *= m_fPositionReadScale;
 		}
+
 		if( frameXML->QueryFloatAttribute(A_SCALE_X, &_scale_x) == TIXML_SUCCESS )
 		{
 			frameData->scaleX = _scale_x;
@@ -683,6 +685,7 @@ namespace cs {
 
 		textureXML->QueryFloatAttribute(A_PIVOT_X, &px);
 		textureXML->QueryFloatAttribute(A_PIVOT_Y, &py);
+		
 		textureXML->QueryFloatAttribute(A_WIDTH, &width);
 		textureXML->QueryFloatAttribute(A_HEIGHT, &height);
 
