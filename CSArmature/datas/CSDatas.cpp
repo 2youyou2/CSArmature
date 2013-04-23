@@ -315,6 +315,7 @@ namespace cs {
 	void MovementBoneData::addFrameData(FrameData *frameData)
 	{
 		frameList.addObject(frameData);
+		duration += frameData->duration;
 	}
 
 	FrameData *MovementBoneData::getFrameData(int index)
