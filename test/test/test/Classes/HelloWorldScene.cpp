@@ -98,7 +98,7 @@ bool HelloWorld::init()
  		armature->setOpacity(200);
  		addChild(armature, 201);
 
-		for (int i = 0; i < 400; i++)
+		for (int i = 0; i < 150; i++)
 		{
 			armature = cs::Armature::create("Knight_f/Knight");
 			armature->getAnimation()->playByIndex(0);

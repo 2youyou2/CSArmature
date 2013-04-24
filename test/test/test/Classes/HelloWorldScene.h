@@ -5,7 +5,7 @@
 #include "CSArmature.h"
 #include "CSArmatureDataManager.h"
 
-#include "Box2D/Box2D.h"
+//#include "Box2D/Box2D.h"
 
 class HelloWorld : public cocos2d::CCLayer
 {
