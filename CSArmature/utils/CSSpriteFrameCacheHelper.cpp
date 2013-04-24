@@ -118,7 +118,6 @@ namespace cs {
 			std::string spriteFrameName = pElement->getStrKey();
 
 			m_Display2ImageMap[spriteFrameName] = _imagePath;
-			addTextureAtlas(spriteFrameName.c_str(), _imagePath);
 
 			CCLog("spriteFrameName : %s,    imagePath : %s", spriteFrameName.c_str(), _imagePath);
 
@@ -194,19 +193,18 @@ namespace cs {
 		return m_Display2ImageMap[_displayName].c_str();
 	}
 
-	void SpriteFrameCacheHelper::addTextureAtlas(const char *displayName, const char *textureName)
-	{
-		CCTextureAtlas *atlas = (CCTextureAtlas*)m_pDisplay2TextureAtlas->objectForKey(displayName);
-		if (atlas == NULL)
-		{
-			atlas = CCTextureAtlas::createWithTexture(CCTextureCache::sharedTextureCache()->addImage(textureName), 4);
-			m_pDisplay2TextureAtlas->setObject(atlas, displayName);
-		}
-	}
 
 	CCTextureAtlas *SpriteFrameCacheHelper::getTextureAtlas(const char *displayName)
 	{
-		return (CCTextureAtlas*)m_pDisplay2TextureAtlas->objectForKey(displayName);
+		const char *textureName = getDisplayImagePath(displayName); 
+		CCTextureAtlas *atlas = (CCTextureAtlas*)m_pDisplay2TextureAtlas->objectForKey(textureName);
+		if (atlas == NULL)
+		{
+			atlas = CCTextureAtlas::createWithTexture(CCTextureCache::sharedTextureCache()->addImage(textureName), 4);
+			m_pDisplay2TextureAtlas->setObject(atlas, textureName);
+		}
+
+		return atlas;
 	}
 
 	SpriteFrameCacheHelper::SpriteFrameCacheHelper()

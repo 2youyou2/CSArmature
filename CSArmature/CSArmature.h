@@ -207,13 +207,8 @@ public:
     void onMovementEvent(const char *eventType, const char *movementID);
     
     void update(float dt);
-	virtual CCAffineTransform nodeToParentTransform();
     
 	virtual void draw();
-
-
-    inline virtual void setTransformDirty(bool dirty){ m_bDirty = dirty; }
-	inline virtual bool isTransformDirty(){ return m_bDirty; }
 
 
 	inline virtual GLubyte getOpacity() { return m_nOpacity; }
@@ -277,8 +272,6 @@ protected:
     
 	GLubyte m_nOpacity;				//! Goes from 0-255. 0 means fully tranparent and 255 means fully opaque.
 	ccColor3B m_sColor;					//! Color: conforms with CCRGBAProtocol protocol
-
-	bool m_bDirty;
 	
 	float m_fInternalZOrder;			//! This is used to sign the index of the Armature being created
 	float m_fActualZOrder;				//! InternalZOrder combine ZOrder is the ActualZOrder.

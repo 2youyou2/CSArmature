@@ -193,12 +193,8 @@ void Bone::update(float dt)
    
 void Bone::updateTransform(float dt)
 {
-	bool parentTransformDirty = false;
-
-	if(m_pParent)
-		parentTransformDirty =  m_pParent->isRootBone() ? m_pArmature->isTransformDirty() : m_pParent->isTransformDirty();
-	
-	m_bTransformDirty = m_bTransformDirty || parentTransformDirty;
+	if (m_pParent)
+		m_bTransformDirty = m_bTransformDirty || m_pParent->isTransformDirty();
 
 	if (m_bTransformDirty)
 	{
@@ -235,22 +231,19 @@ void Bone::updateTransform(float dt)
 			m_tWorldTransformForChildren.ty = m_pCombinedData->y;
 		}
 
-		if(m_pParent)
+		if(m_pParent && !m_pParent->isRootBone())
 		{
-			CCAffineTransform parentTransform = m_pParent->isRootBone() ? m_pArmature->nodeToWorldTransform() : m_pParent->m_tWorldTransformForChildren;
-
-			m_tWorldTransform = CCAffineTransformConcat(m_tWorldTransform, parentTransform);
+			m_tWorldTransform = CCAffineTransformConcat(m_tWorldTransform, m_pParent->m_tWorldTransformForChildren);
 
 			if (m_pChildren && m_pChildren->count() > 0)
 			{
-				m_tWorldTransformForChildren = CCAffineTransformConcat(m_tWorldTransformForChildren, parentTransform);
+				m_tWorldTransformForChildren = CCAffineTransformConcat(m_tWorldTransformForChildren, m_pParent->m_tWorldTransformForChildren);
 			}
 		}
 
         
         if(m_pChildArmature)
         {
-            m_pChildArmature->setTransformDirty(true);
             m_pChildArmature->update(dt);
         }
 

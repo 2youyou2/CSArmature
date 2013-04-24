@@ -351,8 +351,6 @@ public:
      *
      */
     const char *getDisplayImagePath(const char *displayName);
-
-	void addTextureAtlas(const char *displayName, const char *textureName);
 	CCTextureAtlas *getTextureAtlas(const char *displayName);
 	
 private:

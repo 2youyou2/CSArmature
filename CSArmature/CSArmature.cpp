@@ -445,8 +445,6 @@ void Armature::update(float dt)
     m_pAnimation->update(dt);
     m_pRootBone->update(dt);
 
-	m_bDirty = false;
-
     if (m_bBonesIndexChanged)
     {
 		if(m_pArmature)
@@ -464,12 +462,6 @@ void Armature::update(float dt)
     }
 }
 
-
-CCAffineTransform Armature::nodeToParentTransform()
-{
-	m_bDirty = m_bTransformDirty;
-	return CCNode::nodeToParentTransform();
-}
 
 void Armature::draw()
 {
