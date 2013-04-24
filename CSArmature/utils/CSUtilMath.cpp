@@ -148,7 +148,7 @@ CCD_Result CalcIK_CCD(Bone *startBone, Bone *endBone, CCPoint &targetPoint, floa
 	Bone *currentBone = startBone->getParentBone();
 	Bone *lastCurrentBone = startBone;
 
-	while(!currentBone->isRootBone())
+	while(!currentBone->getParentBone() == NULL)
 	{
 		currentPoint = ccp(currentBone->m_tWorldTransform.tx, currentBone->m_tWorldTransform.ty);
 

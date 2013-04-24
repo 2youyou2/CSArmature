@@ -34,9 +34,6 @@
     <Filter Include="CSArmature\utils">
       <UniqueIdentifier>{fd390761-3df0-4c13-89ef-dbe51ea4e7d2}</UniqueIdentifier>
     </Filter>
-    <Filter Include="CSArmature\display\display_factory">
-      <UniqueIdentifier>{d5bcd44b-634c-4209-affb-6972b554216e}</UniqueIdentifier>
-    </Filter>
     <Filter Include="CSArmature\external_tool\Json">
       <UniqueIdentifier>{1d20e252-ef8a-4c79-a18d-5f0ef92a5be2}</UniqueIdentifier>
     </Filter>
@@ -106,24 +103,6 @@
     <ClInclude Include="..\..\..\..\CSArmature\display\CSShaderNode.h">
       <Filter>CSArmature\display</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\..\CSArmature\display\display_factory\CSArmatureDisplayFactory.h">
-      <Filter>CSArmature\display\display_factory</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\CSArmature\display\display_factory\CSDisplayFactory.h">
-      <Filter>CSArmature\display\display_factory</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\CSArmature\display\display_factory\CSDisplayFactoryManager.h">
-      <Filter>CSArmature\display\display_factory</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\CSArmature\display\display_factory\CSParticleDisplayFactory.h">
-      <Filter>CSArmature\display\display_factory</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\CSArmature\display\display_factory\CSShaderDisplayFactory.h">
-      <Filter>CSArmature\display\display_factory</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\CSArmature\display\display_factory\CSSpriteDisplayFactory.h">
-      <Filter>CSArmature\display\display_factory</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\..\CSArmature\external_tool\Json\CSContentJsonDictionary.h">
       <Filter>CSArmature\external_tool\Json</Filter>
     </ClInclude>
@@ -184,12 +163,6 @@
     <ClInclude Include="..\..\..\..\CSArmature\utils\CSArmatureDefine.h">
       <Filter>CSArmature\utils</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\..\CSArmature\utils\CSBatchNode.h">
-      <Filter>CSArmature\utils</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\CSArmature\utils\CSBatchNodeManager.h">
-      <Filter>CSArmature\utils</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\..\CSArmature\utils\CSConstValue.h">
       <Filter>CSArmature\utils</Filter>
     </ClInclude>
@@ -220,6 +193,12 @@
     <ClInclude Include="..\..\..\..\CSArmature\display\CSSkin.h">
       <Filter>CSArmature\display</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\..\CSArmature\display\CSDisplayFactory.h">
+      <Filter>CSArmature\display</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\CSArmature\display\CSBatchNode.h">
+      <Filter>CSArmature\display</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -248,24 +227,6 @@
     </ClCompile>
     <ClCompile Include="..\..\..\..\CSArmature\display\CSShaderNode.cpp">
       <Filter>CSArmature\display</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\CSArmature\display\display_factory\CSArmatureDisplayFactory.cpp">
-      <Filter>CSArmature\display\display_factory</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\CSArmature\display\display_factory\CSDisplayFactory.cpp">
-      <Filter>CSArmature\display\display_factory</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\CSArmature\display\display_factory\CSDisplayFactoryManager.cpp">
-      <Filter>CSArmature\display\display_factory</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\CSArmature\display\display_factory\CSParticleDisplayFactory.cpp">
-      <Filter>CSArmature\display\display_factory</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\CSArmature\display\display_factory\CSShaderDisplayFactory.cpp">
-      <Filter>CSArmature\display\display_factory</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\CSArmature\display\display_factory\CSSpriteDisplayFactory.cpp">
-      <Filter>CSArmature\display\display_factory</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\..\CSArmature\external_tool\Json\CSContentJsonDictionary.cpp">
       <Filter>CSArmature\external_tool\Json</Filter>
@@ -306,12 +267,6 @@
     <ClCompile Include="..\..\..\..\CSArmature\utils\CSArmatureDataManager.cpp">
       <Filter>CSArmature\utils</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\CSArmature\utils\CSBatchNode.cpp">
-      <Filter>CSArmature\utils</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\CSArmature\utils\CSBatchNodeManager.cpp">
-      <Filter>CSArmature\utils</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\..\CSArmature\utils\CSDataReaderHelper.cpp">
       <Filter>CSArmature\utils</Filter>
     </ClCompile>
@@ -337,6 +292,12 @@
       <Filter>CSArmature\datas</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\..\CSArmature\display\CSSkin.cpp">
+      <Filter>CSArmature\display</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\CSArmature\display\CSDisplayFactory.cpp">
+      <Filter>CSArmature\display</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\CSArmature\display\CSBatchNode.cpp">
       <Filter>CSArmature\display</Filter>
     </ClCompile>
   </ItemGroup>

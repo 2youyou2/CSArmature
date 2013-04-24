@@ -28,9 +28,7 @@
 #include "CSUtilMath.h"
 #include "CSArmature.h"
 #include "CSArmatureDataManager.h"
-#include "CSBatchNodeManager.h"
 #include "CSTransformHelp.h"
-#include "CSArmatureDisplayFactory.h"
 #include "CSDisplayManager.h"
 
 namespace cs {
@@ -64,10 +62,7 @@ Bone* Bone::create(const char *name)
 
 Bone::Bone()
 {
-    
-    m_pUserData = NULL;
     m_pTweenData = NULL;
-	m_pCombinedData = NULL;
     m_pParent = NULL;
     m_pArmature = NULL;
     m_pChildArmature = NULL;
@@ -76,14 +71,9 @@ Bone::Bone()
     m_pTween = NULL;
     m_pChildren = NULL;
     m_pDisplayManager = NULL;
-    m_iZOrder = 0;
 	m_bIgnoreMovementBoneData = false;
-	m_bRootBone = false;
 	m_tWorldTransform = CCAffineTransformMake(1, 0, 0, 1, 0, 0);
-	m_tWorldTransformForChildren = CCAffineTransformMake(1, 0, 0, 1, 0, 0);
-	m_bColorDirty = false;
 	m_bTransformDirty = false;
-    m_iZOrder = m_fActualZorder = 0;
 }
 
 
@@ -92,7 +82,6 @@ Bone::~Bone(void)
     CC_SAFE_DELETE(m_pChildren);
     CC_SAFE_DELETE(m_pTween);
     CC_SAFE_DELETE(m_pUserData);
-	CC_SAFE_DELETE(m_pCombinedData);
     CC_SAFE_DELETE(m_pDisplayManager);
     
     if(m_pBoneData)
@@ -119,21 +108,14 @@ bool Bone::init(const char *name)
             m_strName = name;
         }
 
-		//! Init m_pUserData
-        CC_SAFE_DELETE(m_pUserData);
-        m_pUserData = FrameData::create();
-		m_pUserData->scaleX = 0;
-		m_pUserData->scaleY = 0;
-        m_pUserData->retain();
-        
-        CC_SAFE_DELETE(m_pCombinedData);
-        m_pCombinedData = FrameData::create();
-        m_pCombinedData->retain();
+		CC_SAFE_DELETE(m_pTweenData);
+		m_pTweenData = FrameData::create();
+		m_pTweenData->retain();
 
         CC_SAFE_DELETE(m_pTween);
 		m_pTween = Tween::create(this);
 		m_pTween->retain();
-		m_pTweenData = m_pTween->getTweenNode();
+		//m_pTweenData = m_pTween->getTweenNode();
         
         CC_SAFE_DELETE(m_pDisplayManager);
         m_pDisplayManager = DisplayManager::create(this);
@@ -147,119 +129,79 @@ bool Bone::init(const char *name)
     return bRet;
 }
 
-void Bone::setBoneData(BoneData *_boneData)
+void Bone::setBoneData(BoneData *boneData)
 {
-    CCAssert(NULL != _boneData, "_boneData must not be NULL");
+    CCAssert(NULL != boneData, "_boneData must not be NULL");
 	
-    m_pBoneData = _boneData;
-    
+    m_pBoneData = boneData;
     m_pBoneData->retain();
     
-    //! init m_strName
     m_strName = m_pBoneData->name;
-    //! init zorder
-	m_iZOrder = m_pBoneData->zOrder;
+	m_nZOrder = m_pBoneData->zOrder;
     
-    m_pDisplayManager->initDisplayList(_boneData);
+    m_pDisplayManager->initDisplayList(boneData);
 }
     
 BoneData *Bone::getBoneData()
 {
     return m_pBoneData;
 }
-    
-    
-void Bone::update(float dt)
-{
-    if (m_pArmature)
-    {
-        m_pTween->update(dt);
-
-        updateTransform(dt);
-        updateColor();
-
-        //m_pDisplayManager->updateDisplay();
-    }
-
-    CCObject *_object = NULL;
-    CCARRAY_FOREACH(m_pChildren, _object)
-    {
-        Bone *bone = (Bone*)_object;
-        bone->update(dt);
-    }
-
-	m_bColorDirty = m_bTransformDirty = false;
-}
    
-void Bone::updateTransform(float dt)
+void Bone::update(float delta)
 {
 	if (m_pParent)
 		m_bTransformDirty = m_bTransformDirty || m_pParent->isTransformDirty();
 
 	if (m_bTransformDirty)
 	{
-		m_pCombinedData->x = m_pUserData->x + m_pTweenData->x;
-		m_pCombinedData->y = m_pUserData->y + m_pTweenData->y;
-		m_pCombinedData->skewX = m_pUserData->skewX + m_pTweenData->skewX;
-		m_pCombinedData->skewY = m_pUserData->skewY + m_pTweenData->skewY;
-		m_pCombinedData->scaleX = m_pUserData->scaleX + m_pTweenData->scaleX;
-		m_pCombinedData->scaleY = m_pUserData->scaleY + m_pTweenData->scaleY;
-		
-		float cosX	= cos(m_pCombinedData->skewX);
-		float cosY	= cos(m_pCombinedData->skewY);
-		float sinX	= sin(m_pCombinedData->skewX);
-		float sinY  = sin(m_pCombinedData->skewY);
+		float cosX	= cos(m_pTweenData->skewX);
+		float cosY	= cos(m_pTweenData->skewY);
+		float sinX	= sin(m_pTweenData->skewX);
+		float sinY  = sin(m_pTweenData->skewY);
 
-		m_tWorldTransform.a = m_pCombinedData->scaleX * cosY;
-		m_tWorldTransform.b = m_pCombinedData->scaleX * sinY;
-		m_tWorldTransform.c = m_pCombinedData->scaleY * sinX;
-		m_tWorldTransform.d = m_pCombinedData->scaleY * cosX;
-		m_tWorldTransform.tx = m_pCombinedData->x;
-		m_tWorldTransform.ty = m_pCombinedData->y;
+		m_tWorldTransform.a = m_pTweenData->scaleX * cosY;
+		m_tWorldTransform.b = m_pTweenData->scaleX * sinY;
+		m_tWorldTransform.c = m_pTweenData->scaleY * sinX;
+		m_tWorldTransform.d = m_pTweenData->scaleY * cosX;
+		m_tWorldTransform.tx = m_pTweenData->x;
+		m_tWorldTransform.ty = m_pTweenData->y;
 
-		if (m_pChildren && m_pChildren->count() > 0)
+		if(m_pParent)
 		{
-			/*
-			*  m_tWorldTransformForChildren is used for children, and it don't contain
-			*  the parent scale value
-			*/
-			m_tWorldTransformForChildren.a = cosY;
-			m_tWorldTransformForChildren.b = sinY;
-			m_tWorldTransformForChildren.c = sinX;
-			m_tWorldTransformForChildren.d = cosX;
-			m_tWorldTransformForChildren.tx = m_pCombinedData->x;
-			m_tWorldTransformForChildren.ty = m_pCombinedData->y;
+			m_tWorldTransform = CCAffineTransformConcat(m_tWorldTransform, m_pParent->m_tWorldTransform);
 		}
 
-		if(m_pParent && !m_pParent->isRootBone())
-		{
-			m_tWorldTransform = CCAffineTransformConcat(m_tWorldTransform, m_pParent->m_tWorldTransformForChildren);
-
-			if (m_pChildren && m_pChildren->count() > 0)
-			{
-				m_tWorldTransformForChildren = CCAffineTransformConcat(m_tWorldTransformForChildren, m_pParent->m_tWorldTransformForChildren);
-			}
-		}
-
-        
-        if(m_pChildArmature)
-        {
-            m_pChildArmature->update(dt);
-        }
-
+		// 		if(m_pChildArmature)
+		// 		{
+		// 			m_pChildArmature->update(dt);
+		// 		}
 	}
+}
+
+
+void Bone::updateDisplayedColor(const ccColor3B& parentColor)
+{
+	CCNodeRGBA::updateDisplayedColor(parentColor);
+	updateColor();
+}
+
+void Bone::updateDisplayedOpacity(GLubyte parentOpacity)
+{
+	CCNodeRGBA::updateDisplayedOpacity(parentOpacity);
+	updateColor();
 }
 
 void Bone::updateColor()
 {
-	if(m_bColorDirty)
+	CCNode *display = m_pDisplayManager->getDisplayRenderNode();
+	CCRGBAProtocol *protocol = dynamic_cast<CCRGBAProtocol*>(display);
+	if(protocol != NULL)
 	{
-		m_pCombinedData->a = m_pUserData->a  + m_pTweenData->a;
-		m_pCombinedData->r = m_pUserData->r + m_pTweenData->r;
-		m_pCombinedData->g = m_pUserData->g + m_pTweenData->g;
-		m_pCombinedData->b = m_pUserData->b + m_pTweenData->b;
+		protocol->setColor(ccc3(_displayedColor.r*m_pTweenData->r/255, _displayedColor.g*m_pTweenData->g/255, _displayedColor.b*m_pTweenData->b/255));
+		protocol->setOpacity(_displayedOpacity * m_pTweenData->a/255);
 	}
 }
+
 
 void Bone::addChildBone(Bone* _child)
 {
@@ -330,27 +272,27 @@ void Bone::childrenAlloc(void)
 
 void Bone::setChildArmature(Armature *armature)
 {
-	if(m_pChildArmature)
-	{
-		
-        /*
-         *  Remove child armature from armature's bone list
-         */
-        m_pChildArmature->getRootBone()->removeFromParent(true);
-
-		m_pChildArmature->getRootBone()->getDisplayManager()->setVisible(false);
-
-		m_pChildArmature->setArmature(NULL);
-	}
-
-	m_pChildArmature = armature;
-
-	if (m_pChildArmature)
-	{
-		m_pChildArmature->getRootBone()->getDisplayManager()->setVisible(true);
-		m_pChildArmature->setArmature(m_pArmature);
-	}
-	
+// 	if(m_pChildArmature)
+// 	{
+// 		
+//         /*
+//          *  Remove child armature from armature's bone list
+//          */
+//         m_pChildArmature->getRootBone()->removeFromParent(true);
+// 
+// 		m_pChildArmature->getRootBone()->getDisplayManager()->setVisible(false);
+// 
+// 		m_pChildArmature->setArmature(NULL);
+// 	}
+// 
+// 	m_pChildArmature = armature;
+// 
+// 	if (m_pChildArmature)
+// 	{
+// 		m_pChildArmature->getRootBone()->getDisplayManager()->setVisible(true);
+// 		m_pChildArmature->setArmature(m_pArmature);
+// 	}
+// 	
 }
 
 Armature *Bone::getChildArmature()
@@ -358,157 +300,14 @@ Armature *Bone::getChildArmature()
 	return m_pChildArmature;
 }
 
-    
-void Bone::setZOrder(int zorder)
-{
-    /*
-	 *	If zorder is equal to m_iZOrder,then do nothing
-	 */
-    if (zorder == m_iZOrder) {
-        return;
-    }
-    
-    m_iZOrder = zorder;
-    
-    m_pArmature->setBonesIndexChanged(true);
-}
-int Bone::getZOrder()
-{
-    return m_iZOrder;
-}
-    
-/**
- *  Set bone's property, used for users, this won't change data in the data pool
- */
-void Bone::setPosition(float x, float y)
-{
-    m_pUserData->x = x;
-    m_pUserData->y = y;
-
-	m_bTransformDirty = true;
-}
-void Bone::setPositionX(float x)
-{
-    m_pUserData->x = x;
-	m_bTransformDirty = true;
-}
-void Bone::setPositionY(float y)
-{
-    m_pUserData->y = y;
-	m_bTransformDirty = true;
-}
-void Bone::setRotation(float r)
-{
-    m_pUserData->skewX = CC_DEGREES_TO_RADIANS(r);
-    m_pUserData->skewY = CC_DEGREES_TO_RADIANS(-r);
-	m_bTransformDirty = true;
-}
-void Bone::setScale(float scale)
-{
-    m_pUserData->scaleX = scale;
-    m_pUserData->scaleY = scale;
-	m_bTransformDirty = true;
-}
-void Bone::setScaleX(float scaleX)
-{
-    m_pUserData->scaleX = scaleX;
-	m_bTransformDirty = true;
-}
-void Bone::setScaleY(float scaleY)
-{
-    m_pUserData->scaleY = scaleY;
-	m_bTransformDirty = true;
-}
-
-
-/**
-  * Get bone's user transform property
-  */
-CCPoint Bone::getPosition()
-{
-	return ccp(m_pUserData->x, m_pUserData->y);
-}
-float Bone::getPositionX()
-{
-    return m_pUserData->x;
-}
-float Bone::getPositionY()
-{
-    return m_pUserData->y;
-}
-float Bone::getRotation()
-{
-    return m_pUserData->skewX;
-}
-float Bone::getScaleX()
-{
-    return m_pUserData->scaleX;
-}
-float Bone::getScaleY()
-{
-    return m_pUserData->scaleY;
-}
-
-
-void Bone::setOpacity(GLubyte value)
-{
-	m_pUserData->a = value;
-	m_bColorDirty = true;
-}
-void Bone::setColor(const ccColor4B &color)
-{
-	m_pUserData->a = color.a;
-	m_pUserData->r = color.r;
-	m_pUserData->g = color.g;
-	m_pUserData->b = color.b;
-	m_bColorDirty = true;
-}
-void Bone::setColor(const ccColor3B &color)
-{
-	m_pUserData->r = color.r;
-	m_pUserData->g = color.g;
-	m_pUserData->b = color.b;
-	m_bColorDirty = true;
-}
-
-
 CCArray *Bone::getChildren()
 {
     return m_pChildren;
 }
 
-FrameData *Bone::getCombinedData()
-{
-    return m_pCombinedData;
-}
-
 Tween *Bone::getTween()
 {
 	return m_pTween;
-}
-
-void Bone::_setActualZorder(float zorder)
-{ 
-	m_fActualZorder = zorder; 
-
-	do 
-	{
-		CCNode *renderNode = m_pDisplayManager->getDisplayRenderNode();
-		CC_BREAK_IF(!renderNode);
-
-		if(m_pArmature->getRenderType() == BATCHNODE_VERTEXZ)
-		{
-			renderNode->setVertexZ(zorder/10000);
-		}
-		else
-		{
-			if (renderNode->getParent())
-				renderNode->getParent()->reorderChild(renderNode, zorder);
-			else
-				renderNode->_setZOrder(zorder);
-		}
-	} while (0);
-	
 }
 
 

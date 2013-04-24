@@ -35,7 +35,7 @@ namespace cs {
 #define RENDER_IN_SUBPIXEL(__ARGS__) (ceil(__ARGS__))
 #endif
 
-	Skin *Skin::crete()
+	Skin *Skin::create()
 	{
 		Skin *skin = new Skin();
 		if(skin && skin->init())
@@ -60,11 +60,22 @@ namespace cs {
 	}
 
 	Skin::Skin()
+		:m_pBone(NULL)
 	{
-
 	}
 
-	void Skin::updateTransform(Bone *bone)
+	void Skin::setSkinData(const Node& var)
+	{
+		m_sSkinData = var;
+		updateSkinTransform();
+	}
+
+	const Node &Skin::getSkinData()
+	{
+		return m_sSkinData;
+	}
+
+	void Skin::updateTransform()
 	{
 		// If it is not visible, or one of its ancestors is not visible, then do nothing:
 		if( !m_bVisible)
@@ -73,13 +84,9 @@ namespace cs {
 		}
 		else 
 		{
-
-			CCAffineTransform t = bone->getWorldTransform();
-			CCAffineTransform t2;
-			TransformHelp::nodeToMatrix(*bone->getBoneData(), t2);
-			t2.tx -= m_obAnchorPointInPoints.x;
-			t2.ty -= m_obAnchorPointInPoints.y;
-			t = CCAffineTransformConcat(t2, t);
+			CCAffineTransform t = m_pBone->nodeToArmatureTransform();
+			
+			t = CCAffineTransformConcat(m_tSkinTransform, t);
 
 			//
 			// calculate the Quad based on the Affine Matrix
@@ -125,5 +132,10 @@ namespace cs {
 		}
 	}
     
-
+	void Skin::updateSkinTransform()
+	{
+		TransformHelp::nodeToMatrix(m_sSkinData, m_tSkinTransform);
+		m_tSkinTransform.tx -= m_obAnchorPointInPoints.x;
+		m_tSkinTransform.ty -= m_obAnchorPointInPoints.y;
+	}
 }

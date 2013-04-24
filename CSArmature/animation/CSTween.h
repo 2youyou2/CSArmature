@@ -83,16 +83,6 @@ public:
      *
      */
 	virtual void play(MovementBoneData *movementBoneData, int durationTo, int durationTween,  int loop, int tweenEasing);
-	
-	
-	virtual FrameData *getTweenNode();
-
-	CCPoint getPosition();
-	float	getPositionX();
-	float	getPositionY();
-	float	getRotation();
-	float	getScaleX();
-	float	getScaleY();
 
 protected:
     
@@ -124,7 +114,7 @@ protected:
 	//! A weak reference to the current MovementBoneData. The data is in the data pool
 	CC_SYNTHESIZE(MovementBoneData*, m_pMovementBoneData, MovementBoneData)
 
-	FrameData *m_pTweenData;		//! The computational tween frame data
+	FrameData *m_pTweenData;		//! The computational tween frame data, //! A weak reference to the Bone's tweenData
 	FrameData *m_pFrom;				//! From frame data, used for calculate between value
     FrameData *m_pTo;				//! To frame data, used for calculate between value
 	FrameData *m_pBetween;			//! Between frame data, used for calculate current FrameData(m_pNode) value
@@ -133,12 +123,9 @@ protected:
     
 	Bone *m_pBone;					//! A weak reference to the Bone
 
-    
 	TweenType m_eFrameTweenEasing;	//! Dedermine which tween effect current frame use 
 
-	
 	bool m_bIsTweenKeyFrame;
-    
     
     
 	int betweenDuration;			//! Current key frame will last betweenDuration frames

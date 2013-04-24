@@ -69,8 +69,6 @@ public:
      */
     void addDisplay(DisplayData *displayData, int index);
     
-    void insertDisplay(DisplayData *displayData, int index);
-    
     void removeDisplay(int index);
     
     CCArray *getDecorativeDisplayList();
@@ -91,10 +89,8 @@ public:
     CCNode *getDisplayRenderNode();
     
     int getCurrentDisplayIndex();
-    DecorativeDisplay *getCurrentDecorativeDisplay();
+	DecorativeDisplay *getCurrentDecorativeDisplay();
     DecorativeDisplay *getDecorativeDisplayByIndex( int index);
-
-    void updateDisplay();
     
     /**
      * Sets whether the display is visible
@@ -111,9 +107,6 @@ public:
      */
     virtual bool isVisible();
     
-    
-	float getWidth();
-	float getHeight();
 	CCSize getContentSize();
 	CCRect getBoundingBox();
     
@@ -141,7 +134,6 @@ protected:
 	int m_iDisplayIndex;
     
     CC_SYNTHESIZE_PASS_BY_REF(bool, m_bForceChangeDisplay, ForceChangeDisplay)
-    
     
     //! Whether of not the bone is visible. Default is true
     bool m_bVisible;

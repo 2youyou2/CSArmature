@@ -123,8 +123,6 @@ void TransformHelp::matrixToNode(const CCAffineTransform &matrix, Node &node)
 	helpPoint2.x -= matrix.tx;
 	helpPoint2.y -= matrix.ty;
 
-
-
 	node.skewX = -(atan2f(helpPoint1.y, helpPoint1.x) - 1.5707964f);
 	node.skewY = atan2f(helpPoint2.y, helpPoint2.x);
 	node.scaleX = sqrt(matrix.a * matrix.a + matrix.b * matrix.b);

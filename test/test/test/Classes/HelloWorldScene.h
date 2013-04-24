@@ -4,7 +4,6 @@
 #include "cocos2d.h"
 #include "CSArmature.h"
 #include "CSArmatureDataManager.h"
-#include "CSBatchNodeManager.h"
 
 #include "Box2D/Box2D.h"
 

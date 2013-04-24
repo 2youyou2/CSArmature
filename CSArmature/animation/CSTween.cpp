@@ -52,7 +52,6 @@ bool Tween::init(Bone *bone)
     bool bRet = false;
     do
     {
-
         m_pFrom = FrameData::create();
         m_pFrom->retain();
         
@@ -63,6 +62,7 @@ bool Tween::init(Bone *bone)
         m_pBetween->retain();
         
         m_pBone = bone;
+		m_pTweenData = m_pBone->getTweenData();
 
         bRet = true;
     }
@@ -133,12 +133,7 @@ void Tween::play(MovementBoneData *_movementBoneData, int _durationTo, int _dura
         }
     }
 }
-
-FrameData *Tween::getTweenNode()
-{
-	return m_pTweenData;
-}
-    
+ 
 void Tween::updateHandler()
 {
 	
@@ -322,8 +317,7 @@ FrameData *Tween::tweenNodeTo(float percent, FrameData *node)
 		node->r = m_pFrom->r + percent * m_pBetween->r;
 		node->g = m_pFrom->g + percent * m_pBetween->g;
 		node->b = m_pFrom->b + percent * m_pBetween->b;
-
-		m_pBone->setColorDirty(true);
+		m_pBone->updateColor();
 	}
 
 //    CCPoint p1 = ccp(m_pFrom->x, m_pFrom->y);
@@ -406,32 +400,6 @@ float Tween::updateFrameData(float currentPrecent, bool activeFrame)
     }
 
     return currentPrecent;
-}
-    
-
-CCPoint Tween::getPosition()
-{
-	return ccp(m_pTweenData->x, m_pTweenData->y);
-}
-float Tween::getPositionX()
-{
-	return m_pTweenData->x;
-}
-float Tween::getPositionY()
-{
-	return m_pTweenData->y;
-}
-float Tween::getRotation()
-{
-	return m_pTweenData->skewX;
-}
-float Tween::getScaleX()
-{
-	return m_pTweenData->scaleX;
-}
-float Tween::getScaleY()
-{
-	return m_pTweenData->scaleY;
 }
 
 

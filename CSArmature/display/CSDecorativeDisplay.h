@@ -58,7 +58,7 @@ public:
 
 protected:
 
-	CC_SYNTHESIZE_RETAIN(CCObject*, m_pDisplay, Display);
+	CC_SYNTHESIZE_RETAIN(CCNode*, m_pDisplay, Display);
 	CC_SYNTHESIZE_RETAIN(DisplayData*, m_pDisplayData, DisplayData);
 	
 #if CS_DEBUG_FOR_EDIT

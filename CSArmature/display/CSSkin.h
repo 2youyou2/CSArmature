@@ -38,12 +38,18 @@ namespace cs {
 class Skin : public CCSprite
 {
 public:
-	static Skin *crete();
+	static Skin *create();
 	static Skin *createWithSpriteFrameName(const char *pszSpriteFrameName);
 public:
     Skin();
 
-    void updateTransform(Bone *bone);
+	void updateTransform();
+	void updateSkinTransform();
+
+	CC_PROPERTY_PASS_BY_REF(Node, m_sSkinData, SkinData);
+	CC_SYNTHESIZE(Bone*, m_pBone, Bone);
+protected:
+	CCAffineTransform m_tSkinTransform;
 };
 
 }

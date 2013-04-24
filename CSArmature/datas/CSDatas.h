@@ -61,6 +61,54 @@ public: \
 
 namespace cs {
 
+	
+#pragma region Node
+	/**
+	* the base node include a lot of attribute.
+	*/
+	class CS_EXTERN Node : public CCObject
+	{
+	public:
+		CS_CREATE_NO_PARAM_NO_INIT(Node)
+	public:
+		Node();
+		~Node(void);
+
+		/*
+		* Copy datas from node
+		* @param  node A Node to copy datas
+		*/
+		virtual void copy(const Node *_node);
+
+		/*
+		* Calculate two Node's between value(_to - _from) and set to self
+		*
+		* @param  from   from Node
+		* @param  to     to Node
+		*/
+		virtual void subtract(Node *_from, Node *_to);
+	public:
+		/**
+		* x y skewX skewY scaleX scaleY used to calculate transform matrix
+		* skewX, skewY can have rotation effect
+		* To get more matrix information, you can have a look at this pape : http://www.senocular.com/flash/tutorials/transformmatrix/
+		*/
+		float skewX;
+		float skewY;
+		float scaleX;
+		float scaleY;
+
+		float tweenRotate;			//! SkewX, SkewY, and TweenRotate effect the rotation
+
+		bool isUseColorInfo;		//! Whether or not this frame have the color changed Info
+		int a, r, g, b;
+
+		float x;					//! position x attribute
+		float y;					//! position y attribute
+		int zOrder;					//! zorder attribute, used to order the Bone's depth order
+	};
+#pragma endregion
+
 #pragma region DisplayData
 	/**
 	* DisplayType distinguish which type you display is.
@@ -176,53 +224,6 @@ namespace cs {
 	};
 #pragma endregion
 
-
-#pragma region Node
-	/**
-	* the base node include a lot of attribute.
-	*/
-	class CS_EXTERN Node : public CCObject
-	{
-	public:
-		CS_CREATE_NO_PARAM_NO_INIT(Node)
-	public:
-		Node();
-		~Node(void);
-
-		/*
-		* Copy datas from node
-		* @param  node A Node to copy datas
-		*/
-		virtual void copy(const Node *_node);
-
-		/*
-		* Calculate two Node's between value(_to - _from) and set to self
-		*
-		* @param  from   from Node
-		* @param  to     to Node
-		*/
-		virtual void subtract(Node *_from, Node *_to);
-	public:
-		/**
-		* x y skewX skewY scaleX scaleY used to calculate transform matrix
-		* skewX, skewY can have rotation effect
-		* To get more matrix information, you can have a look at this pape : http://www.senocular.com/flash/tutorials/transformmatrix/
-		*/
-		float skewX;
-		float skewY;
-		float scaleX;
-		float scaleY;
-
-		float tweenRotate;			//! SkewX, SkewY, and TweenRotate effect the rotation
-
-		bool isUseColorInfo;		//! Whether or not this frame have the color changed Info
-		int a, r, g, b;
-
-		float x;					//! position x attribute
-		float y;					//! position y attribute
-		int zOrder;					//! zorder attribute, used to order the Bone's depth order
-	};
-#pragma endregion
 
 #pragma region BoneData
 	/**

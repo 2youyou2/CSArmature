@@ -159,36 +159,6 @@ public:
      */
     virtual void removeBone(Bone *bone, bool recursion);
 
-
-	/**
-     * Sets whether the node is visible
-     * The default value is true, a node is default to visible
-     *
-     * @param visible   true if the node is visible, false if the node is hidden.
-     */
-    virtual void setVisible(bool visible);
-    /**
-     * Determines if the node is visible
-     *
-     * @see setVisible(bool)
-     *
-     * @return true if the node is visible, false if the node is hidden.
-     */
-    virtual bool isVisible();
-
-    
-    /**
-     * Reorder the Armature. This will redistribution all child bones vertexz or zorder.
-     * You should note that this zorder is different from zorder of cocos2dx.
-     * It is used to calculate child bones vertexz or zorder.
-     *          
-     * We do not use cocos2dx zorder, because we use batchnode to improve speed and batchnode zorder do not support two batchnode can't mixed use their sprite's zorder
-     *
-     * @param zOrder The zorder you want to set
-     */
-    virtual void setZOrder(int zOrder);
-
-
     /**
      * Get Armature's bone dictionary
      * @return Armature's bone dictionary
@@ -196,7 +166,6 @@ public:
 	CCDictionary *getBoneDic();
 
 	virtual CCRect getBoundingBox();
-    
     
     Bone *getBoneAtPoint(float _x, float _y);
     
@@ -206,85 +175,40 @@ public:
      */
     void onMovementEvent(const char *eventType, const char *movementID);
     
-    void update(float dt);
-    
+	virtual void visit();
+    virtual void update(float dt);
 	virtual void draw();
-
-
-	inline virtual GLubyte getOpacity() { return m_nOpacity; }
-	inline virtual const ccColor3B& getColor(){ return m_sColor; }
-
-	virtual void setOpacity(GLubyte value);
-	virtual void setColor(const ccColor3B& value);
-	/**
-	* Changes the premultipliedAlphaOpacity property.
-	*
-	* Textures with premultiplied alpha will have this property by default on true.
-	* Otherwise the default value is false.
-	*
-	* @param   bValue  flase then opacity will be applied as: glColor(R,G,B,opacity);
-	*                  true then opacity will be applied as: glColor(opacity, opacity, opacity, opacity);
-	*/
-	virtual void setOpacityModifyRGB(bool bValue);
-	virtual bool isOpacityModifyRGB(void);
 
 	inline void setBlendFunc(ccBlendFunc blendFunc) { m_sBlendFunc = blendFunc; }
 	inline ccBlendFunc getBlendFunc(void) { return m_sBlendFunc; }
+
 private:
-    /*
-     * Sort Bones in this Armature, if m_pDisPlayBatchNode used BATCHNODE_VERTEXZ, then order use vertexz, else use cocos2dx zorder 
-     */
-    void sortBoneHelper(int _baseVertexz, int &_index);
     
     /*
      * Used to create Bone internal
      */
 	Bone *createBone(const char *_boneName );
-
-	/*
-	 *	When a new armature is created, internal sort is called. This sort will calculate the current max armature internal zorder, 
-	 *	and give the zorder to the new created armature. This zorder is not be changed after.
-	 *	It's different from the zorder used for users.
-	 */
-	void internalSort();
-
-	void initRootBone();
     
+	
 public:
 	CC_SYNTHESIZE_RETAIN(Animation *, m_pAnimation, Animation);
 
 	CC_SYNTHESIZE_PASS_BY_REF(bool, m_bBonesIndexChanged, BonesIndexChanged);
     
     CC_SYNTHESIZE(ArmatureData *, m_pArmatureData, ArmatureData);
-    
-    CC_PROPERTY(RENDER_TYPE, m_eRenderType, RenderType)
-
-	CC_SYNTHESIZE(Bone *, m_pRootBone, RootBone)
 
 	CC_SYNTHESIZE(Armature*, m_pArmature, Armature);
 
 protected:
     CCDictionary *m_pBoneDic;		//! The dictionary of the bones, include all bones in the armature, no matter it is the direct bone or the indirect bone. It is different from m_pChindren.
-    
-    CCArray *m_pBoneList;				//! A CCArray include all bones
 
     static std::map<int, Armature*> m_sArmatureIndexDic;	//! Use to save armature zorder info, 
-    
-	GLubyte m_nOpacity;				//! Goes from 0-255. 0 means fully tranparent and 255 means fully opaque.
-	ccColor3B m_sColor;					//! Color: conforms with CCRGBAProtocol protocol
-	
-	float m_fInternalZOrder;			//! This is used to sign the index of the Armature being created
-	float m_fActualZOrder;				//! InternalZOrder combine ZOrder is the ActualZOrder.
-
-	bool m_bOpacityModifyRGB;
 
 	ccBlendFunc        m_sBlendFunc;            /// It's required for CCTextureProtocol inheritance
 
 	CC_SYNTHESIZE_PASS_BY_REF(std::string, m_strName, Name);
 
 	CC_SYNTHESIZE(CCTextureAtlas*, m_pAtlas, TextureAtlas);
-private:
-	static int m_siMaxArmatureZorder;
     
     ComArmature *m_pComArmature;
 };

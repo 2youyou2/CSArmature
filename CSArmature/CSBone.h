@@ -40,10 +40,9 @@ using namespace cocos2d;
 
 namespace cs {
 
-
 class Armature;
 
-class CS_EXTERN Bone : public CCObject
+class CS_EXTERN Bone : public CCNodeRGBA
 {
 public:
     /**
@@ -74,8 +73,6 @@ public:
      */
 	virtual bool init(const char *name);
 
-
-	    
     /**
 	 * Add display and use  _DisplayData init the display.
      * If index already have a display, then replace it.
@@ -126,49 +123,15 @@ public:
      */
 	void removeChildBone(Bone *bone, bool recursion);
 
-    /**
-	 * Set the bone's zorder. the zorder is different to cocos2dx's zorder, it used to calculate the vertexz 
-	 *	@param 	_zorder zorder you want to set
-     */
-    void setZOrder(int _zorder);
-    
-    /**
-     * Get current bone's zorder
-     * @return Current bone's zorder
-     */
-    int getZOrder();
-    
-    void update(float dt);
-    
+	void update(float delta);
 
-    /**
-     *  Set bone's property, used for users, this won't change data in the data pool
-     */
-    virtual void setPosition(float x, float y);
-    virtual void setPositionX(float x);
-    virtual void setPositionY(float y);
-    virtual void setRotation(float r);
-    virtual void setScale(float scale);
-	virtual void setScaleX(float scaleX);
-    virtual void setScaleY(float scaleY);
+	void updateDisplayedColor(const ccColor3B& parentColor);
+	void updateDisplayedOpacity(GLubyte parentOpacity);
 
-	/**
-     * Get bone's user property
-     */
-	virtual CCPoint getPosition();
-	virtual float	getPositionX();
-	virtual float	getPositionY();
-	virtual float	getRotation();
-	virtual float	getScaleX();
-	virtual float	getScaleY();
-
-	virtual void setOpacity(GLubyte value);
-	virtual void setColor(const ccColor4B &color);
-	virtual void setColor(const ccColor3B &color);
-
+	//! Update color to render display
+	void updateColor();
 
 	CCArray *getChildren();
-    FrameData *getCombinedData();
 	Tween *getTween();
 
 	/*
@@ -176,31 +139,9 @@ public:
 	 */
 	inline virtual void	setTransformDirty(bool dirty){ m_bTransformDirty = dirty; } 
 	inline virtual bool isTransformDirty(){ return m_bTransformDirty; }
+	
+	inline CCAffineTransform nodeToArmatureTransform(){return m_tWorldTransform;}
 
-	/*
-	 * Whether or not the bone's color property changed. if true, the bone will update the color.
-	 */
-	inline virtual void	setColorDirty(bool dirty){ m_bColorDirty = dirty; } 
-	inline virtual bool isColorDirty(){ return m_bColorDirty; }
-
-	/*
-	 * Whether or not the bone is a root bone, this bone is created when a armature created. It's used for armature to update all bones
-	 */
-	inline virtual void setRootBone(bool isRootBone){ m_bRootBone = isRootBone; }
-	inline virtual bool isRootBone(){ return m_bRootBone; }
-
-	/*
-	 * Internal method to recorder the bone's actual zorder
-	 */
-	virtual void _setActualZorder(float zorder);
-	inline virtual float getActualZorder(){ return m_fActualZorder; }
-
-	inline CCAffineTransform &getWorldTransform(){ return m_tWorldTransform; }
-	inline CCAffineTransform &getWorldTransformForChildren(){ return m_tWorldTransformForChildren; }
-protected:
-    
-    virtual void updateTransform(float dt);
-	virtual void updateColor();
 public:
     /*
      *  The origin state of the Bone. Display's state is effected by m_pBoneData, m_pNode, m_pTweenData
@@ -223,22 +164,10 @@ public:
 	CC_SYNTHESIZE_PASS_BY_REF(bool, m_bIgnoreMovementBoneData, IgnoreMovementBoneData)
 
 protected:
-	Tween *m_pTween;				//! Calculate tween effect
-    
-	FrameData *m_pTweenData;		//! Used for make tween effect between every frame, it's a weak reference of Tween's tweenData
-    FrameData *m_pUserData;			//! Used for users to change the m_pDisplay's transform
-	FrameData *m_pCombinedData;		//! Combine TweenData and UserData, then it's the final data
+	Tween *m_pTween;							//! Calculate tween effect
 
-    /*
-     *  The zorder in the Armature, when chane zorder, you need to change Armature's m_bBonesIndexChanged to 
-     *  true. It is used for Armature calculate Bone's actual zorder.
-     */
-    int m_iZOrder;
-
-	/*
-	 *	The actual zorder will set to the display. Calculate by armature
-	 */
-	int m_fActualZorder;
+	//! Used for make tween effect between every frame
+	CC_SYNTHESIZE_READONLY(FrameData*, m_pTweenData, TweenData);
 
 	CC_SYNTHESIZE_PASS_BY_REF(std::string, m_strName, Name);
     
@@ -246,17 +175,11 @@ protected:
 	void childrenAlloc(void);
     CCArray *m_pChildren;
     
-    
-    Bone *m_pParent;				//! A weak reference to it's parent
-
-	bool m_bRootBone;				//! Whether or not this bone is a root bone
+    Bone *m_pParent;						//! A weak reference to it's parent
 	bool m_bTransformDirty;			//! Whether or not transform dirty
-	bool m_bColorDirty;				//! Whether or not color property is changed.
 
 	//! self Transform, use this to change display's state
 	CCAffineTransform m_tWorldTransform;
-    //! Transform for children
-	CCAffineTransform m_tWorldTransformForChildren;
 };
 
 }

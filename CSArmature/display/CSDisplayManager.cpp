@@ -25,10 +25,10 @@
  */
 
 #include "CSDisplayManager.h"
-#include "CSDisplayFactoryManager.h"
 #include "CSBone.h"
 #include "CSUtilMath.h"
 #include "CSArmature.h"
+#include "CSSkin.h"
 
 namespace cs {
 
@@ -100,8 +100,7 @@ void DisplayManager::addDisplay(DisplayData *_displayData, int _index)
         m_pDecoDisplayList->addObject(decoDisplay);
     }
     
-    
-    DisplayFactoryManager::getFactory((DisplayType)_displayData->displayType)->addDisplay(m_pBone, decoDisplay, _displayData);
+    CS_DISPLAY_ADD(m_pBone, decoDisplay, _displayData);
     
     //! if changed display index is current display index, then change current display to the new display
     if(_index == m_iDisplayIndex)
@@ -110,27 +109,6 @@ void DisplayManager::addDisplay(DisplayData *_displayData, int _index)
         changeDisplayByIndex(_index, false);
     }
 }
-
-
-
-void DisplayManager::insertDisplay(DisplayData *displayData, int index)
-{
-    DecorativeDisplay *decoDisplay = NULL;
-    
-    decoDisplay = DecorativeDisplay::create();
-    m_pDecoDisplayList->insertObject(decoDisplay, index);
-    
-    
-	DisplayFactoryManager::getFactory((DisplayType)displayData->displayType)->addDisplay(m_pBone, decoDisplay, displayData);
-    
-    //! if changed display index is current display index, then change current display to the new display
-    if(index == m_iDisplayIndex)
-    {
-        m_iDisplayIndex = -1;
-        changeDisplayByIndex(index, false);
-    }
-}
-
 
 void DisplayManager::removeDisplay(int index)
 {
@@ -147,23 +125,16 @@ void DisplayManager::changeDisplayByIndex(int index, bool force)
 {
     CCAssert( (m_pDecoDisplayList ? index<(int)m_pDecoDisplayList->count() : true), "the _index value is out of range");
     
-    
     m_bForceChangeDisplay = force;
     
-    /*
-     *	if _index is equal to current display index,then do nothing
-     */
+    //! If index is equal to current display index,then do nothing
     if ( m_iDisplayIndex == index)
-    {
-        return;
-    }
+		return;
     
     
     m_iDisplayIndex = index;
     
-    /*
-     *	m_iDisplayIndex == -1, it means you want to hide you display
-     */
+    //! If displayIndex < 0, it means you want to hide you display
     if (m_iDisplayIndex < 0)
     {
         if(m_pDisplayRenderNode)
@@ -175,13 +146,10 @@ void DisplayManager::changeDisplayByIndex(int index, bool force)
         return;
     }
     
+	m_pCurrentDecoDisplay = (DecorativeDisplay*)m_pDecoDisplayList->objectAtIndex(m_iDisplayIndex);
+	setDisplayRenderNode(m_pCurrentDecoDisplay->getDisplay());
     
-    DecorativeDisplay *decoDisplay = (DecorativeDisplay*)m_pDecoDisplayList->objectAtIndex(m_iDisplayIndex);
-    
-    m_pCurrentDecoDisplay = decoDisplay;
-    
-    DisplayFactoryManager::getFactory((DisplayType)decoDisplay->getDisplayData()->displayType)->changeDisplay(m_pBone, decoDisplay);
-    
+    //DisplayFactoryManager::getFactory((DisplayType)m_pCurrentDecoDisplay->getDisplayData()->displayType)->changeDisplay(m_pBone, decoDisplay);
 }
     
 void DisplayManager::setDisplayRenderNode(CCNode *displayRenderNode)
@@ -239,18 +207,10 @@ void DisplayManager::initDisplayList(BoneData *boneData)
         DecorativeDisplay *decoDisplay = DecorativeDisplay::create();
         decoDisplay->setDisplayData(displayData);
         
-        CCObject *display = NULL;
-        display = DisplayFactoryManager::getFactory((DisplayType)displayData->displayType)->createDisplay(m_pBone, decoDisplay);
-        
+		CS_DISPLAY_CREATE(m_pBone, decoDisplay);
+
         m_pDecoDisplayList->addObject(decoDisplay);
     }
-}
-    
-void DisplayManager::updateDisplay()
-{
-	CS_RETURN_IF(!m_pCurrentDecoDisplay);
-    DisplayData *displayData = m_pCurrentDecoDisplay->getDisplayData();
-    DisplayFactoryManager::getFactory((DisplayType)displayData->displayType)->updateDisplay(m_pBone, m_pCurrentDecoDisplay, m_pBone->getCombinedData());
 }
     
     
@@ -298,63 +258,42 @@ bool DisplayManager::containPoint(float x, float y)
 
 void DisplayManager::setVisible(bool visible)
 {
-	if(!m_pCurrentDecoDisplay)
-	{
+	if(!m_pDisplayRenderNode)
 		return;
-	}
 
 	m_bVisible = visible;
-
-	DisplayFactoryManager::getFactory((DisplayType)m_pCurrentDecoDisplay->getDisplayData()->displayType)->setVisible(m_pBone, m_pCurrentDecoDisplay, m_bVisible);
+	m_pDisplayRenderNode->setVisible(visible);
 }
 
 bool DisplayManager::isVisible()
 {
-    return m_bVisible;
+	return m_bVisible;
 }
 
 
 CCSize DisplayManager::getContentSize()
 {
-	CS_RETURN_IF(!m_pCurrentDecoDisplay) CCSizeMake(0,0);
-    DisplayData *_displayData = m_pCurrentDecoDisplay->getDisplayData();
-    return DisplayFactoryManager::getFactory((DisplayType)_displayData->displayType)->getContentSize(m_pBone, m_pCurrentDecoDisplay);
-}
-
-float DisplayManager::getWidth()
-{
-	CS_RETURN_NULL_IF(!m_pCurrentDecoDisplay);
-    DisplayData *_displayData = m_pCurrentDecoDisplay->getDisplayData();
-    return DisplayFactoryManager::getFactory((DisplayType)_displayData->displayType)->getWidth(m_pBone, m_pCurrentDecoDisplay);
-}
-
-float DisplayManager::getHeight()
-{
-	CS_RETURN_IF(!m_pCurrentDecoDisplay) 0;
-    DisplayData *_displayData = m_pCurrentDecoDisplay->getDisplayData();
-    return DisplayFactoryManager::getFactory((DisplayType)_displayData->displayType)->getHeight(m_pBone, m_pCurrentDecoDisplay);
+	CS_RETURN_IF(!m_pDisplayRenderNode) CCSizeMake(0,0);
+	return m_pDisplayRenderNode->getContentSize();
 }
 
 CCRect DisplayManager::getBoundingBox()
 {
-	CS_RETURN_IF(!m_pCurrentDecoDisplay) CCRectMake(0,0,0,0);
-    DisplayData *_displayData = m_pCurrentDecoDisplay->getDisplayData();
-    return DisplayFactoryManager::getFactory((DisplayType)_displayData->displayType)->getBoundingBox(m_pBone, m_pCurrentDecoDisplay);
+	CS_RETURN_IF(!m_pDisplayRenderNode) CCRectMake(0,0,0,0);
+    return m_pDisplayRenderNode->boundingBox();
 }
 
 
 CCPoint DisplayManager::getAnchorPoint()
 {
-	CS_RETURN_IF(!m_pCurrentDecoDisplay) ccp(0,0);
-    DisplayData *_displayData = m_pCurrentDecoDisplay->getDisplayData();
-    return DisplayFactoryManager::getFactory((DisplayType)_displayData->displayType)->getAnchorPoint(m_pBone, m_pCurrentDecoDisplay);;
+	CS_RETURN_IF(!m_pDisplayRenderNode) ccp(0,0);
+    return m_pDisplayRenderNode->getAnchorPoint();
 }
 
 CCPoint DisplayManager::getAnchorPointInPoints()
 {
-	CS_RETURN_IF(!m_pCurrentDecoDisplay) ccp(0,0);
-    DisplayData *_displayData = m_pCurrentDecoDisplay->getDisplayData();
-    return DisplayFactoryManager::getFactory((DisplayType)_displayData->displayType)->getAnchorPointInPoints(m_pBone, m_pCurrentDecoDisplay);
+	CS_RETURN_IF(!m_pDisplayRenderNode) ccp(0,0);
+	return m_pDisplayRenderNode->getAnchorPointInPoints();
 }
 
 

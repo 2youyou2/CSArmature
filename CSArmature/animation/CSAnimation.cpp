@@ -35,6 +35,7 @@ Animation::Animation()
 
 Animation::~Animation(void)
 {
+	CC_SAFE_RELEASE_NULL(m_pTweenList);
 }
 
 bool Animation::init(Armature *armature)
@@ -44,6 +45,9 @@ bool Animation::init(Armature *armature)
     {
         m_pArmature = armature;
         
+		m_pTweenList = CCArray::create();
+		m_pTweenList->retain();
+
         bRet = true;
     }
     while (0);
@@ -54,84 +58,47 @@ bool Animation::init(Armature *armature)
 
 void Animation:: pause()
 {
-    
-    
-    CCDictElement *_element = NULL;
-    CCDictionary *_dict = m_pArmature->getBoneDic();
-    CCDICT_FOREACH(_dict, _element)
-    {
-        Bone *bone = (Bone*)_element->getObject();
-        if (bone->getTween())
-        {
-            bone->getTween()->pause();
-        }
-    }
-    
+	CCObject *object = NULL;
+	CCARRAY_FOREACH(m_pTweenList, object)
+	{
+		((Tween*)object)->pause();
+	}
     ProcessBase::pause();
-    
 }
   
 void Animation::resume()
 {
-    
-    
-    CCDictElement *_element = NULL;
-    CCDictionary *_dict = m_pArmature->getBoneDic();
-    CCDICT_FOREACH(_dict, _element)
-    {
-        Bone* bone = (Bone*)_element->getObject();
-        if (bone->getTween())
-        {
-            bone->getTween()->resume();
-        }
-    }
-    
+	CCObject *object = NULL;
+	CCARRAY_FOREACH(m_pTweenList, object)
+	{
+		((Tween*)object)->pause();
+	}
     ProcessBase::resume();
 }
 
 void Animation::stop()
 {
-    
-    
-    CCDictElement *_element = NULL;
-    CCDictionary *_dict = m_pArmature->getBoneDic();
-    CCDICT_FOREACH(_dict, _element)
-    {
-        Bone *bone = (Bone*)_element->getObject();
-        if (bone->getTween())
-        {
-            bone->getTween()->stop();
-        }
-    }
-    
+	CCObject *object = NULL;
+	CCARRAY_FOREACH(m_pTweenList, object)
+	{
+		((Tween*)object)->pause();
+	}
+    m_pTweenList->removeAllObjects();
     ProcessBase::stop();
 }
 
-void Animation::setAnimationScale(float _animationScale )
+void Animation::setAnimationScale(float animationScale )
 {
-    if(_animationScale == m_fAnimationScale)
+    if(animationScale == m_fAnimationScale)
     {
         return;
     }
     
-    /*
-     *  when calculate m_fCurrentFrame, we will do a processing of m_fCurrentFrame += m_fAnimationScale * (dt/m_fAnimationInternal);
-     *  then if m_fAnimationScale is bigger, the m_fCurrentFrame grow quicker, animation 
-     *  scale up.
-     *  We want animation slower when m_fAnimationScale is bigger, so do 1/_animationScale.
-     */
-    m_fAnimationScale = 1/_animationScale;
-    
-    CCDictElement *_element = NULL;
-    CCDictionary *_dict = m_pArmature->getBoneDic();
-    CCDICT_FOREACH(_dict, _element)
-    {
-        Bone *bone = (Bone*)_element->getObject();
-        if (bone->getTween())
-        {
-            bone->getTween()->setAnimationScale(m_fAnimationScale);
-        }
-    }
+	CCObject *object = NULL;
+	CCARRAY_FOREACH(m_pTweenList, object)
+	{
+		((Tween*)object)->setAnimationScale(m_fAnimationScale);
+	}
 }
 
 
@@ -179,7 +146,8 @@ void Animation::play(const char *animationName, int durationTo, int durationTwee
 	}
     
     MovementBoneData *movementBoneData = NULL;
-    
+    m_pTweenList->removeAllObjects();
+
     CCDictElement *element = NULL;
     CCDictionary *dict = m_pArmature->getBoneDic();
     CCDICT_FOREACH(dict, element)
@@ -187,9 +155,11 @@ void Animation::play(const char *animationName, int durationTo, int durationTwee
         Bone *bone = (Bone*)element->getObject();
         movementBoneData = (MovementBoneData*)m_pMovementData->movBoneDataDic.objectForKey(bone->getName());
 
+		Tween *tween = bone->getTween();
 		if(movementBoneData && movementBoneData->frameList.count()>0)
         {
-            bone->getTween()->play(movementBoneData, durationTo, durationTween, loop, tweenEasing);
+			m_pTweenList->addObject(tween);
+            tween->play(movementBoneData, durationTo, durationTween, loop, tweenEasing);
         }
         else
         {
@@ -197,10 +167,7 @@ void Animation::play(const char *animationName, int durationTo, int durationTwee
 			{
 				//! this bone is not include in this movement, so hide it
 				bone->getDisplayManager()->changeDisplayByIndex(-1, false);
-				if (bone->getTween())
-				{
-					bone->getTween()->stop();
-				}
+				tween->stop();
 			}
             
         }
@@ -224,6 +191,16 @@ void Animation::playByIndex(int animationIndex, int durationTo, int durationTwee
 int Animation::getMovementCount()
 {
     return m_pAnimationData->getMovementCount();
+}
+
+void Animation::update(float dt)
+{
+	ProcessBase::update(dt);
+	CCObject *object = NULL;
+	CCARRAY_FOREACH(m_pTweenList, object)
+	{
+		((Tween*)object)->update(dt);
+	}
 }
     
 void Animation::updateHandler()
