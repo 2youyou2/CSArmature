@@ -87,7 +87,7 @@ void TestScene::runThisTest()
 	cs::ArmatureDataManager::sharedArmatureDataManager()->addArmatureFileInfo("Cowboy", "", "Armature/Cowboy0.png", "Armature/Cowboy0.plist", "Armature/Cowboy.json");
 	cs::ArmatureDataManager::sharedArmatureDataManager()->addArmatureFileInfo("Zombie_f/Zombie", "", "Armature/Example08.png", "Armature/Example08.plist", "Armature/Example08.xml");
 	cs::ArmatureDataManager::sharedArmatureDataManager()->addArmatureFileInfo("Knight_f/Knight", "", "Armature/knight.png", "Armature/knight.plist", "Armature/knight.xml");
-	cs::ArmatureDataManager::sharedArmatureDataManager()->addArmatureFileInfo("Zombie_zamboni", "", "Armature/Zombie_zamboni.png", "Armature/Zombie_zamboni.plist", "Armature/Zombie_zamboni.xml");
+	cs::ArmatureDataManager::sharedArmatureDataManager()->addArmatureFileInfo("zamboni", "", "Armature/zamboni0.png", "Armature/zamboni0.plist", "Armature/zamboni.json");
 
 	s_nActionIdx = -1;
 	addChild(NextTest());
