@@ -2,124 +2,294 @@
 
 using namespace cocos2d;
 
-CCScene* HelloWorld::scene()
+
+CCLayer* NextTest();
+CCLayer* BackTest();
+CCLayer* RestartTest();
+
+static int s_nActionIdx = -1;
+
+
+CCLayer *CreateLayer(int index)
 {
-    CCScene * scene = NULL;
-    do 
-    {
-        // 'scene' is an autorelease object
-        scene = CCScene::create();
-        CC_BREAK_IF(! scene);
+	CCLayer *pLayer = NULL;
+	switch(index)
+	{
+	case TEST_DRAGON_BONES_2_0:
+		pLayer = new TestDragonBones20();
+		break;
+	case TEST_COCOSTUDIO_WITH_SKELETON:
+		pLayer = new TestCSWithSkeleton();
+		break;
+	case TEST_COCOSTUDIO_WITHOUT_SKELETON:
+		pLayer = new TestCSWithoutSkeleton();
+		break;
+	case TEST_PERFORMANCE:
+		pLayer = new TestPerformance();
+		break;
+	case TEST_CHANGE_ZORDER:
+		pLayer = new TestChangeZorder();
+		break;
+	default:
+		break;
+	}
 
-        // 'layer' is an autorelease object
-        HelloWorld *layer = HelloWorld::create();
-        CC_BREAK_IF(! layer);
-
-        // add layer as a child to scene
-        scene->addChild(layer);
-    } while (0);
-
-    // return the scene
-    return scene;
+	return pLayer;
 }
 
-// on "init" you need to initialize your instance
-bool HelloWorld::init()
+
+CCLayer* NextTest()
 {
-    bool bRet = false;
-    do 
-    {
-        //////////////////////////////////////////////////////////////////////////
-        // super init first
-        //////////////////////////////////////////////////////////////////////////
+	++s_nActionIdx;
+	s_nActionIdx = s_nActionIdx % TEST_LAYER_COUNT;
 
-        CC_BREAK_IF(! CCLayer::init());
+	CCLayer* pLayer = CreateLayer(s_nActionIdx);
+	pLayer->autorelease();
 
-        //////////////////////////////////////////////////////////////////////////
-        // add your codes below...
-        //////////////////////////////////////////////////////////////////////////
+	return pLayer;
+}
 
-        // 1. Add a menu item with "X" image, which is clicked to quit the program.
+CCLayer* BackTest()
+{
+	--s_nActionIdx;
+	if( s_nActionIdx < 0 )
+		s_nActionIdx += TEST_LAYER_COUNT;    
 
-        // Create a "close" menu item with close icon, it's an auto release object.
-        CCMenuItemImage *pCloseItem = CCMenuItemImage::create(
-            "CloseNormal.png",
-            "CloseSelected.png",
-            this,
-            menu_selector(HelloWorld::menuCloseCallback));
-        CC_BREAK_IF(! pCloseItem);
+	CCLayer* pLayer = CreateLayer(s_nActionIdx);
+	pLayer->autorelease();
 
-        // Place the menu item bottom-right conner.
-        pCloseItem->setPosition(ccp(CCDirector::sharedDirector()->getWinSize().width - 20, 20));
+	return pLayer;
+}
 
-        // Create a menu with the "close" menu item, it's an auto release object.
-        CCMenu* pMenu = CCMenu::create(pCloseItem, NULL);
-        pMenu->setPosition(CCPointZero);
-        CC_BREAK_IF(! pMenu);
+CCLayer* RestartTest()
+{
+	CCLayer* pLayer = CreateLayer(s_nActionIdx);
+	pLayer->autorelease();
 
-        // Add the menu to HelloWorld layer as a child layer.
-        this->addChild(pMenu, 1);
+	return pLayer;
+}
 
-        // 2. Add a label shows "Hello World".
 
-        // Create a label and initialize with string "Hello World".
-        CCLabelTTF* pLabel = CCLabelTTF::create("Hello World", "Arial", 24);
-        CC_BREAK_IF(! pLabel);
 
-        // Get window size and place the label upper. 
-        CCSize size = CCDirector::sharedDirector()->getWinSize();
-        pLabel->setPosition(ccp(size.width / 2, size.height - 50));
+TestScene::TestScene(bool bPortrait)
+{
 
-        // Add the label to HelloWorld layer as a child layer.
-        this->addChild(pLabel, 1);
+	CCScene::init();
+}
 
-        // 3. Add add a splash screen, show the cocos2d splash image.
-        CCSprite* pSprite = CCSprite::create("HelloWorld.png");
-        CC_BREAK_IF(! pSprite);
+void TestScene::onEnter()
+{
+	CCScene::onEnter();
+}
 
-        // Place the sprite on the center of the screen
-        pSprite->setPosition(ccp(size.width/2, size.height/2));
+void TestScene::runThisTest()
+{
+	s_nActionIdx = -1;
+	addChild(NextTest());
 
-        // Add the sprite to HelloWorld layer as a child layer.
-        this->addChild(pSprite, 0);
+	cs::ArmatureDataManager::sharedArmatureDataManager()->addArmatureFileInfo("TestBone", "", "TestBone0.png", "TestBone0.plist", "TestBone.json");
+	cs::ArmatureDataManager::sharedArmatureDataManager()->addArmatureFileInfo("Zombie_f/Zombie", "", "Example08.png", "Example08.plist", "Example08.xml");
+	cs::ArmatureDataManager::sharedArmatureDataManager()->addArmatureFileInfo("Knight_f/Knight", "", "knight.png", "knight.plist", "knight.xml");
 
-		cs::ArmatureDataManager::sharedArmatureDataManager()->addArmatureFileInfo("TestBone", "", "TestBone0.png", "TestBone0.plist", "TestBone.json");
-		cs::ArmatureDataManager::sharedArmatureDataManager()->addArmatureFileInfo("Zombie_f/Zombie", "", "Example08.png", "Example08.plist", "Example08.xml");
-		cs::ArmatureDataManager::sharedArmatureDataManager()->addArmatureFileInfo("Knight_f/Knight", "", "knight.png", "knight.plist", "knight.xml");
-		
-		cs::Armature *armature = NULL;
+	CCDirector::sharedDirector()->runWithScene(this);
+}
 
- 		armature = cs::Armature::create("TestBone");
- 		armature->getAnimation()->playByIndex(0);
-  		armature->setScaleX(-0.3);
-  		armature->setScaleY(0.3);
- 		armature->setPosition(290, 50);
- 		armature->setColor(ccc3(0,0,0));
- 		armature->setOpacity(200);
- 		addChild(armature, 201);
 
-		for (int i = 0; i < 150; i++)
-		{
-			armature = cs::Armature::create("Knight_f/Knight");
-			armature->getAnimation()->playByIndex(0);
-			armature->setPosition(50 + i, 150);
-			addChild(armature, i);
-		}
-		
-		armature = cs::Armature::create("Zombie_f/Zombie");
+void TestLayer::onEnter()
+{
+	CCLayer::onEnter();
+
+	// add title and subtitle
+	std::string str = title();
+	const char * pTitle = str.c_str();
+	CCLabelTTF* label = CCLabelTTF::create(pTitle, "Arial", 18);
+	addChild(label, 1);
+	label->setPosition( ccp(VisibleRect::center().x, VisibleRect::top().y - 30) );
+
+	std::string strSubtitle = subtitle();
+	if( ! strSubtitle.empty() ) 
+	{
+		CCLabelTTF* l = CCLabelTTF::create(strSubtitle.c_str(), "Thonburi", 22);
+		addChild(l, 1);
+		l->setPosition( ccp(VisibleRect::center().x, VisibleRect::top().y - 60) );
+	}    
+
+	// add menu
+	CCMenuItemImage *item1 = CCMenuItemImage::create(s_pPathB1, s_pPathB2, this, menu_selector(TestLayer::backCallback) );
+	CCMenuItemImage *item2 = CCMenuItemImage::create(s_pPathR1, s_pPathR2, this, menu_selector(TestLayer::restartCallback) );
+	CCMenuItemImage *item3 = CCMenuItemImage::create(s_pPathF1, s_pPathF2, this, menu_selector(TestLayer::nextCallback) );
+
+	CCMenu *menu = CCMenu::create(item1, item2, item3, NULL);
+
+	menu->setPosition(CCPointZero);
+	item1->setPosition(ccp(VisibleRect::center().x - item2->getContentSize().width*2, VisibleRect::bottom().y+item2->getContentSize().height/2));
+	item2->setPosition(ccp(VisibleRect::center().x, VisibleRect::bottom().y+item2->getContentSize().height/2));
+	item3->setPosition(ccp(VisibleRect::center().x + item2->getContentSize().width*2, VisibleRect::bottom().y+item2->getContentSize().height/2));
+
+	addChild(menu, 100);
+
+}
+void TestLayer::onExit()
+{
+
+}
+
+std::string TestLayer::title()
+{
+	return "CSArmature Test Bed";
+}
+std::string TestLayer::subtitle()
+{
+	return "";
+}
+
+void TestLayer::restartCallback(CCObject* pSender)
+{
+	CCScene* s = new TestScene();
+	s->addChild( RestartTest() );
+	CCDirector::sharedDirector()->replaceScene(s);
+	s->release();
+}
+void TestLayer::nextCallback(CCObject* pSender)
+{
+	CCScene* s = new TestScene();
+	s->addChild( NextTest() );
+	CCDirector::sharedDirector()->replaceScene(s);
+	s->release();
+}
+void TestLayer::backCallback(CCObject* pSender)
+{
+	CCScene* s = new TestScene();
+	s->addChild( BackTest() );
+	CCDirector::sharedDirector()->replaceScene(s);
+	s->release();
+}
+
+
+void TestDragonBones20::onEnter()
+{
+	TestLayer::onEnter();
+
+	cs::Armature *armature = NULL;
+	armature = cs::Armature::create("Zombie_f/Zombie");
+	armature->getAnimation()->playByIndex(0);
+	armature->setPosition(VisibleRect::center());
+	addChild(armature);
+}
+
+std::string TestDragonBones20::title()
+{
+	return "Test Export From DragonBones version 2.0";
+}
+
+
+
+
+void TestCSWithSkeleton::onEnter()
+{
+	TestLayer::onEnter();
+
+	cs::Armature *armature = NULL;
+
+	armature = cs::Armature::create("TestBone");
+	armature->getAnimation()->playByIndex(0);
+	armature->setScale(0.3);
+	armature->setPosition(VisibleRect::center());
+	addChild(armature);
+
+}
+
+std::string TestCSWithSkeleton::title()
+{
+	return "Test Export From CocoStudio With Skeleton Effect";
+}
+
+
+
+
+void TestCSWithoutSkeleton::onEnter()
+{
+	TestLayer::onEnter();
+
+	cs::Armature *armature = NULL;
+
+	armature = cs::Armature::create("TestBone");
+	armature->getAnimation()->playByIndex(0);
+	armature->setScale(0.3);
+	armature->setPosition(ccp(VisibleRect::center().x, VisibleRect::center().y-100));
+	addChild(armature);
+}
+
+std::string TestCSWithoutSkeleton::title()
+{
+	return "Test Export From CocoStudio Without Skeleton Effect";
+}
+
+
+
+
+void TestPerformance::onEnter()
+{
+	TestLayer::onEnter();
+
+	cs::Armature *armature = NULL;
+
+	for (int i = 0; i < 150; i++)
+	{
+		armature = cs::Armature::create("Knight_f/Knight");
 		armature->getAnimation()->playByIndex(0);
-		armature->setPosition(240, 150);
-		addChild(armature, 200);
-
-        bRet = true;
-    } while (0);
-
-    return bRet;
+		armature->setPosition(50 + i, 150);
+		addChild(armature, i);
+	}
 }
 
-void HelloWorld::menuCloseCallback(CCObject* pSender)
+std::string TestPerformance::title()
 {
-    // "close" menu item clicked
-    CCDirector::sharedDirector()->end();
+	return "Test Performance";
 }
 
+
+
+void TestChangeZorder::onEnter()
+{
+	TestLayer::onEnter();
+
+	cs::Armature *armature = NULL;
+	currentTag = -1;
+
+	armature = cs::Armature::create("Knight_f/Knight");
+	armature->getAnimation()->playByIndex(0);
+	armature->setPosition(ccp(VisibleRect::center().x, VisibleRect::center().y-100));
+	addChild(armature,++currentTag, currentTag);
+
+	armature = cs::Armature::create("TestBone");
+	armature->getAnimation()->playByIndex(0);
+	armature->setScale(0.3);
+	armature->setPosition(ccp(VisibleRect::center().x, VisibleRect::center().y-100));
+	addChild(armature,++currentTag, currentTag);
+
+	armature = cs::Armature::create("Zombie_f/Zombie");
+	armature->getAnimation()->playByIndex(0);
+	armature->setPosition(ccp(VisibleRect::center().x , VisibleRect::center().y-100));
+	addChild(armature,++currentTag, currentTag);
+
+	schedule( schedule_selector(TestChangeZorder::changeZorder), 1);      
+
+	currentTag = 0;
+}
+
+std::string TestChangeZorder::title()
+{
+	return "Test Change ZOrder Of Different Armature";
+}
+
+void TestChangeZorder::changeZorder(float dt)
+{
+	
+	CCNode *node = getChildByTag(currentTag);
+
+	node->setZOrder(CCRANDOM_0_1() * 3);
+
+	currentTag ++;
+	currentTag = currentTag % 3;
+}

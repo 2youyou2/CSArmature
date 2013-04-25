@@ -148,8 +148,6 @@ void DisplayManager::changeDisplayByIndex(int index, bool force)
     
 	m_pCurrentDecoDisplay = (DecorativeDisplay*)m_pDecoDisplayList->objectAtIndex(m_iDisplayIndex);
 	setDisplayRenderNode(m_pCurrentDecoDisplay->getDisplay());
-    
-    //DisplayFactoryManager::getFactory((DisplayType)m_pCurrentDecoDisplay->getDisplayData()->displayType)->changeDisplay(m_pBone, decoDisplay);
 }
     
 void DisplayManager::setDisplayRenderNode(CCNode *displayRenderNode)
@@ -161,6 +159,7 @@ void DisplayManager::setDisplayRenderNode(CCNode *displayRenderNode)
     }
     
     m_pDisplayRenderNode = displayRenderNode;
+
     if(m_pDisplayRenderNode)
     {
         m_pDisplayRenderNode->retain();
@@ -193,10 +192,7 @@ void DisplayManager::initDisplayList(BoneData *boneData)
     m_pDecoDisplayList = CCArray::create();
     m_pDecoDisplayList->retain();
     
-    if(!boneData)
-    {
-        return;
-    }
+	CS_RETURN_IF(!boneData);
     
     CCObject *object = NULL;
     CCArray *displayDataList = &boneData->displayDataList;

@@ -199,6 +199,9 @@
     <ClInclude Include="..\..\..\..\CSArmature\display\CSBatchNode.h">
       <Filter>CSArmature\display</Filter>
     </ClInclude>
+    <ClInclude Include="..\Classes\VisibleRect.h">
+      <Filter>include</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -299,6 +302,9 @@
     </ClCompile>
     <ClCompile Include="..\..\..\..\CSArmature\display\CSBatchNode.cpp">
       <Filter>CSArmature\display</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\VisibleRect.cpp">
+      <Filter>source</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

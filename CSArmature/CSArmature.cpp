@@ -463,7 +463,6 @@ CCRect Armature::getBoundingBox()
 			maxy = r.getMaxY() > boundingBox.getMaxY() ? r.getMaxY() : boundingBox.getMaxY();
 		}
 		
-
 		boundingBox.setRect(minx, miny, maxx - minx, maxy - miny);
 	}
 
