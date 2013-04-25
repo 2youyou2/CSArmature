@@ -29,6 +29,8 @@ CCLayer *CreateLayer(int index)
 		pLayer = new TestChangeZorder(); break;
 	case TEST_ANIMATION_EVENT:
 		pLayer = new TestAnimationEvent(); break;
+	case TEST_USE_DIFFERENT_PICTURE:
+		pLayer = new TestUseMutiplePicture(); break;
 	default:
 		break;
 	}
@@ -264,7 +266,6 @@ std::string TestCSContertFromDragonBone::title()
 
 
 
-
 TestPerformance::~TestPerformance()
 {
 	for (std::vector<Armature*>::iterator it = armatureList.begin(); it != armatureList.end(); it++)
@@ -407,4 +408,33 @@ void TestAnimationEvent::callback2()
 {
 	armature->runAction(CCScaleTo::create(0.3f, -0.3f, 0.3f));
 	armature->getAnimation()->play("Fire", 10);
+}
+
+
+
+
+void TestUseMutiplePicture::onEnter()
+{
+	TestLayer::onEnter();
+
+	armature = Armature::create("Knight_f/Knight");
+	armature->getAnimation()->playByIndex(0);
+	armature->setPosition(ccp(VisibleRect::left().x, VisibleRect::left().y));
+	addChild(armature);
+
+	char* weapon[] = {"weapon_f-sword.png", "weapon_f-sword2.png", "weapon_f-sword3.png", "weapon_f-sword4.png", "weapon_f-sword5.png", "weapon_f-knife.png", "weapon_f-hammer.png"};
+
+	SpriteDisplayData displayData;
+	for (int i = 0; i < 7; i++)
+	{
+		armature->getBone("weapon")->addDisplay(&displayData, i);
+	}
+}
+std::string TestUseMutiplePicture::title()
+{
+	return "Test One Armature Use Different Picture";
+}
+void TestUseMutiplePicture::ccTouchesBegan(CCSet *pTouches, CCEvent *pEvent)
+{
+
 }
