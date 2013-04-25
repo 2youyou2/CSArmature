@@ -1,0 +1,748 @@
+<skeleton name="Zombie" frameRate="24" version="2.0">
+ <armatures>
+  <armature name="Zombie_zamboni">
+   <b name="Zombie_zamboni_4" x="40.4" y="134.35" kX="0" kY="0" cX="1" cY="1" pX="26" pY="26" z="0">
+    <d name="Zombie_zamboni_folder-Zombie_zamboni_4"/>
+   </b>
+   <b name="Zombie_zamboni_3" x="52.35" y="110.4" kX="0" kY="0" cX="1" cY="0.89" pX="27" pY="33" z="1">
+    <d name="Zombie_zamboni_folder-Zombie_zamboni_3"/>
+   </b>
+   <b name="Zombie_zamboni_seat" x="67.95" y="71.15" kX="0" kY="0" cX="1" cY="1" pX="29" pY="31" z="2">
+    <d name="Zombie_zamboni_folder-Zombie_zamboni_seat"/>
+   </b>
+   <b name="Zombie_zambonidriver_legs" x="39.95" y="99.8" kX="0" kY="0" cX="1" cY="1" pX="35" pY="27" z="3">
+    <d name="Zombie_zamboni_folder-Zombie_zambonidriver_legs"/>
+   </b>
+   <b name="Zombie_zambonidriver_innerarm_hand" x="30.95" y="54.6" kX="0" kY="0" cX="1" cY="1" pX="11" pY="12" z="4">
+    <d name="Zombie_zamboni_folder-Zombie_zambonidriver_innerarm_hand"/>
+   </b>
+   <b name="Zombie_zambonidriver_body" x="61.55" y="54.7" kX="0" kY="0" cX="1" cY="1" pX="22" pY="23" z="5">
+    <d name="Zombie_zamboni_folder-Zombie_zambonidriver_body"/>
+   </b>
+   <b name="Zombie_zambonidriver_upperarm" x="61.3" y="60.35" kX="-12.25" kY="-12.25" cX="1" cY="1" pX="4" pY="8" z="6">
+    <d name="Zombie_zamboni_folder-Zombie_zambonidriver_upperarm"/>
+   </b>
+   <b name="Zombie_zambonidriver_lowerarm_outer" x="54.35" y="69.15" kX="-23.17" kY="-23.17" cX="1" cY="1" pX="11" pY="4" z="7">
+    <d name="Zombie_zamboni_folder-Zombie_zambonidriver_lowerarm_outer"/>
+   </b>
+   <b name="Zombie_zambonidriver_outerarm_hand" x="38.15" y="70.6" kX="6.8" kY="6.8" cX="1" cY="1" pX="10" pY="13" z="8">
+    <d name="Zombie_zamboni_folder-Zombie_zambonidriver_outerarm_hand"/>
+   </b>
+   <b name="Zombie_zambonidriver_shoulder" x="62.3" y="51.55" kX="0" kY="0" cX="1" cY="1" pX="10" pY="8" z="9">
+    <d name="Zombie_zamboni_folder-Zombie_zambonidriver_shoulder"/>
+   </b>
+   <b name="Zombie_head" x="44.1" y="19.25" kX="0" kY="0" cX="1" cY="1" pX="21" pY="19" z="10">
+    <d name="Zombie_zamboni_folder-Zombie_head"/>
+   </b>
+   <b name="Zombie_jaw" x="43.6" y="39.8" kX="0" kY="0" cX="1" cY="1" pX="13" pY="6" z="11">
+    <d name="Zombie_zamboni_folder-Zombie_jaw"/>
+   </b>
+   <b name="Zombie_zambonidriver_mullet2" x="67.95" y="25.15" kX="0" kY="0" cX="1" cY="1" pX="0" pY="0" z="12">
+    <d name="Zombie_zamboni_folder-Tween 7"/>
+   </b>
+   <b name="Zombie_zambonidriver_beanie" x="49.55" y="3.95" kX="0" kY="0" cX="1" cY="1" pX="26" pY="14" z="13">
+    <d name="Zombie_zamboni_folder-Zombie_zambonidriver_beanie"/>
+   </b>
+   <b name="Zombie_zamboni_wires" x="75.55" y="101.3" kX="0" kY="0" cX="1" cY="1" pX="4" pY="9" z="14">
+    <d name="Zombie_zamboni_folder-Zombie_zamboni_wires"/>
+   </b>
+   <b name="Zombie_zamboni_brush" x="-27.65" y="146.8" kX="0" kY="0" cX="1" cY="1" pX="12" pY="10" z="15">
+    <d name="Zombie_zamboni_folder-Zombie_zamboni_brush"/>
+   </b>
+   <b name="Zombie_zamboni_wheel1" x="-56.7" y="142.65" kX="0" kY="0" cX="1" cY="1" pX="-40" pY="2" z="16">
+    <d name="Zombie_zamboni_folder-Tween 1"/>
+   </b>
+   <b name="Zombie_zamboni_wheel2" x="8.9" y="142.65" kX="0" kY="0" cX="1" cY="1" pX="-40" pY="2" z="17">
+    <d name="Zombie_zamboni_folder-Tween 1"/>
+   </b>
+   <b name="Zombie_zamboni_2" x="-23.6" y="100.4" kX="0" kY="0" cX="1" cY="1" pX="71" pY="54" z="18">
+    <d name="Zombie_zamboni_folder-Zombie_zamboni_2"/>
+   </b>
+   <b name="Zombie_zamboni_1" x="-26.8" y="77.95" kX="0" kY="0" cX="1" cY="1" pX="69" pY="43" z="19">
+    <d name="Zombie_zamboni_folder-Zombie_zamboni_1"/>
+   </b>
+   <b name="Zombie_zambonidriver_lowerarm_inner" x="125.55" y="84.05" kX="49.41" kY="49.41" cX="1" cY="1" pX="10" pY="4" z="0">
+    <d name="Zombie_zamboni_folder-Zombie_zambonidriver_lowerarm_outer"/>
+   </b>
+  </armature>
+ </armatures>
+ <animations>
+  <animation name="Zombie_zamboni">
+   <mov name="anim_drive" dr="13" to="6" drTW="13" lp="0" twE="NaN">
+    <b name="Zombie_zamboni_4" sc="1" dl="0">
+     <f x="40.4" y="134.35" cocos2d_x="14.55" cocos2d_y="108.85" kX="0" kY="0" cX="1" cY="1" pX="26" pY="26" z="0" dI="0" twE="0" dr="1"/>
+     <f x="40.4" y="136.45" cocos2d_x="14.55" cocos2d_y="110.95" kX="0" kY="0" cX="1" cY="1" pX="26" pY="26" z="0" dI="0" twE="0" dr="1"/>
+     <f x="40.4" y="134.35" cocos2d_x="14.55" cocos2d_y="108.85" kX="0" kY="0" cX="1" cY="1" pX="26" pY="26" z="0" dI="0" twE="0" dr="1"/>
+     <f x="40.4" y="136.45" cocos2d_x="14.55" cocos2d_y="110.95" kX="0" kY="0" cX="1" cY="1" pX="26" pY="26" z="0" dI="0" twE="0" dr="1"/>
+     <f x="40.4" y="134.35" cocos2d_x="14.55" cocos2d_y="108.85" kX="0" kY="0" cX="1" cY="1" pX="26" pY="26" z="0" dI="0" twE="0" dr="1"/>
+     <f x="40.4" y="136.45" cocos2d_x="14.55" cocos2d_y="110.95" kX="0" kY="0" cX="1" cY="1" pX="26" pY="26" z="0" dI="0" twE="0" dr="1"/>
+     <f x="40.4" y="134.35" cocos2d_x="14.55" cocos2d_y="108.85" kX="0" kY="0" cX="1" cY="1" pX="26" pY="26" z="0" dI="0" twE="0" dr="1"/>
+     <f x="40.4" y="136.45" cocos2d_x="14.55" cocos2d_y="110.95" kX="0" kY="0" cX="1" cY="1" pX="26" pY="26" z="0" dI="0" twE="0" dr="1"/>
+     <f x="40.4" y="134.35" cocos2d_x="14.55" cocos2d_y="108.85" kX="0" kY="0" cX="1" cY="1" pX="26" pY="26" z="0" dI="0" twE="0" dr="1"/>
+     <f x="40.4" y="136.45" cocos2d_x="14.55" cocos2d_y="110.95" kX="0" kY="0" cX="1" cY="1" pX="26" pY="26" z="0" dI="0" twE="0" dr="1"/>
+     <f x="40.4" y="134.35" cocos2d_x="14.55" cocos2d_y="108.85" kX="0" kY="0" cX="1" cY="1" pX="26" pY="26" z="0" dI="0" twE="0" dr="1"/>
+     <f x="40.4" y="136.45" cocos2d_x="14.55" cocos2d_y="110.95" kX="0" kY="0" cX="1" cY="1" pX="26" pY="26" z="0" dI="0" twE="0" dr="1"/>
+     <f x="40.4" y="134.35" cocos2d_x="14.55" cocos2d_y="108.85" kX="0" kY="0" cX="1" cY="1" pX="26" pY="26" z="0" dI="0" twE="0" dr="1"/>
+    </b>
+    <b name="Zombie_zamboni_3" sc="1" dl="0">
+     <f x="52.35" y="110.4" cocos2d_x="25" cocos2d_y="81.4" kX="0" kY="0" cX="1" cY="0.89" pX="27" pY="33" z="1" dI="0" twE="0" dr="4"/>
+     <f x="52.35" y="110.4" cocos2d_x="25" cocos2d_y="81.4" kX="0" kY="0" cX="1" cY="0.89" pX="27" pY="33" z="1" dI="0" twE="0" dr="3"/>
+     <f x="52.35" y="108.9" cocos2d_x="25" cocos2d_y="79.9" kX="0" kY="0" cX="1" cY="0.89" pX="27" pY="33" z="1" dI="0" twE="0" dr="2"/>
+     <f x="52.35" y="110.4" cocos2d_x="25" cocos2d_y="81.4" kX="0" kY="0" cX="1" cY="0.89" pX="27" pY="33" z="1" dI="0" twE="0" dr="3"/>
+     <f x="52.35" y="110.4" cocos2d_x="25" cocos2d_y="81.4" kX="0" kY="0" cX="1" cY="0.89" pX="27" pY="33" z="1" dI="0" twE="0" dr="1"/>
+    </b>
+    <b name="Zombie_zamboni_seat" sc="1" dl="0">
+     <f x="67.95" y="71.15" cocos2d_x="39.1" cocos2d_y="40.05" kX="0" kY="0" cX="1" cY="1" pX="29" pY="31" z="2" dI="0" twE="0" dr="6"/>
+     <f x="67.95" y="70.25" cocos2d_x="39.1" cocos2d_y="39.15" kX="0" kY="0" cX="1" cY="1" pX="29" pY="31" z="2" dI="0" twE="0" dr="6"/>
+     <f x="67.95" y="71.15" cocos2d_x="39.1" cocos2d_y="40.05" kX="0" kY="0" cX="1" cY="1" pX="29" pY="31" z="2" dI="0" twE="0" dr="1"/>
+    </b>
+    <b name="Zombie_zambonidriver_legs" sc="1" dl="0">
+     <f x="39.95" y="99.8" cocos2d_x="5" cocos2d_y="73.1" kX="0" kY="0" cX="1" cY="1" pX="35" pY="27" z="3" dI="0" twE="0" dr="7"/>
+     <f x="39.95" y="99.2" cocos2d_x="5" cocos2d_y="72.5" kX="0" kY="0" cX="1" cY="1" pX="35" pY="27" z="3" dI="0" twE="0" dr="5"/>
+     <f x="39.95" y="99.8" cocos2d_x="5" cocos2d_y="73.1" kX="0" kY="0" cX="1" cY="1" pX="35" pY="27" z="3" dI="0" twE="0" dr="1"/>
+    </b>
+    <b name="Zombie_zambonidriver_innerarm_hand" sc="1" dl="0">
+     <f x="30.95" y="54.6" cocos2d_x="19.7" cocos2d_y="42.6" kX="0" kY="0" cX="1" cY="1" pX="11" pY="12" z="4" dI="0" twE="0" dr="4"/>
+     <f x="30.7" y="55.85" cocos2d_x="19.45" cocos2d_y="43.85" kX="0" kY="0" cX="1" cY="1" pX="11" pY="12" z="4" dI="0" twE="0" dr="5"/>
+     <f x="30.6" y="54.05" cocos2d_x="19.35" cocos2d_y="42.05" kX="0" kY="0" cX="1" cY="1" pX="11" pY="12" z="4" dI="0" twE="0" dr="3"/>
+     <f x="30.95" y="54.6" cocos2d_x="19.7" cocos2d_y="42.6" kX="0" kY="0" cX="1" cY="1" pX="11" pY="12" z="4" dI="0" twE="0" dr="1"/>
+    </b>
+    <b name="Zombie_zambonidriver_body" sc="1" dl="0">
+     <f x="61.55" y="54.7" cocos2d_x="39.4" cocos2d_y="31.9" kX="0" kY="0" cX="1" cY="1" pX="22" pY="23" z="5" dI="0" twE="0" dr="4"/>
+     <f x="61.25" y="54.8" cocos2d_x="38.45" cocos2d_y="32.75" kX="-1.81" kY="-1.81" cX="1" cY="1" pX="22" pY="23" z="5" dI="0" twE="0" dr="3"/>
+     <f x="61.55" y="54.1" cocos2d_x="39.4" cocos2d_y="31.3" kX="0" kY="0" cX="1" cY="1" pX="22" pY="23" z="5" dI="0" twE="0" dr="2"/>
+     <f x="61.55" y="53.75" cocos2d_x="40.15" cocos2d_y="30.3" kX="1.75" kY="1.75" cX="1" cY="1" pX="22" pY="23" z="5" dI="0" twE="0" dr="3"/>
+     <f x="61.55" y="54.7" cocos2d_x="39.4" cocos2d_y="31.9" kX="0" kY="0" cX="1" cY="1" pX="22" pY="23" z="5" dI="0" twE="0" dr="1"/>
+    </b>
+    <b name="Zombie_zambonidriver_upperarm" sc="1" dl="0">
+     <f x="61.3" y="60.35" cocos2d_x="56.2" cocos2d_y="53.65" kX="-12.25" kY="-12.25" cX="1" cY="1" pX="4" pY="8" z="6" dI="0" twE="0" dr="4"/>
+     <f x="61.05" y="61.1" cocos2d_x="55.95" cocos2d_y="54.4" kX="-12.25" kY="-12.25" cX="1" cY="1" pX="4" pY="8" z="6" dI="0" twE="0" dr="5"/>
+     <f x="60.95" y="59.85" cocos2d_x="55.85" cocos2d_y="53.15" kX="-12.26" kY="-12.26" cX="1" cY="1" pX="4" pY="8" z="6" dI="0" twE="0" dr="3"/>
+     <f x="61.3" y="60.35" cocos2d_x="56.2" cocos2d_y="53.65" kX="-12.25" kY="-12.25" cX="1" cY="1" pX="4" pY="8" z="6" dI="0" twE="0" dr="1"/>
+    </b>
+    <b name="Zombie_zambonidriver_lowerarm_outer" sc="1" dl="0">
+     <f x="54.35" y="69.15" cocos2d_x="43.15" cocos2d_y="69.65" kX="-23.17" kY="-23.17" cX="1" cY="1" pX="11" pY="4" z="7" dI="0" twE="0" dr="4"/>
+     <f x="53.65" y="70.15" cocos2d_x="42.55" cocos2d_y="71.75" kX="-28.59" kY="-28.59" cX="1" cY="1" pX="11" pY="4" z="7" dI="0" twE="0" dr="5"/>
+     <f x="53.85" y="69.1" cocos2d_x="42.7" cocos2d_y="69.85" kX="-24.36" kY="-24.36" cX="1" cY="1" pX="11" pY="4" z="7" dI="0" twE="0" dr="3"/>
+     <f x="54.35" y="69.15" cocos2d_x="43.15" cocos2d_y="69.65" kX="-23.17" kY="-23.17" cX="1" cY="1" pX="11" pY="4" z="7" dI="0" twE="0" dr="1"/>
+    </b>
+    <b name="Zombie_zambonidriver_outerarm_hand" sc="1" dl="0">
+     <f x="38.15" y="70.6" cocos2d_x="29.65" cocos2d_y="56.75" kX="6.8" kY="6.8" cX="1" cY="1" pX="10" pY="13" z="8" dI="0" twE="0" dr="4"/>
+     <f x="37.95" y="71.75" cocos2d_x="29.45" cocos2d_y="58" kX="6.77" kY="6.77" cX="1" cY="1" pX="10" pY="13" z="8" dI="0" twE="0" dr="5"/>
+     <f x="37.85" y="70.05" cocos2d_x="29.35" cocos2d_y="56.3" kX="6.76" kY="6.76" cX="1" cY="1" pX="10" pY="13" z="8" dI="0" twE="0" dr="3"/>
+     <f x="38.15" y="70.6" cocos2d_x="29.65" cocos2d_y="56.75" kX="6.8" kY="6.8" cX="1" cY="1" pX="10" pY="13" z="8" dI="0" twE="0" dr="1"/>
+    </b>
+    <b name="Zombie_zambonidriver_shoulder" sc="1" dl="0">
+     <f x="62.3" y="51.55" cocos2d_x="52.15" cocos2d_y="43.85" kX="0" kY="0" cX="1" cY="1" pX="10" pY="8" z="9" dI="0" twE="0" dr="4"/>
+     <f x="61.9" y="51.65" cocos2d_x="51.5" cocos2d_y="44.25" kX="-1.81" kY="-1.81" cX="1" cY="1" pX="10" pY="8" z="9" dI="0" twE="0" dr="3"/>
+     <f x="62.3" y="50.95" cocos2d_x="52.15" cocos2d_y="43.25" kX="0" kY="0" cX="1" cY="1" pX="10" pY="8" z="9" dI="0" twE="0" dr="2"/>
+     <f x="62.4" y="50.6" cocos2d_x="52.45" cocos2d_y="42.6" kX="1.75" kY="1.75" cX="1" cY="1" pX="10" pY="8" z="9" dI="0" twE="0" dr="3"/>
+     <f x="62.3" y="51.55" cocos2d_x="52.15" cocos2d_y="43.85" kX="0" kY="0" cX="1" cY="1" pX="10" pY="8" z="9" dI="0" twE="0" dr="1"/>
+    </b>
+    <b name="Zombie_head" sc="1" dl="0">
+     <f x="44.1" y="19.25" cocos2d_x="22.9" cocos2d_y="0.05" kX="0" kY="0" cX="1" cY="1" pX="21" pY="19" z="10" dI="0" twE="0" dr="4"/>
+     <f x="43.2" y="19.05" cocos2d_x="22.25" cocos2d_y="-0.35" kX="0.44" kY="0.44" cX="1" cY="1" pX="21" pY="19" z="10" dI="0" twE="0" dr="1"/>
+     <f x="43.5" y="19.5" cocos2d_x="22.5" cocos2d_y="0.2" kX="0.26" kY="0.26" cX="1" cY="1" pX="21" pY="19" z="10" dI="0" twE="0" dr="2"/>
+     <f x="44.1" y="18.65" cocos2d_x="22.9" cocos2d_y="-0.55" kX="0" kY="0" cX="1" cY="1" pX="21" pY="19" z="10" dI="0" twE="0" dr="2"/>
+     <f x="44.4" y="18" cocos2d_x="23.2" cocos2d_y="-1.2" kX="0" kY="0" cX="1" cY="1" pX="21" pY="19" z="10" dI="0" twE="0" dr="3"/>
+     <f x="44.1" y="19.25" cocos2d_x="22.9" cocos2d_y="0.05" kX="0" kY="0" cX="1" cY="1" pX="21" pY="19" z="10" dI="0" twE="0" dr="1"/>
+    </b>
+    <b name="Zombie_jaw" sc="1" dl="0">
+     <f x="43.6" y="39.8" cocos2d_x="30.8" cocos2d_y="33.8" kX="0" kY="0" cX="1" cY="1" pX="13" pY="6" z="11" dI="0" twE="0" dr="4"/>
+     <f x="42.55" y="39.6" cocos2d_x="29.85" cocos2d_y="33.45" kX="0.44" kY="0.44" cX="1" cY="1" pX="13" pY="6" z="11" dI="0" twE="0" dr="1"/>
+     <f x="43.25" y="39.45" cocos2d_x="30.5" cocos2d_y="33.35" kX="0.26" kY="0.26" cX="1" cY="1" pX="13" pY="6" z="11" dI="0" twE="0" dr="2"/>
+     <f x="43.6" y="39.2" cocos2d_x="30.8" cocos2d_y="33.2" kX="0" kY="0" cX="1" cY="1" pX="13" pY="6" z="11" dI="0" twE="0" dr="2"/>
+     <f x="43.9" y="38.85" cocos2d_x="30.8" cocos2d_y="33.55" kX="-3.28" kY="-3.28" cX="1" cY="1" pX="13" pY="6" z="11" dI="0" twE="0" dr="3"/>
+     <f x="43.6" y="39.8" cocos2d_x="30.8" cocos2d_y="33.8" kX="0" kY="0" cX="1" cY="1" pX="13" pY="6" z="11" dI="0" twE="0" dr="1"/>
+    </b>
+    <b name="Zombie_zambonidriver_mullet2" sc="1" dl="0">
+     <f x="67.95" y="25.15" cocos2d_x="67.95" cocos2d_y="25.15" kX="0" kY="0" cX="1" cY="1" pX="0" pY="0" z="12" dI="0" twE="0" dr="4"/>
+     <f x="67.05" y="25.1" cocos2d_x="67.05" cocos2d_y="25.1" kX="0.44" kY="0.44" cX="1" cY="1" pX="0" pY="0" z="12" dI="0" twE="0" dr="1"/>
+     <f x="67.35" y="25.5" cocos2d_x="67.35" cocos2d_y="25.5" kX="0.26" kY="0.26" cX="1" cY="1" pX="0" pY="0" z="12" dI="0" twE="0" dr="2"/>
+     <f x="68" y="24.35" cocos2d_x="68" cocos2d_y="24.35" kX="0" kY="0" cX="1" cY="1" pX="0" pY="0" z="12" dI="0" twE="0" dr="2"/>
+     <f x="69.1" y="22.95" cocos2d_x="69.1" cocos2d_y="22.95" kX="-1.55" kY="-1.55" cX="1" cY="1" pX="0" pY="0" z="12" dI="0" twE="0" dr="1"/>
+     <f x="68.8" y="23.85" cocos2d_x="68.8" cocos2d_y="23.85" kX="-2.54" kY="-2.54" cX="1" cY="1" pX="0" pY="0" z="12" dI="0" twE="0" dr="2"/>
+     <f x="67.95" y="25.15" cocos2d_x="67.95" cocos2d_y="25.15" kX="0" kY="0" cX="1" cY="1" pX="0" pY="0" z="12" dI="0" twE="0" dr="1"/>
+    </b>
+    <b name="Zombie_zambonidriver_beanie" sc="1" dl="0">
+     <f x="49.55" y="3.95" cocos2d_x="23.55" cocos2d_y="-10.05" kX="0" kY="0" cX="1" cY="1" pX="26" pY="14" z="13" dI="0" twE="0" dr="4"/>
+     <f x="48.75" y="3.85" cocos2d_x="23" cocos2d_y="-10.35" kX="0.44" kY="0.44" cX="1" cY="1" pX="26" pY="14" z="13" dI="0" twE="0" dr="1"/>
+     <f x="48.85" y="4.35" cocos2d_x="23.05" cocos2d_y="-9.75" kX="0.28" kY="0.28" cX="1" cY="1" pX="26" pY="14" z="13" dI="0" twE="0" dr="1"/>
+     <f x="49.05" y="4.55" cocos2d_x="23.2" cocos2d_y="-9.45" kX="0.05" kY="0.05" cX="1" cY="1" pX="26" pY="14" z="13" dI="0" twE="0" dr="3"/>
+     <f x="49.7" y="2.65" cocos2d_x="23.85" cocos2d_y="-11.3" kX="0.01" kY="0.01" cX="1" cY="1" pX="26" pY="14" z="13" dI="0" twE="0" dr="1"/>
+     <f x="49.85" y="2.45" cocos2d_x="23.85" cocos2d_y="-11.55" kX="0" kY="0" cX="1" cY="1" pX="26" pY="14" z="13" dI="0" twE="0" dr="2"/>
+     <f x="49.55" y="3.95" cocos2d_x="23.55" cocos2d_y="-10.05" kX="0" kY="0" cX="1" cY="1" pX="26" pY="14" z="13" dI="0" twE="0" dr="1"/>
+    </b>
+    <b name="Zombie_zamboni_wires" sc="1" dl="0">
+     <f x="75.55" y="101.3" cocos2d_x="71.45" cocos2d_y="92.7" kX="0" kY="0" cX="1" cY="1" pX="4" pY="9" z="14" dI="0" twE="0" dr="6"/>
+     <f x="75.55" y="100.4" cocos2d_x="71.45" cocos2d_y="91.8" kX="0" kY="0" cX="1" cY="1" pX="4" pY="9" z="14" dI="0" twE="0" dr="6"/>
+     <f x="75.55" y="101.3" cocos2d_x="71.45" cocos2d_y="92.7" kX="0" kY="0" cX="1" cY="1" pX="4" pY="9" z="14" dI="0" twE="0" dr="1"/>
+    </b>
+    <b name="Zombie_zamboni_brush" sc="1" dl="0">
+     <f x="-27.65" y="146.8" cocos2d_x="-39.65" cocos2d_y="136.7" kX="0" kY="0" cX="1" cY="1" pX="12" pY="10" z="15" dI="0" twE="0" dr="4"/>
+     <f x="-29.85" y="146" cocos2d_x="-41.85" cocos2d_y="135.9" kX="0" kY="0" cX="1" cY="1" pX="12" pY="10" z="15" dI="0" twE="0" dr="2"/>
+     <f x="-30.45" y="146.5" cocos2d_x="-42.45" cocos2d_y="136.4" kX="0" kY="0" cX="1" cY="1" pX="12" pY="10" z="15" dI="0" twE="0" dr="2"/>
+     <f x="-29.35" y="146.8" cocos2d_x="-41.35" cocos2d_y="136.7" kX="0" kY="0" cX="1" cY="1" pX="12" pY="10" z="15" dI="0" twE="0" dr="4"/>
+     <f x="-27.65" y="146.8" cocos2d_x="-39.65" cocos2d_y="136.7" kX="0" kY="0" cX="1" cY="1" pX="12" pY="10" z="15" dI="0" twE="0" dr="1"/>
+    </b>
+    <b name="Zombie_zamboni_wheel1" sc="1" dl="0">
+     <f x="-56.7" y="142.65" cocos2d_x="-16.45" cocos2d_y="140.55" kX="0" kY="0" cX="1" cY="1" pX="-40" pY="2" z="16" dI="0" twE="0" dr="3"/>
+     <f x="-56.3" y="142.85" cocos2d_x="-17.15" cocos2d_y="133.3" kX="-10.79" kY="-10.79" cX="1" cY="1" pX="-40" pY="2" z="16" dI="0" twE="0" dr="3"/>
+     <f x="-56.7" y="142.65" cocos2d_x="-16.45" cocos2d_y="140.55" kX="0" kY="0" cX="1" cY="1" pX="-40" pY="2" z="16" dI="0" twE="0" dr="3"/>
+     <f x="-56.7" y="142.65" cocos2d_x="-16.65" cocos2d_y="147.2" kX="9.54" kY="9.54" cX="1" cY="1" pX="-40" pY="2" z="16" dI="0" twE="0" dr="3"/>
+     <f x="-56.7" y="142.65" cocos2d_x="-16.45" cocos2d_y="140.55" kX="0" kY="0" cX="1" cY="1" pX="-40" pY="2" z="16" dI="0" twE="0" dr="1"/>
+    </b>
+    <b name="Zombie_zamboni_wheel2" sc="1" dl="0">
+     <f x="8.9" y="142.65" cocos2d_x="49.15" cocos2d_y="140.55" kX="0" kY="0" cX="1" cY="1" pX="-40" pY="2" z="17" dI="0" twE="0" dr="3"/>
+     <f x="9.1" y="142.45" cocos2d_x="48.25" cocos2d_y="132.9" kX="-10.79" kY="-10.79" cX="1" cY="1" pX="-40" pY="2" z="17" dI="0" twE="0" dr="3"/>
+     <f x="8.9" y="142.65" cocos2d_x="49.15" cocos2d_y="140.55" kX="0" kY="0" cX="1" cY="1" pX="-40" pY="2" z="17" dI="0" twE="0" dr="3"/>
+     <f x="8.5" y="143.05" cocos2d_x="48.55" cocos2d_y="147.6" kX="9.54" kY="9.54" cX="1" cY="1" pX="-40" pY="2" z="17" dI="0" twE="0" dr="3"/>
+     <f x="8.9" y="142.65" cocos2d_x="49.15" cocos2d_y="140.55" kX="0" kY="0" cX="1" cY="1" pX="-40" pY="2" z="17" dI="0" twE="0" dr="1"/>
+    </b>
+    <b name="Zombie_zamboni_2" sc="1" dl="0">
+     <f x="-23.6" y="100.4" cocos2d_x="-94.45" cocos2d_y="46.4" kX="0" kY="0" cX="1" cY="1" pX="71" pY="54" z="18" dI="0" twE="0" dr="4"/>
+     <f x="-23.6" y="101.6" cocos2d_x="-94.45" cocos2d_y="47.6" kX="0" kY="0" cX="1" cY="1" pX="71" pY="54" z="18" dI="0" twE="0" dr="2"/>
+     <f x="-23.6" y="100.4" cocos2d_x="-94.45" cocos2d_y="46.4" kX="0" kY="0" cX="1" cY="1" pX="71" pY="54" z="18" dI="0" twE="0" dr="2"/>
+     <f x="-23.6" y="99.5" cocos2d_x="-94.45" cocos2d_y="45.5" kX="0" kY="0" cX="1" cY="1" pX="71" pY="54" z="18" dI="0" twE="0" dr="4"/>
+     <f x="-23.6" y="100.4" cocos2d_x="-94.45" cocos2d_y="46.4" kX="0" kY="0" cX="1" cY="1" pX="71" pY="54" z="18" dI="0" twE="0" dr="1"/>
+    </b>
+    <b name="Zombie_zamboni_1" sc="1" dl="0">
+     <f x="-26.8" y="77.95" cocos2d_x="-95.4" cocos2d_y="34.85" kX="0" kY="0" cX="1" cY="1" pX="69" pY="43" z="19" dI="0" twE="0" dr="4"/>
+     <f x="-26.8" y="78.4" cocos2d_x="-94.95" cocos2d_y="34.7" kX="0.53" kY="0.53" cX="1" cY="1" pX="69" pY="43" z="19" dI="0" twE="0" dr="4"/>
+     <f x="-26.8" y="75.25" cocos2d_x="-94.4" cocos2d_y="30.6" kX="1.27" kY="1.27" cX="1" cY="1" pX="69" pY="43" z="19" dI="0" twE="0" dr="4"/>
+     <f x="-26.8" y="77.95" cocos2d_x="-95.4" cocos2d_y="34.85" kX="0" kY="0" cX="1" cY="1" pX="69" pY="43" z="19" dI="0" twE="0" dr="1"/>
+    </b>
+   </mov>
+   <mov name="anim_wheelie1" dr="16" to="6" drTW="16" lp="1" twE="NaN">
+    <b name="Zombie_zamboni_4" sc="1" dl="0">
+     <f x="40.4" y="134.35" cocos2d_x="14.55" cocos2d_y="108.85" kX="0" kY="0" cX="1" cY="1" pX="26" pY="26" z="0" dI="0" twE="0" dr="2"/>
+     <f x="44.55" y="108.15" cocos2d_x="28.1" cocos2d_y="75.8" kX="18.37" kY="18.37" cX="1" cY="1" pX="26" pY="26" z="0" dI="0" twE="0" dr="5"/>
+     <f x="38.75" y="118.6" cocos2d_x="9.55" cocos2d_y="97.15" kX="-8.35" kY="-8.35" cX="1" cY="1" pX="26" pY="26" z="0" dI="0" twE="0" dr="2"/>
+     <f x="39.05" y="128.8" cocos2d_x="11.75" cocos2d_y="104.95" kX="-3.54" kY="-3.54" cX="1" cY="1" pX="26" pY="26" z="0" dI="0" twE="0" dr="2"/>
+     <f x="39.35" y="134.4" cocos2d_x="13.95" cocos2d_y="108.5" kX="1" kY="1" cX="1" cY="1" pX="26" pY="25" z="0" dI="0" twE="0" dr="2"/>
+     <f x="39.35" y="129.2" cocos2d_x="13.95" cocos2d_y="103.3" kX="1" kY="1" cX="1" cY="1" pX="26" pY="25" z="0" dI="0" twE="0" dr="2"/>
+     <f x="40.4" y="134.35" cocos2d_x="14.55" cocos2d_y="108.85" kX="0" kY="0" cX="1" cY="1" pX="26" pY="26" z="0" dI="0" twE="0" dr="1"/>
+    </b>
+    <b name="Zombie_zamboni_3" sc="1" dl="0">
+     <f x="52.35" y="110.4" cocos2d_x="25" cocos2d_y="81.4" kX="0" kY="0" cX="1" cY="0.89" pX="27" pY="33" z="1" dI="0" twE="0" dr="2"/>
+     <f x="64.25" y="86" cocos2d_x="47.4" cocos2d_y="50" kX="18.37" kY="18.37" cX="1" cY="0.89" pX="27" pY="32" z="1" dI="0" twE="0" dr="5"/>
+     <f x="47.1" y="93.25" cocos2d_x="15.8" cocos2d_y="68.7" kX="-8.35" kY="-8.35" cX="1" cY="0.89" pX="27" pY="32" z="1" dI="0" twE="0" dr="2"/>
+     <f x="49.45" y="106.35" cocos2d_x="20.3" cocos2d_y="79.3" kX="-3.54" kY="-3.54" cX="1" cY="0.89" pX="27" pY="32" z="1" dI="0" twE="0" dr="2"/>
+     <f x="51.7" y="110.7" cocos2d_x="24.85" cocos2d_y="81.25" kX="1" kY="1" cX="1" cY="0.89" pX="27" pY="33" z="1" dI="0" twE="0" dr="2"/>
+     <f x="51.7" y="105.5" cocos2d_x="24.85" cocos2d_y="76.05" kX="1" kY="1" cX="1" cY="0.89" pX="27" pY="33" z="1" dI="0" twE="0" dr="2"/>
+     <f x="52.35" y="110.4" cocos2d_x="25" cocos2d_y="81.4" kX="0" kY="0" cX="1" cY="0.89" pX="27" pY="33" z="1" dI="0" twE="0" dr="1"/>
+    </b>
+    <b name="Zombie_zamboni_seat" sc="1" dl="0">
+     <f x="67.95" y="71.15" cocos2d_x="39.1" cocos2d_y="40.05" kX="0" kY="0" cX="1" cY="1" pX="29" pY="31" z="2" dI="0" twE="0" dr="2"/>
+     <f x="91.35" y="53.75" cocos2d_x="73.8" cocos2d_y="15.2" kX="18.37" kY="18.37" cX="1" cY="1" pX="29" pY="31" z="2" dI="0" twE="0" dr="5"/>
+     <f x="56.75" y="52.35" cocos2d_x="23.7" cocos2d_y="25.8" kX="-8.35" kY="-8.35" cX="1" cY="1" pX="29" pY="31" z="2" dI="0" twE="0" dr="2"/>
+     <f x="62.35" y="66.65" cocos2d_x="31.65" cocos2d_y="37.45" kX="-3.54" kY="-3.54" cX="1" cY="1" pX="29" pY="31" z="2" dI="0" twE="0" dr="2"/>
+     <f x="68" y="71.75" cocos2d_x="39.7" cocos2d_y="40.15" kX="1" kY="1" cX="1" cY="1" pX="29" pY="31" z="2" dI="0" twE="0" dr="2"/>
+     <f x="68" y="66.55" cocos2d_x="39.7" cocos2d_y="34.95" kX="1" kY="1" cX="1" cY="1" pX="29" pY="31" z="2" dI="0" twE="0" dr="2"/>
+     <f x="67.95" y="71.15" cocos2d_x="39.1" cocos2d_y="40.05" kX="0" kY="0" cX="1" cY="1" pX="29" pY="31" z="2" dI="0" twE="0" dr="1"/>
+    </b>
+    <b name="Zombie_zambonidriver_legs" sc="1" dl="0">
+     <f x="39.95" y="99.8" cocos2d_x="5" cocos2d_y="73.1" kX="0" kY="0" cX="1" cY="1" pX="35" pY="27" z="3" dI="0" twE="0" dr="2"/>
+     <f x="55.8" y="72.1" cocos2d_x="31.1" cocos2d_y="35.8" kX="18.37" kY="18.37" cX="1" cY="1" pX="35" pY="27" z="3" dI="0" twE="0" dr="5"/>
+     <f x="32.1" y="74.05" cocos2d_x="-7.9" cocos2d_y="56" kX="-13.13" kY="-13.13" cX="1" cY="1" pX="35" pY="27" z="3" dI="0" twE="0" dr="2"/>
+     <f x="36.35" y="94.65" cocos2d_x="-0.1" cocos2d_y="70.25" kX="-3.54" kY="-3.54" cX="1" cY="1" pX="35" pY="27" z="3" dI="0" twE="0" dr="2"/>
+     <f x="39.5" y="99.9" cocos2d_x="5" cocos2d_y="72.6" kX="1" kY="1" cX="1" cY="1" pX="35" pY="27" z="3" dI="0" twE="0" dr="2"/>
+     <f x="39.5" y="90.2" cocos2d_x="5" cocos2d_y="62.9" kX="1" kY="1" cX="1" cY="1" pX="35" pY="27" z="3" dI="0" twE="0" dr="2"/>
+     <f x="39.95" y="99.8" cocos2d_x="5" cocos2d_y="73.1" kX="0" kY="0" cX="1" cY="1" pX="35" pY="27" z="3" dI="0" twE="0" dr="1"/>
+    </b>
+    <b name="Zombie_zambonidriver_innerarm_hand" sc="1" dl="0">
+     <f x="30.95" y="54.6" cocos2d_x="19.7" cocos2d_y="42.6" kX="0" kY="0" cX="1" cY="1" pX="11" pY="12" z="4" dI="0" twE="0" dr="2"/>
+     <f x="61.5" y="26.4" cocos2d_x="54.55" cocos2d_y="11.55" kX="18.37" kY="18.37" cX="1" cY="1" pX="11" pY="12" z="4" dI="0" twE="0" dr="5"/>
+     <f x="19.3" y="40.45" cocos2d_x="5.3" cocos2d_y="31.7" kX="-14.82" kY="-14.82" cX="1" cY="1" pX="11" pY="12" z="4" dI="0" twE="0" dr="2"/>
+     <f x="24.5" y="50.3" cocos2d_x="12.55" cocos2d_y="38.95" kX="-3.54" kY="-3.54" cX="1" cY="1" pX="11" pY="12" z="4" dI="0" twE="0" dr="2"/>
+     <f x="31.3" y="54.55" cocos2d_x="20.25" cocos2d_y="42.35" kX="1" kY="1" cX="1" cY="1" pX="11" pY="12" z="4" dI="0" twE="0" dr="2"/>
+     <f x="31.3" y="49.35" cocos2d_x="20.25" cocos2d_y="37.15" kX="1" kY="1" cX="1" cY="1" pX="11" pY="12" z="4" dI="0" twE="0" dr="2"/>
+     <f x="30.95" y="54.6" cocos2d_x="19.7" cocos2d_y="42.6" kX="0" kY="0" cX="1" cY="1" pX="11" pY="12" z="4" dI="0" twE="0" dr="1"/>
+    </b>
+    <b name="Zombie_zambonidriver_body" sc="1" dl="0">
+     <f x="61.55" y="54.7" cocos2d_x="39.4" cocos2d_y="31.9" kX="0" kY="0" cX="1" cY="1" pX="22" pY="23" z="5" dI="0" twE="0" dr="2"/>
+     <f x="82.8" y="36.1" cocos2d_x="66.5" cocos2d_y="8.9" kX="13.35" kY="13.35" cX="1" cY="1" pX="22" pY="23" z="5" dI="0" twE="0" dr="5"/>
+     <f x="49.25" y="31.1" cocos2d_x="26.65" cocos2d_y="8.65" kX="-0.8" kY="-0.8" cX="1" cY="1" pX="22" pY="23" z="5" dI="0" twE="0" dr="2"/>
+     <f x="50.9" y="50.45" cocos2d_x="24.15" cocos2d_y="32.95" kX="-12.57" kY="-12.57" cX="1" cY="1" pX="22" pY="23" z="5" dI="0" twE="0" dr="2"/>
+     <f x="61.9" y="55.2" cocos2d_x="40.15" cocos2d_y="32" kX="1" kY="1" cX="1" cY="1" pX="22" pY="23" z="5" dI="0" twE="0" dr="2"/>
+     <f x="61.9" y="46.75" cocos2d_x="40.15" cocos2d_y="23.55" kX="1" kY="1" cX="1" cY="1" pX="22" pY="23" z="5" dI="0" twE="0" dr="2"/>
+     <f x="61.55" y="54.7" cocos2d_x="39.4" cocos2d_y="31.9" kX="0" kY="0" cX="1" cY="1" pX="22" pY="23" z="5" dI="0" twE="0" dr="1"/>
+    </b>
+    <b name="Zombie_zambonidriver_upperarm" sc="1" dl="0">
+     <f x="61.3" y="60.35" cocos2d_x="56.2" cocos2d_y="53.65" kX="-12.25" kY="-12.25" cX="1" cY="1" pX="4" pY="8" z="6" dI="0" twE="0" dr="2"/>
+     <f x="83.8" y="41.6" cocos2d_x="78.2" cocos2d_y="35.3" kX="-16.7" kY="-16.7" cX="1" cY="1" pX="4" pY="8" z="6" dI="0" twE="0" dr="5"/>
+     <f x="48.95" y="36.7" cocos2d_x="43.75" cocos2d_y="30.1" kX="-13.05" kY="-13.05" cX="1" cY="1" pX="4" pY="8" z="6" dI="0" twE="0" dr="2"/>
+     <f x="52.7" y="55.9" cocos2d_x="45.85" cocos2d_y="51.15" kX="-29.6" kY="-29.6" cX="1" cY="1" pX="4" pY="8" z="6" dI="0" twE="0" dr="2"/>
+     <f x="61.55" y="60.8" cocos2d_x="56.55" cocos2d_y="54.05" kX="-11.25" kY="-11.25" cX="1" cY="1" pX="4" pY="8" z="6" dI="0" twE="0" dr="2"/>
+     <f x="61.55" y="50.85" cocos2d_x="56.55" cocos2d_y="44.1" kX="-11.25" kY="-11.25" cX="1" cY="1" pX="4" pY="8" z="6" dI="0" twE="0" dr="2"/>
+     <f x="61.3" y="60.35" cocos2d_x="56.2" cocos2d_y="53.65" kX="-12.25" kY="-12.25" cX="1" cY="1" pX="4" pY="8" z="6" dI="0" twE="0" dr="1"/>
+    </b>
+    <b name="Zombie_zambonidriver_lowerarm_outer" sc="1" dl="0">
+     <f x="54.35" y="69.15" cocos2d_x="43.15" cocos2d_y="69.65" kX="-23.17" kY="-23.17" cX="1" cY="1" pX="11" pY="4" z="7" dI="0" twE="0" dr="2"/>
+     <f x="76.2" y="48.5" cocos2d_x="65.2" cocos2d_y="46.35" kX="-9.83" kY="-9.83" cX="1" cY="1" pX="11" pY="4" z="7" dI="0" twE="0" dr="5"/>
+     <f x="42.7" y="49.8" cocos2d_x="32.65" cocos2d_y="54.75" kX="-47.07" kY="-47.07" cX="1" cY="1" pX="11" pY="4" z="7" dI="0" twE="0" dr="2"/>
+     <f x="47.65" y="66.1" cocos2d_x="36.55" cocos2d_y="67.25" kX="-26.8" kY="-26.8" cX="1" cY="1" pX="11" pY="4" z="7" dI="0" twE="0" dr="2"/>
+     <f x="54.45" y="69.5" cocos2d_x="43.25" cocos2d_y="69.8" kX="-22.17" kY="-22.17" cX="1" cY="1" pX="11" pY="4" z="7" dI="0" twE="0" dr="2"/>
+     <f x="54.45" y="61.05" cocos2d_x="43.65" cocos2d_y="63.95" kX="-35.74" kY="-35.74" cX="1" cY="1" pX="11" pY="4" z="7" dI="0" twE="0" dr="2"/>
+     <f x="54.35" y="69.15" cocos2d_x="43.15" cocos2d_y="69.65" kX="-23.17" kY="-23.17" cX="1" cY="1" pX="11" pY="4" z="7" dI="0" twE="0" dr="1"/>
+    </b>
+    <b name="Zombie_zambonidriver_outerarm_hand" sc="1" dl="0">
+     <f x="38.15" y="70.6" cocos2d_x="29.65" cocos2d_y="56.75" kX="6.8" kY="6.8" cX="1" cY="1" pX="10" pY="13" z="8" dI="0" twE="0" dr="2"/>
+     <f x="63.35" y="43.85" cocos2d_x="59.55" cocos2d_y="28.05" kX="25.17" kY="25.17" cX="1" cY="1" pX="10" pY="13" z="8" dI="0" twE="0" dr="5"/>
+     <f x="28.3" y="55.4" cocos2d_x="17.75" cocos2d_y="43.05" kX="-1.54" kY="-1.54" cX="1" cY="1" pX="10" pY="13" z="8" dI="0" twE="0" dr="2"/>
+     <f x="32.85" y="65.75" cocos2d_x="23.25" cocos2d_y="52.55" kX="3.03" kY="3.03" cX="1" cY="1" pX="10" pY="13" z="8" dI="0" twE="0" dr="2"/>
+     <f x="38.2" y="70.65" cocos2d_x="29.95" cocos2d_y="56.65" kX="7.81" kY="7.81" cX="1" cY="1" pX="10" pY="13" z="8" dI="0" twE="0" dr="2"/>
+     <f x="38.2" y="65.45" cocos2d_x="29.95" cocos2d_y="51.45" kX="7.81" kY="7.81" cX="1" cY="1" pX="10" pY="13" z="8" dI="0" twE="0" dr="2"/>
+     <f x="38.15" y="70.6" cocos2d_x="29.65" cocos2d_y="56.75" kX="6.8" kY="6.8" cX="1" cY="1" pX="10" pY="13" z="8" dI="0" twE="0" dr="1"/>
+    </b>
+    <b name="Zombie_zambonidriver_shoulder" sc="1" dl="0">
+     <f x="62.3" y="51.55" cocos2d_x="52.15" cocos2d_y="43.85" kX="0" kY="0" cX="1" cY="1" pX="10" pY="8" z="9" dI="0" twE="0" dr="2"/>
+     <f x="84.4" y="34.1" cocos2d_x="77.25" cocos2d_y="23.65" kX="18.37" kY="18.37" cX="1" cY="1" pX="10" pY="8" z="9" dI="0" twE="0" dr="5"/>
+     <f x="49.8" y="27.8" cocos2d_x="39.7" cocos2d_y="20.35" kX="-0.8" kY="-0.8" cX="1" cY="1" pX="10" pY="8" z="9" dI="0" twE="0" dr="2"/>
+     <f x="50.8" y="47.15" cocos2d_x="39.35" cocos2d_y="41.95" kX="-12.57" kY="-12.57" cX="1" cY="1" pX="10" pY="8" z="9" dI="0" twE="0" dr="2"/>
+     <f x="62.7" y="52.05" cocos2d_x="52.7" cocos2d_y="44.15" kX="1" kY="1" cX="1" cY="1" pX="10" pY="8" z="9" dI="0" twE="0" dr="2"/>
+     <f x="62.7" y="43.6" cocos2d_x="52.7" cocos2d_y="35.7" kX="1" kY="1" cX="1" cY="1" pX="10" pY="8" z="9" dI="0" twE="0" dr="2"/>
+     <f x="62.3" y="51.55" cocos2d_x="52.15" cocos2d_y="43.85" kX="0" kY="0" cX="1" cY="1" pX="10" pY="8" z="9" dI="0" twE="0" dr="1"/>
+    </b>
+    <b name="Zombie_head" sc="1" dl="0">
+     <f x="44.1" y="19.25" cocos2d_x="22.9" cocos2d_y="0.05" kX="0" kY="0" cX="1" cY="1" pX="21" pY="19" z="10" dI="0" twE="0" dr="2"/>
+     <f x="68.9" y="0.75" cocos2d_x="46.65" cocos2d_y="-17.1" kX="-3.28" kY="-3.28" cX="1" cY="1" pX="21" pY="19" z="10" dI="0" twE="0" dr="5"/>
+     <f x="31.3" y="-4.15" cocos2d_x="9.85" cocos2d_y="-22.9" kX="-0.8" kY="-0.8" cX="1" cY="1" pX="21" pY="19" z="10" dI="0" twE="0" dr="2"/>
+     <f x="22.6" y="24.6" cocos2d_x="-4.5" cocos2d_y="15.65" kX="-23.63" kY="-23.63" cX="1" cY="1" pX="21" pY="19" z="10" dI="0" twE="0" dr="2"/>
+     <f x="45.05" y="19.4" cocos2d_x="24.2" cocos2d_y="-0.15" kX="1" kY="1" cX="1" cY="1" pX="21" pY="19" z="10" dI="0" twE="0" dr="2"/>
+     <f x="45.05" y="10.95" cocos2d_x="24.2" cocos2d_y="-8.6" kX="1" kY="1" cX="1" cY="1" pX="21" pY="19" z="10" dI="0" twE="0" dr="2"/>
+     <f x="44.1" y="19.25" cocos2d_x="22.9" cocos2d_y="0.05" kX="0" kY="0" cX="1" cY="1" pX="21" pY="19" z="10" dI="0" twE="0" dr="1"/>
+    </b>
+    <b name="Zombie_jaw" sc="1" dl="0">
+     <f x="43.6" y="39.8" cocos2d_x="30.8" cocos2d_y="33.8" kX="0" kY="0" cX="1" cY="1" pX="13" pY="6" z="11" dI="0" twE="0" dr="2"/>
+     <f x="68.5" y="18.5" cocos2d_x="55.7" cocos2d_y="12.25" kX="1.03" kY="1.03" cX="1" cY="1" pX="13" pY="6" z="11" dI="0" twE="0" dr="5"/>
+     <f x="30.1" y="16.1" cocos2d_x="17.35" cocos2d_y="9.75" kX="1.18" kY="1.18" cX="1" cY="1" pX="13" pY="6" z="11" dI="0" twE="0" dr="2"/>
+     <f x="28.45" y="45.05" cocos2d_x="14.25" cocos2d_y="44.7" kX="-23.63" kY="-23.63" cX="1" cY="1" pX="13" pY="6" z="11" dI="0" twE="0" dr="2"/>
+     <f x="44.2" y="39.95" cocos2d_x="31.5" cocos2d_y="33.75" kX="1" kY="1" cX="1" cY="1" pX="13" pY="6" z="11" dI="0" twE="0" dr="2"/>
+     <f x="44.2" y="31.5" cocos2d_x="31.5" cocos2d_y="25.3" kX="1" kY="1" cX="1" cY="1" pX="13" pY="6" z="11" dI="0" twE="0" dr="2"/>
+     <f x="43.6" y="39.8" cocos2d_x="30.8" cocos2d_y="33.8" kX="0" kY="0" cX="1" cY="1" pX="13" pY="6" z="11" dI="0" twE="0" dr="1"/>
+    </b>
+    <b name="Zombie_zambonidriver_mullet2" sc="1" dl="0">
+     <f x="67.95" y="25.15" cocos2d_x="67.95" cocos2d_y="25.15" kX="0" kY="0" cX="1" cY="1" pX="0" pY="0" z="12" dI="0" twE="0" dr="2"/>
+     <f x="89.35" y="5.25" cocos2d_x="89.35" cocos2d_y="5.25" kX="11.59" kY="11.59" cX="1" cY="1" pX="0" pY="0" z="12" dI="0" twE="0" dr="5"/>
+     <f x="55.15" y="1.5" cocos2d_x="55.15" cocos2d_y="1.5" kX="-0.8" kY="-0.8" cX="1" cY="1" pX="0" pY="0" z="12" dI="0" twE="0" dr="2"/>
+     <f x="43.8" y="22.3" cocos2d_x="43.8" cocos2d_y="22.3" kX="-10.87" kY="-10.87" cX="1" cY="1" pX="0" pY="0" z="12" dI="0" twE="0" dr="2"/>
+     <f x="68.8" y="25.75" cocos2d_x="68.8" cocos2d_y="25.75" kX="1" kY="1" cX="1" cY="1" pX="0" pY="0" z="12" dI="0" twE="0" dr="2"/>
+     <f x="68.8" y="17.3" cocos2d_x="68.8" cocos2d_y="17.3" kX="1" kY="1" cX="1" cY="1" pX="0" pY="0" z="12" dI="0" twE="0" dr="2"/>
+     <f x="67.95" y="25.15" cocos2d_x="67.95" cocos2d_y="25.15" kX="0" kY="0" cX="1" cY="1" pX="0" pY="0" z="12" dI="0" twE="0" dr="1"/>
+    </b>
+    <b name="Zombie_zambonidriver_beanie" sc="1" dl="0">
+     <f x="49.55" y="3.95" cocos2d_x="23.55" cocos2d_y="-10.05" kX="0" kY="0" cX="1" cY="1" pX="26" pY="14" z="13" dI="0" twE="0" dr="2"/>
+     <f x="70.25" y="-12.65" cocos2d_x="41.85" cocos2d_y="-19.95" kX="-13.86" kY="-13.86" cX="1" cY="1" pX="26" pY="14" z="13" dI="0" twE="0" dr="5"/>
+     <f x="36.45" y="-19.4" cocos2d_x="10.4" cocos2d_y="-32.85" kX="-0.8" kY="-0.8" cX="1" cY="1" pX="26" pY="14" z="13" dI="0" twE="0" dr="2"/>
+     <f x="20.3" y="12.4" cocos2d_x="-8.9" cocos2d_y="14.25" kX="-31.66" kY="-31.66" cX="1" cY="1" pX="26" pY="14" z="13" dI="0" twE="0" dr="2"/>
+     <f x="50.8" y="4.2" cocos2d_x="25.05" cocos2d_y="-10.25" kX="1" kY="1" cX="1" cY="1" pX="26" pY="14" z="13" dI="0" twE="0" dr="2"/>
+     <f x="50.8" y="-4.25" cocos2d_x="25.05" cocos2d_y="-18.7" kX="1" kY="1" cX="1" cY="1" pX="26" pY="14" z="13" dI="0" twE="0" dr="2"/>
+     <f x="49.55" y="3.95" cocos2d_x="23.55" cocos2d_y="-10.05" kX="0" kY="0" cX="1" cY="1" pX="26" pY="14" z="13" dI="0" twE="0" dr="1"/>
+    </b>
+    <b name="Zombie_zamboni_wires" sc="1" dl="0">
+     <f x="75.55" y="101.3" cocos2d_x="71.45" cocos2d_y="92.7" kX="0" kY="0" cX="1" cY="1" pX="4" pY="9" z="14" dI="0" twE="0" dr="2"/>
+     <f x="89" y="84.75" cocos2d_x="87.85" cocos2d_y="75.25" kX="18.37" kY="18.37" cX="1" cY="1" pX="4" pY="9" z="14" dI="0" twE="0" dr="5"/>
+     <f x="68.5" y="80.9" cocos2d_x="63.3" cocos2d_y="72.95" kX="-8.35" kY="-8.35" cX="1" cY="1" pX="4" pY="9" z="14" dI="0" twE="0" dr="2"/>
+     <f x="71.8" y="93.8" cocos2d_x="67.3" cocos2d_y="85.4" kX="-3.54" kY="-3.54" cX="1" cY="1" pX="4" pY="9" z="14" dI="0" twE="0" dr="2"/>
+     <f x="75.1" y="102" cocos2d_x="71.15" cocos2d_y="93.35" kX="1" kY="1" cX="1" cY="1" pX="4" pY="9" z="14" dI="0" twE="0" dr="2"/>
+     <f x="75.1" y="96.8" cocos2d_x="71.15" cocos2d_y="88.15" kX="1" kY="1" cX="1" cY="1" pX="4" pY="9" z="14" dI="0" twE="0" dr="2"/>
+     <f x="75.55" y="101.3" cocos2d_x="71.45" cocos2d_y="92.7" kX="0" kY="0" cX="1" cY="1" pX="4" pY="9" z="14" dI="0" twE="0" dr="1"/>
+    </b>
+    <b name="Zombie_zamboni_brush" sc="1" dl="0">
+     <f x="-27.65" y="146.8" cocos2d_x="-39.65" cocos2d_y="136.7" kX="0" kY="0" cX="1" cY="1" pX="12" pY="10" z="15" dI="0" twE="0" dr="2"/>
+     <f x="-23.45" y="98.15" cocos2d_x="-31.7" cocos2d_y="84.85" kX="18.37" kY="18.37" cX="1" cY="1" pX="12" pY="10" z="15" dI="0" twE="0" dr="5"/>
+     <f x="-26.65" y="140.7" cocos2d_x="-39.9" cocos2d_y="132.55" kX="-8.35" kY="-8.35" cX="1" cY="1" pX="12" pY="10" z="15" dI="0" twE="0" dr="2"/>
+     <f x="-27.7" y="145.6" cocos2d_x="-40.2" cocos2d_y="136.4" kX="-3.54" kY="-3.54" cX="1" cY="1" pX="12" pY="10" z="15" dI="0" twE="0" dr="2"/>
+     <f x="-28.9" y="145.65" cocos2d_x="-40.75" cocos2d_y="135.35" kX="1" kY="1" cX="1" cY="1" pX="12" pY="10" z="15" dI="0" twE="0" dr="2"/>
+     <f x="-28.9" y="140.45" cocos2d_x="-40.75" cocos2d_y="130.15" kX="1" kY="1" cX="1" cY="1" pX="12" pY="10" z="15" dI="0" twE="0" dr="2"/>
+     <f x="-27.65" y="146.8" cocos2d_x="-39.65" cocos2d_y="136.7" kX="0" kY="0" cX="1" cY="1" pX="12" pY="10" z="15" dI="0" twE="0" dr="1"/>
+    </b>
+    <b name="Zombie_zamboni_wheel1" sc="1" dl="0">
+     <f x="-56.7" y="142.65" cocos2d_x="-16.45" cocos2d_y="140.55" kX="0" kY="0" cX="1" cY="1" pX="-40" pY="2" z="16" dI="0" twE="0" dr="2"/>
+     <f x="-50.45" y="87.55" cocos2d_x="-11.65" cocos2d_y="98.15" kX="18.37" kY="18.37" cX="1" cY="1" pX="-40" pY="2" z="16" dI="0" twE="0" dr="5"/>
+     <f x="-55.85" y="140.8" cocos2d_x="-16.45" cocos2d_y="133" kX="-8.35" kY="-8.35" cX="1" cY="1" pX="-40" pY="2" z="16" dI="0" twE="0" dr="2"/>
+     <f x="-56.15" y="142.65" cocos2d_x="-10.65" cocos2d_y="137.55" kX="-4.04" kY="-4.04" cX="1.14" cY="0.92" pX="-40" pY="2" z="16" dI="0" twE="0" dr="2"/>
+     <f x="-57.9" y="141" cocos2d_x="-17.6" cocos2d_y="139.6" kX="1" kY="1" cX="1" cY="1" pX="-40" pY="2" z="16" dI="0" twE="0" dr="2"/>
+     <f x="-57.9" y="135.8" cocos2d_x="-17.6" cocos2d_y="134.4" kX="1" kY="1" cX="1" cY="1" pX="-40" pY="2" z="16" dI="0" twE="0" dr="2"/>
+     <f x="-56.7" y="142.65" cocos2d_x="-16.45" cocos2d_y="140.55" kX="0" kY="0" cX="1" cY="1" pX="-40" pY="2" z="16" dI="0" twE="0" dr="1"/>
+    </b>
+    <b name="Zombie_zamboni_wheel2" sc="1" dl="0">
+     <f x="8.9" y="142.65" cocos2d_x="49.15" cocos2d_y="140.55" kX="0" kY="0" cX="1" cY="1" pX="-40" pY="2" z="17" dI="0" twE="0" dr="2"/>
+     <f x="11.35" y="107.95" cocos2d_x="50.15" cocos2d_y="118.7" kX="18.37" kY="18.37" cX="1" cY="1" pX="-40" pY="2" z="17" dI="0" twE="0" dr="5"/>
+     <f x="8.85" y="131.35" cocos2d_x="48.3" cocos2d_y="123.5" kX="-8.35" kY="-8.35" cX="1" cY="1" pX="-40" pY="2" z="17" dI="0" twE="0" dr="2"/>
+     <f x="8.35" y="139.1" cocos2d_x="48.35" cocos2d_y="134.55" kX="-3.54" kY="-3.54" cX="1" cY="1" pX="-40" pY="2" z="17" dI="0" twE="0" dr="2"/>
+     <f x="7.7" y="142.75" cocos2d_x="51.3" cocos2d_y="141.55" kX="1" kY="1" cX="1.08" cY="0.93" pX="-40" pY="2" z="17" dI="0" twE="0" dr="2"/>
+     <f x="7.7" y="137.55" cocos2d_x="48" cocos2d_y="136.1" kX="1" kY="1" cX="1" cY="1" pX="-40" pY="2" z="17" dI="0" twE="0" dr="2"/>
+     <f x="8.9" y="142.65" cocos2d_x="49.15" cocos2d_y="140.55" kX="0" kY="0" cX="1" cY="1" pX="-40" pY="2" z="17" dI="0" twE="0" dr="1"/>
+    </b>
+    <b name="Zombie_zamboni_2" sc="1" dl="0">
+     <f x="-23.6" y="100.4" cocos2d_x="-94.45" cocos2d_y="46.4" kX="0" kY="0" cX="1" cY="1" pX="71" pY="54" z="18" dI="0" twE="0" dr="2"/>
+     <f x="-4.65" y="52.65" cocos2d_x="-54.8" cocos2d_y="-20.85" kX="18.37" kY="18.37" cX="1" cY="1" pX="71" pY="54" z="18" dI="0" twE="0" dr="5"/>
+     <f x="-29.35" y="94.35" cocos2d_x="-107.05" cocos2d_y="51.35" kX="-8.35" kY="-8.35" cX="1" cY="1" pX="71" pY="54" z="18" dI="0" twE="0" dr="2"/>
+     <f x="-26.7" y="99.2" cocos2d_x="-100.6" cocos2d_y="49.75" kX="-3.54" kY="-3.54" cX="1" cY="1" pX="71" pY="54" z="18" dI="0" twE="0" dr="2"/>
+     <f x="-24.05" y="99.4" cocos2d_x="-93.95" cocos2d_y="44.15" kX="1" kY="1" cX="1" cY="1" pX="71" pY="54" z="18" dI="0" twE="0" dr="2"/>
+     <f x="-24.05" y="94.2" cocos2d_x="-93.95" cocos2d_y="38.95" kX="1" kY="1" cX="1" cY="1" pX="71" pY="54" z="18" dI="0" twE="0" dr="2"/>
+     <f x="-23.6" y="100.4" cocos2d_x="-94.45" cocos2d_y="46.4" kX="0" kY="0" cX="1" cY="1" pX="71" pY="54" z="18" dI="0" twE="0" dr="1"/>
+    </b>
+    <b name="Zombie_zamboni_1" sc="1" dl="0">
+     <f x="-26.8" y="77.95" cocos2d_x="-95.4" cocos2d_y="34.85" kX="0" kY="0" cX="1" cY="1" pX="69" pY="43" z="19" dI="0" twE="0" dr="2"/>
+     <f x="1.75" y="24.35" cocos2d_x="-44.85" cocos2d_y="-41.7" kX="22.65" kY="22.65" cX="1" cY="1" pX="69" pY="43" z="19" dI="0" twE="0" dr="5"/>
+     <f x="-35.8" y="72.7" cocos2d_x="-109.75" cocos2d_y="40.05" kX="-8.35" kY="-8.35" cX="1" cY="1" pX="69" pY="43" z="19" dI="0" twE="0" dr="2"/>
+     <f x="-31.3" y="80.65" cocos2d_x="-102.35" cocos2d_y="41.9" kX="-3.54" kY="-3.54" cX="1" cY="1" pX="69" pY="43" z="19" dI="0" twE="0" dr="2"/>
+     <f x="-26.85" y="76.9" cocos2d_x="-94.7" cocos2d_y="32.6" kX="1" kY="1" cX="1" cY="1" pX="69" pY="43" z="19" dI="0" twE="0" dr="2"/>
+     <f x="-26.85" y="71.7" cocos2d_x="-94.7" cocos2d_y="27.4" kX="1" kY="1" cX="1" cY="1" pX="69" pY="43" z="19" dI="0" twE="0" dr="2"/>
+     <f x="-26.8" y="77.95" cocos2d_x="-95.4" cocos2d_y="34.85" kX="0" kY="0" cX="1" cY="1" pX="69" pY="43" z="19" dI="0" twE="0" dr="1"/>
+    </b>
+   </mov>
+   <mov name="anim_wheelie2" dr="33" to="6" drTW="33" lp="0" twE="NaN">
+    <b name="Zombie_zambonidriver_lowerarm_inner" sc="1" dl="0">
+     <f dr="10" dI="-1"/>
+     <f x="125.55" y="84.05" cocos2d_x="121.7" cocos2d_y="73.65" kX="49.41" kY="49.41" cX="1" cY="1" pX="10" pY="4" z="0" dI="0" twE="0" dr="2"/>
+     <f x="123.6" y="109.7" cocos2d_x="122.95" cocos2d_y="98.6" kX="66.24" kY="66.24" cX="1" cY="1" pX="10" pY="4" z="0" dI="0" twE="0" dr="2"/>
+     <f x="121.8" y="113.3" cocos2d_x="122.8" cocos2d_y="102.7" kX="76.74" kY="73.82" cX="0.97" cY="1.02" pX="10" pY="4" z="0" dI="0" twE="0" dr="2"/>
+     <f x="126.75" y="110.5" cocos2d_x="129.3" cocos2d_y="99.75" kX="82.65" kY="82.65" cX="0.99" cY="0.99" pX="10" pY="4" z="0" dI="0" twE="0" dr="1"/>
+     <f x="126.75" y="118.75" cocos2d_x="129.3" cocos2d_y="108" kX="82.65" kY="82.65" cX="0.99" cY="0.99" pX="10" pY="4" z="0" dI="0" twE="0" dr="2"/>
+     <f x="121.6" y="118.7" cocos2d_x="122.25" cocos2d_y="107.95" kX="73.74" kY="71.88" cX="0.97" cY="1.02" pX="10" pY="4" z="0" dI="0" twE="0" dr="2"/>
+     <f x="121.2" y="111.5" cocos2d_x="121.85" cocos2d_y="100.55" kX="72.97" kY="72.69" cX="0.99" cY="0.99" pX="10" pY="4" z="0" dI="0" twE="0" dr="2"/>
+     <f x="121.5" y="116.85" cocos2d_x="122" cocos2d_y="105.85" kX="71.94" kY="71.66" cX="0.99" cY="0.99" pX="10" pY="4" z="0" dI="0" twE="0" dr="9"/>
+     <f x="121.5" y="116.85" cocos2d_x="122" cocos2d_y="105.85" kX="71.94" kY="71.66" cX="0.99" cY="0.99" pX="10" pY="4" z="0" dI="0" twE="0" dr="1"/>
+    </b>
+    <b name="Zombie_zamboni_4" sc="1" dl="0">
+     <f x="40.4" y="134.35" cocos2d_x="14.55" cocos2d_y="108.85" kX="0" kY="0" cX="1" cY="1" pX="26" pY="26" z="0" dI="0" twE="0" dr="3"/>
+     <f x="36.5" y="90.6" cocos2d_x="48.65" cocos2d_y="56.45" kX="64.99" kY="64.99" cX="1" cY="1" pX="26" pY="25" z="0" dI="0" twE="0" dr="1"/>
+     <f x="38.3" y="87.85" cocos2d_x="51.6" cocos2d_y="54.15" kX="66.94" kY="66.94" cX="1" cY="1" pX="26" pY="26" z="0" dI="0" twE="0" dr="1"/>
+     <f x="37.4" y="87.35" cocos2d_x="51.85" cocos2d_y="54.15" kX="68.93" kY="68.93" cX="1" cY="1" pX="26" pY="25" z="0" dI="0" twE="0" dr="1"/>
+     <f x="40.7" y="84.15" cocos2d_x="56.3" cocos2d_y="51.45" kX="70.92" kY="70.92" cX="1" cY="1" pX="26" pY="26" z="0" dI="0" twE="0" dr="1"/>
+     <f x="39.7" y="83.1" cocos2d_x="56.35" cocos2d_y="50.9" kX="72.58" kY="72.58" cX="1" cY="1" pX="26" pY="26" z="0" dI="0" twE="0" dr="1"/>
+     <f x="42.6" y="88.5" cocos2d_x="59.3" cocos2d_y="56.35" kX="72.69" kY="72.69" cX="1" cY="1" pX="26" pY="26" z="0" dI="0" twE="0" dr="1"/>
+     <f x="41.55" y="95.95" cocos2d_x="58.2" cocos2d_y="63.8" kX="72.71" kY="72.71" cX="1" cY="1" pX="26" pY="26" z="0" dI="0" twE="0" dr="1"/>
+     <f x="44.45" y="102.35" cocos2d_x="61.1" cocos2d_y="70.15" kX="72.58" kY="72.58" cX="1" cY="1" pX="26" pY="26" z="1" dI="0" twE="0" dr="1"/>
+     <f x="42.65" y="113.75" cocos2d_x="59.35" cocos2d_y="81.6" kX="72.69" kY="72.69" cX="1" cY="1" pX="26" pY="26" z="1" dI="0" twE="0" dr="1"/>
+     <f x="44.7" y="124.35" cocos2d_x="61.35" cocos2d_y="92.15" kX="72.58" kY="72.58" cX="1" cY="1" pX="26" pY="26" z="1" dI="0" twE="0" dr="1"/>
+     <f x="42" y="126.95" cocos2d_x="58.95" cocos2d_y="95.4" kX="73.21" kY="72.17" cX="0.98" cY="1.01" pX="26" pY="26" z="1" dI="0" twE="0" dr="1"/>
+     <f x="42.75" y="127.25" cocos2d_x="59.9" cocos2d_y="96.25" kX="73.69" kY="71.42" cX="0.97" cY="1.02" pX="26" pY="26" z="1" dI="0" twE="0" dr="1"/>
+     <f x="42.65" y="114.95" cocos2d_x="63.85" cocos2d_y="86.15" kX="81.46" kY="80.23" cX="0.98" cY="1.01" pX="26" pY="26" z="1" dI="0" twE="0" dr="1"/>
+     <f x="46.95" y="102.2" cocos2d_x="72.05" cocos2d_y="76.05" kX="88.99" kY="88.99" cX="1" cY="1" pX="26" pY="26" z="1" dI="0" twE="0" dr="1"/>
+     <f x="44.7" y="110.45" cocos2d_x="69.8" cocos2d_y="84.3" kX="88.99" kY="88.99" cX="1" cY="1" pX="26" pY="26" z="1" dI="0" twE="0" dr="1"/>
+     <f x="46.1" y="116" cocos2d_x="69.2" cocos2d_y="88.3" kX="84.47" kY="83.95" cX="0.98" cY="1.01" pX="26" pY="26" z="1" dI="0" twE="0" dr="1"/>
+     <f x="43.6" y="120.55" cocos2d_x="64.5" cocos2d_y="91.4" kX="79.81" kY="78.6" cX="0.97" cY="1.02" pX="26" pY="26" z="1" dI="0" twE="0" dr="1"/>
+     <f x="46.5" y="116.35" cocos2d_x="67.15" cocos2d_y="87" kX="79.7" kY="78.96" cX="0.98" cY="1.01" pX="26" pY="26" z="1" dI="0" twE="0" dr="1"/>
+     <f x="45.35" y="112.2" cocos2d_x="65.7" cocos2d_y="82.45" kX="79.31" kY="79.13" cX="0.99" cY="1" pX="26" pY="26" z="1" dI="0" twE="0" dr="1"/>
+     <f x="47.55" y="116.1" cocos2d_x="67.65" cocos2d_y="86.25" kX="78.94" kY="78.71" cX="0.99" cY="1" pX="26" pY="26" z="1" dI="0" twE="0" dr="1"/>
+     <f x="45.7" y="120.1" cocos2d_x="65.55" cocos2d_y="89.95" kX="78.29" kY="78.1" cX="0.99" cY="1" pX="26" pY="26" z="1" dI="0" twE="0" dr="1"/>
+     <f x="47.1" y="120.05" cocos2d_x="66.95" cocos2d_y="90" kX="78.44" kY="78.2" cX="0.99" cY="1" pX="26" pY="26" z="1" dI="0" twE="0" dr="1"/>
+     <f x="45.9" y="120.1" cocos2d_x="65.8" cocos2d_y="90.05" kX="78.46" kY="78.22" cX="0.99" cY="1" pX="26" pY="26" z="1" dI="0" twE="0" dr="1"/>
+     <f x="46.9" y="120.1" cocos2d_x="66.75" cocos2d_y="90.05" kX="78.47" kY="78.23" cX="0.99" cY="0.99" pX="26" pY="26" z="1" dI="0" twE="0" dr="1"/>
+     <f x="46.15" y="120.05" cocos2d_x="66" cocos2d_y="90" kX="78.47" kY="78.23" cX="0.99" cY="0.99" pX="26" pY="26" z="1" dI="0" twE="0" dr="1"/>
+     <f x="48.2" y="120.1" cocos2d_x="68.05" cocos2d_y="90.05" kX="78.46" kY="78.22" cX="0.99" cY="0.99" pX="26" pY="26" z="1" dI="0" twE="0" dr="1"/>
+     <f x="47.7" y="120.1" cocos2d_x="67.55" cocos2d_y="89.95" kX="78.29" kY="78.1" cX="0.99" cY="1" pX="26" pY="26" z="1" dI="0" twE="0" dr="1"/>
+     <f x="45.65" y="120.05" cocos2d_x="65.5" cocos2d_y="90.05" kX="78.44" kY="78.2" cX="0.99" cY="1" pX="26" pY="26" z="1" dI="0" twE="0" dr="1"/>
+     <f x="47.45" y="120.15" cocos2d_x="67.35" cocos2d_y="90.15" kX="78.46" kY="78.22" cX="0.99" cY="1" pX="26" pY="26" z="1" dI="0" twE="0" dr="1"/>
+     <f x="45.7" y="120.1" cocos2d_x="65.55" cocos2d_y="89.95" kX="78.29" kY="78.1" cX="0.99" cY="1" pX="26" pY="26" z="1" dI="0" twE="0" dr="1"/>
+    </b>
+    <b name="Zombie_zamboni_3" sc="1" dl="0">
+     <f x="52.35" y="110.4" cocos2d_x="25" cocos2d_y="81.4" kX="0" kY="0" cX="1" cY="0.89" pX="27" pY="33" z="1" dI="0" twE="0" dr="3"/>
+     <f x="63.25" y="91.3" cocos2d_x="77.9" cocos2d_y="54.35" kX="64.99" kY="64.99" cX="1" cY="0.89" pX="27" pY="33" z="1" dI="0" twE="0" dr="4"/>
+     <f x="67.15" y="86.85" cocos2d_x="86.6" cocos2d_y="52.15" kX="72.58" kY="72.58" cX="1" cY="0.89" pX="27" pY="33" z="1" dI="0" twE="0" dr="3"/>
+     <f x="69.9" y="106.1" cocos2d_x="89.35" cocos2d_y="71.4" kX="72.58" kY="72.58" cX="1" cY="0.89" pX="27" pY="33" z="2" dI="0" twE="0" dr="2"/>
+     <f x="69.9" y="128.85" cocos2d_x="89.35" cocos2d_y="94.15" kX="72.58" kY="72.58" cX="1" cY="0.89" pX="27" pY="33" z="2" dI="0" twE="0" dr="2"/>
+     <f x="69.3" y="130.1" cocos2d_x="89.35" cocos2d_y="96.65" kX="73.69" kY="71.42" cX="0.97" cY="0.91" pX="27" pY="33" z="2" dI="0" twE="0" dr="2"/>
+     <f x="69.9" y="113.7" cocos2d_x="98.4" cocos2d_y="86" kX="88.99" kY="88.99" cX="1" cY="0.89" pX="27" pY="33" z="2" dI="0" twE="0" dr="1"/>
+     <f x="69.9" y="121.95" cocos2d_x="98.4" cocos2d_y="94.25" kX="88.99" kY="88.99" cX="1" cY="0.89" pX="27" pY="33" z="2" dI="0" twE="0" dr="2"/>
+     <f x="67.4" y="127.15" cocos2d_x="96.75" cocos2d_y="100.25" kX="89.04" kY="88.93" cX="0.97" cY="0.91" pX="27" pY="33" z="2" dI="0" twE="0" dr="2"/>
+     <f x="68.55" y="120.15" cocos2d_x="97.05" cocos2d_y="92.7" kX="89" kY="88.98" cX="0.99" cY="0.89" pX="27" pY="33" z="2" dI="0" twE="0" dr="2"/>
+     <f x="69" y="126.4" cocos2d_x="97" cocos2d_y="98.4" kX="87.97" kY="87.95" cX="0.99" cY="0.89" pX="27" pY="33" z="2" dI="0" twE="0" dr="9"/>
+     <f x="69" y="126.4" cocos2d_x="97" cocos2d_y="98.4" kX="87.97" kY="87.95" cX="0.99" cY="0.89" pX="27" pY="33" z="2" dI="0" twE="0" dr="1"/>
+    </b>
+    <b name="Zombie_zamboni_seat" sc="1" dl="0">
+     <f x="67.95" y="71.15" cocos2d_x="39.1" cocos2d_y="40.05" kX="0" kY="0" cX="1" cY="1" pX="29" pY="31" z="2" dI="0" twE="0" dr="3"/>
+     <f x="105.3" y="88.85" cocos2d_x="121.3" cocos2d_y="49.55" kX="64.99" kY="64.99" cX="1" cY="1" pX="29" pY="31" z="2" dI="0" twE="0" dr="4"/>
+     <f x="109.15" y="90" cocos2d_x="130.2" cocos2d_y="53.1" kX="72.58" kY="72.58" cX="1" cY="1" pX="29" pY="31" z="2" dI="0" twE="0" dr="3"/>
+     <f x="111.9" y="109.25" cocos2d_x="132.95" cocos2d_y="72.35" kX="72.58" kY="72.58" cX="1" cY="1" pX="29" pY="31" z="3" dI="0" twE="0" dr="2"/>
+     <f x="111.9" y="132" cocos2d_x="132.95" cocos2d_y="95.1" kX="72.58" kY="72.58" cX="1" cY="1" pX="29" pY="31" z="3" dI="0" twE="0" dr="2"/>
+     <f x="110.95" y="137.1" cocos2d_x="138.1" cocos2d_y="105.5" kX="82.76" kY="80.49" cX="0.97" cY="1.02" pX="29" pY="31" z="3" dI="0" twE="0" dr="2"/>
+     <f x="109.3" y="128.6" cocos2d_x="139.9" cocos2d_y="99.2" kX="88.99" kY="88.99" cX="1" cY="1" pX="29" pY="31" z="3" dI="0" twE="0" dr="1"/>
+     <f x="109.3" y="136.85" cocos2d_x="139.9" cocos2d_y="107.45" kX="88.99" kY="88.99" cX="1" cY="1" pX="29" pY="31" z="3" dI="0" twE="0" dr="2"/>
+     <f x="107" y="138.85" cocos2d_x="132.95" cocos2d_y="105.7" kX="79.77" kY="78.54" cX="0.97" cY="1.02" pX="29" pY="31" z="3" dI="0" twE="0" dr="2"/>
+     <f x="107.05" y="132.1" cocos2d_x="132.25" cocos2d_y="98.25" kX="79.26" kY="79.08" cX="0.99" cY="1" pX="29" pY="31" z="3" dI="0" twE="0" dr="2"/>
+     <f x="107.75" y="137.7" cocos2d_x="132.3" cocos2d_y="103.35" kX="78.24" kY="78.05" cX="0.99" cY="1" pX="29" pY="31" z="3" dI="0" twE="0" dr="9"/>
+     <f x="107.75" y="137.7" cocos2d_x="132.3" cocos2d_y="103.35" kX="78.24" kY="78.05" cX="0.99" cY="1" pX="29" pY="31" z="3" dI="0" twE="0" dr="1"/>
+    </b>
+    <b name="Zombie_zambonidriver_legs" sc="1" dl="0">
+     <f x="39.95" y="99.8" cocos2d_x="5" cocos2d_y="73.1" kX="0" kY="0" cX="1" cY="1" pX="35" pY="27" z="3" dI="0" twE="0" dr="3"/>
+     <f x="67.6" y="75.6" cocos2d_x="77" cocos2d_y="32.7" kX="64.99" kY="64.99" cX="1" cY="1" pX="35" pY="27" z="3" dI="0" twE="0" dr="4"/>
+     <f x="73.55" y="71.85" cocos2d_x="88.6" cocos2d_y="30.6" kX="72.58" kY="72.58" cX="1" cY="1" pX="35" pY="27" z="3" dI="0" twE="0" dr="3"/>
+     <f x="76.3" y="91.1" cocos2d_x="91.35" cocos2d_y="49.85" kX="72.58" kY="72.58" cX="1" cY="1" pX="35" pY="27" z="4" dI="0" twE="0" dr="2"/>
+     <f x="76.3" y="113.85" cocos2d_x="91.35" cocos2d_y="72.6" kX="72.58" kY="72.58" cX="1" cY="1" pX="35" pY="27" z="4" dI="0" twE="0" dr="2"/>
+     <f x="72.6" y="119.5" cocos2d_x="100.3" cocos2d_y="82" kX="82.28" kY="90.56" cX="0.97" cY="1.03" pX="35" pY="27" z="4" dI="0" twE="0" dr="2"/>
+     <f x="80.3" y="101.2" cocos2d_x="106.35" cocos2d_y="65.9" kX="88.99" kY="88.99" cX="1" cY="1" pX="35" pY="27" z="4" dI="0" twE="0" dr="1"/>
+     <f x="80.3" y="109.45" cocos2d_x="106.35" cocos2d_y="74.15" kX="88.99" kY="88.99" cX="1" cY="1" pX="35" pY="27" z="4" dI="0" twE="0" dr="2"/>
+     <f x="78.1" y="115" cocos2d_x="104.9" cocos2d_y="80.7" kX="89.04" kY="88.93" cX="0.97" cY="1.03" pX="35" pY="27" z="4" dI="0" twE="0" dr="2"/>
+     <f x="78.95" y="107.75" cocos2d_x="105" cocos2d_y="72.75" kX="89" kY="88.98" cX="0.99" cY="1" pX="35" pY="27" z="4" dI="0" twE="0" dr="2"/>
+     <f x="79.2" y="113.8" cocos2d_x="104.65" cocos2d_y="78.35" kX="87.97" kY="87.95" cX="0.99" cY="1" pX="35" pY="27" z="4" dI="0" twE="0" dr="9"/>
+     <f x="79.2" y="113.8" cocos2d_x="104.65" cocos2d_y="78.35" kX="87.97" kY="87.95" cX="0.99" cY="1" pX="35" pY="27" z="4" dI="0" twE="0" dr="1"/>
+    </b>
+    <b name="Zombie_zambonidriver_innerarm_hand" sc="1" dl="0">
+     <f x="30.95" y="54.6" cocos2d_x="19.7" cocos2d_y="42.6" kX="0" kY="0" cX="1" cY="1" pX="11" pY="12" z="4" dI="0" twE="0" dr="3"/>
+     <f x="104.7" y="48.4" cocos2d_x="110.75" cocos2d_y="33.15" kX="64.99" kY="64.99" cX="1" cY="1" pX="11" pY="12" z="4" dI="0" twE="0" dr="4"/>
+     <f x="113.9" y="49.85" cocos2d_x="121.95" cocos2d_y="35.45" kX="72.58" kY="72.58" cX="1" cY="1" pX="11" pY="12" z="4" dI="0" twE="0" dr="3"/>
+     <f x="116.65" y="69.1" cocos2d_x="124.7" cocos2d_y="54.7" kX="72.58" kY="72.58" cX="1" cY="1" pX="11" pY="12" z="5" dI="0" twE="0" dr="2"/>
+     <f x="116.65" y="91.85" cocos2d_x="124.7" cocos2d_y="77.45" kX="72.58" kY="72.58" cX="1" cY="1" pX="11" pY="12" z="5" dI="0" twE="0" dr="2"/>
+     <f x="116.9" y="95.7" cocos2d_x="127.3" cocos2d_y="83.3" kX="82.76" kY="80.49" cX="0.97" cY="1.02" pX="11" pY="12" z="5" dI="0" twE="0" dr="2"/>
+     <f x="125.2" y="91.5" cocos2d_x="136.95" cocos2d_y="79.9" kX="88.99" kY="88.99" cX="1" cY="1" pX="11" pY="12" z="5" dI="0" twE="0" dr="1"/>
+     <f x="125.2" y="99.75" cocos2d_x="136.95" cocos2d_y="88.15" kX="88.99" kY="88.99" cX="1" cY="1" pX="11" pY="12" z="5" dI="0" twE="0" dr="2"/>
+     <f x="123.8" y="115.55" cocos2d_x="135.9" cocos2d_y="104.25" kX="89.04" kY="88.93" cX="0.97" cY="1.03" pX="11" pY="12" z="5" dI="0" twE="0" dr="2"/>
+     <f x="123.35" y="108.3" cocos2d_x="135.1" cocos2d_y="96.8" kX="89" kY="88.98" cX="0.99" cY="1" pX="11" pY="12" z="5" dI="0" twE="0" dr="2"/>
+     <f x="123.6" y="113.55" cocos2d_x="135.15" cocos2d_y="101.8" kX="87.97" kY="87.95" cX="0.99" cY="1" pX="12" pY="12" z="5" dI="0" twE="0" dr="9"/>
+     <f x="123.6" y="113.55" cocos2d_x="135.15" cocos2d_y="101.8" kX="87.97" kY="87.95" cX="0.99" cY="1" pX="12" pY="12" z="5" dI="0" twE="0" dr="1"/>
+    </b>
+    <b name="Zombie_zambonidriver_body" sc="1" dl="0">
+     <f x="61.55" y="54.7" cocos2d_x="39.4" cocos2d_y="31.9" kX="0" kY="0" cX="1" cY="1" pX="22" pY="23" z="5" dI="0" twE="0" dr="3"/>
+     <f x="111.8" y="69.55" cocos2d_x="117.85" cocos2d_y="38.45" kX="54.95" kY="54.95" cX="1" cY="1" pX="22" pY="23" z="5" dI="0" twE="0" dr="4"/>
+     <f x="122.9" y="78.9" cocos2d_x="138.05" cocos2d_y="51.05" kX="72.58" kY="72.58" cX="1" cY="1" pX="22" pY="23" z="5" dI="0" twE="0" dr="3"/>
+     <f x="125.65" y="98.15" cocos2d_x="140.8" cocos2d_y="70.3" kX="72.58" kY="72.58" cX="1" cY="1" pX="22" pY="23" z="6" dI="0" twE="0" dr="2"/>
+     <f x="121.9" y="130.1" cocos2d_x="150.05" cocos2d_y="115.7" kX="106.92" kY="106.92" cX="1" cY="1" pX="22" pY="23" z="6" dI="0" twE="0" dr="2"/>
+     <f x="121.5" y="136.9" cocos2d_x="152.35" cocos2d_y="127.8" kX="114.92" kY="117.13" cX="0.96" cY="1.02" pX="22" pY="23" z="6" dI="0" twE="0" dr="2"/>
+     <f x="119.45" y="129.6" cocos2d_x="150.45" cocos2d_y="123.75" kX="123.33" kY="123.33" cX="1" cY="1" pX="22" pY="23" z="6" dI="0" twE="0" dr="1"/>
+     <f x="119.45" y="137.85" cocos2d_x="150.45" cocos2d_y="132" kX="123.33" kY="123.33" cX="1" cY="1" pX="22" pY="23" z="6" dI="0" twE="0" dr="2"/>
+     <f x="117.55" y="138.15" cocos2d_x="147.85" cocos2d_y="127.45" kX="112.33" kY="114.75" cX="0.98" cY="1.01" pX="22" pY="23" z="6" dI="0" twE="0" dr="2"/>
+     <f x="117.45" y="133.55" cocos2d_x="147.2" cocos2d_y="123.55" kX="115.1" kY="115.47" cX="0.99" cY="0.99" pX="22" pY="23" z="6" dI="0" twE="0" dr="2"/>
+     <f x="118" y="138.5" cocos2d_x="147.25" cocos2d_y="127" kX="112.3" kY="112.67" cX="0.99" cY="0.99" pX="22" pY="23" z="6" dI="0" twE="0" dr="9"/>
+     <f x="118" y="138.5" cocos2d_x="147.25" cocos2d_y="127" kX="112.3" kY="112.67" cX="0.99" cY="0.99" pX="22" pY="23" z="6" dI="0" twE="0" dr="1"/>
+    </b>
+    <b name="Zombie_zambonidriver_upperarm" sc="1" dl="0">
+     <f x="61.3" y="60.35" cocos2d_x="56.2" cocos2d_y="53.65" kX="-12.25" kY="-12.25" cX="1" cY="1" pX="4" pY="8" z="6" dI="0" twE="0" dr="3"/>
+     <f x="110.85" y="73.1" cocos2d_x="109.65" cocos2d_y="64.75" kX="16.12" kY="16.12" cX="0.99" cY="0.99" pX="4" pY="8" z="6" dI="0" twE="0" dr="4"/>
+     <f x="117.45" y="80.5" cocos2d_x="122.35" cocos2d_y="73.5" kX="60.33" kY="60.33" cX="1" cY="1" pX="4" pY="8" z="6" dI="0" twE="0" dr="3"/>
+     <f x="120.2" y="99.75" cocos2d_x="125.1" cocos2d_y="92.75" kX="60.33" kY="60.33" cX="1" cY="1" pX="4" pY="8" z="7" dI="0" twE="0" dr="2"/>
+     <f x="116.5" y="128.3" cocos2d_x="124.45" cocos2d_y="125.35" kX="94.67" kY="94.67" cX="0.99" cY="0.99" pX="4" pY="8" z="7" dI="0" twE="0" dr="2"/>
+     <f x="116.15" y="136.3" cocos2d_x="124.95" cocos2d_y="136.1" kX="111.68" kY="112.32" cX="0.96" cY="1.02" pX="4" pY="8" z="7" dI="0" twE="0" dr="2"/>
+     <f x="114.75" y="126.35" cocos2d_x="123.15" cocos2d_y="125.7" kX="111.07" kY="111.07" cX="0.99" cY="0.99" pX="4" pY="8" z="7" dI="0" twE="0" dr="1"/>
+     <f x="114.75" y="134.6" cocos2d_x="123.15" cocos2d_y="133.95" kX="111.07" kY="111.07" cX="0.99" cY="0.99" pX="4" pY="8" z="7" dI="0" twE="0" dr="2"/>
+     <f x="109.7" y="144" cocos2d_x="117.3" cocos2d_y="140.05" kX="87.17" kY="86.82" cX="0.96" cY="1.02" pX="4" pY="8" z="7" dI="0" twE="0" dr="2"/>
+     <f x="108.55" y="139.55" cocos2d_x="116.75" cocos2d_y="137.55" kX="102.66" kY="102.61" cX="0.98" cY="0.99" pX="4" pY="8" z="7" dI="0" twE="0" dr="2"/>
+     <f x="110.45" y="144.65" cocos2d_x="117.8" cocos2d_y="140.45" kX="86" kY="85.94" cX="0.98" cY="0.99" pX="4" pY="8" z="7" dI="0" twE="0" dr="9"/>
+     <f x="110.45" y="144.65" cocos2d_x="117.8" cocos2d_y="140.45" kX="86" kY="85.94" cX="0.98" cY="0.99" pX="4" pY="8" z="7" dI="0" twE="0" dr="1"/>
+    </b>
+    <b name="Zombie_zambonidriver_lowerarm_outer" sc="1" dl="0">
+     <f x="54.35" y="69.15" cocos2d_x="43.15" cocos2d_y="69.65" kX="-23.17" kY="-23.17" cX="1" cY="1" pX="11" pY="4" z="7" dI="0" twE="0" dr="3"/>
+     <f x="101.4" y="74.15" cocos2d_x="95.25" cocos2d_y="64.9" kX="36.05" kY="36.05" cX="1" cY="1" pX="11" pY="4" z="7" dI="0" twE="0" dr="4"/>
+     <f x="107.05" y="76.35" cocos2d_x="103.2" cocos2d_y="65.95" kX="49.41" kY="49.41" cX="1" cY="1" pX="10" pY="4" z="7" dI="0" twE="0" dr="3"/>
+     <f x="109.8" y="95.6" cocos2d_x="105.95" cocos2d_y="85.2" kX="49.41" kY="49.41" cX="1" cY="1" pX="11" pY="4" z="8" dI="0" twE="0" dr="2"/>
+     <f x="106.95" y="119.1" cocos2d_x="106.1" cocos2d_y="108.1" kX="64.98" kY="64.98" cX="0.99" cY="0.99" pX="10" pY="4" z="8" dI="0" twE="0" dr="2"/>
+     <f x="105.7" y="122.2" cocos2d_x="106.4" cocos2d_y="111.55" kX="74.75" kY="71.7" cX="0.97" cY="1.01" pX="10" pY="4" z="8" dI="0" twE="0" dr="2"/>
+     <f x="108.25" y="114.8" cocos2d_x="110.45" cocos2d_y="104.1" kX="81.38" kY="81.38" cX="0.99" cY="0.99" pX="10" pY="4" z="8" dI="0" twE="0" dr="1"/>
+     <f x="108.25" y="123.05" cocos2d_x="110.45" cocos2d_y="112.35" kX="81.38" kY="81.38" cX="0.99" cY="0.99" pX="10" pY="4" z="8" dI="0" twE="0" dr="2"/>
+     <f x="104.05" y="135.3" cocos2d_x="109.5" cocos2d_y="125.95" kX="98.46" kY="99.48" cX="0.96" cY="1.02" pX="10" pY="4" z="8" dI="0" twE="0" dr="2"/>
+     <f x="104.15" y="128.55" cocos2d_x="109.45" cocos2d_y="118.95" kX="98.88" kY="99.03" cX="0.98" cY="0.99" pX="11" pY="4" z="8" dI="0" twE="0" dr="2"/>
+     <f x="104.8" y="135.8" cocos2d_x="109.95" cocos2d_y="126.2" kX="97.85" kY="98.01" cX="0.98" cY="0.99" pX="10" pY="4" z="8" dI="0" twE="0" dr="9"/>
+     <f x="104.8" y="135.8" cocos2d_x="109.95" cocos2d_y="126.2" kX="97.85" kY="98.01" cX="0.98" cY="0.99" pX="10" pY="4" z="8" dI="0" twE="0" dr="1"/>
+    </b>
+    <b name="Zombie_zambonidriver_outerarm_hand" sc="1" dl="0">
+     <f x="38.15" y="70.6" cocos2d_x="29.65" cocos2d_y="56.75" kX="6.8" kY="6.8" cX="1" cY="1" pX="10" pY="13" z="8" dI="0" twE="0" dr="3"/>
+     <f x="93.2" y="61.65" cocos2d_x="102.2" cocos2d_y="48.1" kX="71.8" kY="71.8" cX="1" cY="1" pX="10" pY="13" z="8" dI="0" twE="0" dr="4"/>
+     <f x="100.75" y="61.35" cocos2d_x="111.45" cocos2d_y="49.15" kX="79.39" kY="79.39" cX="1" cY="1" pX="10" pY="13" z="8" dI="0" twE="0" dr="3"/>
+     <f x="103.5" y="80.6" cocos2d_x="114.2" cocos2d_y="68.4" kX="79.39" kY="79.39" cX="1" cY="1" pX="10" pY="13" z="9" dI="0" twE="0" dr="2"/>
+     <f x="103.5" y="103.35" cocos2d_x="114.2" cocos2d_y="91.15" kX="79.39" kY="79.39" cX="1" cY="1" pX="10" pY="13" z="9" dI="0" twE="0" dr="2"/>
+     <f x="103.95" y="105.5" cocos2d_x="115" cocos2d_y="93.75" kX="80.08" kY="78.64" cX="0.96" cY="1.03" pX="10" pY="13" z="9" dI="0" twE="0" dr="2"/>
+     <f x="109.35" y="98.8" cocos2d_x="123.15" cocos2d_y="90.15" kX="95.79" kY="95.79" cX="1" cY="1" pX="10" pY="13" z="9" dI="0" twE="0" dr="1"/>
+     <f x="109.35" y="107.05" cocos2d_x="123.15" cocos2d_y="98.4" kX="95.79" kY="95.79" cX="1" cY="1" pX="10" pY="13" z="9" dI="0" twE="0" dr="2"/>
+     <f x="108.5" y="120.2" cocos2d_x="122.7" cocos2d_y="111.8" kX="95.47" kY="96.13" cX="0.97" cY="1.02" pX="10" pY="13" z="9" dI="0" twE="0" dr="2"/>
+     <f x="108.5" y="113.05" cocos2d_x="122.3" cocos2d_y="104.5" kX="95.74" kY="95.84" cX="0.99" cY="1" pX="10" pY="13" z="9" dI="0" twE="0" dr="2"/>
+     <f x="108.85" y="118.55" cocos2d_x="122.5" cocos2d_y="109.8" kX="94.71" kY="94.81" cX="0.99" cY="1" pX="10" pY="13" z="9" dI="0" twE="0" dr="9"/>
+     <f x="108.85" y="118.55" cocos2d_x="122.5" cocos2d_y="109.8" kX="94.71" kY="94.81" cX="0.99" cY="1" pX="10" pY="13" z="9" dI="0" twE="0" dr="1"/>
+    </b>
+    <b name="Zombie_zambonidriver_shoulder" sc="1" dl="0">
+     <f x="62.3" y="51.55" cocos2d_x="52.15" cocos2d_y="43.85" kX="0" kY="0" cX="1" cY="1" pX="10" pY="8" z="9" dI="0" twE="0" dr="3"/>
+     <f x="114.9" y="68.4" cocos2d_x="115.35" cocos2d_y="55.65" kX="54.95" kY="54.95" cX="1" cY="1" pX="10" pY="8" z="9" dI="0" twE="0" dr="4"/>
+     <f x="126.15" y="78.75" cocos2d_x="130.5" cocos2d_y="66.7" kX="72.58" kY="72.58" cX="1" cY="1" pX="10" pY="8" z="9" dI="0" twE="0" dr="3"/>
+     <f x="128.9" y="98" cocos2d_x="133.25" cocos2d_y="85.95" kX="72.58" kY="72.58" cX="1" cY="1" pX="10" pY="8" z="10" dI="0" twE="0" dr="2"/>
+     <f x="124.65" y="131.85" cocos2d_x="135.05" cocos2d_y="124.3" kX="106.92" kY="106.92" cX="1" cY="1" pX="10" pY="8" z="10" dI="0" twE="0" dr="2"/>
+     <f x="124" y="139" cocos2d_x="135.75" cocos2d_y="133.55" kX="114.92" kY="117.13" cX="0.96" cY="1.02" pX="10" pY="8" z="10" dI="0" twE="0" dr="2"/>
+     <f x="121.55" y="132.05" cocos2d_x="133.6" cocos2d_y="127.7" kX="123.33" kY="123.33" cX="1" cY="1" pX="10" pY="8" z="10" dI="0" twE="0" dr="1"/>
+     <f x="121.55" y="140.3" cocos2d_x="133.6" cocos2d_y="135.95" kX="123.33" kY="123.33" cX="1" cY="1" pX="10" pY="8" z="10" dI="0" twE="0" dr="2"/>
+     <f x="120.05" y="140.1" cocos2d_x="131.5" cocos2d_y="134" kX="112.33" kY="114.75" cX="0.98" cY="1.01" pX="10" pY="8" z="10" dI="0" twE="0" dr="2"/>
+     <f x="119.75" y="136.85" cocos2d_x="131.05" cocos2d_y="131" kX="115.1" kY="115.47" cX="0.99" cY="0.99" pX="10" pY="8" z="10" dI="0" twE="0" dr="2"/>
+     <f x="120.45" y="140.45" cocos2d_x="131.5" cocos2d_y="134" kX="112.3" kY="112.67" cX="0.99" cY="0.99" pX="10" pY="8" z="10" dI="0" twE="0" dr="9"/>
+     <f x="120.45" y="140.45" cocos2d_x="131.5" cocos2d_y="134" kX="112.3" kY="112.67" cX="0.99" cY="0.99" pX="10" pY="8" z="10" dI="0" twE="0" dr="1"/>
+    </b>
+    <b name="Zombie_head" sc="1" dl="0">
+     <f x="44.1" y="19.25" cocos2d_x="22.9" cocos2d_y="0.05" kX="0" kY="0" cX="1" cY="1" pX="21" pY="19" z="10" dI="0" twE="0" dr="2"/>
+     <f x="101.2" y="28.85" cocos2d_x="92.05" cocos2d_y="1.95" kX="29.07" kY="29.07" cX="1" cY="1" pX="21" pY="19" z="10" dI="0" twE="0" dr="1"/>
+     <f x="127.5" y="33.7" cocos2d_x="125.35" cocos2d_y="5.1" kX="43.65" kY="43.65" cX="1" cY="1" pX="21" pY="19" z="10" dI="0" twE="0" dr="4"/>
+     <f x="151.45" y="51.8" cocos2d_x="163.5" cocos2d_y="25.85" kX="72.58" kY="72.58" cX="1" cY="1" pX="21" pY="19" z="10" dI="0" twE="0" dr="3"/>
+     <f x="154.2" y="71.05" cocos2d_x="166.25" cocos2d_y="45.1" kX="72.58" kY="72.58" cX="1" cY="1" pX="21" pY="19" z="11" dI="0" twE="0" dr="2"/>
+     <f x="160.7" y="123.85" cocos2d_x="185.2" cocos2d_y="109.25" kX="106.92" kY="106.92" cX="1" cY="1" pX="21" pY="19" z="11" dI="0" twE="0" dr="2"/>
+     <f x="161.9" y="137.25" cocos2d_x="189.1" cocos2d_y="127.45" kX="114.92" kY="117.13" cX="0.96" cY="1.02" pX="21" pY="19" z="11" dI="0" twE="0" dr="2"/>
+     <f x="158.3" y="134.55" cocos2d_x="185.95" cocos2d_y="127.5" kX="123.33" kY="123.33" cX="1" cY="1" pX="21" pY="19" z="11" dI="0" twE="0" dr="1"/>
+     <f x="158.3" y="142.8" cocos2d_x="185.95" cocos2d_y="135.75" kX="123.33" kY="123.33" cX="1" cY="1" pX="21" pY="19" z="11" dI="0" twE="0" dr="2"/>
+     <f x="156.15" y="141.45" cocos2d_x="184.35" cocos2d_y="133.45" kX="119.6" kY="122.53" cX="0.98" cY="1.01" pX="21" pY="19" z="11" dI="0" twE="0" dr="2"/>
+     <f x="154.75" y="139.3" cocos2d_x="182.4" cocos2d_y="132.05" kX="122.6" kY="123.04" cX="0.99" cY="0.99" pX="21" pY="19" z="11" dI="0" twE="0" dr="2"/>
+     <f x="155.6" y="142.2" cocos2d_x="182.85" cocos2d_y="133.55" kX="119.8" kY="120.24" cX="0.99" cY="0.99" pX="21" pY="19" z="11" dI="0" twE="0" dr="9"/>
+     <f x="155.6" y="142.2" cocos2d_x="182.85" cocos2d_y="133.55" kX="119.8" kY="120.24" cX="0.99" cY="0.99" pX="21" pY="19" z="11" dI="0" twE="0" dr="1"/>
+    </b>
+    <b name="Zombie_jaw" sc="1" dl="0">
+     <f x="43.6" y="39.8" cocos2d_x="30.8" cocos2d_y="33.8" kX="0" kY="0" cX="1" cY="1" pX="13" pY="6" z="11" dI="0" twE="0" dr="2"/>
+     <f x="91.65" y="45.4" cocos2d_x="83.4" cocos2d_y="33.95" kX="29.07" kY="29.07" cX="1" cY="1" pX="13" pY="6" z="11" dI="0" twE="0" dr="1"/>
+     <f x="113" y="48.1" cocos2d_x="107.85" cocos2d_y="35" kX="43.65" kY="43.65" cX="1" cY="1" pX="13" pY="6" z="11" dI="0" twE="0" dr="4"/>
+     <f x="131.8" y="57.4" cocos2d_x="133.65" cocos2d_y="43.4" kX="72.58" kY="72.58" cX="1" cY="1" pX="13" pY="6" z="11" dI="0" twE="0" dr="3"/>
+     <f x="134.55" y="76.65" cocos2d_x="136.4" cocos2d_y="62.65" kX="72.58" kY="72.58" cX="1" cY="1" pX="13" pY="6" z="12" dI="0" twE="0" dr="2"/>
+     <f x="141.9" y="119.05" cocos2d_x="150" cocos2d_y="107.55" kX="100.4" kY="100.4" cX="1" cY="1" pX="13" pY="6" z="12" dI="0" twE="0" dr="2"/>
+     <f x="143.5" y="130.85" cocos2d_x="153.55" cocos2d_y="121.3" kX="108.79" kY="110.2" cX="0.96" cY="1.03" pX="13" pY="6" z="12" dI="0" twE="0" dr="2"/>
+     <f x="141.6" y="124.65" cocos2d_x="152.65" cocos2d_y="115.95" kX="116.81" kY="116.81" cX="1" cY="1" pX="13" pY="6" z="12" dI="0" twE="0" dr="1"/>
+     <f x="141.6" y="132.9" cocos2d_x="152.65" cocos2d_y="124.2" kX="116.81" kY="116.81" cX="1" cY="1" pX="13" pY="6" z="12" dI="0" twE="0" dr="2"/>
+     <f x="138.65" y="132.45" cocos2d_x="149.6" cocos2d_y="123.5" kX="113.29" kY="115.79" cX="0.98" cY="1.01" pX="13" pY="6" z="12" dI="0" twE="0" dr="2"/>
+     <f x="138.1" y="129.65" cocos2d_x="148.95" cocos2d_y="120.85" kX="116.1" kY="116.48" cX="0.99" cY="0.99" pX="13" pY="6" z="12" dI="0" twE="0" dr="2"/>
+     <f x="138.4" y="133.35" cocos2d_x="148.9" cocos2d_y="124" kX="113.31" kY="113.68" cX="0.99" cY="0.99" pX="13" pY="6" z="12" dI="0" twE="0" dr="9"/>
+     <f x="138.4" y="133.35" cocos2d_x="148.9" cocos2d_y="124" kX="113.31" kY="113.68" cX="0.99" cY="0.99" pX="13" pY="6" z="12" dI="0" twE="0" dr="1"/>
+    </b>
+    <b name="Zombie_zambonidriver_mullet2" sc="1" dl="0">
+     <f x="67.95" y="25.15" cocos2d_x="67.95" cocos2d_y="25.15" kX="0" kY="0" cX="1" cY="1" pX="0" pY="0" z="12" dI="0" twE="0" dr="2"/>
+     <f x="119.1" y="43.4" cocos2d_x="119.1" cocos2d_y="43.4" kX="27.07" kY="27.07" cX="1" cY="1" pX="0" pY="0" z="12" dI="0" twE="0" dr="1"/>
+     <f x="139.4" y="52.55" cocos2d_x="139.4" cocos2d_y="52.55" kX="40.66" kY="40.66" cX="1" cY="1" pX="0" pY="0" z="12" dI="0" twE="0" dr="4"/>
+     <f x="153.05" y="76.3" cocos2d_x="153.05" cocos2d_y="76.3" kX="72.58" kY="72.58" cX="1" cY="1" pX="0" pY="0" z="12" dI="0" twE="0" dr="3"/>
+     <f x="155.8" y="95.55" cocos2d_x="155.8" cocos2d_y="95.55" kX="72.58" kY="72.58" cX="1" cY="1" pX="0" pY="0" z="13" dI="0" twE="0" dr="2"/>
+     <f x="148.15" y="140.75" cocos2d_x="148.15" cocos2d_y="140.75" kX="127.96" kY="127.96" cX="0.99" cY="0.99" pX="0" pY="0" z="13" dI="0" twE="0" dr="2"/>
+     <f x="146.55" y="152.6" cocos2d_x="146.55" cocos2d_y="152.6" kX="135.13" kY="138.98" cX="0.98" cY="1" pX="0" pY="0" z="13" dI="0" twE="0" dr="2"/>
+     <f x="141.55" y="147.2" cocos2d_x="141.55" cocos2d_y="147.2" kX="144.37" kY="144.37" cX="0.99" cY="0.99" pX="0" pY="0" z="13" dI="0" twE="0" dr="1"/>
+     <f x="141.55" y="155.45" cocos2d_x="141.55" cocos2d_y="155.45" kX="144.37" kY="144.37" cX="0.99" cY="0.99" pX="0" pY="0" z="13" dI="0" twE="0" dr="2"/>
+     <f x="139.55" y="154.3" cocos2d_x="139.55" cocos2d_y="154.3" kX="140.47" kY="143.68" cX="1" cY="0.99" pX="0" pY="0" z="13" dI="0" twE="0" dr="2"/>
+     <f x="138.2" y="151.95" cocos2d_x="138.2" cocos2d_y="151.95" kX="143.61" kY="144.1" cX="0.99" cY="0.99" pX="0" pY="0" z="13" dI="0" twE="0" dr="2"/>
+     <f x="139.65" y="155.65" cocos2d_x="139.65" cocos2d_y="155.65" kX="140.81" kY="141.3" cX="0.99" cY="0.99" pX="0" pY="0" z="13" dI="0" twE="0" dr="9"/>
+     <f x="139.65" y="155.65" cocos2d_x="139.65" cocos2d_y="155.65" kX="140.81" kY="141.3" cX="0.99" cY="0.99" pX="0" pY="0" z="13" dI="0" twE="0" dr="1"/>
+    </b>
+    <b name="Zombie_zambonidriver_beanie" sc="1" dl="0">
+     <f x="49.55" y="3.95" cocos2d_x="23.55" cocos2d_y="-10.05" kX="0" kY="0" cX="1" cY="1" pX="26" pY="14" z="13" dI="0" twE="0" dr="2"/>
+     <f x="108.65" y="17.6" cocos2d_x="86.5" cocos2d_y="-1.8" kX="13.03" kY="13.03" cX="1" cY="1" pX="26" pY="14" z="13" dI="0" twE="0" dr="1"/>
+     <f x="135.6" y="24.35" cocos2d_x="119.95" cocos2d_y="-0.55" kX="29.36" kY="29.36" cX="1" cY="1" pX="26" pY="14" z="13" dI="0" twE="0" dr="4"/>
+     <f x="167.65" y="52.35" cocos2d_x="173.25" cocos2d_y="23.45" kX="72.58" kY="72.58" cX="1" cY="1" pX="26" pY="14" z="13" dI="0" twE="0" dr="3"/>
+     <f x="170.4" y="71.6" cocos2d_x="176" cocos2d_y="42.7" kX="72.58" kY="72.58" cX="1" cY="1" pX="26" pY="14" z="14" dI="0" twE="0" dr="2"/>
+     <f x="173.7" y="129.1" cocos2d_x="190.2" cocos2d_y="104.8" kX="95.86" kY="95.86" cX="1" cY="1" pX="26" pY="14" z="14" dI="0" twE="0" dr="2"/>
+     <f x="174.45" y="142.7" cocos2d_x="191.35" cocos2d_y="120.2" kX="99.25" kY="96.4" cX="0.96" cY="1.03" pX="26" pY="14" z="14" dI="0" twE="0" dr="2"/>
+     <f x="169.35" y="143.3" cocos2d_x="192.05" cocos2d_y="124.65" kX="112.27" kY="112.27" cX="0.99" cY="0.99" pX="26" pY="14" z="14" dI="0" twE="0" dr="1"/>
+     <f x="169.35" y="151.55" cocos2d_x="192.05" cocos2d_y="132.9" kX="112.27" kY="112.27" cX="0.99" cY="0.99" pX="26" pY="14" z="14" dI="0" twE="0" dr="2"/>
+     <f x="166.65" y="149.5" cocos2d_x="194.1" cocos2d_y="132.2" kX="108.94" kY="122.67" cX="1" cY="1.02" pX="26" pY="14" z="14" dI="0" twE="0" dr="2"/>
+     <f x="164.7" y="147.3" cocos2d_x="191.95" cocos2d_y="130.6" kX="111.59" kY="123.18" cX="1.01" cY="0.99" pX="26" pY="14" z="14" dI="0" twE="0" dr="2"/>
+     <f x="165.9" y="150.25" cocos2d_x="192.3" cocos2d_y="132.1" kX="108.79" kY="120.38" cX="1.01" cY="0.99" pX="26" pY="14" z="14" dI="0" twE="0" dr="9"/>
+     <f x="165.9" y="150.25" cocos2d_x="192.3" cocos2d_y="132.1" kX="108.79" kY="120.38" cX="1.01" cY="0.99" pX="26" pY="14" z="14" dI="0" twE="0" dr="1"/>
+    </b>
+    <b name="Zombie_zamboni_wires" sc="1" dl="0">
+     <f x="75.55" y="101.3" cocos2d_x="71.45" cocos2d_y="92.7" kX="0" kY="0" cX="1" cY="1" pX="4" pY="9" z="14" dI="0" twE="0" dr="3"/>
+     <f x="81.25" y="108.5" cocos2d_x="87.3" cocos2d_y="101.05" kX="64.99" kY="64.99" cX="1" cY="1" pX="4" pY="9" z="14" dI="0" twE="0" dr="4"/>
+     <f x="82.75" y="106.25" cocos2d_x="89.75" cocos2d_y="99.6" kX="72.58" kY="72.58" cX="1" cY="1" pX="4" pY="9" z="14" dI="0" twE="0" dr="3"/>
+     <f x="85.5" y="125.5" cocos2d_x="92.5" cocos2d_y="118.85" kX="72.58" kY="72.58" cX="1" cY="1" pX="4" pY="9" z="15" dI="0" twE="0" dr="2"/>
+     <f x="85.5" y="148.25" cocos2d_x="92.5" cocos2d_y="141.6" kX="72.58" kY="72.58" cX="1" cY="1" pX="4" pY="9" z="15" dI="0" twE="0" dr="2"/>
+     <f x="85.35" y="148.75" cocos2d_x="92.6" cocos2d_y="142.35" kX="73.69" kY="71.42" cX="0.97" cY="1.02" pX="4" pY="9" z="15" dI="0" twE="0" dr="2"/>
+     <f x="79.4" y="136.75" cocos2d_x="87.95" cocos2d_y="132.35" kX="88.99" kY="88.99" cX="1" cY="1" pX="4" pY="9" z="15" dI="0" twE="0" dr="1"/>
+     <f x="79.4" y="145" cocos2d_x="87.95" cocos2d_y="140.6" kX="88.99" kY="88.99" cX="1" cY="1" pX="4" pY="9" z="15" dI="0" twE="0" dr="2"/>
+     <f x="77.2" y="149.5" cocos2d_x="86" cocos2d_y="145.2" kX="89.04" kY="88.93" cX="0.97" cY="1.03" pX="4" pY="9" z="15" dI="0" twE="0" dr="2"/>
+     <f x="78.05" y="143" cocos2d_x="86.6" cocos2d_y="138.6" kX="89" kY="88.98" cX="0.99" cY="1" pX="4" pY="9" z="15" dI="0" twE="0" dr="2"/>
+     <f x="78.95" y="149.05" cocos2d_x="87.4" cocos2d_y="144.5" kX="87.97" kY="87.95" cX="0.99" cY="1" pX="4" pY="9" z="15" dI="0" twE="0" dr="9"/>
+     <f x="78.95" y="149.05" cocos2d_x="87.4" cocos2d_y="144.5" kX="87.97" kY="87.95" cX="0.99" cY="1" pX="4" pY="9" z="15" dI="0" twE="0" dr="1"/>
+    </b>
+    <b name="Zombie_zamboni_brush" sc="1" dl="0">
+     <f x="-27.65" y="146.8" cocos2d_x="-39.65" cocos2d_y="136.7" kX="0" kY="0" cX="1" cY="1" pX="12" pY="10" z="15" dI="0" twE="0" dr="3"/>
+     <f x="-3.45" y="34.3" cocos2d_x="0.6" cocos2d_y="19.15" kX="64.99" kY="64.99" cX="1" cY="1" pX="12" pY="10" z="15" dI="0" twE="0" dr="4"/>
+     <f x="8.65" y="21.6" cocos2d_x="14.65" cocos2d_y="7.1" kX="72.58" kY="72.58" cX="1" cY="1" pX="12" pY="10" z="15" dI="0" twE="0" dr="3"/>
+     <f x="11.4" y="40.85" cocos2d_x="17.4" cocos2d_y="26.35" kX="72.58" kY="72.58" cX="1" cY="1" pX="12" pY="10" z="16" dI="0" twE="0" dr="2"/>
+     <f x="11.4" y="63.6" cocos2d_x="17.4" cocos2d_y="49.1" kX="72.58" kY="72.58" cX="1" cY="1" pX="12" pY="10" z="16" dI="0" twE="0" dr="2"/>
+     <f x="8.9" y="69" cocos2d_x="15.1" cocos2d_y="55.05" kX="73.69" kY="71.42" cX="0.97" cY="1.02" pX="12" pY="10" z="16" dI="0" twE="0" dr="2"/>
+     <f x="32.35" y="34.7" cocos2d_x="42.15" cocos2d_y="22.55" kX="88.99" kY="88.99" cX="1" cY="1" pX="12" pY="10" z="16" dI="0" twE="0" dr="1"/>
+     <f x="32.35" y="42.95" cocos2d_x="42.15" cocos2d_y="30.8" kX="88.99" kY="88.99" cX="1" cY="1" pX="12" pY="10" z="16" dI="0" twE="0" dr="2"/>
+     <f x="36.45" y="49.35" cocos2d_x="43.9" cocos2d_y="35.85" kX="78.49" kY="77.12" cX="0.97" cY="1.02" pX="12" pY="10" z="16" dI="0" twE="0" dr="2"/>
+     <f x="38.45" y="38.75" cocos2d_x="45.7" cocos2d_y="25" kX="77.93" kY="77.72" cX="0.99" cY="1" pX="12" pY="10" z="16" dI="0" twE="0" dr="2"/>
+     <f x="37.5" y="47.5" cocos2d_x="44.5" cocos2d_y="33.65" kX="76.9" kY="76.69" cX="0.99" cY="0.99" pX="12" pY="10" z="16" dI="0" twE="0" dr="2"/>
+     <f x="37.55" y="44.5" cocos2d_x="46.4" cocos2d_y="31.8" kX="85.22" kY="84.98" cX="0.99" cY="0.99" pX="12" pY="10" z="16" dI="0" twE="0" dr="2"/>
+     <f x="36.8" y="48.25" cocos2d_x="44.75" cocos2d_y="34.95" kX="81.2" kY="80.95" cX="0.99" cY="0.99" pX="12" pY="10" z="16" dI="0" twE="0" dr="2"/>
+     <f x="38.85" y="42.5" cocos2d_x="49.95" cocos2d_y="31.6" kX="96.08" kY="95.83" cX="0.99" cY="0.99" pX="12" pY="10" z="16" dI="0" twE="0" dr="1"/>
+     <f x="37.05" y="44.4" cocos2d_x="47.45" cocos2d_y="32.85" kX="92.55" kY="92.31" cX="0.99" cY="0.99" pX="12" pY="10" z="16" dI="0" twE="0" dr="2"/>
+     <f x="37.5" y="47.5" cocos2d_x="44.5" cocos2d_y="33.65" kX="76.9" kY="76.69" cX="0.99" cY="0.99" pX="12" pY="10" z="16" dI="0" twE="0" dr="1"/>
+    </b>
+    <b name="Zombie_zamboni_wheel1" sc="1" dl="0">
+     <f x="-56.7" y="142.65" cocos2d_x="-16.45" cocos2d_y="140.55" kX="0" kY="0" cX="1" cY="1" pX="-40" pY="2" z="16" dI="0" twE="0" dr="3"/>
+     <f x="-11.9" y="6.25" cocos2d_x="6.9" cocos2d_y="41.75" kX="64.99" kY="64.99" cX="1" cY="1" pX="-40" pY="2" z="16" dI="0" twE="0" dr="4"/>
+     <f x="3.9" y="-7.35" cocos2d_x="17.9" cocos2d_y="30.3" kX="72.58" kY="72.58" cX="1" cY="1" pX="-40" pY="2" z="16" dI="0" twE="0" dr="3"/>
+     <f x="6.65" y="11.9" cocos2d_x="20.65" cocos2d_y="49.55" kX="72.58" kY="72.58" cX="1" cY="1" pX="-40" pY="2" z="17" dI="0" twE="0" dr="2"/>
+     <f x="6.65" y="34.65" cocos2d_x="20.65" cocos2d_y="72.3" kX="72.58" kY="72.58" cX="1" cY="1" pX="-40" pY="2" z="17" dI="0" twE="0" dr="2"/>
+     <f x="4" y="41.6" cocos2d_x="18.45" cocos2d_y="77.9" kX="73.69" kY="71.42" cX="0.97" cY="1.02" pX="-40" pY="2" z="17" dI="0" twE="0" dr="2"/>
+     <f x="35.9" y="5.55" cocos2d_x="38.75" cocos2d_y="45.65" kX="88.99" kY="88.99" cX="1" cY="1" pX="-40" pY="2" z="17" dI="0" twE="0" dr="1"/>
+     <f x="35.9" y="13.8" cocos2d_x="38.75" cocos2d_y="53.9" kX="88.99" kY="88.99" cX="1" cY="1" pX="-40" pY="2" z="17" dI="0" twE="0" dr="2"/>
+     <f x="44.25" y="25.3" cocos2d_x="40.65" cocos2d_y="64.2" kX="97.65" kY="98.57" cX="0.97" cY="1.02" pX="-40" pY="2" z="17" dI="0" twE="0" dr="2"/>
+     <f x="46.05" y="11.45" cocos2d_x="42.55" cocos2d_y="51.15" kX="98.03" kY="98.17" cX="0.99" cY="1" pX="-40" pY="2" z="17" dI="0" twE="0" dr="2"/>
+     <f x="44.7" y="22.85" cocos2d_x="41.9" cocos2d_y="62.6" kX="97" kY="97.14" cX="0.99" cY="1" pX="-40" pY="2" z="17" dI="0" twE="0" dr="3"/>
+     <f x="44.7" y="24.1" cocos2d_x="48.25" cocos2d_y="63.75" kX="87.96" kY="88" cX="0.99" cY="1" pX="-40" pY="2" z="17" dI="0" twE="0" dr="2"/>
+     <f x="46.2" y="22.2" cocos2d_x="42.65" cocos2d_y="61.9" kX="98.09" kY="98.29" cX="0.99" cY="1" pX="-40" pY="2" z="17" dI="0" twE="0" dr="2"/>
+     <f x="44" y="21.35" cocos2d_x="43.9" cocos2d_y="61.2" kX="93.25" kY="93.29" cX="0.99" cY="1" pX="-40" pY="2" z="17" dI="0" twE="0" dr="2"/>
+     <f x="44.7" y="22.85" cocos2d_x="41.9" cocos2d_y="62.6" kX="97" kY="97.14" cX="0.99" cY="1" pX="-40" pY="2" z="17" dI="0" twE="0" dr="1"/>
+    </b>
+    <b name="Zombie_zamboni_wheel2" sc="1" dl="0">
+     <f x="8.9" y="142.65" cocos2d_x="49.15" cocos2d_y="140.55" kX="0" kY="0" cX="1" cY="1" pX="-40" pY="2" z="17" dI="0" twE="0" dr="3"/>
+     <f x="15.75" y="65.6" cocos2d_x="34.6" cocos2d_y="101.1" kX="64.99" kY="64.99" cX="1" cY="1" pX="-40" pY="2" z="17" dI="0" twE="0" dr="4"/>
+     <f x="23.55" y="55.1" cocos2d_x="37.5" cocos2d_y="92.8" kX="72.58" kY="72.58" cX="1" cY="1" pX="-40" pY="2" z="17" dI="0" twE="0" dr="3"/>
+     <f x="26.3" y="74.35" cocos2d_x="40.25" cocos2d_y="112.05" kX="72.58" kY="72.58" cX="1" cY="1" pX="-40" pY="2" z="18" dI="0" twE="0" dr="2"/>
+     <f x="26.3" y="97.1" cocos2d_x="40.25" cocos2d_y="134.8" kX="72.58" kY="72.58" cX="1" cY="1" pX="-40" pY="2" z="18" dI="0" twE="0" dr="2"/>
+     <f x="24.3" y="101.8" cocos2d_x="38.7" cocos2d_y="138.05" kX="73.69" kY="71.42" cX="0.97" cY="1.02" pX="-40" pY="2" z="18" dI="0" twE="0" dr="2"/>
+     <f x="37.1" y="70.9" cocos2d_x="39.85" cocos2d_y="111.05" kX="88.99" kY="88.99" cX="1" cY="1" pX="-40" pY="2" z="18" dI="0" twE="0" dr="1"/>
+     <f x="37.1" y="79.15" cocos2d_x="39.85" cocos2d_y="119.3" kX="88.99" kY="88.99" cX="1" cY="1" pX="-40" pY="2" z="18" dI="0" twE="0" dr="2"/>
+     <f x="36.25" y="88" cocos2d_x="39.1" cocos2d_y="127" kX="89.04" kY="88.93" cX="0.97" cY="1.03" pX="-40" pY="2" z="18" dI="0" twE="0" dr="2"/>
+     <f x="38.25" y="76.7" cocos2d_x="41" cocos2d_y="116.5" kX="89" kY="88.98" cX="0.99" cY="1" pX="-40" pY="2" z="18" dI="0" twE="0" dr="2"/>
+     <f x="38" y="86.95" cocos2d_x="41.45" cocos2d_y="126.75" kX="87.97" kY="87.95" cX="0.99" cY="1" pX="-40" pY="2" z="18" dI="0" twE="0" dr="3"/>
+     <f x="38" y="88.65" cocos2d_x="46.75" cocos2d_y="127.6" kX="80.19" kY="80.18" cX="0.99" cY="1" pX="-40" pY="2" z="18" dI="0" twE="0" dr="2"/>
+     <f x="37.95" y="86.05" cocos2d_x="37.15" cocos2d_y="125.95" kX="93.96" kY="93.96" cX="0.99" cY="1" pX="-40" pY="2" z="18" dI="0" twE="0" dr="2"/>
+     <f x="37.8" y="86.5" cocos2d_x="39.2" cocos2d_y="126.45" kX="90.8" kY="90.8" cX="0.99" cY="1" pX="-40" pY="2" z="18" dI="0" twE="0" dr="2"/>
+     <f x="38" y="86.95" cocos2d_x="41.45" cocos2d_y="126.75" kX="87.97" kY="87.95" cX="0.99" cY="1" pX="-40" pY="2" z="18" dI="0" twE="0" dr="1"/>
+    </b>
+    <b name="Zombie_zamboni_2" sc="1" dl="0">
+     <f x="-23.6" y="100.4" cocos2d_x="-94.45" cocos2d_y="46.4" kX="0" kY="0" cX="1" cY="1" pX="71" pY="54" z="18" dI="0" twE="0" dr="3"/>
+     <f x="40.25" y="18.4" cocos2d_x="59.15" cocos2d_y="-68.5" kX="64.99" kY="64.99" cX="1" cY="1" pX="71" pY="54" z="18" dI="0" twE="0" dr="4"/>
+     <f x="54" y="11.55" cocos2d_x="84.25" cocos2d_y="-72.05" kX="72.58" kY="72.58" cX="1" cY="1" pX="71" pY="54" z="18" dI="0" twE="0" dr="3"/>
+     <f x="56.75" y="30.8" cocos2d_x="87" cocos2d_y="-52.8" kX="72.58" kY="72.58" cX="1" cY="1" pX="71" pY="54" z="19" dI="0" twE="0" dr="2"/>
+     <f x="56.75" y="53.55" cocos2d_x="87" cocos2d_y="-30.05" kX="72.58" kY="72.58" cX="1" cY="1" pX="71" pY="54" z="19" dI="0" twE="0" dr="2"/>
+     <f x="55.7" y="57.6" cocos2d_x="86.9" cocos2d_y="-22.9" kX="73.69" kY="71.42" cX="0.97" cY="1.02" pX="71" pY="54" z="19" dI="0" twE="0" dr="2"/>
+     <f x="78.6" y="37.9" cocos2d_x="131.1" cocos2d_y="-33.8" kX="88.99" kY="88.99" cX="1" cY="1" pX="71" pY="54" z="19" dI="0" twE="0" dr="1"/>
+     <f x="78.6" y="46.15" cocos2d_x="131.1" cocos2d_y="-25.55" kX="88.99" kY="88.99" cX="1" cY="1" pX="71" pY="54" z="19" dI="0" twE="0" dr="2"/>
+     <f x="82.9" y="57.95" cocos2d_x="147.8" cocos2d_y="-2.65" kX="97.65" kY="98.57" cX="0.97" cY="1.02" pX="71" pY="54" z="19" dI="0" twE="0" dr="2"/>
+     <f x="83.6" y="50.05" cocos2d_x="146.7" cocos2d_y="-11.85" kX="98.03" kY="98.17" cX="0.99" cY="1" pX="71" pY="54" z="19" dI="0" twE="0" dr="2"/>
+     <f x="82.85" y="55.5" cocos2d_x="144.8" cocos2d_y="-7.55" kX="97" kY="97.14" cX="0.99" cY="1" pX="71" pY="54" z="19" dI="0" twE="0" dr="9"/>
+     <f x="82.85" y="55.5" cocos2d_x="144.8" cocos2d_y="-7.55" kX="97" kY="97.14" cX="0.99" cY="1" pX="71" pY="54" z="19" dI="0" twE="0" dr="1"/>
+    </b>
+    <b name="Zombie_zamboni_1" sc="1" dl="0">
+     <f x="-26.8" y="77.95" cocos2d_x="-95.4" cocos2d_y="34.85" kX="0" kY="0" cX="1" cY="1" pX="69" pY="43" z="19" dI="0" twE="0" dr="3"/>
+     <f x="59.2" y="6" cocos2d_x="69.25" cocos2d_y="-74.25" kX="64.99" kY="64.99" cX="1" cY="1" pX="69" pY="43" z="19" dI="0" twE="0" dr="4"/>
+     <f x="74.5" y="1.75" cocos2d_x="95.05" cocos2d_y="-76.4" kX="72.58" kY="72.58" cX="1" cY="1" pX="69" pY="43" z="19" dI="0" twE="0" dr="3"/>
+     <f x="77.25" y="21" cocos2d_x="97.8" cocos2d_y="-57.15" kX="72.58" kY="72.58" cX="1" cY="1" pX="69" pY="43" z="20" dI="0" twE="0" dr="2"/>
+     <f x="77.25" y="43.75" cocos2d_x="97.8" cocos2d_y="-34.4" kX="72.58" kY="72.58" cX="1" cY="1" pX="69" pY="43" z="20" dI="0" twE="0" dr="2"/>
+     <f x="76.85" y="50.65" cocos2d_x="98.05" cocos2d_y="-24.6" kX="73.69" kY="71.42" cX="0.97" cY="1.02" pX="69" pY="43" z="20" dI="0" twE="0" dr="2"/>
+     <f x="100.95" y="34.3" cocos2d_x="142.65" cocos2d_y="-34.8" kX="88.99" kY="88.99" cX="1" cY="1" pX="69" pY="43" z="20" dI="0" twE="0" dr="1"/>
+     <f x="100.95" y="42.55" cocos2d_x="142.65" cocos2d_y="-26.55" kX="88.99" kY="88.99" cX="1" cY="1" pX="69" pY="43" z="20" dI="0" twE="0" dr="2"/>
+     <f x="106.15" y="59" cocos2d_x="159.75" cocos2d_y="-0.85" kX="97.65" kY="98.57" cX="0.97" cY="1.02" pX="69" pY="43" z="20" dI="0" twE="0" dr="2"/>
+     <f x="106.2" y="49.35" cocos2d_x="158.3" cocos2d_y="-11.75" kX="98.03" kY="98.17" cX="0.99" cY="1" pX="69" pY="43" z="20" dI="0" twE="0" dr="2"/>
+     <f x="105.45" y="56.15" cocos2d_x="156.45" cocos2d_y="-5.9" kX="97" kY="97.14" cX="0.99" cY="1" pX="69" pY="43" z="20" dI="0" twE="0" dr="9"/>
+     <f x="105.45" y="56.15" cocos2d_x="156.45" cocos2d_y="-5.9" kX="97" kY="97.14" cX="0.99" cY="1" pX="69" pY="43" z="20" dI="0" twE="0" dr="1"/>
+    </b>
+   </mov>
+  </animation>
+ </animations>
+ <TextureAtlas name="Zombie" width="256" height="256">
+  <SubTexture name="Zombie_zamboni_folder-Zombie_zamboni_1" width="110" height="69" cocos2d_pX="-13.7" cocos2d_pY="-8.6" x="116" y="0"/>
+  <SubTexture name="Zombie_zamboni_folder-Zombie_zamboni_2" width="114" height="87" cocos2d_pX="-14.15" cocos2d_pY="-10.8" x="0" y="0"/>
+  <SubTexture name="Zombie_zamboni_folder-Tween 1" width="30" height="32" cocos2d_pX="55.45" cocos2d_pY="15.95" x="53" y="141"/>
+  <SubTexture name="Zombie_zamboni_folder-Zombie_zamboni_brush" width="21" height="17" cocos2d_pX="-1.95" cocos2d_pY="-1.6" x="228" y="87"/>
+  <SubTexture name="Zombie_zamboni_folder-Zombie_zamboni_wires" width="7" height="15" cocos2d_pX="-0.65" cocos2d_pY="-1.35" x="102" y="109"/>
+  <SubTexture name="Zombie_zamboni_folder-Zombie_zambonidriver_beanie" width="52" height="28" cocos2d_pX="0" cocos2d_pY="0" x="156" y="126"/>
+  <SubTexture name="Zombie_zamboni_folder-Tween 7" width="27" height="27" cocos2d_pX="13.2" cocos2d_pY="13.2" x="0" y="143"/>
+  <SubTexture name="Zombie_zamboni_folder-Zombie_jaw" width="26" height="12" cocos2d_pX="0" cocos2d_pY="0" x="228" y="73"/>
+  <SubTexture name="Zombie_zamboni_folder-Zombie_head" width="43" height="39" cocos2d_pX="0" cocos2d_pY="0" x="111" y="122"/>
+  <SubTexture name="Zombie_zamboni_folder-Zombie_zambonidriver_shoulder" width="22" height="17" cocos2d_pX="0.7" cocos2d_pY="0.55" x="228" y="54"/>
+  <SubTexture name="Zombie_zamboni_folder-Zombie_zambonidriver_outerarm_hand" width="21" height="26" cocos2d_pX="0" cocos2d_pY="0" x="228" y="26"/>
+  <SubTexture name="Zombie_zamboni_folder-Zombie_zambonidriver_lowerarm_outer" width="24" height="9" cocos2d_pX="1.45" cocos2d_pY="0.55" x="228" y="106"/>
+  <SubTexture name="Zombie_zamboni_folder-Zombie_zambonidriver_upperarm" width="9" height="18" cocos2d_pX="0.5" cocos2d_pY="1" x="102" y="89"/>
+  <SubTexture name="Zombie_zamboni_folder-Zombie_zambonidriver_body" width="51" height="52" cocos2d_pX="3.05" cocos2d_pY="3.1" x="0" y="89"/>
+  <SubTexture name="Zombie_zamboni_folder-Zombie_zambonidriver_innerarm_hand" width="23" height="24" cocos2d_pX="0" cocos2d_pY="0" x="228" y="0"/>
+  <SubTexture name="Zombie_zamboni_folder-Zombie_zambonidriver_legs" width="64" height="49" cocos2d_pX="-3.15" cocos2d_pY="-2.4" x="116" y="71"/>
+  <SubTexture name="Zombie_zamboni_folder-Zombie_zamboni_seat" width="47" height="50" cocos2d_pX="-5.75" cocos2d_pY="-6.2" x="53" y="89"/>
+  <SubTexture name="Zombie_zamboni_folder-Zombie_zamboni_3" width="44" height="53" cocos2d_pX="-5.45" cocos2d_pY="-6.5" x="182" y="71"/>
+  <SubTexture name="Zombie_zamboni_folder-Zombie_zamboni_4" width="38" height="38" cocos2d_pX="-6.9" cocos2d_pY="-6.8" x="210" y="126"/>
+ </TextureAtlas>
+</skeleton>

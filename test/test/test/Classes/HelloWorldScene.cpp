@@ -16,20 +16,19 @@ CCLayer *CreateLayer(int index)
 	switch(index)
 	{
 	case TEST_DRAGON_BONES_2_0:
-		pLayer = new TestDragonBones20();
-		break;
+		pLayer = new TestDragonBones20(); break;
 	case TEST_COCOSTUDIO_WITH_SKELETON:
-		pLayer = new TestCSWithSkeleton();
-		break;
+		pLayer = new TestCSWithSkeleton(); break;
 	case TEST_COCOSTUDIO_WITHOUT_SKELETON:
-		pLayer = new TestCSWithoutSkeleton();
-		break;
+		pLayer = new TestCSWithoutSkeleton(); break;
+	case TEST_COCOSTUDIO_WITH_CONVERT_FROM_DRAGON_BONES_2_0:
+		pLayer = new TestCSContertFromDragonBone(); break;
 	case TEST_PERFORMANCE:
-		pLayer = new TestPerformance();
-		break;
+		pLayer = new TestPerformance(); break;
 	case TEST_CHANGE_ZORDER:
-		pLayer = new TestChangeZorder();
-		break;
+		pLayer = new TestChangeZorder(); break;
+	case TEST_ANIMATION_EVENT:
+		pLayer = new TestAnimationEvent(); break;
 	default:
 		break;
 	}
@@ -84,33 +83,53 @@ void TestScene::onEnter()
 
 void TestScene::runThisTest()
 {
+	cs::ArmatureDataManager::sharedArmatureDataManager()->addArmatureFileInfo("TestBone", "", "Armature/TestBone0.png", "Armature/TestBone0.plist", "Armature/TestBone.json");
+	cs::ArmatureDataManager::sharedArmatureDataManager()->addArmatureFileInfo("Cowboy", "", "Armature/Cowboy0.png", "Armature/Cowboy0.plist", "Armature/Cowboy.json");
+	cs::ArmatureDataManager::sharedArmatureDataManager()->addArmatureFileInfo("Zombie_f/Zombie", "", "Armature/Example08.png", "Armature/Example08.plist", "Armature/Example08.xml");
+	cs::ArmatureDataManager::sharedArmatureDataManager()->addArmatureFileInfo("Knight_f/Knight", "", "Armature/knight.png", "Armature/knight.plist", "Armature/knight.xml");
+	cs::ArmatureDataManager::sharedArmatureDataManager()->addArmatureFileInfo("Zombie_zamboni", "", "Armature/Zombie_zamboni.png", "Armature/Zombie_zamboni.plist", "Armature/Zombie_zamboni.xml");
+
 	s_nActionIdx = -1;
 	addChild(NextTest());
-
-	cs::ArmatureDataManager::sharedArmatureDataManager()->addArmatureFileInfo("TestBone", "", "TestBone0.png", "TestBone0.plist", "TestBone.json");
-	cs::ArmatureDataManager::sharedArmatureDataManager()->addArmatureFileInfo("Zombie_f/Zombie", "", "Example08.png", "Example08.plist", "Example08.xml");
-	cs::ArmatureDataManager::sharedArmatureDataManager()->addArmatureFileInfo("Knight_f/Knight", "", "knight.png", "knight.plist", "knight.xml");
 
 	CCDirector::sharedDirector()->runWithScene(this);
 }
 
+void TestScene::draw()
+{
+	CCScene::draw();
+}
 
 void TestLayer::onEnter()
 {
 	CCLayer::onEnter();
 
+
+	CCSprite *bg = CCSprite::create("bg.jpg");
+	bg->setPosition(VisibleRect::center());
+
+	float scaleX = VisibleRect::getVisibleRect().size.width / bg->getContentSize().width;
+	float scaleY = VisibleRect::getVisibleRect().size.height / bg->getContentSize().height;
+
+	bg->setScaleX(scaleX);
+	bg->setScaleY(scaleY);
+
+	addChild(bg);
+
 	// add title and subtitle
 	std::string str = title();
 	const char * pTitle = str.c_str();
 	CCLabelTTF* label = CCLabelTTF::create(pTitle, "Arial", 18);
-	addChild(label, 1);
+	label->setColor(ccc3(0, 0, 0));
+	addChild(label, 1, 10000);
 	label->setPosition( ccp(VisibleRect::center().x, VisibleRect::top().y - 30) );
 
 	std::string strSubtitle = subtitle();
 	if( ! strSubtitle.empty() ) 
 	{
 		CCLabelTTF* l = CCLabelTTF::create(strSubtitle.c_str(), "Thonburi", 22);
-		addChild(l, 1);
+		l->setColor(ccc3(0, 0, 0));
+		addChild(l, 1, 10001);
 		l->setPosition( ccp(VisibleRect::center().x, VisibleRect::top().y - 60) );
 	}    
 
@@ -131,7 +150,6 @@ void TestLayer::onEnter()
 }
 void TestLayer::onExit()
 {
-
 }
 
 std::string TestLayer::title()
@@ -183,18 +201,16 @@ std::string TestDragonBones20::title()
 }
 
 
-
-
 void TestCSWithSkeleton::onEnter()
 {
 	TestLayer::onEnter();
 
 	cs::Armature *armature = NULL;
 
-	armature = cs::Armature::create("TestBone");
+	armature = cs::Armature::create("Cowboy");
 	armature->getAnimation()->playByIndex(0);
 	armature->setScale(0.3);
-	armature->setPosition(VisibleRect::center());
+	armature->setPosition(ccp(VisibleRect::center().x, VisibleRect::center().y/*-100*/));
 	addChild(armature);
 
 }
@@ -206,12 +222,12 @@ std::string TestCSWithSkeleton::title()
 
 
 
-
 void TestCSWithoutSkeleton::onEnter()
 {
 	TestLayer::onEnter();
 
 	cs::Armature *armature = NULL;
+
 
 	armature = cs::Armature::create("TestBone");
 	armature->getAnimation()->playByIndex(0);
@@ -228,24 +244,71 @@ std::string TestCSWithoutSkeleton::title()
 
 
 
+void TestCSContertFromDragonBone::onEnter()
+{
+	TestLayer::onEnter();
+
+	cs::Armature *armature = cs::Armature::create("Zombie_zamboni");
+	armature->getAnimation()->playByIndex(1);
+	armature->getAnimation()->setAnimationScale(0.5);
+	armature->setPosition(ccp(VisibleRect::center().x, VisibleRect::center().y + 100));
+	addChild(armature);
+}
+
+std::string TestCSContertFromDragonBone::title()
+{
+	return "Test CocoStudio Data Convert From DragonBones 2.0 ";
+}
+
+
+
+
+
+
+TestPerformance::~TestPerformance()
+{
+	for (std::vector<Armature*>::iterator it = armatureList.begin(); it != armatureList.end(); it++)
+	{
+		(*it)->removeFromParentAndCleanup(true);
+	}
+}
 void TestPerformance::onEnter()
 {
 	TestLayer::onEnter();
 
-	cs::Armature *armature = NULL;
-
-	for (int i = 0; i < 150; i++)
-	{
-		armature = cs::Armature::create("Knight_f/Knight");
-		armature->getAnimation()->playByIndex(0);
-		armature->setPosition(50 + i, 150);
-		addChild(armature, i);
-	}
+	armatureCount = frames = times =  0;
+	scheduleUpdate();
 }
-
 std::string TestPerformance::title()
 {
 	return "Test Performance";
+}
+std::string TestPerformance::subtitle()
+{
+	return "Current Armature Count : ";
+}
+void TestPerformance::update(float delta)
+{
+	frames ++;
+	times += delta;
+
+	if (frames/ times > 58)
+	{
+		cs::Armature *armature = NULL;
+		armature = new Armature();
+		armature->init("Knight_f/Knight");
+		armature->getAnimation()->playByIndex(0);
+		armature->setPosition(50 + armatureCount * 2, 150);
+		addChild(armature, armatureCount++);
+
+		armatureList.push_back(armature);
+
+		char pszCount[255];
+		sprintf(pszCount, "%s %i", subtitle().c_str(), armatureCount);
+		CCLabelTTF *label = (CCLabelTTF*)getChildByTag(10001);
+		label->setString(pszCount);
+
+	}
 }
 
 
@@ -292,4 +355,56 @@ void TestChangeZorder::changeZorder(float dt)
 
 	currentTag ++;
 	currentTag = currentTag % 3;
+}
+
+
+
+
+void TestAnimationEvent::onEnter()
+{
+	TestLayer::onEnter();
+	armature = Armature::create("Cowboy");
+	armature->getAnimation()->play("Fire");
+	armature->setScaleX(-0.3f);
+	armature->setScaleY(0.3f);
+	armature->setPosition(ccp(VisibleRect::left().x + 50, VisibleRect::left().y));
+	armature->getAnimation()->MovementEventSignal.connect(this, &TestAnimationEvent::animationEvent);
+	addChild(armature);
+}
+std::string TestAnimationEvent::title()
+{
+	return "Test Armature Animation Event";
+}
+void TestAnimationEvent::animationEvent(Armature *armature, const char *movementType, const char *movementID)
+{
+	std::string id = movementID;
+	std::string type = movementType;
+
+	if (type.compare(LOOP_COMPLETE) == 0)
+	{
+		if (id.compare("Fire") == 0)
+		{
+			CCActionInterval *actionToRight = CCMoveTo::create(2, ccp(VisibleRect::right().x - 50, VisibleRect::right().y));
+			armature->stopAllActions();
+			armature->runAction(CCSequence::create(actionToRight,  CCCallFunc::create(this, callfunc_selector(TestAnimationEvent::callback1)), NULL));
+			armature->getAnimation()->play("Walk");
+		}
+		else if (id.compare("FireMax") == 0)
+		{
+			CCActionInterval *actionToLeft = CCMoveTo::create(2, ccp(VisibleRect::left().x + 50, VisibleRect::left().y));
+			armature->stopAllActions();
+			armature->runAction(CCSequence::create(actionToLeft,  CCCallFunc::create(this, callfunc_selector(TestAnimationEvent::callback2)), NULL));
+			armature->getAnimation()->play("Walk");
+		}
+	}
+}
+void TestAnimationEvent::callback1()
+{
+	armature->runAction(CCScaleTo::create(0.3f, 0.3f, 0.3f));
+	armature->getAnimation()->play("FireMax", 10);
+}
+void TestAnimationEvent::callback2()
+{
+	armature->runAction(CCScaleTo::create(0.3f, -0.3f, 0.3f));
+	armature->getAnimation()->play("Fire", 10);
 }

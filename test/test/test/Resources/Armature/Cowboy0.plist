@@ -194,24 +194,43 @@
 				<key>offsetY</key>
 				<real>0</real>
 			</dict>
+			<key>25.png</key>
+			<dict>
+				<key>width</key>
+				<integer>20</integer>
+				<key>height</key>
+				<integer>23</integer>
+				<key>originalWidth</key>
+				<integer>20</integer>
+				<key>originalHeight</key>
+				<integer>23</integer>
+				<key>x</key>
+				<integer>454</integer>
+				<key>y</key>
+				<integer>481</integer>
+				<key>offsetX</key>
+				<real>0</real>
+				<key>offsetY</key>
+				<real>0</real>
+			</dict>
 		</dict>
 		<key>metadata</key>
 		<dict>
 			<key>format</key>
 			<integer>0</integer>
 			<key>textureFileName</key>
-			<string>TestBone0.png</string>
+			<string>Cowboy0.png</string>
 			<key>realTextureFileName</key>
-			<string>TestBone0.png</string>
+			<string>Cowboy0.png</string>
 			<key>size</key>
-			<string>{2048,2048}</string>
+			<string>{2048,1024}</string>
 		</dict>
 		<key>texture</key>
 		<dict>
 			<key>width</key>
 			<integer>2048</integer>
 			<key>height</key>
-			<integer>2048</integer>
+			<integer>1024</integer>
 		</dict>
 	</dict>
 </plist>

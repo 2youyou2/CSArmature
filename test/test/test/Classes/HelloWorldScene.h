@@ -5,6 +5,7 @@
 #include "CSArmature.h"
 #include "CSArmatureDataManager.h"
 #include "VisibleRect.h"
+#include "sigslot.h"
 
 using namespace cs;
 
@@ -26,14 +27,17 @@ public:
 	virtual void onEnter();
 
 	virtual void runThisTest();
+	virtual void draw();
 };
 
 enum {
 	TEST_DRAGON_BONES_2_0 = 0,
-	TEST_COCOSTUDIO_WITHOUT_SKELETON,
 	TEST_COCOSTUDIO_WITH_SKELETON,
+	TEST_COCOSTUDIO_WITHOUT_SKELETON,
+	TEST_COCOSTUDIO_WITH_CONVERT_FROM_DRAGON_BONES_2_0,
 	TEST_PERFORMANCE,
 	TEST_CHANGE_ZORDER,
+	TEST_ANIMATION_EVENT,
 
 	TEST_LAYER_COUNT
 };
@@ -52,12 +56,16 @@ public:
 	void backCallback(CCObject* pSender);
 };
 
+
+
 class TestDragonBones20 : public TestLayer
 {
 public:
 	virtual void onEnter();
 	virtual std::string title();
 };
+
+
 
 class TestCSWithSkeleton : public TestLayer
 {
@@ -71,11 +79,30 @@ class TestCSWithoutSkeleton : public TestLayer
 	virtual std::string title();
 };
 
-class TestPerformance : public TestLayer
+class TestCSContertFromDragonBone : public TestLayer
 {
 	virtual void onEnter();
 	virtual std::string title();
 };
+
+class TestPerformance : public TestLayer
+{
+	~TestPerformance();
+
+	virtual void onEnter();
+	virtual std::string title();
+	virtual std::string subtitle();
+	void update(float delta);
+
+	int armatureCount;
+
+	int frames;
+	float times;
+
+	std::vector<Armature*> armatureList;
+};
+
+
 
 class TestChangeZorder : public TestLayer
 {
@@ -84,6 +111,18 @@ class TestChangeZorder : public TestLayer
 	void changeZorder(float dt);
 
 	int currentTag;
+};
+
+
+class TestAnimationEvent : public TestLayer, public sigslot::has_slots<>
+{
+	virtual void onEnter();
+	virtual std::string title();
+	void animationEvent(Armature *armature, const char *movementType, const char *movementID);
+	void callback1();
+	void callback2();
+
+	Armature *armature;
 };
 
 #endif  // __HELLOWORLD_SCENE_H__

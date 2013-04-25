@@ -85,7 +85,6 @@ namespace cs {
 		else 
 		{
 			CCAffineTransform t = m_pBone->nodeToArmatureTransform();
-			
 			t = CCAffineTransformConcat(m_tSkinTransform, t);
 
 			//
@@ -134,8 +133,14 @@ namespace cs {
     
 	void Skin::updateSkinTransform()
 	{
-		TransformHelp::nodeToMatrix(m_sSkinData, m_tSkinTransform);
-		m_tSkinTransform.tx -= m_obAnchorPointInPoints.x;
-		m_tSkinTransform.ty -= m_obAnchorPointInPoints.y;
+		setScaleX(m_sSkinData.scaleX);
+		setScaleY(m_sSkinData.scaleY);
+
+		setScaleX(m_sSkinData.scaleX);
+		setScaleY(m_sSkinData.scaleY);
+		setRotation(CC_RADIANS_TO_DEGREES(m_sSkinData.skewX));
+		setPosition(ccp(m_sSkinData.x, m_sSkinData.y));
+
+		m_tSkinTransform = nodeToParentTransform();
 	}
 }

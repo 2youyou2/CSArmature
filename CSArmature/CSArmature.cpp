@@ -202,7 +202,7 @@ bool Armature::init(const char *name)
                     CC_BREAK_IF(!movData);
                     
                     MovementBoneData *movBoneData = movData->getMovementBoneData(bone->getName().c_str());
-                    CC_BREAK_IF(!movBoneData);
+                    CC_BREAK_IF(!movBoneData || movBoneData->frameList.count() <= 0);
                     
                     FrameData *_frameData = movBoneData->getFrameData(0);
                     CC_BREAK_IF(!_frameData);
@@ -401,6 +401,10 @@ void Armature::draw()
 		m_pAtlas->drawQuads();
 		m_pAtlas->removeAllQuads();
 	}
+
+// 	ccDrawColor4B(0,0,0,255);
+// 	ccDrawLine(ccp(0, -160), ccp(0, 160));
+// 	ccDrawLine(ccp(-240, 0), ccp(240, 0));
 }
 
 void Armature::visit()

@@ -93,6 +93,8 @@ void Animation::setAnimationScale(float animationScale )
     {
         return;
     }
+
+	m_fAnimationScale = animationScale;
     
 	CCObject *object = NULL;
 	CCARRAY_FOREACH(m_pTweenList, object)
