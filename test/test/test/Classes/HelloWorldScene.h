@@ -131,8 +131,11 @@ class TestUseMutiplePicture : public TestLayer
 {
 	virtual void onEnter();
 	virtual std::string title();
-	virtual void ccTouchesBegan(CCSet *pTouches, CCEvent *pEvent);
+	virtual std::string subtitle();
+	virtual bool ccTouchBegan(CCTouch *pTouch, CCEvent *pEvent);
+	virtual void registerWithTouchDispatcher();
 
+	int displayIndex;
 	Armature *armature;
 };
 #endif  // __HELLOWORLD_SCENE_H__

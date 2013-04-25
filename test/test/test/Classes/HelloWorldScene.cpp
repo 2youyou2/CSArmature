@@ -90,6 +90,7 @@ void TestScene::runThisTest()
 	cs::ArmatureDataManager::sharedArmatureDataManager()->addArmatureFileInfo("Zombie_f/Zombie", "", "Armature/Example08.png", "Armature/Example08.plist", "Armature/Example08.xml");
 	cs::ArmatureDataManager::sharedArmatureDataManager()->addArmatureFileInfo("Knight_f/Knight", "", "Armature/knight.png", "Armature/knight.plist", "Armature/knight.xml");
 	cs::ArmatureDataManager::sharedArmatureDataManager()->addArmatureFileInfo("zamboni", "", "Armature/zamboni0.png", "Armature/zamboni0.plist", "Armature/zamboni.json");
+	cs::ArmatureDataManager::sharedArmatureDataManager()->addArmatureFileInfo("weapon", "", "Armature/weapon.png", "Armature/weapon.plist", "Armature/weapon.xml");
 
 	s_nActionIdx = -1;
 	addChild(NextTest());
@@ -416,10 +417,14 @@ void TestAnimationEvent::callback2()
 void TestUseMutiplePicture::onEnter()
 {
 	TestLayer::onEnter();
+	setTouchEnabled(true);
+
+	displayIndex = 0;
 
 	armature = Armature::create("Knight_f/Knight");
 	armature->getAnimation()->playByIndex(0);
-	armature->setPosition(ccp(VisibleRect::left().x, VisibleRect::left().y));
+	armature->setPosition(ccp(VisibleRect::left().x+70, VisibleRect::left().y));
+	armature->setScale(2);
 	addChild(armature);
 
 	char* weapon[] = {"weapon_f-sword.png", "weapon_f-sword2.png", "weapon_f-sword3.png", "weapon_f-sword4.png", "weapon_f-sword5.png", "weapon_f-knife.png", "weapon_f-hammer.png"};
@@ -427,6 +432,7 @@ void TestUseMutiplePicture::onEnter()
 	SpriteDisplayData displayData;
 	for (int i = 0; i < 7; i++)
 	{
+		displayData.setParam(weapon[i]);
 		armature->getBone("weapon")->addDisplay(&displayData, i);
 	}
 }
@@ -434,7 +440,18 @@ std::string TestUseMutiplePicture::title()
 {
 	return "Test One Armature Use Different Picture";
 }
-void TestUseMutiplePicture::ccTouchesBegan(CCSet *pTouches, CCEvent *pEvent)
+std::string TestUseMutiplePicture::subtitle()
 {
+	return "weapon and armature are in different picture";
+}
+bool TestUseMutiplePicture::ccTouchBegan(CCTouch *pTouch, CCEvent *pEvent)
+{
+	displayIndex = (++displayIndex) % 6;
+	armature->getBone("weapon")->changeDisplayByIndex(displayIndex, true);
+	return false;
+}
 
+void TestUseMutiplePicture::registerWithTouchDispatcher()
+{
+	CCDirector::sharedDirector()->getTouchDispatcher()->addTargetedDelegate(this, INT_MIN+1, true);
 }
