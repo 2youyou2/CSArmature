@@ -126,6 +126,7 @@ Armature::Armature()
     ,m_pComArmature(NULL)
 	,m_pArmature(NULL)
 	,m_pAtlas(NULL)
+	,m_pBatchNode(NULL)
 {
 }
 
@@ -396,7 +397,7 @@ void Armature::draw()
 		}
 	}
 
-	if(m_pAtlas)
+	if(m_pAtlas && !m_pBatchNode)
 	{
 		m_pAtlas->drawQuads();
 		m_pAtlas->removeAllQuads();

@@ -32,43 +32,21 @@
 using namespace cocos2d;
 
 namespace cs {
-    
-enum RENDER_TYPE
-{
-    SIMPLE_ZORDER,          //! use a single png and cocos2dx zorder to order
-    BATCHNODE_ZORDER,       //! use CCSpriteBatchNode and cocos2dx zorder to order
-    BATCHNODE_VERTEXZ,      //! use CCSpriteBatchNode and cocos2dx vertexz to order. The batch node will open depth test and alpha test, the advantage is we can order between two different CCSpriteBatchNode, the disadvantage is it can't have      translucence effect.
-    
-    RENDER_MAX
-};
 
-
-class BatchNode : public CCSpriteBatchNode
+class BatchNode : public CCNode
 {
 public:
-	static BatchNode *create(const char *_fileName);
+	static BatchNode *create();
 public:
     BatchNode();
-    
-    
+
+	virtual bool init();
+	virtual void addChild(CCNode *child, int zOrder, int tag);
+	virtual void visit();
 	void draw();
-    
-    /*
-     *  @brief   set this BatchNode's render type
-     *
-     *  @@param _renderType    RENDER_TYPE you want to set
-     */
-    void setRenderType(RENDER_TYPE _renderType);
-    
-    /*
-     *  @brief   get this BatchNode's render type
-     *
-     *  @return    RENDER_TYPE you want to set
-     */
-    RENDER_TYPE getRenderType();
-    
-private:
-    RENDER_TYPE m_eRenderType;
+
+protected:
+	CCTextureAtlas *m_pAtlas;
 };
 
 }

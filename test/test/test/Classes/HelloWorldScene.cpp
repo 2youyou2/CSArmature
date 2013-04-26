@@ -25,6 +25,8 @@ CCLayer *CreateLayer(int index)
 		pLayer = new TestCSContertFromDragonBone(); break;
 	case TEST_PERFORMANCE:
 		pLayer = new TestPerformance(); break;
+	case TEST_USE_BATCHNODE:
+		pLayer = new TestUseBatchNode(); break;
 	case TEST_CHANGE_ZORDER:
 		pLayer = new TestChangeZorder(); break;
 	case TEST_ANIMATION_EVENT:
@@ -289,6 +291,10 @@ std::string TestPerformance::subtitle()
 {
 	return "Current Armature Count : ";
 }
+void TestPerformance::addArmature(Armature *armature)
+{
+	addChild(armature, armatureCount++);
+}
 void TestPerformance::update(float delta)
 {
 	frames ++;
@@ -301,9 +307,8 @@ void TestPerformance::update(float delta)
 		armature->init("Knight_f/Knight");
 		armature->getAnimation()->playByIndex(0);
 		armature->setPosition(50 + armatureCount * 2, 150);
-		addChild(armature, armatureCount++);
-
 		armatureList.push_back(armature);
+		addArmature(armature);
 
 		char pszCount[255];
 		sprintf(pszCount, "%s %i", subtitle().c_str(), armatureCount);
@@ -311,6 +316,23 @@ void TestPerformance::update(float delta)
 		label->setString(pszCount);
 
 	}
+}
+
+
+void TestUseBatchNode::onEnter()
+{
+	TestPerformance::onEnter();
+
+	batchnode = BatchNode::create();
+	addChild(batchnode);
+}
+std::string TestUseBatchNode::title()
+{
+	return "Test Use BatchNode.";
+}
+void TestUseBatchNode::addArmature(Armature *armature)
+{
+	batchnode->addChild(armature, armatureCount++, 0);
 }
 
 

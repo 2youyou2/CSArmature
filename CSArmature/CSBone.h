@@ -134,6 +134,7 @@ public:
 	CCArray *getChildren();
 	Tween *getTween();
 
+	virtual void setZOrder(int zOrder);
 	/*
 	 * Whether or not the bone's transform property changed. if true, the bone will update the transform.
 	 */

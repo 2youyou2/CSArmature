@@ -310,6 +310,11 @@ Tween *Bone::getTween()
 	return m_pTween;
 }
 
+void Bone::setZOrder(int zOrder)
+{
+	if (m_nZOrder != zOrder)
+		CCNode::setZOrder(zOrder);
+}
 
 void Bone::addDisplay(DisplayData *_displayData, int _index)
 {
