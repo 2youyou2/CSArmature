@@ -38,7 +38,6 @@ enum {
 	TEST_PERFORMANCE,
 	TEST_CHANGE_ZORDER,
 	TEST_ANIMATION_EVENT,
-	TEST_USE_DIFFERENT_PICTURE,
 
 	TEST_LAYER_COUNT
 };
@@ -126,16 +125,4 @@ class TestAnimationEvent : public TestLayer, public sigslot::has_slots<>
 	Armature *armature;
 };
 
-
-class TestUseMutiplePicture : public TestLayer
-{
-	virtual void onEnter();
-	virtual std::string title();
-	virtual std::string subtitle();
-	virtual bool ccTouchBegan(CCTouch *pTouch, CCEvent *pEvent);
-	virtual void registerWithTouchDispatcher();
-
-	int displayIndex;
-	Armature *armature;
-};
 #endif  // __HELLOWORLD_SCENE_H__

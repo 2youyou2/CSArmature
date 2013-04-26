@@ -9,16 +9,7 @@
 /* Begin PBXBuildFile section */
 		064904FF1727F4CC00B06212 /* CloseNormal.png in Resources */ = {isa = PBXBuildFile; fileRef = 064904F31727F4CC00B06212 /* CloseNormal.png */; };
 		064905001727F4CC00B06212 /* CloseSelected.png in Resources */ = {isa = PBXBuildFile; fileRef = 064904F41727F4CC00B06212 /* CloseSelected.png */; };
-		064905011727F4CC00B06212 /* Example08.plist in Resources */ = {isa = PBXBuildFile; fileRef = 064904F51727F4CC00B06212 /* Example08.plist */; };
-		064905021727F4CC00B06212 /* Example08.png in Resources */ = {isa = PBXBuildFile; fileRef = 064904F61727F4CC00B06212 /* Example08.png */; };
-		064905031727F4CC00B06212 /* Example08.xml in Resources */ = {isa = PBXBuildFile; fileRef = 064904F71727F4CC00B06212 /* Example08.xml */; };
 		064905041727F4CC00B06212 /* HelloWorld.png in Resources */ = {isa = PBXBuildFile; fileRef = 064904F81727F4CC00B06212 /* HelloWorld.png */; };
-		064905051727F4CC00B06212 /* TestBone_Skeleton.json in Resources */ = {isa = PBXBuildFile; fileRef = 064904F91727F4CC00B06212 /* TestBone_Skeleton.json */; };
-		064905061727F4CC00B06212 /* TestBone_Skeleton0.plist in Resources */ = {isa = PBXBuildFile; fileRef = 064904FA1727F4CC00B06212 /* TestBone_Skeleton0.plist */; };
-		064905071727F4CC00B06212 /* TestBone_Skeleton0.png in Resources */ = {isa = PBXBuildFile; fileRef = 064904FB1727F4CC00B06212 /* TestBone_Skeleton0.png */; };
-		064905081727F4CC00B06212 /* TestBone.json in Resources */ = {isa = PBXBuildFile; fileRef = 064904FC1727F4CC00B06212 /* TestBone.json */; };
-		064905091727F4CC00B06212 /* TestBone0.plist in Resources */ = {isa = PBXBuildFile; fileRef = 064904FD1727F4CC00B06212 /* TestBone0.plist */; };
-		0649050A1727F4CC00B06212 /* TestBone0.png in Resources */ = {isa = PBXBuildFile; fileRef = 064904FE1727F4CC00B06212 /* TestBone0.png */; };
 		06490FCB1727F64500B06212 /* CSAnimation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 06490F3F1727F64500B06212 /* CSAnimation.cpp */; };
 		06490FCC1727F64500B06212 /* CSProcessBase.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 06490F411727F64500B06212 /* CSProcessBase.cpp */; };
 		06490FCD1727F64500B06212 /* CSTween.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 06490F431727F64500B06212 /* CSTween.cpp */; };
@@ -51,9 +42,10 @@
 		064910DC1727FF0700B06212 /* CSDisplayFactory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 064910D71727FF0700B06212 /* CSDisplayFactory.cpp */; };
 		064910DD1727FF0700B06212 /* CSSkin.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 064910D91727FF0700B06212 /* CSSkin.cpp */; };
 		064910E01727FF1700B06212 /* CSDatas.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 064910DE1727FF1700B06212 /* CSDatas.cpp */; };
-		064910E41727FFEA00B06212 /* knight.plist in Resources */ = {isa = PBXBuildFile; fileRef = 064910E11727FFEA00B06212 /* knight.plist */; };
-		064910E51727FFEA00B06212 /* knight.png in Resources */ = {isa = PBXBuildFile; fileRef = 064910E21727FFEA00B06212 /* knight.png */; };
-		064910E61727FFEA00B06212 /* knight.xml in Resources */ = {isa = PBXBuildFile; fileRef = 064910E31727FFEA00B06212 /* knight.xml */; };
+		06F1CA99172A22AE003BEA3C /* Armature in Resources */ = {isa = PBXBuildFile; fileRef = 06F1CA98172A22AE003BEA3C /* Armature */; };
+		06F1CA9B172A22B5003BEA3C /* Images in Resources */ = {isa = PBXBuildFile; fileRef = 06F1CA9A172A22B5003BEA3C /* Images */; };
+		06F1CA9E172A22DF003BEA3C /* VisibleRect.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 06F1CA9C172A22DF003BEA3C /* VisibleRect.cpp */; };
+		06F1CAA0172A2325003BEA3C /* bg.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 06F1CA9F172A2325003BEA3C /* bg.jpg */; };
 		1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
 		1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
 		288765A50DF7441C002DB57D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765A40DF7441C002DB57D /* CoreGraphics.framework */; };
@@ -88,16 +80,7 @@
 /* Begin PBXFileReference section */
 		064904F31727F4CC00B06212 /* CloseNormal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CloseNormal.png; sourceTree = "<group>"; };
 		064904F41727F4CC00B06212 /* CloseSelected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CloseSelected.png; sourceTree = "<group>"; };
-		064904F51727F4CC00B06212 /* Example08.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Example08.plist; sourceTree = "<group>"; };
-		064904F61727F4CC00B06212 /* Example08.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Example08.png; sourceTree = "<group>"; };
-		064904F71727F4CC00B06212 /* Example08.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = Example08.xml; sourceTree = "<group>"; };
 		064904F81727F4CC00B06212 /* HelloWorld.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = HelloWorld.png; sourceTree = "<group>"; };
-		064904F91727F4CC00B06212 /* TestBone_Skeleton.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = TestBone_Skeleton.json; sourceTree = "<group>"; };
-		064904FA1727F4CC00B06212 /* TestBone_Skeleton0.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = TestBone_Skeleton0.plist; sourceTree = "<group>"; };
-		064904FB1727F4CC00B06212 /* TestBone_Skeleton0.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = TestBone_Skeleton0.png; sourceTree = "<group>"; };
-		064904FC1727F4CC00B06212 /* TestBone.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = TestBone.json; sourceTree = "<group>"; };
-		064904FD1727F4CC00B06212 /* TestBone0.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = TestBone0.plist; sourceTree = "<group>"; };
-		064904FE1727F4CC00B06212 /* TestBone0.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = TestBone0.png; sourceTree = "<group>"; };
 		06490F341727F54600B06212 /* cocos2dx.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = cocos2dx.xcodeproj; path = ../../cocos2dx/proj.ios/cocos2dx.xcodeproj; sourceTree = "<group>"; };
 		06490F3F1727F64500B06212 /* CSAnimation.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CSAnimation.cpp; sourceTree = "<group>"; };
 		06490F401727F64500B06212 /* CSAnimation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSAnimation.h; sourceTree = "<group>"; };
@@ -165,9 +148,11 @@
 		064910DA1727FF0700B06212 /* CSSkin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSSkin.h; sourceTree = "<group>"; };
 		064910DE1727FF1700B06212 /* CSDatas.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CSDatas.cpp; sourceTree = "<group>"; };
 		064910DF1727FF1700B06212 /* CSDatas.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSDatas.h; sourceTree = "<group>"; };
-		064910E11727FFEA00B06212 /* knight.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = knight.plist; sourceTree = "<group>"; };
-		064910E21727FFEA00B06212 /* knight.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = knight.png; sourceTree = "<group>"; };
-		064910E31727FFEA00B06212 /* knight.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = knight.xml; sourceTree = "<group>"; };
+		06F1CA98172A22AE003BEA3C /* Armature */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Armature; sourceTree = "<group>"; };
+		06F1CA9A172A22B5003BEA3C /* Images */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Images; sourceTree = "<group>"; };
+		06F1CA9C172A22DF003BEA3C /* VisibleRect.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = VisibleRect.cpp; sourceTree = "<group>"; };
+		06F1CA9D172A22DF003BEA3C /* VisibleRect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VisibleRect.h; sourceTree = "<group>"; };
+		06F1CA9F172A2325003BEA3C /* bg.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = bg.jpg; sourceTree = "<group>"; };
 		1D30AB110D05D00D00671497 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		1D6058910D05DD3D006BFB54 /* Test.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Test.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1DF5F4DF0D08C38300B7A737 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -420,21 +405,12 @@
 		784521C214EBA449009D533B /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				064910E11727FFEA00B06212 /* knight.plist */,
-				064910E21727FFEA00B06212 /* knight.png */,
-				064910E31727FFEA00B06212 /* knight.xml */,
+				06F1CA9F172A2325003BEA3C /* bg.jpg */,
+				06F1CA9A172A22B5003BEA3C /* Images */,
+				06F1CA98172A22AE003BEA3C /* Armature */,
 				064904F31727F4CC00B06212 /* CloseNormal.png */,
 				064904F41727F4CC00B06212 /* CloseSelected.png */,
-				064904F51727F4CC00B06212 /* Example08.plist */,
-				064904F61727F4CC00B06212 /* Example08.png */,
-				064904F71727F4CC00B06212 /* Example08.xml */,
 				064904F81727F4CC00B06212 /* HelloWorld.png */,
-				064904F91727F4CC00B06212 /* TestBone_Skeleton.json */,
-				064904FA1727F4CC00B06212 /* TestBone_Skeleton0.plist */,
-				064904FB1727F4CC00B06212 /* TestBone_Skeleton0.png */,
-				064904FC1727F4CC00B06212 /* TestBone.json */,
-				064904FD1727F4CC00B06212 /* TestBone0.plist */,
-				064904FE1727F4CC00B06212 /* TestBone0.png */,
 				D4EF94ED15BD319D00D803EB /* Icon-144.png */,
 				D4EF94EB15BD319B00D803EB /* Icon-72.png */,
 				D4EF94E915BD319500D803EB /* Icon-114.png */,
@@ -450,6 +426,8 @@
 		BF23D4E2143315EB00657E08 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				06F1CA9C172A22DF003BEA3C /* VisibleRect.cpp */,
+				06F1CA9D172A22DF003BEA3C /* VisibleRect.h */,
 				BF23D4E3143315EB00657E08 /* AppDelegate.cpp */,
 				BF23D4E4143315EB00657E08 /* AppDelegate.h */,
 				BF23D4E5143315EB00657E08 /* HelloWorldScene.cpp */,
@@ -548,23 +526,14 @@
 				D446FD7D161028F4000ADA7B /* Default-568h@2x.png in Resources */,
 				064904FF1727F4CC00B06212 /* CloseNormal.png in Resources */,
 				064905001727F4CC00B06212 /* CloseSelected.png in Resources */,
-				064905011727F4CC00B06212 /* Example08.plist in Resources */,
-				064905021727F4CC00B06212 /* Example08.png in Resources */,
-				064905031727F4CC00B06212 /* Example08.xml in Resources */,
 				064905041727F4CC00B06212 /* HelloWorld.png in Resources */,
-				064905051727F4CC00B06212 /* TestBone_Skeleton.json in Resources */,
-				064905061727F4CC00B06212 /* TestBone_Skeleton0.plist in Resources */,
-				064905071727F4CC00B06212 /* TestBone_Skeleton0.png in Resources */,
-				064905081727F4CC00B06212 /* TestBone.json in Resources */,
-				064905091727F4CC00B06212 /* TestBone0.plist in Resources */,
-				0649050A1727F4CC00B06212 /* TestBone0.png in Resources */,
 				06490FF41727F64500B06212 /* json_internalarray.inl in Resources */,
 				06490FF51727F64500B06212 /* json_internalmap.inl in Resources */,
 				06490FF81727F64500B06212 /* json_valueiterator.inl in Resources */,
 				06490FFA1727F64500B06212 /* sconscript in Resources */,
-				064910E41727FFEA00B06212 /* knight.plist in Resources */,
-				064910E51727FFEA00B06212 /* knight.png in Resources */,
-				064910E61727FFEA00B06212 /* knight.xml in Resources */,
+				06F1CA99172A22AE003BEA3C /* Armature in Resources */,
+				06F1CA9B172A22B5003BEA3C /* Images in Resources */,
+				06F1CAA0172A2325003BEA3C /* bg.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -607,6 +576,7 @@
 				064910DC1727FF0700B06212 /* CSDisplayFactory.cpp in Sources */,
 				064910DD1727FF0700B06212 /* CSSkin.cpp in Sources */,
 				064910E01727FF1700B06212 /* CSDatas.cpp in Sources */,
+				06F1CA9E172A22DF003BEA3C /* VisibleRect.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

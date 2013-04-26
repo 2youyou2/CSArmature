@@ -29,8 +29,6 @@ CCLayer *CreateLayer(int index)
 		pLayer = new TestChangeZorder(); break;
 	case TEST_ANIMATION_EVENT:
 		pLayer = new TestAnimationEvent(); break;
-	case TEST_USE_DIFFERENT_PICTURE:
-		pLayer = new TestUseMutiplePicture(); break;
 	default:
 		break;
 	}
@@ -300,7 +298,7 @@ void TestPerformance::update(float delta)
 		armature = new Armature();
 		armature->init("Knight_f/Knight");
 		armature->getAnimation()->playByIndex(0);
-		armature->setPosition(50 + armatureCount * 2, 150);
+		armature->setPosition(50 + armatureCount * 2, VisibleRect::center().y);
 		addChild(armature, armatureCount++);
 
 		armatureList.push_back(armature);
@@ -412,46 +410,3 @@ void TestAnimationEvent::callback2()
 }
 
 
-
-
-void TestUseMutiplePicture::onEnter()
-{
-	TestLayer::onEnter();
-	setTouchEnabled(true);
-
-	displayIndex = 0;
-
-	armature = Armature::create("Knight_f/Knight");
-	armature->getAnimation()->playByIndex(0);
-	armature->setPosition(ccp(VisibleRect::left().x+70, VisibleRect::left().y));
-	armature->setScale(2);
-	addChild(armature);
-
-	char* weapon[] = {"weapon_f-sword.png", "weapon_f-sword2.png", "weapon_f-sword3.png", "weapon_f-sword4.png", "weapon_f-sword5.png", "weapon_f-knife.png", "weapon_f-hammer.png"};
-
-	SpriteDisplayData displayData;
-	for (int i = 0; i < 7; i++)
-	{
-		displayData.setParam(weapon[i]);
-		armature->getBone("weapon")->addDisplay(&displayData, i);
-	}
-}
-std::string TestUseMutiplePicture::title()
-{
-	return "Test One Armature Use Different Picture";
-}
-std::string TestUseMutiplePicture::subtitle()
-{
-	return "weapon and armature are in different picture";
-}
-bool TestUseMutiplePicture::ccTouchBegan(CCTouch *pTouch, CCEvent *pEvent)
-{
-	displayIndex = (++displayIndex) % 6;
-	armature->getBone("weapon")->changeDisplayByIndex(displayIndex, true);
-	return false;
-}
-
-void TestUseMutiplePicture::registerWithTouchDispatcher()
-{
-	CCDirector::sharedDirector()->getTouchDispatcher()->addTargetedDelegate(this, INT_MIN+1, true);
-}
