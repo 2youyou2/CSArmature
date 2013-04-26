@@ -166,7 +166,7 @@ public:
      */
 	CCDictionary *getBoneDic();
 
-	virtual CCRect getBoundingBox();
+	virtual CCRect boundingBox();
     
     Bone *getBoneAtPoint(float _x, float _y);
     

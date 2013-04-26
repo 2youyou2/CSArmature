@@ -40,8 +40,10 @@ class Bone;
 class DecorativeDisplay;
 class DisplayData;
 
+
 void CS_DISPLAY_ADD(Bone *bone, DecorativeDisplay *decoDisplay, DisplayData *displayData);
 void CS_DISPLAY_CREATE(Bone *bone, DecorativeDisplay *decoDisplay);
+void CS_DISPLAY_UPDATE(Bone *bone, DecorativeDisplay *decoDisplay, float dt);
 
 void CS_DISPLAY_SPRITE_ADD(Bone *bone, DecorativeDisplay *decoDisplay, DisplayData *displayData);
 void CS_DISPLAY_SPRITE_CREATE(Bone *bone, DecorativeDisplay *decoDisplay);
@@ -51,6 +53,7 @@ void CS_DISPLAY_ARMATURE_CREATE(Bone *bone, DecorativeDisplay *decoDisplay);
 
 void CS_DISPLAY_PARTICLE_ADD(Bone *bone, DecorativeDisplay *decoDisplay, DisplayData *displayData);
 void CS_DISPLAY_PARTICLE_CREATE(Bone *bone, DecorativeDisplay *decoDisplay);
+void CS_DISPLAY_PARTICLE_UPDATE(Bone *bone, DecorativeDisplay *decoDisplay, float dt);
 
 void CS_DISPLAY_SHADER_ADD(Bone *bone, DecorativeDisplay *decoDisplay, DisplayData *displayData);
 void CS_DISPLAY_SHADER_CREATE(Bone *bone, DecorativeDisplay *decoDisplay);

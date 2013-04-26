@@ -193,14 +193,14 @@
     <ClInclude Include="..\..\..\..\CSArmature\display\CSSkin.h">
       <Filter>CSArmature\display</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\..\CSArmature\display\CSDisplayFactory.h">
-      <Filter>CSArmature\display</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\..\CSArmature\display\CSBatchNode.h">
       <Filter>CSArmature\display</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\VisibleRect.h">
       <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\CSArmature\display\CSDisplayFactory.h">
+      <Filter>CSArmature\display</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

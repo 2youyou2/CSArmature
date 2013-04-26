@@ -31,6 +31,8 @@ CCLayer *CreateLayer(int index)
 		pLayer = new TestChangeZorder(); break;
 	case TEST_ANIMATION_EVENT:
 		pLayer = new TestAnimationEvent(); break;
+	case  TEST_PARTICLE_DISPLAY:
+		pLayer = new TestParticleDisplay(); break;
 	case TEST_USE_DIFFERENT_PICTURE:
 		pLayer = new TestUseMutiplePicture(); break;
 	default:
@@ -73,10 +75,8 @@ CCLayer* RestartTest()
 }
 
 
-
 TestScene::TestScene(bool bPortrait)
 {
-
 	CCScene::init();
 }
 
@@ -93,6 +93,7 @@ void TestScene::runThisTest()
 	cs::ArmatureDataManager::sharedArmatureDataManager()->addArmatureFileInfo("Knight_f/Knight", "", "Armature/knight.png", "Armature/knight.plist", "Armature/knight.xml");
 	cs::ArmatureDataManager::sharedArmatureDataManager()->addArmatureFileInfo("zamboni", "", "Armature/zamboni0.png", "Armature/zamboni0.plist", "Armature/zamboni.json");
 	cs::ArmatureDataManager::sharedArmatureDataManager()->addArmatureFileInfo("weapon", "", "Armature/weapon.png", "Armature/weapon.plist", "Armature/weapon.xml");
+	cs::ArmatureDataManager::sharedArmatureDataManager()->addArmatureFileInfo("robot", "", "Armature/robot.png", "Armature/robot.plist", "Armature/robot.xml");
 
 	s_nActionIdx = -1;
 	addChild(NextTest());
@@ -198,6 +199,7 @@ void TestDragonBones20::onEnter()
 	armature->getAnimation()->playByIndex(0);
 	armature->setPosition(VisibleRect::center());
 	addChild(armature);
+
 }
 
 std::string TestDragonBones20::title()
@@ -217,7 +219,6 @@ void TestCSWithSkeleton::onEnter()
 	armature->setScale(0.3);
 	armature->setPosition(ccp(VisibleRect::center().x, VisibleRect::center().y/*-100*/));
 	addChild(armature);
-
 }
 
 std::string TestCSWithSkeleton::title()
@@ -232,7 +233,6 @@ void TestCSWithoutSkeleton::onEnter()
 	TestLayer::onEnter();
 
 	cs::Armature *armature = NULL;
-
 
 	armature = cs::Armature::create("TestBone");
 	armature->getAnimation()->playByIndex(0);
@@ -394,6 +394,7 @@ void TestAnimationEvent::onEnter()
 	armature->setPosition(ccp(VisibleRect::left().x + 50, VisibleRect::left().y));
 	armature->getAnimation()->MovementEventSignal.connect(this, &TestAnimationEvent::animationEvent);
 	addChild(armature);
+	
 }
 std::string TestAnimationEvent::title()
 {
@@ -432,6 +433,60 @@ void TestAnimationEvent::callback2()
 	armature->runAction(CCScaleTo::create(0.3f, -0.3f, 0.3f));
 	armature->getAnimation()->play("Fire", 10);
 }
+
+
+
+
+void TestParticleDisplay::onEnter()
+{
+	TestLayer::onEnter();
+	setTouchEnabled(true);
+
+	animationID = 0;
+
+	armature = Armature::create("robot");
+	armature->getAnimation()->playByIndex(0);
+	armature->setPosition(VisibleRect::center());
+	armature->setScale(0.6);
+	addChild(armature);
+
+	ParticleDisplayData displayData;
+	displayData.setParam("Particle/SmallSun.plist");
+
+	Bone *bone  = Bone::create("p1");
+	bone->addDisplay(&displayData, 0);
+	bone->changeDisplayByIndex(0, true);
+	bone->setIgnoreMovementBoneData(true);
+	bone->setZOrder(100);
+	armature->addBone(bone, "bady-a3");
+	
+	bone  = Bone::create("p2");
+	bone->addDisplay(&displayData, 0);
+	bone->changeDisplayByIndex(0, true);
+	bone->setIgnoreMovementBoneData(true);
+	bone->setZOrder(100);
+	armature->addBone(bone, "bady-a30");
+}
+std::string TestParticleDisplay::title()
+{
+	return "Test Particle Display";
+}
+std::string TestParticleDisplay::subtitle()
+{
+	return "Touch to change animation";
+}
+bool TestParticleDisplay::ccTouchBegan(CCTouch *pTouch, CCEvent *pEvent)
+{
+	animationID = (++animationID) % armature->getAnimation()->getMovementCount();
+	armature->getAnimation()->playByIndex(animationID);
+	return false;
+}
+
+void TestParticleDisplay::registerWithTouchDispatcher()
+{
+	CCDirector::sharedDirector()->getTouchDispatcher()->addTargetedDelegate(this, INT_MIN+1, true);
+}
+
 
 
 

@@ -73,7 +73,7 @@ Bone::Bone()
     m_pDisplayManager = NULL;
 	m_bIgnoreMovementBoneData = false;
 	m_tWorldTransform = CCAffineTransformMake(1, 0, 0, 1, 0, 0);
-	m_bTransformDirty = false;
+	m_bTransformDirty = true;
 }
 
 
@@ -171,6 +171,7 @@ void Bone::update(float delta)
 			m_tWorldTransform = CCAffineTransformConcat(m_tWorldTransform, m_pParent->m_tWorldTransform);
 		}
 
+		CS_DISPLAY_UPDATE(this, m_pDisplayManager->getCurrentDecorativeDisplay(), delta);
 		// 		if(m_pChildArmature)
 		// 		{
 		// 			m_pChildArmature->update(dt);
