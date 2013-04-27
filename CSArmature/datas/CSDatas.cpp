@@ -342,7 +342,6 @@ namespace cs {
 	void MovementData::addMovementBoneData(MovementBoneData *movBoneData)
 	{
 		movBoneDataDic.setObject(movBoneData, movBoneData->name);
-		movBoneDataVec.push_back(movBoneData);
 	}
 
 	MovementBoneData *MovementData::getMovementBoneData(const char *boneName)
