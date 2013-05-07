@@ -81,6 +81,17 @@ CCLayer* RestartTest()
 TestScene::TestScene(bool bPortrait)
 {
 	CCScene::init();
+
+	CCSprite *bg = CCSprite::create("bg.jpg");
+	bg->setPosition(VisibleRect::center());
+
+	float scaleX = VisibleRect::getVisibleRect().size.width / bg->getContentSize().width;
+	float scaleY = VisibleRect::getVisibleRect().size.height / bg->getContentSize().height;
+
+	bg->setScaleX(scaleX);
+	bg->setScaleY(scaleY);
+
+	addChild(bg);
 }
 
 void TestScene::onEnter()
@@ -90,14 +101,14 @@ void TestScene::onEnter()
 
 void TestScene::runThisTest()
 {
+	cs::ArmatureDataManager::sharedArmatureDataManager()->addArmatureFileInfo("Zombie_f/Zombie", "", "Armature/Example08.png", "Armature/Example08.plist", "Armature/Example08.xml");
 	cs::ArmatureDataManager::sharedArmatureDataManager()->addArmatureFileInfo("TestBone", "", "Armature/TestBone0.png", "Armature/TestBone0.plist", "Armature/TestBone.json");
 	cs::ArmatureDataManager::sharedArmatureDataManager()->addArmatureFileInfo("Cowboy", "", "Armature/Cowboy0.png", "Armature/Cowboy0.plist", "Armature/Cowboy.json");
-	cs::ArmatureDataManager::sharedArmatureDataManager()->addArmatureFileInfo("Zombie_f/Zombie", "", "Armature/Example08.png", "Armature/Example08.plist", "Armature/Example08.xml");
 	cs::ArmatureDataManager::sharedArmatureDataManager()->addArmatureFileInfo("Knight_f/Knight", "", "Armature/knight.png", "Armature/knight.plist", "Armature/knight.xml");
 	cs::ArmatureDataManager::sharedArmatureDataManager()->addArmatureFileInfo("zamboni", "", "Armature/zamboni0.png", "Armature/zamboni0.plist", "Armature/zamboni.json");
 	cs::ArmatureDataManager::sharedArmatureDataManager()->addArmatureFileInfo("weapon", "", "Armature/weapon.png", "Armature/weapon.plist", "Armature/weapon.xml");
 	cs::ArmatureDataManager::sharedArmatureDataManager()->addArmatureFileInfo("robot", "", "Armature/robot.png", "Armature/robot.plist", "Armature/robot.xml");
-
+	
 	s_nActionIdx = -1;
 	addChild(NextTest());
 
@@ -112,18 +123,6 @@ void TestScene::draw()
 void TestLayer::onEnter()
 {
 	CCLayer::onEnter();
-
-
-	CCSprite *bg = CCSprite::create("bg.jpg");
-	bg->setPosition(VisibleRect::center());
-
-	float scaleX = VisibleRect::getVisibleRect().size.width / bg->getContentSize().width;
-	float scaleY = VisibleRect::getVisibleRect().size.height / bg->getContentSize().height;
-
-	bg->setScaleX(scaleX);
-	bg->setScaleY(scaleY);
-
-	addChild(bg);
 
 	// add title and subtitle
 	std::string str = title();
@@ -559,6 +558,7 @@ void TestBox2DDetector::onEnter()
 	armature2->setPosition(ccp(VisibleRect::right().x - 30, VisibleRect::left().y));
 	addChild(armature2);
 
+	
 	PhysicsWorld::sharedPhysicsWorld()->BoneColliderSignal.connect(this, &TestBox2DDetector::onHit);
 }
 std::string TestBox2DDetector::title()
