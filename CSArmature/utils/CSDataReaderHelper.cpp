@@ -1049,7 +1049,7 @@ namespace cs {
 			vertex->x = dic->getItemFloatValue(A_X, 0);
 			vertex->y = dic->getItemFloatValue(A_Y, 0);
 
-			vertex->y = -vertex->y;
+			//vertex->y = -vertex->y;
 
 			contourData->vertexList.addObject(vertex);
 		}
@@ -1059,8 +1059,8 @@ namespace cs {
 
 	void DataReaderHelper::DecodeNode(Node *node, CSJsonDictionary &json)
 	{
-		node->x = json.getItemFloatValue(A_X, 0);
-		node->y = json.getItemFloatValue(A_Y, 0);
+		node->x = json.getItemFloatValue(A_X, 0) * m_fPositionReadScale;
+		node->y = json.getItemFloatValue(A_Y, 0) * m_fPositionReadScale;
 		node->zOrder = json.getItemIntValue(A_Z, 0);
 
 		node->skewX = json.getItemFloatValue(A_SKEW_X, 0);

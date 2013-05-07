@@ -42,6 +42,7 @@ enum {
 	TEST_ANIMATION_EVENT,
 	TEST_PARTICLE_DISPLAY,
 	TEST_USE_DIFFERENT_PICTURE,
+	TEST_BOX2D_DETECTOR,
 
 	TEST_LAYER_COUNT
 };
@@ -165,5 +166,19 @@ class TestParticleDisplay : public TestLayer
 
 	int animationID;
 	Armature *armature;
+};
+
+class TestBox2DDetector : public TestLayer, public sigslot::has_slots<>
+{
+public:
+	virtual void onEnter();
+	virtual std::string title();
+	virtual void draw();
+	virtual void update(float delta);
+
+	void onHit(Bone *bone, Bone *bone2);
+
+	Armature *armature;
+	Armature *armature2;
 };
 #endif  // __HELLOWORLD_SCENE_H__

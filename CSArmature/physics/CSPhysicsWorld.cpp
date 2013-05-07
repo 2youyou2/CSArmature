@@ -39,7 +39,6 @@ PhysicsWorld *PhysicsWorld::sharedPhysicsWorld()
 	if (s_PhysicsWorld == NULL)
 	{
 		s_PhysicsWorld = new PhysicsWorld();
-
 		s_PhysicsWorld->initNoGravityWorld();
 	}
 
@@ -47,17 +46,18 @@ PhysicsWorld *PhysicsWorld::sharedPhysicsWorld()
 }
 
 PhysicsWorld::PhysicsWorld()
+	:m_pNoGravityWorld(NULL)
 {
 }
 
 PhysicsWorld::~PhysicsWorld()
 {
-
 }
 
 void PhysicsWorld::initNoGravityWorld()
 {
 	b2Vec2 noGravity(0, 0);
+
 	m_pNoGravityWorld = new b2World(noGravity);
 	m_pNoGravityWorld->SetAllowSleeping(true);
 

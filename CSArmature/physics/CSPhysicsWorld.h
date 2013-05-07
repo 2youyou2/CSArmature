@@ -91,11 +91,10 @@ class PhysicsWorld
 {
 public:
 	static PhysicsWorld *sharedPhysicsWorld();
+	void initNoGravityWorld();
 private:
 	PhysicsWorld();
 	~PhysicsWorld();
-
-	void initNoGravityWorld();
 
 private:
 	static PhysicsWorld *s_PhysicsWorld;

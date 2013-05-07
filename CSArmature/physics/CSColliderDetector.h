@@ -84,10 +84,10 @@ public:
     virtual bool init();
 	virtual bool init(Bone *bone);
     
-    void addContourData(ContourData *_contourData);
-    void addContourDataList(CCArray *_contourDataList);
+    void addContourData(ContourData *contourData);
+    void addContourDataList(CCArray *contourDataList);
     
-	void removeContourData(ContourData *_contourData);
+	void removeContourData(ContourData *contourData);
 	void removeAll();
     
     void updateTransform(CCAffineTransform &t);

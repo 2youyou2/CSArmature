@@ -65,6 +65,16 @@ void CS_DISPLAY_CREATE(Bone *bone, DecorativeDisplay *decoDisplay)
 void CS_DISPLAY_UPDATE(Bone *bone, DecorativeDisplay *decoDisplay, float dt)
 {
 	CS_RETURN_IF(!decoDisplay);
+
+#if ENABLE_PHYSICS_DETECT
+	ColliderDetector *detector = decoDisplay->getColliderDetector();
+	if (detector)
+	{
+		detector->updateTransform(CCAffineTransformConcat(bone->nodeToArmatureTransform(), bone->getArmature()->nodeToWorldTransform()));
+	}
+#endif
+	
+	
 	switch(decoDisplay->getDisplayData()->displayType)
 	{
 	case CS_DISPLAY_PARTICLE:
@@ -125,12 +135,12 @@ void CS_DISPLAY_SPRITE_CREATE(Bone *bone, DecorativeDisplay *decoDisplay)
 	decoDisplay->setDisplay(skin);
 
 #if ENABLE_PHYSICS_DETECT
-	if (textureData && textureData->getContourCount() > 0)
+	if (textureData && textureData->contourDataList.count() > 0)
 	{
 
 		//! create ContourSprite
 		ColliderDetector *colliderDetector = ColliderDetector::create(bone);
-		colliderDetector->addContourDataList(textureData->getContourDatas());
+		colliderDetector->addContourDataList(&textureData->contourDataList);
 
 		decoDisplay->setColliderDetector(colliderDetector);
 	}

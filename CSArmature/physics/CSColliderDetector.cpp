@@ -61,6 +61,17 @@ ColliderDetector::ColliderDetector()
 
 ColliderDetector::~ColliderDetector()
 {
+	CCObject *object = NULL;
+	CCARRAY_FOREACH(m_pColliderBodyList, object)
+	{
+		ColliderBody *colliderBody = (ColliderBody*)object;
+
+		ContourData *contourData = colliderBody->getContourData();
+		b2Body *body = colliderBody->getB2Body();
+		PhysicsWorld::sharedPhysicsWorld()->getNoGravityWorld()->DestroyBody(body);
+	}
+
+
     m_pColliderBodyList->removeAllObjects();
     CC_SAFE_DELETE(m_pColliderBodyList);
 }
@@ -93,7 +104,7 @@ void ColliderDetector::addContourData(ContourData *contourData)
 	CCARRAY_FOREACH(array, object)
 	{
 		ContourVertex2 *v = (ContourVertex2*)object;
-		b2bv[i].Set(v->x, v->y);
+		b2bv[i].Set(v->x/PT_RATIO, v->y/PT_RATIO);
 		i++;
 	}
 
@@ -119,10 +130,10 @@ void ColliderDetector::addContourData(ContourData *contourData)
     m_pColliderBodyList->addObject(colliderBody);
 }
     
-void ColliderDetector::addContourDataList(CCArray *_contourDataList)
+void ColliderDetector::addContourDataList(CCArray *contourDataList)
 {
 	CCObject *object = NULL;
-	CCARRAY_FOREACH(_contourDataList,object)
+	CCARRAY_FOREACH(contourDataList,object)
 	{
 		addContourData((ContourData*)object);
 	}
@@ -158,13 +169,13 @@ void ColliderDetector::updateTransform(CCAffineTransform &t)
 	{
 		ColliderBody *colliderBody = (ColliderBody*)object;
 
-		ContourData *_contourData = colliderBody->getContourData();
+		ContourData *contourData = colliderBody->getContourData();
 		b2Body *body = colliderBody->getB2Body();
 
 		b2PolygonShape *shape = (b2PolygonShape *)body->GetFixtureList()->GetShape();
 		
 		//! update every vertex
-		const CCArray *array = &_contourData->vertexList;
+		const CCArray *array = &contourData->vertexList;
 		CCObject *object = NULL;
 		int i = 0;
 		CCARRAY_FOREACH(array, object)

@@ -119,7 +119,7 @@ namespace cs {
 
 			m_Display2ImageMap[spriteFrameName] = _imagePath;
 
-			CCLog("spriteFrameName : %s,    imagePath : %s", spriteFrameName.c_str(), _imagePath);
+			//CCLog("spriteFrameName : %s,    imagePath : %s", spriteFrameName.c_str(), _imagePath);
 
 			CCSpriteFrame* spriteFrame = (CCSpriteFrame*)CCSpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName(spriteFrameName.c_str());
 			if (spriteFrame)

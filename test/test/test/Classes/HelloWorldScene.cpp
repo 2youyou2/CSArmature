@@ -1,4 +1,5 @@
 #include "HelloWorldScene.h"
+#include "CSPhysicsWorld.h"
 
 using namespace cocos2d;
 
@@ -35,6 +36,8 @@ CCLayer *CreateLayer(int index)
 		pLayer = new TestParticleDisplay(); break;
 	case TEST_USE_DIFFERENT_PICTURE:
 		pLayer = new TestUseMutiplePicture(); break;
+	case TEST_BOX2D_DETECTOR:
+		pLayer = new TestBox2DDetector(); break;
 	default:
 		break;
 	}
@@ -531,4 +534,54 @@ bool TestUseMutiplePicture::ccTouchBegan(CCTouch *pTouch, CCEvent *pEvent)
 void TestUseMutiplePicture::registerWithTouchDispatcher()
 {
 	CCDirector::sharedDirector()->getTouchDispatcher()->addTargetedDelegate(this, INT_MIN+1, true);
+}
+
+
+
+void TestBox2DDetector::onEnter()
+{
+	TestLayer::onEnter();
+
+	scheduleUpdate();
+
+	armature = Armature::create("Cowboy");
+	armature->getAnimation()->play("Fire");
+	armature->getAnimation()->setAnimationScale(0.1f);
+	armature->setScaleX(-0.3f);
+	armature->setScaleY(0.3f);
+	armature->setPosition(ccp(VisibleRect::left().x + 70, VisibleRect::left().y));
+	addChild(armature);
+
+	armature2 = Armature::create("Cowboy");
+	armature2->getAnimation()->play("Walk");
+	armature2->setScaleX(-0.3f);
+	armature2->setScaleY(0.3f);
+	armature2->setPosition(ccp(VisibleRect::right().x - 30, VisibleRect::left().y));
+	addChild(armature2);
+
+	PhysicsWorld::sharedPhysicsWorld()->BoneColliderSignal.connect(this, &TestBox2DDetector::onHit);
+}
+std::string TestBox2DDetector::title()
+{
+	return "Test Box2D Detector";
+}
+void TestBox2DDetector::draw()
+{
+	ccGLEnableVertexAttribs( kCCVertexAttribFlag_Position );
+
+	kmGLPushMatrix();
+
+	PhysicsWorld::sharedPhysicsWorld()->drawDebug();
+
+	kmGLPopMatrix();
+	
+}
+void TestBox2DDetector::update(float delta)
+{
+	armature2->setVisible(true);
+	PhysicsWorld::sharedPhysicsWorld()->update(delta);
+}
+void TestBox2DDetector::onHit(Bone *bone, Bone *bone2)
+{
+	armature2->setVisible(false);
 }
