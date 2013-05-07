@@ -25,10 +25,16 @@ CCLayer *CreateLayer(int index)
 		pLayer = new TestCSContertFromDragonBone(); break;
 	case TEST_PERFORMANCE:
 		pLayer = new TestPerformance(); break;
+	case TEST_USE_BATCHNODE:
+		pLayer = new TestUseBatchNode(); break;
 	case TEST_CHANGE_ZORDER:
 		pLayer = new TestChangeZorder(); break;
 	case TEST_ANIMATION_EVENT:
 		pLayer = new TestAnimationEvent(); break;
+	case  TEST_PARTICLE_DISPLAY:
+		pLayer = new TestParticleDisplay(); break;
+	case TEST_USE_DIFFERENT_PICTURE:
+		pLayer = new TestUseMutiplePicture(); break;
 	default:
 		break;
 	}
@@ -69,10 +75,8 @@ CCLayer* RestartTest()
 }
 
 
-
 TestScene::TestScene(bool bPortrait)
 {
-
 	CCScene::init();
 }
 
@@ -89,6 +93,7 @@ void TestScene::runThisTest()
 	cs::ArmatureDataManager::sharedArmatureDataManager()->addArmatureFileInfo("Knight_f/Knight", "", "Armature/knight.png", "Armature/knight.plist", "Armature/knight.xml");
 	cs::ArmatureDataManager::sharedArmatureDataManager()->addArmatureFileInfo("zamboni", "", "Armature/zamboni0.png", "Armature/zamboni0.plist", "Armature/zamboni.json");
 	cs::ArmatureDataManager::sharedArmatureDataManager()->addArmatureFileInfo("weapon", "", "Armature/weapon.png", "Armature/weapon.plist", "Armature/weapon.xml");
+	cs::ArmatureDataManager::sharedArmatureDataManager()->addArmatureFileInfo("robot", "", "Armature/robot.png", "Armature/robot.plist", "Armature/robot.xml");
 
 	s_nActionIdx = -1;
 	addChild(NextTest());
@@ -194,6 +199,7 @@ void TestDragonBones20::onEnter()
 	armature->getAnimation()->playByIndex(0);
 	armature->setPosition(VisibleRect::center());
 	addChild(armature);
+
 }
 
 std::string TestDragonBones20::title()
@@ -213,7 +219,6 @@ void TestCSWithSkeleton::onEnter()
 	armature->setScale(0.3);
 	armature->setPosition(ccp(VisibleRect::center().x, VisibleRect::center().y/*-100*/));
 	addChild(armature);
-
 }
 
 std::string TestCSWithSkeleton::title()
@@ -228,7 +233,6 @@ void TestCSWithoutSkeleton::onEnter()
 	TestLayer::onEnter();
 
 	cs::Armature *armature = NULL;
-
 
 	armature = cs::Armature::create("TestBone");
 	armature->getAnimation()->playByIndex(0);
@@ -287,6 +291,10 @@ std::string TestPerformance::subtitle()
 {
 	return "Current Armature Count : ";
 }
+void TestPerformance::addArmature(Armature *armature)
+{
+	addChild(armature, armatureCount++);
+}
 void TestPerformance::update(float delta)
 {
 	frames ++;
@@ -298,10 +306,9 @@ void TestPerformance::update(float delta)
 		armature = new Armature();
 		armature->init("Knight_f/Knight");
 		armature->getAnimation()->playByIndex(0);
-		armature->setPosition(50 + armatureCount * 2, VisibleRect::center().y);
-		addChild(armature, armatureCount++);
-
+		armature->setPosition(50 + armatureCount * 2, 150);
 		armatureList.push_back(armature);
+		addArmature(armature);
 
 		char pszCount[255];
 		sprintf(pszCount, "%s %i", subtitle().c_str(), armatureCount);
@@ -309,6 +316,23 @@ void TestPerformance::update(float delta)
 		label->setString(pszCount);
 
 	}
+}
+
+
+void TestUseBatchNode::onEnter()
+{
+	TestPerformance::onEnter();
+
+	batchnode = BatchNode::create();
+	addChild(batchnode);
+}
+std::string TestUseBatchNode::title()
+{
+	return "Test Use BatchNode.";
+}
+void TestUseBatchNode::addArmature(Armature *armature)
+{
+	batchnode->addChild(armature, armatureCount++, 0);
 }
 
 
@@ -370,6 +394,7 @@ void TestAnimationEvent::onEnter()
 	armature->setPosition(ccp(VisibleRect::left().x + 50, VisibleRect::left().y));
 	armature->getAnimation()->MovementEventSignal.connect(this, &TestAnimationEvent::animationEvent);
 	addChild(armature);
+	
 }
 std::string TestAnimationEvent::title()
 {
@@ -410,3 +435,100 @@ void TestAnimationEvent::callback2()
 }
 
 
+
+
+void TestParticleDisplay::onEnter()
+{
+	TestLayer::onEnter();
+	setTouchEnabled(true);
+
+	animationID = 0;
+
+	armature = Armature::create("robot");
+	armature->getAnimation()->playByIndex(0);
+	armature->setPosition(VisibleRect::center());
+	armature->setScale(0.6);
+	addChild(armature);
+
+	ParticleDisplayData displayData;
+	displayData.setParam("Particle/SmallSun.plist");
+
+	Bone *bone  = Bone::create("p1");
+	bone->addDisplay(&displayData, 0);
+	bone->changeDisplayByIndex(0, true);
+	bone->setIgnoreMovementBoneData(true);
+	bone->setZOrder(100);
+	armature->addBone(bone, "bady-a3");
+	
+	bone  = Bone::create("p2");
+	bone->addDisplay(&displayData, 0);
+	bone->changeDisplayByIndex(0, true);
+	bone->setIgnoreMovementBoneData(true);
+	bone->setZOrder(100);
+	armature->addBone(bone, "bady-a30");
+}
+std::string TestParticleDisplay::title()
+{
+	return "Test Particle Display";
+}
+std::string TestParticleDisplay::subtitle()
+{
+	return "Touch to change animation";
+}
+bool TestParticleDisplay::ccTouchBegan(CCTouch *pTouch, CCEvent *pEvent)
+{
+	animationID = (++animationID) % armature->getAnimation()->getMovementCount();
+	armature->getAnimation()->playByIndex(animationID);
+	return false;
+}
+
+void TestParticleDisplay::registerWithTouchDispatcher()
+{
+	CCDirector::sharedDirector()->getTouchDispatcher()->addTargetedDelegate(this, INT_MIN+1, true);
+}
+
+
+
+
+
+void TestUseMutiplePicture::onEnter()
+{
+	TestLayer::onEnter();
+	setTouchEnabled(true);
+
+	displayIndex = 0;
+
+	armature = Armature::create("Knight_f/Knight");
+	armature->getAnimation()->playByIndex(0);
+	armature->setPosition(ccp(VisibleRect::left().x+70, VisibleRect::left().y));
+	armature->setScale(2);
+	addChild(armature);
+
+	char* weapon[] = {"weapon_f-sword.png", "weapon_f-sword2.png", "weapon_f-sword3.png", "weapon_f-sword4.png", "weapon_f-sword5.png", "weapon_f-knife.png", "weapon_f-hammer.png"};
+
+	SpriteDisplayData displayData;
+	for (int i = 0; i < 7; i++)
+	{
+		displayData.setParam(weapon[i]);
+		armature->getBone("weapon")->addDisplay(&displayData, i);
+	}
+}
+std::string TestUseMutiplePicture::title()
+{
+	return "Test One Armature Use Different Picture";
+}
+std::string TestUseMutiplePicture::subtitle()
+{
+	return "weapon and armature are in different picture";
+}
+bool TestUseMutiplePicture::ccTouchBegan(CCTouch *pTouch, CCEvent *pEvent)
+{
+	displayIndex = (++displayIndex) % 6;
+	armature->getBone("weapon")->changeDisplayByIndex(displayIndex, true);
+	return false;
+}
+
+void TestUseMutiplePicture::registerWithTouchDispatcher()
+{
+	CCDirector::sharedDirector()->getTouchDispatcher()->addTargetedDelegate(this, INT_MIN+1, true);
+}

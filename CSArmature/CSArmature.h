@@ -33,6 +33,7 @@
 #include "CSBone.h"
 #include "cocos2d.h"
 #include "CSArmatureDefine.h"
+#include "CSBatchNode.h"
 
 using namespace cocos2d;
 
@@ -165,7 +166,7 @@ public:
      */
 	CCDictionary *getBoneDic();
 
-	virtual CCRect getBoundingBox();
+	virtual CCRect boundingBox();
     
     Bone *getBoneAtPoint(float _x, float _y);
     
@@ -182,7 +183,7 @@ public:
 	inline void setBlendFunc(ccBlendFunc blendFunc) { m_sBlendFunc = blendFunc; }
 	inline ccBlendFunc getBlendFunc(void) { return m_sBlendFunc; }
 
-private:
+protected:
     
     /*
      * Used to create Bone internal
@@ -190,7 +191,6 @@ private:
 	Bone *createBone(const char *_boneName );
     
 	
-public:
 	CC_SYNTHESIZE_RETAIN(Animation *, m_pAnimation, Animation);
 
 	CC_SYNTHESIZE_PASS_BY_REF(bool, m_bBonesIndexChanged, BonesIndexChanged);
@@ -199,6 +199,7 @@ public:
 
 	CC_SYNTHESIZE(Armature*, m_pArmature, Armature);
 
+	CC_SYNTHESIZE(BatchNode*, m_pBatchNode, BatchNode);
 protected:
     CCDictionary *m_pBoneDic;		//! The dictionary of the bones, include all bones in the armature, no matter it is the direct bone or the indirect bone. It is different from m_pChindren.
 

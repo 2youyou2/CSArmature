@@ -6,6 +6,7 @@
 #include "CSArmatureDataManager.h"
 #include "VisibleRect.h"
 #include "sigslot.h"
+#include "CSBatchNode.h"
 
 using namespace cs;
 
@@ -36,8 +37,11 @@ enum {
 	TEST_COCOSTUDIO_WITHOUT_SKELETON,
 	TEST_COCOSTUDIO_WITH_CONVERT_FROM_DRAGON_BONES_2_0,
 	TEST_PERFORMANCE,
+	TEST_USE_BATCHNODE,
 	TEST_CHANGE_ZORDER,
 	TEST_ANIMATION_EVENT,
+	TEST_PARTICLE_DISPLAY,
+	TEST_USE_DIFFERENT_PICTURE,
 
 	TEST_LAYER_COUNT
 };
@@ -87,11 +91,13 @@ class TestCSContertFromDragonBone : public TestLayer
 
 class TestPerformance : public TestLayer
 {
+public:
 	~TestPerformance();
 
 	virtual void onEnter();
 	virtual std::string title();
 	virtual std::string subtitle();
+	virtual void addArmature(Armature *armature);
 	void update(float delta);
 
 	int armatureCount;
@@ -101,6 +107,17 @@ class TestPerformance : public TestLayer
 
 	std::vector<Armature*> armatureList;
 };
+
+
+class TestUseBatchNode : public TestPerformance
+{
+	virtual void onEnter();
+	virtual std::string title();
+	virtual void addArmature(Armature *armature);
+
+	BatchNode *batchnode;
+};
+
 
 
 
@@ -116,6 +133,7 @@ class TestChangeZorder : public TestLayer
 
 class TestAnimationEvent : public TestLayer, public sigslot::has_slots<>
 {
+public:
 	virtual void onEnter();
 	virtual std::string title();
 	void animationEvent(Armature *armature, const char *movementType, const char *movementID);
@@ -125,4 +143,27 @@ class TestAnimationEvent : public TestLayer, public sigslot::has_slots<>
 	Armature *armature;
 };
 
+class TestUseMutiplePicture : public TestLayer
+{
+	virtual void onEnter();
+	virtual std::string title();
+	virtual std::string subtitle();
+	virtual bool ccTouchBegan(CCTouch *pTouch, CCEvent *pEvent);
+	virtual void registerWithTouchDispatcher();
+
+	int displayIndex;
+	Armature *armature;
+};
+
+class TestParticleDisplay : public TestLayer
+{
+	virtual void onEnter();
+	virtual std::string title();
+	virtual std::string subtitle();
+	virtual bool ccTouchBegan(CCTouch *pTouch, CCEvent *pEvent);
+	virtual void registerWithTouchDispatcher();
+
+	int animationID;
+	Armature *armature;
+};
 #endif  // __HELLOWORLD_SCENE_H__

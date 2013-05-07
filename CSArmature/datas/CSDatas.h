@@ -370,9 +370,6 @@ namespace cs {
 		* @value	MovementBoneData *
 		*/
 		CCDictionary movBoneDataDic;
-
-		std::vector<MovementBoneData*> movBoneDataVec;
-
 	};
 #pragma endregion
 

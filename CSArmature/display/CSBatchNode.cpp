@@ -26,100 +26,96 @@
 
 #include "CSBatchNode.h"
 #include "CSArmatureDefine.h"
+#include "CSArmature.h"
 
 namespace cs {
 
-BatchNode *BatchNode::create(const char *_fileName)
+BatchNode *BatchNode::create()
 {
-	BatchNode *_batchNode = new BatchNode();
-	if (_batchNode && _batchNode->initWithFile(_fileName, kDefaultSpriteBatchCapacity))
+	BatchNode *batchNode = new BatchNode();
+	if (batchNode && batchNode->init())
 	{
-		_batchNode->autorelease();
-		return _batchNode;
+		batchNode->autorelease();
+		return batchNode;
 	}
-	CC_SAFE_DELETE(_batchNode);
+	CC_SAFE_DELETE(batchNode);
 	return NULL;
 }
 
 BatchNode::BatchNode()
-    :m_eRenderType(BATCHNODE_ZORDER)
+	:m_pAtlas(NULL)
 {
-}
-    
-void BatchNode::setRenderType(RENDER_TYPE _renderType)
-{
-    if (m_eRenderType == _renderType)
-    {
-        return;
-    }
-    m_eRenderType = _renderType;
-    
-    switch (m_eRenderType) {
-        case SIMPLE_ZORDER:
-            setShaderProgram(CCShaderCache::sharedShaderCache()->programForKey(kCCShader_PositionTextureColor));
-            break;
-        case BATCHNODE_ZORDER:
-            setShaderProgram(CCShaderCache::sharedShaderCache()->programForKey(kCCShader_PositionTextureColor));
-            break;
-        case BATCHNODE_VERTEXZ:
-            setShaderProgram(CCShaderCache::sharedShaderCache()->programForKey(kCCShader_PositionTextureColorAlphaTest));
-            break;
-        default:
-            setShaderProgram(CCShaderCache::sharedShaderCache()->programForKey(kCCShader_PositionTextureColor));
-            break;
-    }
-
 }
 
-RENDER_TYPE BatchNode::getRenderType()
+bool BatchNode::init()
 {
-    return m_eRenderType;
+	bool ret = CCNode::init();
+	setShaderProgram(CCShaderCache::sharedShaderCache()->programForKey(kCCShader_PositionTextureColor));
+	return ret;
 }
-    
+
+void BatchNode::addChild(CCNode *child, int zOrder, int tag)
+{
+	CCNode::addChild(child, zOrder, tag);
+	Armature *armature = dynamic_cast<Armature*>(child);
+	if (armature != NULL)
+	{
+		armature->setBatchNode(this);
+	}
+}
+
+void BatchNode::visit()
+{
+	// quick return if not visible. children won't be drawn.
+	if (!m_bVisible)
+	{
+		return;
+	}
+	kmGLPushMatrix();
+
+	if (m_pGrid && m_pGrid->isActive())
+	{
+		m_pGrid->beforeDraw();
+	}
+
+	transform();
+	sortAllChildren();
+	draw();
+
+	// reset for next frame
+	m_uOrderOfArrival = 0;
+
+	if (m_pGrid && m_pGrid->isActive())
+	{
+		m_pGrid->afterDraw(this);
+	}
+
+	kmGLPopMatrix();
+}
+
 void BatchNode::draw()
 {
-    ccDirectorProjection _originProjection;
-    if (m_eRenderType == BATCHNODE_VERTEXZ)
-    {
-        // enable depth test
-        CCDirector::sharedDirector()->setDepthTest(true);
-        _originProjection = CCDirector::sharedDirector()->getProjection();
-        
-        CCDirector::sharedDirector()->setProjection(kCCDirectorProjection2D);
-        
-        // enable alpha test, used for opengl es 1.0
-//        glEnable(GL_ALPHA_TEST);
-//        glAlphaFunc(GL_GREATER, 0.5f);
-        
-//        
-//        CCSize size = CCDirector::sharedDirector()->getWinSize();
-//        
-//        
-//        //  open 2d projection. We not use CCDirector::setProjection(kCCDirectorProjection2D),
-//        //  because it's near value and far value is 1024, small for us
-//        
-//        kmGLMatrixMode(KM_GL_PROJECTION);
-//        kmGLLoadIdentity();
-//        kmMat4 orthoMatrix;
-//        kmMat4OrthographicProjection(&orthoMatrix, 0, size.width / CC_CONTENT_SCALE_FACTOR(), 0, size.height / CC_CONTENT_SCALE_FACTOR(), -MAX_VERTEXZ_VALUE, MAX_VERTEXZ_VALUE );
-//        kmGLMultMatrix(&orthoMatrix); 
-//        kmGLMatrixMode(KM_GL_MODELVIEW);
-//        kmGLLoadIdentity();
-    }
-	
-    
-	CCSpriteBatchNode::draw();
-    
+	CC_NODE_DRAW_SETUP();
+	CCObject *object = NULL;
+	CCARRAY_FOREACH(m_pChildren, object)
+	{
+		Armature *armature = dynamic_cast<Armature*>(object);
+		if (armature)
+		{
+			armature->visit();
+			m_pAtlas = armature->getTextureAtlas();
+		}
+		else
+		{
+			((CCNode*)object)->visit();
+		}
+	}
 
-    if (m_eRenderType == BATCHNODE_VERTEXZ)
-    {
-        CCDirector::sharedDirector()->setDepthTest(false);
-        
-        //disable alpha test, used for opengl es 1.0
-//        glDisable(GL_ALPHA_TEST);
-        
-        CCDirector::sharedDirector()->setProjection(_originProjection);
-    }
+	if (m_pAtlas)
+	{
+		m_pAtlas->drawQuads();
+		m_pAtlas->removeAllQuads();
+	}
 }
 
 }

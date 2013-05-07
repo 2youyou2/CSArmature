@@ -126,6 +126,7 @@ Armature::Armature()
     ,m_pComArmature(NULL)
 	,m_pArmature(NULL)
 	,m_pAtlas(NULL)
+	,m_pBatchNode(NULL)
 {
 }
 
@@ -209,8 +210,8 @@ bool Armature::init(const char *name)
                     
                     bone->getTweenData()->copy(_frameData);
                 } while (0);
-            }
-            
+			}
+			update(0);
         }
         else
         {
@@ -392,11 +393,16 @@ void Armature::draw()
 				m_pAtlas->drawQuads();
 				m_pAtlas->removeAllQuads();
 			}
-			node->visit();
+			//node->setAdditionalTransform(bone->nodeToArmatureTransform());
+// 			node->setPosition(100, 0);
+ 			node->visit();
+
+			CC_NODE_DRAW_SETUP();
+			ccGLBlendFunc(m_sBlendFunc.src, m_sBlendFunc.dst);
 		}
 	}
 
-	if(m_pAtlas)
+	if(m_pAtlas && !m_pBatchNode)
 	{
 		m_pAtlas->drawQuads();
 		m_pAtlas->removeAllQuads();
@@ -436,7 +442,7 @@ void Armature::visit()
 	kmGLPopMatrix();
 }
 
-CCRect Armature::getBoundingBox()
+CCRect Armature::boundingBox()
 {
 	float minx, miny, maxx, maxy = 0;
 

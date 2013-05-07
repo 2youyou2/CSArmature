@@ -32,6 +32,7 @@
 #include "CSSpriteFrameCacheHelper.h"
 #include "CSArmatureDataManager.h"
 #include "CSShaderNode.h"
+#include "CSTransformHelp.h"
 
 namespace cs {
 
@@ -40,8 +41,9 @@ void CS_DISPLAY_ADD(Bone *bone, DecorativeDisplay *decoDisplay, DisplayData *dis
 	switch(displayData->displayType)
 	{
 	case CS_DISPLAY_SPRITE:
-		CS_DISPLAY_SPRITE_ADD(bone, decoDisplay, displayData);
-		break;
+		CS_DISPLAY_SPRITE_ADD(bone, decoDisplay, displayData); break;
+	case  CS_DISPLAY_PARTICLE:
+		CS_DISPLAY_PARTICLE_ADD(bone, decoDisplay, displayData); break;
 	default:
 		break;
 	}
@@ -52,13 +54,25 @@ void CS_DISPLAY_CREATE(Bone *bone, DecorativeDisplay *decoDisplay)
 	switch(decoDisplay->getDisplayData()->displayType)
 	{
 	case CS_DISPLAY_SPRITE:
-		CS_DISPLAY_SPRITE_CREATE(bone, decoDisplay);
-		break;
+		CS_DISPLAY_SPRITE_CREATE(bone, decoDisplay); break;
+	case CS_DISPLAY_PARTICLE:
+		CS_DISPLAY_PARTICLE_CREATE(bone, decoDisplay); break; 
 	default:
 		break;
 	}
 }
 
+void CS_DISPLAY_UPDATE(Bone *bone, DecorativeDisplay *decoDisplay, float dt)
+{
+	CS_RETURN_IF(!decoDisplay);
+	switch(decoDisplay->getDisplayData()->displayType)
+	{
+	case CS_DISPLAY_PARTICLE:
+		CS_DISPLAY_PARTICLE_UPDATE(bone, decoDisplay, dt); break; 
+	default:
+		break;
+	}
+}
 
 
 
@@ -165,7 +179,16 @@ void CS_DISPLAY_PARTICLE_CREATE(Bone *bone, DecorativeDisplay *decoDisplay)
 	CCParticleSystem *system = CCParticleSystemQuad::create(displayData->plist.c_str());
 	decoDisplay->setDisplay(system);
 }
-
+void CS_DISPLAY_PARTICLE_UPDATE(Bone *bone, DecorativeDisplay *decoDisplay, float dt)
+{
+	CCParticleSystem *system = (CCParticleSystem*)decoDisplay->getDisplay();
+	Node node;
+	TransformHelp::matrixToNode(bone->nodeToArmatureTransform(), node);
+	system->setPosition(node.x, node.y);
+	system->setScaleX(node.scaleX);
+	system->setScaleY(node.scaleY);
+	system->update(dt);
+}
 
 
 
