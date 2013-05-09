@@ -9,7 +9,6 @@ ipch
 /test/test/test.suo
 
 /test/test/test/proj.android/obj
-
-libs
+/test/test/test/proj.android/libs
 /test/test/test/proj.android/bin
-assets
+/test/test/test/proj.android/assets
