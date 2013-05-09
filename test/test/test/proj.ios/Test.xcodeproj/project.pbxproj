@@ -42,13 +42,14 @@
 		064910DC1727FF0700B06212 /* CSDisplayFactory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 064910D71727FF0700B06212 /* CSDisplayFactory.cpp */; };
 		064910DD1727FF0700B06212 /* CSSkin.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 064910D91727FF0700B06212 /* CSSkin.cpp */; };
 		064910E01727FF1700B06212 /* CSDatas.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 064910DE1727FF1700B06212 /* CSDatas.cpp */; };
-		06F1CA99172A22AE003BEA3C /* Armature in Resources */ = {isa = PBXBuildFile; fileRef = 06F1CA98172A22AE003BEA3C /* Armature */; };
-		06F1CA9B172A22B5003BEA3C /* Images in Resources */ = {isa = PBXBuildFile; fileRef = 06F1CA9A172A22B5003BEA3C /* Images */; };
-		06F1CA9E172A22DF003BEA3C /* VisibleRect.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 06F1CA9C172A22DF003BEA3C /* VisibleRect.cpp */; };
-		06F1CAA0172A2325003BEA3C /* bg.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 06F1CA9F172A2325003BEA3C /* bg.jpg */; };
 		1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
 		1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
 		288765A50DF7441C002DB57D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765A40DF7441C002DB57D /* CoreGraphics.framework */; };
+		376ABD27173794FC00828B83 /* VisibleRect.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 376ABD25173794FC00828B83 /* VisibleRect.cpp */; };
+		376ABD731737963B00828B83 /* Armature in Resources */ = {isa = PBXBuildFile; fileRef = 376ABD6F1737963B00828B83 /* Armature */; };
+		376ABD741737963B00828B83 /* bg.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 376ABD701737963B00828B83 /* bg.jpg */; };
+		376ABD751737963B00828B83 /* Images in Resources */ = {isa = PBXBuildFile; fileRef = 376ABD711737963B00828B83 /* Images */; };
+		376ABD761737963B00828B83 /* Particle in Resources */ = {isa = PBXBuildFile; fileRef = 376ABD721737963B00828B83 /* Particle */; };
 		BF1373EF128A898400D9F789 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF492D4B1289302400A09262 /* OpenGLES.framework */; };
 		BF1373F0128A899500D9F789 /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BF492C21128924A800A09262 /* libxml2.dylib */; };
 		BF1373F1128A899E00D9F789 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BF492B6912891AC600A09262 /* libz.dylib */; };
@@ -148,15 +149,16 @@
 		064910DA1727FF0700B06212 /* CSSkin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSSkin.h; sourceTree = "<group>"; };
 		064910DE1727FF1700B06212 /* CSDatas.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CSDatas.cpp; sourceTree = "<group>"; };
 		064910DF1727FF1700B06212 /* CSDatas.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSDatas.h; sourceTree = "<group>"; };
-		06F1CA98172A22AE003BEA3C /* Armature */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Armature; sourceTree = "<group>"; };
-		06F1CA9A172A22B5003BEA3C /* Images */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Images; sourceTree = "<group>"; };
-		06F1CA9C172A22DF003BEA3C /* VisibleRect.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = VisibleRect.cpp; sourceTree = "<group>"; };
-		06F1CA9D172A22DF003BEA3C /* VisibleRect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VisibleRect.h; sourceTree = "<group>"; };
-		06F1CA9F172A2325003BEA3C /* bg.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = bg.jpg; sourceTree = "<group>"; };
 		1D30AB110D05D00D00671497 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		1D6058910D05DD3D006BFB54 /* Test.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Test.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1DF5F4DF0D08C38300B7A737 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		288765A40DF7441C002DB57D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		376ABD25173794FC00828B83 /* VisibleRect.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = VisibleRect.cpp; sourceTree = "<group>"; };
+		376ABD26173794FC00828B83 /* VisibleRect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VisibleRect.h; sourceTree = "<group>"; };
+		376ABD6F1737963B00828B83 /* Armature */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Armature; sourceTree = "<group>"; };
+		376ABD701737963B00828B83 /* bg.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = bg.jpg; sourceTree = "<group>"; };
+		376ABD711737963B00828B83 /* Images */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Images; sourceTree = "<group>"; };
+		376ABD721737963B00828B83 /* Particle */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Particle; sourceTree = "<group>"; };
 		781C33B11547F06B00633F88 /* OpenAL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenAL.framework; path = System/Library/Frameworks/OpenAL.framework; sourceTree = SDKROOT; };
 		781C33B31547F06B00633F88 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		781C33B51547F06B00633F88 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
@@ -405,9 +407,10 @@
 		784521C214EBA449009D533B /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				06F1CA9F172A2325003BEA3C /* bg.jpg */,
-				06F1CA9A172A22B5003BEA3C /* Images */,
-				06F1CA98172A22AE003BEA3C /* Armature */,
+				376ABD6F1737963B00828B83 /* Armature */,
+				376ABD701737963B00828B83 /* bg.jpg */,
+				376ABD711737963B00828B83 /* Images */,
+				376ABD721737963B00828B83 /* Particle */,
 				064904F31727F4CC00B06212 /* CloseNormal.png */,
 				064904F41727F4CC00B06212 /* CloseSelected.png */,
 				064904F81727F4CC00B06212 /* HelloWorld.png */,
@@ -426,8 +429,8 @@
 		BF23D4E2143315EB00657E08 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				06F1CA9C172A22DF003BEA3C /* VisibleRect.cpp */,
-				06F1CA9D172A22DF003BEA3C /* VisibleRect.h */,
+				376ABD25173794FC00828B83 /* VisibleRect.cpp */,
+				376ABD26173794FC00828B83 /* VisibleRect.h */,
 				BF23D4E3143315EB00657E08 /* AppDelegate.cpp */,
 				BF23D4E4143315EB00657E08 /* AppDelegate.h */,
 				BF23D4E5143315EB00657E08 /* HelloWorldScene.cpp */,
@@ -531,9 +534,10 @@
 				06490FF51727F64500B06212 /* json_internalmap.inl in Resources */,
 				06490FF81727F64500B06212 /* json_valueiterator.inl in Resources */,
 				06490FFA1727F64500B06212 /* sconscript in Resources */,
-				06F1CA99172A22AE003BEA3C /* Armature in Resources */,
-				06F1CA9B172A22B5003BEA3C /* Images in Resources */,
-				06F1CAA0172A2325003BEA3C /* bg.jpg in Resources */,
+				376ABD731737963B00828B83 /* Armature in Resources */,
+				376ABD741737963B00828B83 /* bg.jpg in Resources */,
+				376ABD751737963B00828B83 /* Images in Resources */,
+				376ABD761737963B00828B83 /* Particle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -576,7 +580,7 @@
 				064910DC1727FF0700B06212 /* CSDisplayFactory.cpp in Sources */,
 				064910DD1727FF0700B06212 /* CSSkin.cpp in Sources */,
 				064910E01727FF1700B06212 /* CSDatas.cpp in Sources */,
-				06F1CA9E172A22DF003BEA3C /* VisibleRect.cpp in Sources */,
+				376ABD27173794FC00828B83 /* VisibleRect.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

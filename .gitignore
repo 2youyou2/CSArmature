@@ -7,3 +7,9 @@ ipch
 /test/test/*.suo
 /test/test/*.suo
 /test/test/test.suo
+
+/test/test/test/proj.android/obj
+
+libs
+/test/test/test/proj.android/bin
+assets
