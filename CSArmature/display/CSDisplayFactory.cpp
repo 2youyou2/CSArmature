@@ -70,7 +70,8 @@ void CS_DISPLAY_UPDATE(Bone *bone, DecorativeDisplay *decoDisplay, float dt)
 	ColliderDetector *detector = decoDisplay->getColliderDetector();
 	if (detector)
 	{
-		detector->updateTransform(CCAffineTransformConcat(bone->nodeToArmatureTransform(), bone->getArmature()->nodeToWorldTransform()));
+		CCAffineTransform t = CCAffineTransformConcat(bone->nodeToArmatureTransform(), bone->getArmature()->nodeToWorldTransform());
+		detector->updateTransform(t);
 	}
 #endif
 	
