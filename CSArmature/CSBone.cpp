@@ -121,6 +121,9 @@ bool Bone::init(const char *name)
         m_pDisplayManager = DisplayManager::create(this);
         m_pDisplayManager->retain();
         
+		CC_SAFE_DELETE(m_pBoneData);
+		m_pBoneData = BoneData::create();
+		m_pBoneData->retain();
         
         bRet = true;
     }
@@ -154,17 +157,26 @@ void Bone::update(float delta)
 
 	if (m_bTransformDirty)
 	{
-		float cosX	= cos(m_pTweenData->skewX);
-		float cosY	= cos(m_pTweenData->skewY);
-		float sinX	= sin(m_pTweenData->skewX);
-		float sinY  = sin(m_pTweenData->skewY);
+		float skewX = m_pTweenData->skewX + m_pBoneData->skewX;
+		float skewY = m_pTweenData->skewY + m_pBoneData->skewY;
+		float scaleX = m_pTweenData->scaleX + m_pBoneData->scaleX - 1;
+		float scaleY = m_pTweenData->scaleY + m_pBoneData->scaleY - 1;
+		float x = m_pTweenData->x + m_pBoneData->x;
+		float y = m_pTweenData->y + m_pBoneData->y;
 
-		m_tWorldTransform.a = m_pTweenData->scaleX * cosY;
-		m_tWorldTransform.b = m_pTweenData->scaleX * sinY;
-		m_tWorldTransform.c = m_pTweenData->scaleY * sinX;
-		m_tWorldTransform.d = m_pTweenData->scaleY * cosX;
-		m_tWorldTransform.tx = m_pTweenData->x;
-		m_tWorldTransform.ty = m_pTweenData->y;
+		float cosX	= cos(skewX);
+		float cosY	= cos(skewY);
+		float sinX	= sin(skewX);
+		float sinY  = sin(skewY);
+
+		m_tWorldTransform.a = scaleX * cosY;
+		m_tWorldTransform.b = scaleX * sinY;
+		m_tWorldTransform.c = scaleY * sinX;
+		m_tWorldTransform.d = scaleY * cosX;
+		m_tWorldTransform.tx = x;
+		m_tWorldTransform.ty = y;
+
+		m_tWorldTransform = CCAffineTransformConcat(m_tWorldTransform, nodeToParentTransform());
 
 		if(m_pParent)
 		{

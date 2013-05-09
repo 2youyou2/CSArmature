@@ -133,13 +133,13 @@ namespace cs {
     
 	void Skin::updateSkinTransform()
 	{
-		setScaleX(m_sSkinData.scaleX);
-		setScaleY(m_sSkinData.scaleY);
-
-		setScaleX(m_sSkinData.scaleX);
-		setScaleY(m_sSkinData.scaleY);
-		setRotation(CC_RADIANS_TO_DEGREES(m_sSkinData.skewX));
-		setPosition(ccp(m_sSkinData.x, m_sSkinData.y));
+// 		setScaleX(m_sSkinData.scaleX);
+// 		setScaleY(m_sSkinData.scaleY);
+// 
+// 		setScaleX(m_sSkinData.scaleX);
+// 		setScaleY(m_sSkinData.scaleY);
+// 		setRotation(CC_RADIANS_TO_DEGREES(m_sSkinData.skewX));
+// 		setPosition(ccp(m_sSkinData.x, m_sSkinData.y));
 
 		m_tSkinTransform = nodeToParentTransform();
 	}
