@@ -1,5 +1,5 @@
-cocos2dx
-/test/test/external
+/test/test/cocos2dx/*
+/test/test/external/Box2D/*
 Debug.win32
 ipch
 /test/test/*.sdf
