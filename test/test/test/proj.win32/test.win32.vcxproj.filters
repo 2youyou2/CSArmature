@@ -42,9 +42,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <None Include="res\test.ico">
-      <Filter>resource</Filter>
-    </None>
     <None Include="..\Resources\CloseSelected.png">
       <Filter>resource</Filter>
     </None>
@@ -65,6 +62,9 @@
     </None>
     <None Include="..\..\..\..\CSArmature\external_tool\Json\lib_json\sconscript">
       <Filter>CSArmature\external_tool\Json</Filter>
+    </None>
+    <None Include="res\test.ico">
+      <Filter>resource</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>
@@ -193,14 +193,14 @@
     <ClInclude Include="..\..\..\..\CSArmature\display\CSSkin.h">
       <Filter>CSArmature\display</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\..\CSArmature\display\CSDisplayFactory.h">
+      <Filter>CSArmature\display</Filter>
+    </ClInclude>
     <ClInclude Include="..\..\..\..\CSArmature\display\CSBatchNode.h">
       <Filter>CSArmature\display</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\VisibleRect.h">
       <Filter>include</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\CSArmature\display\CSDisplayFactory.h">
-      <Filter>CSArmature\display</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

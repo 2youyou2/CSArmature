@@ -1,5 +1,5 @@
-cocos2dx
-/test/test/external
+/test/test/cocos2dx/*
+/test/test/external/Box2D/*
 Debug.win32
 ipch
 /test/test/*.sdf
@@ -7,3 +7,8 @@ ipch
 /test/test/*.suo
 /test/test/*.suo
 /test/test/test.suo
+
+/test/test/test/proj.android/obj
+/test/test/test/proj.android/libs
+/test/test/test/proj.android/bin
+/test/test/test/proj.android/assets

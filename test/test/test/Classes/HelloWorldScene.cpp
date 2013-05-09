@@ -26,8 +26,6 @@ CCLayer *CreateLayer(int index)
 		pLayer = new TestCSContertFromDragonBone(); break;
 	case TEST_PERFORMANCE:
 		pLayer = new TestPerformance(); break;
-	case TEST_USE_BATCHNODE:
-		pLayer = new TestUseBatchNode(); break;
 	case TEST_CHANGE_ZORDER:
 		pLayer = new TestChangeZorder(); break;
 	case TEST_ANIMATION_EVENT:
@@ -319,25 +317,6 @@ void TestPerformance::update(float delta)
 
 	}
 }
-
-
-void TestUseBatchNode::onEnter()
-{
-	TestPerformance::onEnter();
-
-	batchnode = BatchNode::create();
-	addChild(batchnode);
-}
-std::string TestUseBatchNode::title()
-{
-	return "Test Use BatchNode.";
-}
-void TestUseBatchNode::addArmature(Armature *armature)
-{
-	batchnode->addChild(armature, armatureCount++, 0);
-}
-
-
 
 void TestChangeZorder::onEnter()
 {

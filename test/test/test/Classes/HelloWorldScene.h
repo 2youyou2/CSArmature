@@ -37,7 +37,6 @@ enum {
 	TEST_COCOSTUDIO_WITHOUT_SKELETON,
 	TEST_COCOSTUDIO_WITH_CONVERT_FROM_DRAGON_BONES_2_0,
 	TEST_PERFORMANCE,
-	TEST_USE_BATCHNODE,
 	TEST_CHANGE_ZORDER,
 	TEST_ANIMATION_EVENT,
 	TEST_PARTICLE_DISPLAY,
@@ -108,18 +107,6 @@ public:
 
 	std::vector<Armature*> armatureList;
 };
-
-
-class TestUseBatchNode : public TestPerformance
-{
-	virtual void onEnter();
-	virtual std::string title();
-	virtual void addArmature(Armature *armature);
-
-	BatchNode *batchnode;
-};
-
-
 
 
 class TestChangeZorder : public TestLayer
