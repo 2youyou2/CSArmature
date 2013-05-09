@@ -439,6 +439,7 @@ void TestParticleDisplay::onEnter()
 	bone->changeDisplayByIndex(0, true);
 	bone->setIgnoreMovementBoneData(true);
 	bone->setZOrder(100);
+	bone->setScale(2);
 	armature->addBone(bone, "bady-a3");
 	
 	bone  = Bone::create("p2");
@@ -446,6 +447,7 @@ void TestParticleDisplay::onEnter()
 	bone->changeDisplayByIndex(0, true);
 	bone->setIgnoreMovementBoneData(true);
 	bone->setZOrder(100);
+	bone->setScale(2);
 	armature->addBone(bone, "bady-a30");
 }
 std::string TestParticleDisplay::title()

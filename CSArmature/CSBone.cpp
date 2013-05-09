@@ -166,6 +166,8 @@ void Bone::update(float delta)
 		m_tWorldTransform.tx = m_pTweenData->x;
 		m_tWorldTransform.ty = m_pTweenData->y;
 
+		m_tWorldTransform = CCAffineTransformConcat(m_tWorldTransform, nodeToParentTransform());
+
 		if(m_pParent)
 		{
 			m_tWorldTransform = CCAffineTransformConcat(m_tWorldTransform, m_pParent->m_tWorldTransform);
