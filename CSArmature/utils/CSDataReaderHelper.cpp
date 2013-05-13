@@ -1039,7 +1039,7 @@ namespace cs {
 		ContourData *contourData = ContourData::create();
 
 		int length = json.getArrayItemCount(VERTEX_POINT);
-		for (int i = 0; i<length; i++)
+		for (int i = length - 1; i>=0; i--)
 		{
 			CSJsonDictionary *dic = json.getSubItemFromArray(VERTEX_POINT, i);
 
@@ -1048,8 +1048,6 @@ namespace cs {
 
 			vertex->x = dic->getItemFloatValue(A_X, 0);
 			vertex->y = dic->getItemFloatValue(A_Y, 0);
-
-			//vertex->y = -vertex->y;
 
 			contourData->vertexList.addObject(vertex);
 		}
