@@ -30,12 +30,10 @@
 #include "cocos2d.h"
 #include "CSBone.h"
 
-using namespace cocos2d;
-
 namespace cs {
 
 
-class Skin : public CCSprite
+class Skin : public cocos2d::CCSprite
 {
 public:
 	static Skin *create();
@@ -49,7 +47,7 @@ public:
 	CC_PROPERTY_PASS_BY_REF(Node, m_sSkinData, SkinData);
 	CC_SYNTHESIZE(Bone*, m_pBone, Bone);
 protected:
-	CCAffineTransform m_tSkinTransform;
+	cocos2d::CCAffineTransform m_tSkinTransform;
 };
 
 }

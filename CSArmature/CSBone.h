@@ -36,13 +36,11 @@
 #include "CSDecorativeDisplay.h"
 #include "CSDisplayManager.h"
 
-using namespace cocos2d;
-
 namespace cs {
 
 class Armature;
 
-class CS_EXTERN Bone : public CCNodeRGBA
+class CS_EXTERN Bone : public cocos2d::CCNodeRGBA
 {
 public:
     /**
@@ -125,13 +123,13 @@ public:
 
 	void update(float delta);
 
-	void updateDisplayedColor(const ccColor3B& parentColor);
+	void updateDisplayedColor(const cocos2d::ccColor3B& parentColor);
 	void updateDisplayedOpacity(GLubyte parentOpacity);
 
 	//! Update color to render display
 	void updateColor();
 
-	CCArray *getChildren();
+	cocos2d::CCArray *getChildren();
 	Tween *getTween();
 
 	virtual void setZOrder(int zOrder);
@@ -141,7 +139,7 @@ public:
 	inline virtual void	setTransformDirty(bool dirty){ m_bTransformDirty = dirty; } 
 	inline virtual bool isTransformDirty(){ return m_bTransformDirty; }
 	
-	inline CCAffineTransform nodeToArmatureTransform(){return m_tWorldTransform;}
+	inline cocos2d::CCAffineTransform nodeToArmatureTransform(){return m_tWorldTransform;}
 
 public:
     /*
@@ -174,13 +172,13 @@ protected:
     
 	//! Lazy allocs
 	void childrenAlloc(void);
-    CCArray *m_pChildren;
+    cocos2d::CCArray *m_pChildren;
     
     Bone *m_pParent;						//! A weak reference to it's parent
 	bool m_bTransformDirty;			//! Whether or not transform dirty
 
 	//! self Transform, use this to change display's state
-	CCAffineTransform m_tWorldTransform;
+	cocos2d::CCAffineTransform m_tWorldTransform;
 };
 
 }

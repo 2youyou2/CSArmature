@@ -1,6 +1,8 @@
 #include "CSProcessBase.h"
 #include "CSUtilMath.h"
 
+using namespace cocos2d;
+
 namespace cs {
 
 ProcessBase::ProcessBase(void)

@@ -26,6 +26,8 @@
 
 #include "CSShaderNode.h"
 
+using namespace cocos2d;
+
 namespace cs {
 
 enum 

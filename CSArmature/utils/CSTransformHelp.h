@@ -30,8 +30,6 @@
 #include "cocos2d.h"
 #include "CSDatas.h"
 
-using namespace cocos2d;
-
 namespace cs {
 
     
@@ -49,16 +47,16 @@ public:
 	static void transformFromParentWithoutScale(Node &node, const Node &parentNode);
 	static void transformToParentWithoutScale(Node &node, const Node &parentNode);
 
-	static void nodeToMatrix(const Node &_node, CCAffineTransform &_matrix);
-	static void matrixToNode(const CCAffineTransform &_matrix, Node &_node);
+	static void nodeToMatrix(const Node &_node, cocos2d::CCAffineTransform &_matrix);
+	static void matrixToNode(const cocos2d::CCAffineTransform &_matrix, Node &_node);
 
 	static void nodeConcat(Node &target, Node &source);
 public:
-	static CCAffineTransform helpMatrix1;
-	static CCAffineTransform helpMatrix2;
+	static cocos2d::CCAffineTransform helpMatrix1;
+	static cocos2d::CCAffineTransform helpMatrix2;
 
-	static CCPoint helpPoint1;
-	static CCPoint helpPoint2;
+	static cocos2d::CCPoint helpPoint1;
+	static cocos2d::CCPoint helpPoint2;
 };
 
 }

@@ -32,8 +32,6 @@
 #include "cocos2d.h"
 #include "CSDatas.h"
 
-using namespace cocos2d;
-
 namespace cs {
     
 enum AnimationType
@@ -52,7 +50,7 @@ enum AnimationType
 };
 
 
-class CS_EXTERN ProcessBase : public CCObject
+class CS_EXTERN ProcessBase : public cocos2d::CCObject
 {
 public:
 	ProcessBase(void);

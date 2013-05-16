@@ -27,6 +27,8 @@
 #include "CSSkin.h"
 #include "CSTransformHelp.h"
 
+using namespace cocos2d;
+
 namespace cs {
 
 #if CC_SPRITEBATCHNODE_RENDER_SUBPIXEL

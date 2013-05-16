@@ -33,7 +33,6 @@
 #include "CSArmatureDefine.h"
 #include "CSBone.h"
 
-using namespace cocos2d;
 
 #define CS_PI M_PI
 
@@ -46,8 +45,8 @@ using namespace cocos2d;
 namespace cs {
 
 //! hit test function
-bool isSpriteContainPoint(CCSprite *_sprite, CCPoint _point);
-bool isSpriteContainPoint(CCSprite *_sprite, CCPoint _point, CCPoint &_outPoint);
+bool isSpriteContainPoint(cocos2d::CCSprite *sprite, cocos2d::CCPoint point);
+bool isSpriteContainPoint(cocos2d::CCSprite *sprite, cocos2d::CCPoint point,cocos2d::CCPoint &outPoint);
 
 #define CS_SPRITE_CONTAIN_POINT(sprite, point) isSpriteContainPoint((sprite), (point))
 
@@ -55,26 +54,26 @@ bool isSpriteContainPoint(CCSprite *_sprite, CCPoint _point, CCPoint &_outPoint)
 
 
 //! motion curve function
-CCPoint bezierTo(float t, CCPoint &point1, CCPoint &point2, CCPoint &point3);
-CCPoint bezierTo(float t, CCPoint &point1, CCPoint &point2, CCPoint &point3, CCPoint &point4);
+cocos2d::CCPoint bezierTo(float t, cocos2d::CCPoint &point1, cocos2d::CCPoint &point2, cocos2d::CCPoint &point3);
+cocos2d::CCPoint bezierTo(float t, cocos2d::CCPoint &point1, cocos2d::CCPoint &point2, cocos2d::CCPoint &point3, cocos2d::CCPoint &point4);
 
-CCPoint circleTo(float t, CCPoint &center, float radius, float fromRadian, float radianDif);
+cocos2d::CCPoint circleTo(float t, cocos2d::CCPoint &center, float radius, float fromRadian, float radianDif);
 
 
 
 //! Hit test function
-bool isSpriteContainPoint(CCSprite *_sprite, CCPoint _point);
-bool isSpriteContainPoint(CCSprite *_sprite, CCPoint _point, CCPoint &_outPoint);
+bool isSpriteContainPoint(cocos2d::CCSprite *_sprite, cocos2d::CCPoint _point);
+bool isSpriteContainPoint(cocos2d::CCSprite *_sprite, cocos2d::CCPoint _point, cocos2d::CCPoint &_outPoint);
 
 #define CS_SPRITE_CONTAIN_POINT(sprite, point) isSpriteContainPoint((sprite), (point))
 #define CS_SPRITE_CONTAIN_POINT_WITH_RETURN(sprite, point, outPoint) isSpriteContainPoint((sprite), (point), outPoint)
 
 
 //! Motion curve function
-CCPoint bezierTo(float t, CCPoint &point1, CCPoint &point2, CCPoint &point3);
-CCPoint bezierTo(float t, CCPoint &point1, CCPoint &point2, CCPoint &point3, CCPoint &point4);
+cocos2d::CCPoint bezierTo(float t, cocos2d::CCPoint &point1, cocos2d::CCPoint &point2, cocos2d::CCPoint &point3);
+cocos2d::CCPoint bezierTo(float t, cocos2d::CCPoint &point1, cocos2d::CCPoint &point2, cocos2d::CCPoint &point3, cocos2d::CCPoint &point4);
 
-CCPoint circleTo(float t, CCPoint &center, float radius, float fromRadian, float radianDif);
+cocos2d::CCPoint circleTo(float t, cocos2d::CCPoint &center, float radius, float fromRadian, float radianDif);
 
 
 //! IK function
@@ -89,7 +88,7 @@ enum CCD_Result
 double simplifyAngle(double angle);
 float simplifyAngle(float angle);
 
-CS_EXTERN CCD_Result CalcIK_CCD(Bone *startBone, Bone *endBone, CCPoint &targetPoint, float arrivalDist);
+CS_EXTERN CCD_Result CalcIK_CCD(Bone *startBone, Bone *endBone, cocos2d::CCPoint &targetPoint, float arrivalDist);
 
 }
 

@@ -42,11 +42,10 @@
 #include "CSColliderDetector.h"
 #endif
 
-using namespace cocos2d;
 
 namespace cs {
 
-class CS_EXTERN DecorativeDisplay: public CCObject, public sigslot::has_slots<>
+class CS_EXTERN DecorativeDisplay: public cocos2d::CCObject, public sigslot::has_slots<>
 {
 public:
 	static DecorativeDisplay *create();
@@ -58,7 +57,7 @@ public:
 
 protected:
 
-	CC_SYNTHESIZE_RETAIN(CCNode*, m_pDisplay, Display);
+	CC_SYNTHESIZE_RETAIN(cocos2d::CCNode*, m_pDisplay, Display);
 	CC_SYNTHESIZE_RETAIN(DisplayData*, m_pDisplayData, DisplayData);
 	
 #if CS_DEBUG_FOR_EDIT

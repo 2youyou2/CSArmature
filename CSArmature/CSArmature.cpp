@@ -31,6 +31,8 @@
 #include "CSDataReaderHelper.h"
 #include "CSSkin.h"
 
+using namespace cocos2d;
+
 #if CS_DEBUG_FOR_EDIT
 #include "CSEditorArmature.h"
 #endif
@@ -73,57 +75,11 @@ Armature *Armature::create(const char* _name)
     CC_SAFE_DELETE(armature);
     return NULL;
 }
-    
-#if CS_TOOL_PLATFORM
-
-Armature *Armature::createWithComArmature(const char* _name, ComArmature *_comArmature)
-{
-#if CS_DEBUG_FOR_EDIT
-	Armature *armature = new EditorArmature();
-#else
-	Armature *armature = new Armature();
-#endif
-	if (armature && armature->initWithComArmature(_name, _comArmature))
-	{
-		armature->autorelease();
-		return armature;
-	}
-	CC_SAFE_DELETE(armature);
-	return NULL;
-}
-
-bool Armature::initWithComArmature(ComArmature *_comArmature)
-{
-	return initWithComArmature(NULL, _comArmature);
-}
-
-
-bool Armature::initWithComArmature(const char *_name, ComArmature *_comArmature)
-{
-	bool bRet = false;
-	do
-	{
-		if (!Armature::init(_name))
-		{
-			break;
-		}
-
-		m_pComArmature = _comArmature;
-
-		bRet = true;
-	}while (0);
-
-	return bRet;
-}
-
-#endif
-
 
 Armature::Armature()
     :m_pAnimation(NULL)
     ,m_pBoneDic(NULL)
     ,m_bBonesIndexChanged(false)
-    ,m_pComArmature(NULL)
 	,m_pArmature(NULL)
 	,m_pAtlas(NULL)
 	,m_pBatchNode(NULL)
@@ -327,16 +283,6 @@ void Armature::changeBoneParent(Bone *bone, const char *parentName)
 	}
 }
 
-void Armature::onMovementEvent(const char *_eventType, const char *_movementID)
-{
-    if(NULL != m_pComArmature)
-    {
-#if CS_TOOL_PLATFORM
-		m_pComArmature->onMovementEvent(_eventType, _movementID);
-#endif
-    }
-}
-
 CCDictionary *Armature::getBoneDic()
 {
     return m_pBoneDic;
@@ -350,6 +296,11 @@ void Armature::update(float dt)
 	CCARRAY_FOREACH(m_pChildren, object)
 	{
 		((Bone*)object)->update(dt);
+	}
+
+	CCARRAY_FOREACH(m_pChildren, object)
+	{
+		((Bone*)object)->setTransformDirty(false);
 	}
 }
 
@@ -407,10 +358,6 @@ void Armature::draw()
 		m_pAtlas->drawQuads();
 		m_pAtlas->removeAllQuads();
 	}
-
-// 	ccDrawColor4B(0,0,0,255);
-// 	ccDrawLine(ccp(0, -160), ccp(0, 160));
-// 	ccDrawLine(ccp(-240, 0), ccp(240, 0));
 }
 
 void Armature::visit()

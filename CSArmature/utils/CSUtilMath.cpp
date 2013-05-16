@@ -26,6 +26,8 @@
 
 #include "CSUtilMath.h"
 
+using namespace cocos2d;
+
 #if CS_DEBUG_FOR_EDIT
 #include "CSEditorTween.h"
 #include "CSEditorDisplayManager.h"

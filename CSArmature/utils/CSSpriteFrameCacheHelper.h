@@ -29,8 +29,6 @@
 #include "cocos2d.h"
 #include <stack>
 
-using namespace cocos2d;
-
 namespace cs{
     
 typedef enum
@@ -51,20 +49,20 @@ typedef enum
     SAX_RESULT_ARRAY
 }CSSAXResult;
     
-class CSDictMaker : public CCSAXDelegator
+class CSDictMaker : public cocos2d::CCSAXDelegator
 {
 public:
     CSSAXResult m_eResultType;
-    CCArray* m_pRootArray;
-    CCDictionary *m_pRootDict;
-    CCDictionary *m_pCurDict;
-    std::stack<CCDictionary*> m_tDictStack;
+    cocos2d::CCArray* m_pRootArray;
+    cocos2d::CCDictionary *m_pRootDict;
+    cocos2d::CCDictionary *m_pCurDict;
+    std::stack<cocos2d::CCDictionary*> m_tDictStack;
     std::string m_sCurKey;   ///< parsed key
     std::string m_sCurValue; // parsed value
     CSSAXState m_tState;
-    CCArray* m_pArray;
+    cocos2d::CCArray* m_pArray;
     
-    std::stack<CCArray*> m_tArrayStack;
+    std::stack<cocos2d::CCArray*> m_tArrayStack;
     std::stack<CSSAXState>  m_tStateStack;
     
 public:
@@ -82,10 +80,10 @@ public:
     {
     }
     
-    CCDictionary* dictionaryWithContentsOfCache(const char *pContentCache, unsigned int uDataLength)
+    cocos2d::CCDictionary* dictionaryWithContentsOfCache(const char *pContentCache, unsigned int uDataLength)
     {
         m_eResultType = SAX_RESULT_DICT;
-        CCSAXParser parser;
+        cocos2d::CCSAXParser parser;
         
         if (false == parser.init("UTF-8"))
         {
@@ -102,10 +100,10 @@ public:
     }
     
     
-    CCDictionary* dictionaryWithContentsOfFile(const char *pFileName)
+    cocos2d::CCDictionary* dictionaryWithContentsOfFile(const char *pFileName)
     {
         m_eResultType = SAX_RESULT_DICT;
-        CCSAXParser parser;
+        cocos2d::CCSAXParser parser;
         
         if (false == parser.init("UTF-8"))
         {
@@ -117,10 +115,10 @@ public:
         return m_pRootDict;
     }
     
-    CCArray* arrayWithContentsOfFile(const char* pFileName)
+    cocos2d::CCArray* arrayWithContentsOfFile(const char* pFileName)
     {
         m_eResultType = SAX_RESULT_ARRAY;
-        CCSAXParser parser;
+        cocos2d::CCSAXParser parser;
         
         if (false == parser.init("UTF-8"))
         {
@@ -139,7 +137,7 @@ public:
         std::string sName((char*)name);
         if( sName == "dict" )
         {
-            m_pCurDict = new CCDictionary();
+            m_pCurDict = new cocos2d::CCDictionary();
             if(m_eResultType == SAX_RESULT_DICT && m_pRootDict == NULL)
             {
                 // Because it will call m_pCurDict->release() later, so retain here.
@@ -163,7 +161,7 @@ public:
             {
                 // add the dictionary into the pre dictionary
                 CCAssert(! m_tDictStack.empty(), "The state is wrong!");
-                CCDictionary* pPreDict = m_tDictStack.top();
+                cocos2d::CCDictionary* pPreDict = m_tDictStack.top();
                 pPreDict->setObject(m_pCurDict, m_sCurKey.c_str());
             }
             
@@ -192,7 +190,7 @@ public:
         else if (sName == "array")
         {
             m_tState = SAX_ARRAY;
-            m_pArray = new CCArray();
+            m_pArray = new cocos2d::CCArray();
             if (m_eResultType == SAX_RESULT_ARRAY && m_pRootArray == NULL)
             {
                 m_pRootArray = m_pArray;
@@ -211,7 +209,7 @@ public:
             else if (preState == SAX_ARRAY)
             {
                 CCAssert(! m_tArrayStack.empty(), "The state is worng!");
-                CCArray* pPreArray = m_tArrayStack.top();
+                cocos2d::CCArray* pPreArray = m_tArrayStack.top();
                 pPreArray->addObject(m_pArray);
             }
             m_pArray->release();
@@ -344,20 +342,20 @@ public:
     
     void addSpriteFrameFromPak(const char *_plistPath, const char *_imagePath);
     
-    void addSpriteFrameFromDict(CCDictionary* dictionary, CCTexture2D *pobTexture, const char *_imagePath);
+    void addSpriteFrameFromDict(cocos2d::CCDictionary* dictionary, cocos2d::CCTexture2D *pobTexture, const char *_imagePath);
     
     /**
      *	@brief	Get this display in which image
      *
      */
     const char *getDisplayImagePath(const char *displayName);
-	CCTextureAtlas *getTextureAtlas(const char *displayName);
+	cocos2d::CCTextureAtlas *getTextureAtlas(const char *displayName);
 	
 private:
     SpriteFrameCacheHelper();
 
     std::map<std::string, std::string> m_Display2ImageMap;
-	CCDictionary *m_pDisplay2TextureAtlas;
+	cocos2d::CCDictionary *m_pDisplay2TextureAtlas;
     
     static SpriteFrameCacheHelper *s_SpriteFrameCacheHelper;
 

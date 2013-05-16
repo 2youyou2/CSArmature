@@ -31,8 +31,6 @@
 #include "CSArmatureDefine.h"
 #include "CSTweenFunction.h"
 
-using namespace cocos2d;
-
 #define CS_CREATE_NO_PARAM_NO_INIT(varType)\
 public: \
 	static inline varType *create(void){ \
@@ -66,7 +64,7 @@ namespace cs {
 	/**
 	* the base node include a lot of attribute.
 	*/
-	class CS_EXTERN Node : public CCObject
+	class CS_EXTERN Node : public cocos2d::CCObject
 	{
 	public:
 		CS_CREATE_NO_PARAM_NO_INIT(Node)
@@ -122,7 +120,7 @@ namespace cs {
 		CS_DISPLAY_MAX
 	};
 
-	class CS_EXTERN DisplayData : public CCObject
+	class CS_EXTERN DisplayData : public cocos2d::CCObject
 	{
 	public:
 		CS_CREATE_NO_PARAM_NO_INIT(DisplayData)
@@ -246,7 +244,7 @@ namespace cs {
 	public:
 		std::string name;					//! the bone's name
 		std::string parentName;		//! the bone parent's name
-		CCArray displayDataList;		//! save DisplayData informations for the Bone
+		cocos2d::CCArray displayDataList;		//! save DisplayData informations for the Bone
 	};
 #pragma  endregion
 
@@ -254,9 +252,9 @@ namespace cs {
 	/**
 	* ArmatureData saved the Armature name and Bonedatas needed for the Bones in this Armature
 	* When we create a Armature, we need to get each Bone's BoneData as it's init information.
-	* So we can get a BoneData from the CCDictionary saved in the ArmatureData.
+	* So we can get a BoneData from the cocos2d::CCDictionary saved in the ArmatureData.
 	*/
-	class CS_EXTERN ArmatureData : public CCObject
+	class CS_EXTERN ArmatureData : public cocos2d::CCObject
 	{
 	public:
 		CS_CREATE_NO_PARAM(ArmatureData)
@@ -269,8 +267,8 @@ namespace cs {
 		BoneData *getBoneData(const char *boneName);
 	public:
 		std::string name;
-		CCDictionary boneDataDic;
-		CCArray boneList;
+		cocos2d::CCDictionary boneDataDic;
+		cocos2d::CCArray boneList;
 	};
 #pragma  endregion
 
@@ -305,7 +303,7 @@ namespace cs {
 #pragma endregion
 
 #pragma region MovementBoneData
-	class CS_EXTERN MovementBoneData : public CCObject
+	class CS_EXTERN MovementBoneData : public cocos2d::CCObject
 	{
 	public:
 		CS_CREATE_NO_PARAM(MovementBoneData)
@@ -323,12 +321,12 @@ namespace cs {
 		float duration;		//! this Bone in this movement will last m_iDuration frames
 		std::string name;	//! bone name
 
-		CCArray frameList;
+		cocos2d::CCArray frameList;
 	};
 #pragma endregion
 
 #pragma region MovementData
-	class CS_EXTERN MovementData : public CCObject
+	class CS_EXTERN MovementData : public cocos2d::CCObject
 	{
 	public:
 		CS_CREATE_NO_PARAM_NO_INIT(MovementData)
@@ -369,7 +367,7 @@ namespace cs {
 		* @key	std::string
 		* @value	MovementBoneData *
 		*/
-		CCDictionary movBoneDataDic;
+		cocos2d::CCDictionary movBoneDataDic;
 	};
 #pragma endregion
 
@@ -379,7 +377,7 @@ namespace cs {
 	*  The struct is AnimationData -> MovementData -> MovementBoneData -> FrameData
 	*                                              -> MovementFrameData
 	*/
-	class CS_EXTERN AnimationData : public CCObject
+	class CS_EXTERN AnimationData : public cocos2d::CCObject
 	{
 	public:
 		CS_CREATE_NO_PARAM_NO_INIT(AnimationData)
@@ -392,13 +390,13 @@ namespace cs {
 		int getMovementCount();
 	public:
 		std::string name;
-		CCDictionary movementDataDic;
+		cocos2d::CCDictionary movementDataDic;
 		std::vector<std::string> movementNames;
 	};
 #pragma endregion
 
 #pragma region ContourData
-	struct ContourVertex2 : public CCObject
+	struct ContourVertex2 : public cocos2d::CCObject
 	{
 		ContourVertex2(float x, float y)
 		{
@@ -413,7 +411,7 @@ namespace cs {
 	/*
 	* ContourData include a contour vertex information 
 	*/
-	class  ContourData : public CCObject
+	class  ContourData : public cocos2d::CCObject
 	{
 	public:
 		CS_CREATE_NO_PARAM(ContourData)
@@ -423,7 +421,7 @@ namespace cs {
 
 		virtual bool init();
 	public:
-		CCArray vertexList;	//! Save contour vertex info, vertex saved in a CCPoint
+		cocos2d::CCArray vertexList;	//! Save contour vertex info, vertex saved in a CCPoint
 	};
 #pragma endregion
 
@@ -434,7 +432,7 @@ namespace cs {
 	/*
 	* TextureData include a texture's information 
 	*/
-	class CS_EXTERN TextureData : public CCObject
+	class CS_EXTERN TextureData : public cocos2d::CCObject
 	{
 	public:
 		CS_CREATE_NO_PARAM(TextureData)
@@ -455,7 +453,7 @@ namespace cs {
 		float width;		//! The texture's width, height
 		float height;
 
-		CCArray contourDataList;
+		cocos2d::CCArray contourDataList;
 	};
 #pragma endregion
 

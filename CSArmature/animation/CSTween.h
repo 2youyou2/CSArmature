@@ -31,8 +31,6 @@
 #include "CSProcessBase.h"
 #include "CSTweenFunction.h"
 
-using namespace cocos2d;
-
 namespace cs {
 
 class Bone;

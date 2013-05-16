@@ -30,6 +30,8 @@
 #include "CSArmature.h"
 #include "CSSkin.h"
 
+using namespace cocos2d;
+
 namespace cs {
 
 DisplayManager *DisplayManager::create(Bone *bone)

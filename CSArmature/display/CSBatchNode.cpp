@@ -28,6 +28,8 @@
 #include "CSArmatureDefine.h"
 #include "CSArmature.h"
 
+using namespace cocos2d;
+
 namespace cs {
 
 BatchNode *BatchNode::create()

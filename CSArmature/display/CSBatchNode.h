@@ -29,11 +29,10 @@
 
 #include "cocos2d.h"
 
-using namespace cocos2d;
 
 namespace cs {
 
-class BatchNode : public CCNode
+class BatchNode : public cocos2d::CCNode
 {
 public:
 	static BatchNode *create();
@@ -41,12 +40,12 @@ public:
     BatchNode();
 
 	virtual bool init();
-	virtual void addChild(CCNode *child, int zOrder, int tag);
+	virtual void addChild(cocos2d::CCNode *child, int zOrder, int tag);
 	virtual void visit();
 	void draw();
 
 protected:
-	CCTextureAtlas *m_pAtlas;
+	cocos2d::CCTextureAtlas *m_pAtlas;
 };
 
 }

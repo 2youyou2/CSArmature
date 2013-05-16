@@ -39,7 +39,8 @@ namespace cs {
 /**
  *	@brief	format and manage armature configuration and armature animation
  */
-class ArmatureDataManager : public CCObject {
+class ArmatureDataManager : public cocos2d::CCObject 
+{
 public:
     static ArmatureDataManager *sharedArmatureDataManager();
 private:
@@ -139,21 +140,21 @@ private:
 	 *  @key	std::string
 	 *  @value	ArmatureData *
      */
-	CC_SYNTHESIZE_READONLY(CCDictionary *, m_pArmarureDatas, ArmarureDatas);
+	CC_SYNTHESIZE_READONLY(cocos2d::CCDictionary *, m_pArmarureDatas, ArmarureDatas);
 
     /**
 	 *	@brief	save animation datas
 	 *  @key	std::string
 	 *  @value	AnimationData *
      */
-	CC_SYNTHESIZE_READONLY(CCDictionary *, m_pAnimationDatas, AnimationDatas);
+	CC_SYNTHESIZE_READONLY(cocos2d::CCDictionary *, m_pAnimationDatas, AnimationDatas);
 
 	/**
 	 *	@brief	save texture datas
 	 *  @key	std::string
 	 *  @value	TextureData *
      */
-	CC_SYNTHESIZE_READONLY(CCDictionary *, m_pTextureDatas, TextureDatas);
+	CC_SYNTHESIZE_READONLY(cocos2d::CCDictionary *, m_pTextureDatas, TextureDatas);
 
 private:
     static ArmatureDataManager *m_sSharedArmatureDataManager;
@@ -164,7 +165,7 @@ private:
 	 *  @key	std::string
 	 *  @value	ArmatureFileInfo*
      */
-    CCDictionary *m_pArmatureFileInfoDic;
+    cocos2d::CCDictionary *m_pArmatureFileInfoDic;
     
 };
 

@@ -31,6 +31,8 @@
 #include "CSDatas.h"
 #include "CSArmatureDefine.h"
 
+using namespace cocos2d;
+
 namespace cs {
 
 	std::vector<std::string> DataReaderHelper::m_arrConfigFileList;

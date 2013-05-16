@@ -31,14 +31,13 @@
 #include "CSDecorativeDisplay.h"
 #include "CSDatas.h"
 
-using namespace cocos2d;
 
 namespace cs {
     
 class Bone;
 
 //! DisplayManager manages Bone's display
-class CS_EXTERN DisplayManager : public CCObject
+class CS_EXTERN DisplayManager : public cocos2d::CCObject
 {
 public:
     static DisplayManager *create(Bone *bone);
@@ -71,7 +70,7 @@ public:
     
     void removeDisplay(int index);
     
-    CCArray *getDecorativeDisplayList();
+    cocos2d::CCArray *getDecorativeDisplayList();
     
     /**
 	 * Change display by index. You can just use this method to change display in the display list. 
@@ -85,8 +84,8 @@ public:
 	void changeDisplayByIndex(int index, bool force);
     
     
-    void setDisplayRenderNode(CCNode *_displayRenderNode);
-    CCNode *getDisplayRenderNode();
+    void setDisplayRenderNode(cocos2d::CCNode *displayRenderNode);
+    cocos2d::CCNode *getDisplayRenderNode();
     
     int getCurrentDisplayIndex();
 	DecorativeDisplay *getCurrentDecorativeDisplay();
@@ -107,16 +106,16 @@ public:
      */
     virtual bool isVisible();
     
-	CCSize getContentSize();
-	CCRect getBoundingBox();
+	cocos2d::CCSize getContentSize();
+	cocos2d::CCRect getBoundingBox();
     
-    CCPoint getAnchorPoint();
-    CCPoint getAnchorPointInPoints();
+    cocos2d::CCPoint getAnchorPoint();
+    cocos2d::CCPoint getAnchorPointInPoints();
 
 	/**
      * Check if the position is inside the bone.
      */
-    virtual bool containPoint(CCPoint &_point);
+    virtual bool containPoint(cocos2d::CCPoint &_point);
     
     /**
      * Check if the position is inside the bone.
@@ -125,9 +124,9 @@ public:
 
 protected:
     //! Display render node.
-	CCNode *m_pDisplayRenderNode;
+	cocos2d::CCNode *m_pDisplayRenderNode;
     
-    CCArray *m_pDecoDisplayList;
+    cocos2d::CCArray *m_pDecoDisplayList;
     //! Include current display information, like contour sprite, etc.
     DecorativeDisplay *m_pCurrentDecoDisplay;
     //! Current display index

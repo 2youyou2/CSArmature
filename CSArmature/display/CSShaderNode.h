@@ -29,12 +29,10 @@
 
 #include "cocos2d.h"
 
-using namespace cocos2d;
-
 namespace cs {
 
 
-class ShaderNode : public CCNode
+class ShaderNode : public cocos2d::CCNode
 {
 public:
     ShaderNode();
@@ -43,16 +41,16 @@ public:
     void loadShaderVertex(const char *vert, const char *frag);
 
     virtual void update(float dt);
-    virtual void setPosition(const CCPoint &newPosition);
-	virtual void translateFormOtherNode(CCAffineTransform &transform);
+    virtual void setPosition(const cocos2d::CCPoint &newPosition);
+	virtual void translateFormOtherNode(cocos2d::CCAffineTransform &transform);
     virtual void draw();
 
     static ShaderNode* shaderNodeWithVertex(const char *vert, const char *frag);
 
 private:
 
-    ccVertex2F m_center;
-    ccVertex2F m_resolution;
+    cocos2d::ccVertex2F m_center;
+    cocos2d::ccVertex2F m_resolution;
     float      m_time;
     GLuint     m_uniformCenter, m_uniformResolution, m_uniformTime;
 };

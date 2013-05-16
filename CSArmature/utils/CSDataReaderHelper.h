@@ -33,8 +33,6 @@
 #include "CSArmature.h"
 #include "CSContentJsonDictionary.h"
 
-using namespace cocos2d;
-
 class TiXmlElement;
 
 namespace cs {

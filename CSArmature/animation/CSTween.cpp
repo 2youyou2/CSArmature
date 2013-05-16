@@ -5,8 +5,9 @@
 #include "CSTweenFunction.h"
 #include "cocos2d.h"
 
-namespace cs {
+using namespace cocos2d;
 
+namespace cs {
 
 Tween* Tween::create(Bone *bone)
 {

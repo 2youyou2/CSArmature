@@ -153,6 +153,8 @@ void TestLayer::onEnter()
 
 	addChild(menu, 100);
 
+
+	setShaderProgram(CCShaderCache::sharedShaderCache()->programForKey(kCCShader_PositionTextureColor));
 }
 void TestLayer::onExit()
 {
@@ -188,6 +190,16 @@ void TestLayer::backCallback(CCObject* pSender)
 	CCDirector::sharedDirector()->replaceScene(s);
 	s->release();
 }
+void TestLayer::draw()
+{
+	CCLayer::draw();
+
+// 	CC_NODE_DRAW_SETUP();
+// 	ccDrawColor4B(0,0,0,255);
+// 	ccDrawLine(VisibleRect::left(), VisibleRect::right());
+// 	ccDrawLine(VisibleRect::bottom(), VisibleRect::top());
+}
+
 
 
 void TestDragonBones20::onEnter()
@@ -473,7 +485,6 @@ void TestParticleDisplay::registerWithTouchDispatcher()
 
 
 
-
 void TestUseMutiplePicture::onEnter()
 {
 	TestLayer::onEnter();
@@ -539,7 +550,6 @@ void TestBox2DDetector::onEnter()
 	armature2->setPosition(ccp(VisibleRect::right().x - 30, VisibleRect::left().y));
 	addChild(armature2);
 
-	
 	PhysicsWorld::sharedPhysicsWorld()->BoneColliderSignal.connect(this, &TestBox2DDetector::onHit);
 }
 std::string TestBox2DDetector::title()

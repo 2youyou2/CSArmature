@@ -35,12 +35,8 @@
 #include "CSArmatureDefine.h"
 #include "CSBatchNode.h"
 
-using namespace cocos2d;
-
 
 namespace cs {
-
-class ComArmature;
     
 typedef struct _ImageInfo
 {
@@ -48,7 +44,7 @@ typedef struct _ImageInfo
     std::string plistPath;
 }ImageInfo;
 
-typedef struct _ArmatureFileInfo : public CCObject
+typedef struct _ArmatureFileInfo : public cocos2d::CCObject
 {
     static _ArmatureFileInfo *create()
     {
@@ -68,7 +64,7 @@ typedef struct _ArmatureFileInfo : public CCObject
     std::vector<ImageInfo> imageInfoVector;
 }ArmatureFileInfo;
     
-class Armature : public CCNodeRGBA, public CCBlendProtocol 
+class Armature : public cocos2d::CCNodeRGBA, public cocos2d::CCBlendProtocol 
 {
 
 public:
@@ -85,37 +81,6 @@ public:
 	* @return A initialized armature which is marked as "autorelease".
 	*/
 	static Armature *create(const char* name);
-    
-#if CS_TOOL_PLATFORM
-    /**
-	 * Create a empty armature with Component Armature
-	 * @param comArmature Component Armature bind to
-	 */
-	static Armature *createWithComArmature(ComArmature *comArmature);
-	     
-    /**
-	 * Create a armature with Component Armature
-	 *
-	 * @param name Armature name
-	 * @param comArmature Component Armature bind to
-	 */
-	static Armature *createWithComArmature(const char* name, ComArmature *comArmature);
-
-    /**
-	 * Init the empty armature with Component Armature
-	 * @param comArmature Component Armature bind to
-	 */
-	virtual bool initWithComArmature(ComArmature *comArmature);
-    
-    /**
-	 * Init a armature with Component Armature
-	 *
-	 * @param name Armature name
-	 * @param comArmature Component Armature bind to
-	 */
-	virtual bool initWithComArmature(const char *_name, ComArmature *_comArmature);
-#endif
-
 
 public:
     Armature();
@@ -144,7 +109,7 @@ public:
      *
      * @param name The bone's name you want to get
      */
-    virtual Bone *getBone(const char *_name);
+    virtual Bone *getBone(const char *name);
     /**
      * Change a bone's parent with the specified parent name.
      *
@@ -164,31 +129,25 @@ public:
      * Get Armature's bone dictionary
      * @return Armature's bone dictionary
      */
-	CCDictionary *getBoneDic();
+	cocos2d::CCDictionary *getBoneDic();
 
-	virtual CCRect boundingBox();
+	virtual cocos2d::CCRect boundingBox();
     
     Bone *getBoneAtPoint(float _x, float _y);
-    
-    /**
-     * Animation event call back, When Animation is start, complete or other, Animation will call this method to dispatch Animation event.
-     * @param  eventType 
-     */
-    void onMovementEvent(const char *eventType, const char *movementID);
     
 	virtual void visit();
     virtual void update(float dt);
 	virtual void draw();
 
-	inline void setBlendFunc(ccBlendFunc blendFunc) { m_sBlendFunc = blendFunc; }
-	inline ccBlendFunc getBlendFunc(void) { return m_sBlendFunc; }
+	inline void setBlendFunc(cocos2d::ccBlendFunc blendFunc) { m_sBlendFunc = blendFunc; }
+	inline cocos2d::ccBlendFunc getBlendFunc(void) { return m_sBlendFunc; }
 
 protected:
     
     /*
      * Used to create Bone internal
      */
-	Bone *createBone(const char *_boneName );
+	Bone *createBone(const char *boneName );
     
 	
 	CC_SYNTHESIZE_RETAIN(Animation *, m_pAnimation, Animation);
@@ -201,17 +160,15 @@ protected:
 
 	CC_SYNTHESIZE(BatchNode*, m_pBatchNode, BatchNode);
 protected:
-    CCDictionary *m_pBoneDic;		//! The dictionary of the bones, include all bones in the armature, no matter it is the direct bone or the indirect bone. It is different from m_pChindren.
+    cocos2d::CCDictionary *m_pBoneDic;		//! The dictionary of the bones, include all bones in the armature, no matter it is the direct bone or the indirect bone. It is different from m_pChindren.
 
     static std::map<int, Armature*> m_sArmatureIndexDic;	//! Use to save armature zorder info, 
 
-	ccBlendFunc        m_sBlendFunc;            /// It's required for CCTextureProtocol inheritance
+	cocos2d::ccBlendFunc        m_sBlendFunc;            /// It's required for CCTextureProtocol inheritance
 
 	CC_SYNTHESIZE_PASS_BY_REF(std::string, m_strName, Name);
 
-	CC_SYNTHESIZE(CCTextureAtlas*, m_pAtlas, TextureAtlas);
-    
-    ComArmature *m_pComArmature;
+	CC_SYNTHESIZE(cocos2d::CCTextureAtlas*, m_pAtlas, TextureAtlas);
 };
 
 

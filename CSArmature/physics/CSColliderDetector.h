@@ -31,13 +31,11 @@
 #include "CSDatas.h"
 #include "Box2D/Box2D.h"
 
-using namespace cocos2d;
-
 namespace cs {
 
 class Bone;
 
-class ColliderBody : public CCObject
+class ColliderBody : public cocos2d::CCObject
 {
 public:
 	ColliderBody(b2Body *b2b, ContourData *contourData)
@@ -72,7 +70,7 @@ private:
 /*
  *  @brief  ContourSprite used to draw the contour of the display
  */
-class ColliderDetector : public CCObject
+class ColliderDetector : public cocos2d::CCObject
 {
 public:
 	static ColliderDetector *create();
@@ -85,17 +83,17 @@ public:
 	virtual bool init(Bone *bone);
     
     void addContourData(ContourData *contourData);
-    void addContourDataList(CCArray *contourDataList);
+    void addContourDataList(cocos2d::CCArray *contourDataList);
     
 	void removeContourData(ContourData *contourData);
 	void removeAll();
     
-    void updateTransform(CCAffineTransform &t);
+    void updateTransform(cocos2d::CCAffineTransform &t);
 
 	void setColliderFilter(b2Filter &filter);
     
 private:
-    CCArray *m_pColliderBodyList;
+    cocos2d::CCArray *m_pColliderBodyList;
     
 	CC_SYNTHESIZE(Bone*, m_pBone, Bone);
 

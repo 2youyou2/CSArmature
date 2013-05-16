@@ -28,6 +28,8 @@
 #include "CSPhysicsWorld.h"
 #include "CSBone.h"
 
+using namespace cocos2d;
+
 namespace cs {
 
 ColliderDetector *ColliderDetector::create()

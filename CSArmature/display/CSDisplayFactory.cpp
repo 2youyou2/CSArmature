@@ -34,6 +34,8 @@
 #include "CSShaderNode.h"
 #include "CSTransformHelp.h"
 
+using namespace cocos2d;
+
 namespace cs {
 
 void CS_DISPLAY_ADD(Bone *bone, DecorativeDisplay *decoDisplay, DisplayData *displayData)
@@ -62,16 +64,19 @@ void CS_DISPLAY_CREATE(Bone *bone, DecorativeDisplay *decoDisplay)
 	}
 }
 
-void CS_DISPLAY_UPDATE(Bone *bone, DecorativeDisplay *decoDisplay, float dt)
+void CS_DISPLAY_UPDATE(Bone *bone, DecorativeDisplay *decoDisplay, float dt, bool dirty)
 {
 	CS_RETURN_IF(!decoDisplay);
 
 #if ENABLE_PHYSICS_DETECT
-	ColliderDetector *detector = decoDisplay->getColliderDetector();
-	if (detector)
+	if (dirty)
 	{
-		CCAffineTransform t = CCAffineTransformConcat(bone->nodeToArmatureTransform(), bone->getArmature()->nodeToWorldTransform());
-		detector->updateTransform(t);
+		ColliderDetector *detector = decoDisplay->getColliderDetector();
+		if (detector)
+		{
+			CCAffineTransform t = CCAffineTransformConcat(bone->nodeToArmatureTransform(), bone->getArmature()->nodeToWorldTransform());
+			detector->updateTransform(t);
+		}
 	}
 #endif
 	
@@ -79,7 +84,7 @@ void CS_DISPLAY_UPDATE(Bone *bone, DecorativeDisplay *decoDisplay, float dt)
 	switch(decoDisplay->getDisplayData()->displayType)
 	{
 	case CS_DISPLAY_PARTICLE:
-		CS_DISPLAY_PARTICLE_UPDATE(bone, decoDisplay, dt); break; 
+		CS_DISPLAY_PARTICLE_UPDATE(bone, decoDisplay, dt, dirty); break; 
 	default:
 		break;
 	}
@@ -190,7 +195,7 @@ void CS_DISPLAY_PARTICLE_CREATE(Bone *bone, DecorativeDisplay *decoDisplay)
 	CCParticleSystem *system = CCParticleSystemQuad::create(displayData->plist.c_str());
 	decoDisplay->setDisplay(system);
 }
-void CS_DISPLAY_PARTICLE_UPDATE(Bone *bone, DecorativeDisplay *decoDisplay, float dt)
+void CS_DISPLAY_PARTICLE_UPDATE(Bone *bone, DecorativeDisplay *decoDisplay, float dt, bool dirty)
 {
 	CCParticleSystem *system = (CCParticleSystem*)decoDisplay->getDisplay();
 	Node node;

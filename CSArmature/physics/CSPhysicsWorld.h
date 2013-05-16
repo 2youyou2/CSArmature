@@ -32,8 +32,6 @@
 #include "sigslot.h"
 #include "CSBone.h"
 
-using namespace cocos2d;
-
 #include <list>
 using std::list;
 

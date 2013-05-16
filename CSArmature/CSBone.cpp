@@ -31,6 +31,8 @@
 #include "CSTransformHelp.h"
 #include "CSDisplayManager.h"
 
+using namespace cocos2d;
+
 namespace cs {
 
 Bone* Bone::create()
@@ -166,19 +168,23 @@ void Bone::update(float delta)
 		m_tWorldTransform.tx = m_pTweenData->x;
 		m_tWorldTransform.ty = m_pTweenData->y;
 
-		m_tWorldTransform = CCAffineTransformConcat(m_tWorldTransform, nodeToParentTransform());
+		m_tWorldTransform = CCAffineTransformConcat(nodeToParentTransform(), m_tWorldTransform);
+
 
 		if(m_pParent)
 		{
 			m_tWorldTransform = CCAffineTransformConcat(m_tWorldTransform, m_pParent->m_tWorldTransform);
 		}
 
-		CS_DISPLAY_UPDATE(this, m_pDisplayManager->getCurrentDecorativeDisplay(), delta);
+		
 		// 		if(m_pChildArmature)
 		// 		{
 		// 			m_pChildArmature->update(dt);
 		// 		}
+		
 	}
+
+	CS_DISPLAY_UPDATE(this, m_pDisplayManager->getCurrentDecorativeDisplay(), delta, m_bTransformDirty);
 }
 
 

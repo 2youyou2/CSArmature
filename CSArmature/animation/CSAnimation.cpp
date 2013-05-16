@@ -5,7 +5,7 @@
 #include "CSUtilMath.h"
 #include "CSConstValue.h"
 
-
+using namespace cocos2d;
 using namespace std;
 
 namespace cs {
@@ -224,7 +224,6 @@ void Animation::updateHandler()
 			{
 				m_iNextFrameIndex = m_iDurationTween;
 
-				m_pArmature->onMovementEvent(START, m_strMovementID.c_str());
 				MovementEventSignal.emit(m_pArmature, START, m_strMovementID.c_str());
 
 				break;
@@ -234,7 +233,6 @@ void Animation::updateHandler()
 			m_fCurrentPercent = 1;
 			m_bIsComplete = true;
 
-			m_pArmature->onMovementEvent(COMPLETE, m_strMovementID.c_str());
 			MovementEventSignal.emit(m_pArmature, COMPLETE, m_strMovementID.c_str());
 
 			break;
@@ -244,7 +242,6 @@ void Animation::updateHandler()
 			m_fCurrentFrame = fmodf(m_fCurrentFrame, m_iNextFrameIndex);
 			m_iNextFrameIndex = m_iDurationTween > 0 ? m_iDurationTween : 1;
 
-			m_pArmature->onMovementEvent(START, m_strMovementID.c_str());
 			MovementEventSignal.emit(m_pArmature, START, m_strMovementID.c_str());
 
 			break;
@@ -254,7 +251,6 @@ void Animation::updateHandler()
 			m_fCurrentFrame = fmodf(m_fCurrentFrame, m_iNextFrameIndex);
 			m_iToIndex = 0;
 
-			m_pArmature->onMovementEvent(LOOP_COMPLETE, m_strMovementID.c_str());
 			MovementEventSignal.emit(m_pArmature, LOOP_COMPLETE, m_strMovementID.c_str());
 
 			break;

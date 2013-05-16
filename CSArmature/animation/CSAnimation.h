@@ -149,15 +149,13 @@ protected:
     int m_iPrevFrameIndex;					//! Prev key frame index
 	int m_iToIndex;								//! The frame index in MovementData->m_pMovFrameDataArr, it's different from m_iFrameIndex.
 
-	CCArray *m_pTweenList;
+	cocos2d::CCArray *m_pTweenList;
 public:
 	/**
 	 * MovementEvent signal. This will emit a signal when trigger a event. 
 	 * The 1st param is the Armature. The 2nd param is Event Type, like START, COMPLETE. The 3rd param is Movement ID, also called Movement Name.
      */
 	sigslot::signal3<Armature*, const char*, const char*> MovementEventSignal;
-
-
 };
 
 }

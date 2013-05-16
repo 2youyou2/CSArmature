@@ -58,6 +58,8 @@ public:
 	void restartCallback(CCObject* pSender);
 	void nextCallback(CCObject* pSender);
 	void backCallback(CCObject* pSender);
+
+	virtual void draw();
 };
 
 
