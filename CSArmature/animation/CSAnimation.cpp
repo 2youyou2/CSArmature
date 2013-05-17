@@ -71,7 +71,7 @@ void Animation::resume()
 	CCObject *object = NULL;
 	CCARRAY_FOREACH(m_pTweenList, object)
 	{
-		((Tween*)object)->pause();
+		((Tween*)object)->resume();
 	}
     ProcessBase::resume();
 }
@@ -81,7 +81,7 @@ void Animation::stop()
 	CCObject *object = NULL;
 	CCARRAY_FOREACH(m_pTweenList, object)
 	{
-		((Tween*)object)->pause();
+		((Tween*)object)->stop();
 	}
     m_pTweenList->removeAllObjects();
     ProcessBase::stop();

@@ -89,7 +89,7 @@ namespace cs {
 			DataReaderHelper::addDataFromXML(filePathStr.c_str());
 #endif
 		}
-		else if(str.compare(".json") == 0)
+		else if(str.compare(".json") == 0 || str.compare(".ExportJson") == 0)
 		{
 			DataReaderHelper::addDataFromJson(filePathStr.c_str());
 		}
