@@ -225,7 +225,7 @@ namespace cs {
 		return armatureData;
 	}
 
-	BoneData *DataReaderHelper::decodeBone(TiXmlElement *boneXML, TiXmlElement *_parentXML)
+	BoneData *DataReaderHelper::decodeBone(TiXmlElement *boneXML, TiXmlElement *parentXml)
 	{
 
 		std::string name = boneXML->Attribute(A_NAME);
@@ -273,16 +273,16 @@ namespace cs {
 		//     boneData->skewY = CC_DEGREES_TO_RADIANS(-boneData->skewY);
 		//     
 		//     
-		//     if(_parentXML)
+		//     if(parentXml)
 		//     {
 		//         /*
 		//          *  recalculate bone data from parent bone data, use for translate matrix
 		//          */
 		//         Node _helpNode;
-		//         _parentXML->QueryFloatAttribute(A_X, &_helpNode.x);
-		//         _parentXML->QueryFloatAttribute(A_Y, &_helpNode.y);
-		//         _parentXML->QueryFloatAttribute(A_SKEW_X, &_helpNode.skewX);
-		//         _parentXML->QueryFloatAttribute(A_SKEW_Y, &_helpNode.skewY);
+		//         parentXml->QueryFloatAttribute(A_X, &_helpNode.x);
+		//         parentXml->QueryFloatAttribute(A_Y, &_helpNode.y);
+		//         parentXml->QueryFloatAttribute(A_SKEW_X, &_helpNode.skewX);
+		//         parentXml->QueryFloatAttribute(A_SKEW_Y, &_helpNode.skewY);
 		//         
 		//         _helpNode.y = -_helpNode.y;
 		//         _helpNode.skewX = CC_DEGREES_TO_RADIANS(_helpNode.skewX);
@@ -433,22 +433,22 @@ namespace cs {
 			std::string _parentName = boneData->parentName;
 
 
-			TiXmlElement *_parentXML = NULL;
+			TiXmlElement *parentXml = NULL;
 			if (_parentName.compare("") != 0)
 			{
-				_parentXML = movementXML->FirstChildElement(BONE);
+				parentXml = movementXML->FirstChildElement(BONE);
 
-				while (_parentXML)
+				while (parentXml)
 				{
-					if (_parentName.compare(_parentXML->Attribute(A_NAME)) == 0)
+					if (_parentName.compare(parentXml->Attribute(A_NAME)) == 0)
 					{
 						break;
 					}
-					_parentXML = _parentXML->NextSiblingElement(BONE);
+					parentXml = parentXml->NextSiblingElement(BONE);
 				}
 			}
 
-			MovementBoneData *_moveBoneData = decodeMovementBone(movBoneXml, _parentXML, boneData);
+			MovementBoneData *_moveBoneData = decodeMovementBone(movBoneXml, parentXml, boneData);
 			movementData->addMovementBoneData(_moveBoneData);
 
 			movBoneXml = movBoneXml->NextSiblingElement(BONE);
@@ -458,16 +458,16 @@ namespace cs {
 	}
 
 
-	MovementBoneData *DataReaderHelper::decodeMovementBone(TiXmlElement* movBoneXml, TiXmlElement* _parentXml, BoneData *boneData)
+	MovementBoneData *DataReaderHelper::decodeMovementBone(TiXmlElement* movBoneXml, TiXmlElement* parentXml, BoneData *boneData)
 	{
-		MovementBoneData* _movBoneData = MovementBoneData::create();
+		MovementBoneData* movBoneData = MovementBoneData::create();
 		float _scale, _delay;
 
 		if( movBoneXml )
 		{
 			if( movBoneXml->QueryFloatAttribute(A_MOVEMENT_SCALE, &_scale) == TIXML_SUCCESS )
 			{
-				_movBoneData->scale = _scale;
+				movBoneData->scale = _scale;
 			}
 			if( movBoneXml->QueryFloatAttribute(A_MOVEMENT_DELAY, &_delay) == TIXML_SUCCESS )
 			{
@@ -475,7 +475,7 @@ namespace cs {
 				{
 					_delay -= 1;
 				}
-				_movBoneData->delay = _delay;
+				movBoneData->delay = _delay;
 			}
 		}
 
@@ -486,23 +486,23 @@ namespace cs {
 
 		TiXmlElement *parentFrameXML = NULL;
 
-		std::vector<TiXmlElement*> _parentXMLList;
+		std::vector<TiXmlElement*> parentXmlList;
 
 		/*
 		*  get the parent frame xml list, we need get the origin data
 		*/
-		if( _parentXml != NULL )
+		if( parentXml != NULL )
 		{
-			parentFrameXML = _parentXml->FirstChildElement(FRAME);
+			parentFrameXML = parentXml->FirstChildElement(FRAME);
 			while (parentFrameXML)
 			{
-				_parentXMLList.push_back(parentFrameXML);
+				parentXmlList.push_back(parentFrameXML);
 				parentFrameXML = parentFrameXML->NextSiblingElement(FRAME);
 			}
 
 			parentFrameXML = NULL;
 
-			_length = _parentXMLList.size();
+			_length = parentXmlList.size();
 		}
 
 
@@ -510,20 +510,20 @@ namespace cs {
 
 		std::string name = movBoneXml->Attribute(A_NAME);
 
-		_movBoneData->name = name;
+		movBoneData->name = name;
 
 		TiXmlElement *frameXML= movBoneXml->FirstChildElement(FRAME);
 
 		while( frameXML )
 		{
-			if(_parentXml)
+			if(parentXml)
 			{
 				/*
 				*  in this loop we get the corresponding parent frame xml
 				*/
 				while(_i < _length && (parentFrameXML?(_totalDuration < _parentTotalDuration || _totalDuration >= _parentTotalDuration + _currentDuration):true))
 				{
-					parentFrameXML = _parentXMLList[_i];
+					parentFrameXML = parentXmlList[_i];
 					_parentTotalDuration += _currentDuration;
 					parentFrameXML->QueryIntAttribute(A_DURATION, &_currentDuration);
 					_i++;
@@ -532,7 +532,7 @@ namespace cs {
 			}
 
 			FrameData * _frameData = decodeFrame( frameXML, parentFrameXML, boneData);
-			_movBoneData->addFrameData(_frameData);
+			movBoneData->addFrameData(_frameData);
 
 			_totalDuration += _frameData->duration;
 
@@ -540,10 +540,10 @@ namespace cs {
 		}
 
 
-		return _movBoneData;
+		return movBoneData;
 	}
 
-	FrameData * DataReaderHelper::decodeFrame(TiXmlElement* frameXML,  TiXmlElement* _parentFrameXml, BoneData *boneData)
+	FrameData * DataReaderHelper::decodeFrame(TiXmlElement* frameXML,  TiXmlElement* parentFrameXml, BoneData *boneData)
 	{
 		float _x, _y, _scale_x, _scale_y, _skew_x, _skew_y = 0;
 		int _duration, _displayIndex, _zOrder, _tweenEasing = 0;
@@ -665,16 +665,16 @@ namespace cs {
 			}
 		}
 
-		if(_parentFrameXml)
+		if(parentFrameXml)
 		{
 			/*
 			*  recalculate frame data from parent frame data, use for translate matrix
 			*/
 			Node _helpNode;
-			_parentFrameXml->QueryFloatAttribute(A_X, &_helpNode.x);
-			_parentFrameXml->QueryFloatAttribute(A_Y, &_helpNode.y);
-			_parentFrameXml->QueryFloatAttribute(A_SKEW_X, &_helpNode.skewX);
-			_parentFrameXml->QueryFloatAttribute(A_SKEW_Y, &_helpNode.skewY);
+			parentFrameXml->QueryFloatAttribute(A_X, &_helpNode.x);
+			parentFrameXml->QueryFloatAttribute(A_Y, &_helpNode.y);
+			parentFrameXml->QueryFloatAttribute(A_SKEW_X, &_helpNode.skewX);
+			parentFrameXml->QueryFloatAttribute(A_SKEW_Y, &_helpNode.skewY);
 
 			_helpNode.y = -_helpNode.y;
 			_helpNode.skewX = CC_DEGREES_TO_RADIANS(_helpNode.skewX);
@@ -718,11 +718,11 @@ namespace cs {
 		textureXML->QueryFloatAttribute(A_WIDTH, &width);
 		textureXML->QueryFloatAttribute(A_HEIGHT, &height);
 
-		float _anchorPointX = px / width;
-		float _anchorPointY = (height - py) / height;
+		float anchorPointX = px / width;
+		float anchorPointY = (height - py) / height;
 
-		textureData->pivotX = _anchorPointX;
-		textureData->pivotY = _anchorPointY;
+		textureData->pivotX = anchorPointX;
+		textureData->pivotY = anchorPointY;
 
 		TiXmlElement *contourXML = textureXML->FirstChildElement(CONTOUR);
 
@@ -746,14 +746,14 @@ namespace cs {
 
 		while (vertexDataXML) {
 
-			ContourVertex2 *_vertex = new ContourVertex2(0, 0);
-			_vertex->autorelease();
+			ContourVertex2 *vertex = new ContourVertex2(0, 0);
+			vertex->autorelease();
 
-			vertexDataXML->QueryFloatAttribute(A_X, &_vertex->x);
-			vertexDataXML->QueryFloatAttribute(A_Y, &_vertex->y);
+			vertexDataXML->QueryFloatAttribute(A_X, &vertex->x);
+			vertexDataXML->QueryFloatAttribute(A_Y, &vertex->y);
 
-			_vertex->y = -_vertex->y;
-			contourData->vertexList.addObject(_vertex);
+			vertex->y = -vertex->y;
+			contourData->vertexList.addObject(vertex);
 
 			vertexDataXML = vertexDataXML->NextSiblingElement(CONTOUR_VERTEX);
 		}
