@@ -58,43 +58,43 @@ public:
      * @param id The id of the armature data
 	 * @param armatureData ArmatureData *
      */
-    void addArmatureData(const char *_id, ArmatureData *_armatureData);
+    void addArmatureData(const char *id, ArmatureData *armatureData);
     
 	/**
      *	@brief	get armature data
      *
-     *	@param	_id the id of the armature data you want to get
+     *	@param	id the id of the armature data you want to get
 	 *  
 	 *  @return	ArmatureData *
      */
-    ArmatureData *getArmatureData(const char *_id);
+    ArmatureData *getArmatureData(const char *id);
 
     /**
      *	@brief	add animation data 
      *
-     *	@param 	_id the id of the animation data 
+     *	@param 	id the id of the animation data 
 	 *
 	 *  @return AnimationData *
      */
-    void addAnimationData(const char *_id, AnimationData *_animationData);
+    void addAnimationData(const char *id, AnimationData *animationData);
     
 	/**
      *	@brief	get animation data from m_pAnimationDatas(CCDictionary)
      *
-     *	@param 	_id the id of the animation data you want to get
+     *	@param 	id the id of the animation data you want to get
 	 *  
 	 *  @return AnimationData *
      */
-    AnimationData *getAnimationData(const char *_id);
+    AnimationData *getAnimationData(const char *id);
 
     /**
      *	@brief	add texture data 
      *
-     *	@param 	_id the id of the texture data
+     *	@param 	id the id of the texture data
 	 *
 	 *  @return TextureData *
      */
-    void addTextureData(const char *_id, TextureData *_textureData);
+    void addTextureData(const char *id, TextureData *textureData);
     
 	/**
      *	@brief	get texture data
@@ -103,29 +103,21 @@ public:
 	 *  
 	 *  @return TextureData *
      */
-    TextureData *getTextureData(const char *_id);
+    TextureData *getTextureData(const char *id);
     
     /**
 	 *	@brief	Add ArmatureFileInfo, it is managed by ArmatureDataManager.
-     *
      */
-	void addArmatureFileInfo(const char *_armatureName, const char *_useExistFileInfo, const char *_imagePath, const char *_plistPath, const char *_configFilePath);
-    
-    
+	void addArmatureFileInfo(const char *armatureName, const char *useExistFileInfo, const char *imagePath, const char *plistPath, const char *configFilePath);
     /**
-     *	@brief	get ArmatureFileInfo from m_pArmatureFileInfoDic(CCDictionary)
-     *
-     *	@param 	_id the id of the ArmatureFileInfo you want to get
-	 *
-	 *  @return ArmatureFileInfo *
+	 *	@brief	Add ArmatureFileInfo, it is managed by ArmatureDataManager.
      */
-    ArmatureFileInfo *getArmatureFileInfo(const char *_id);
-    
+	void addArmatureFileInfo(const char *imagePath, const char *plistPath, const char *configFilePath);
+
     /**
      *	@brief	Add sprite frame to CCSpriteFrameCache, it will save display name and it's relative image name
-     *
      */
-    void addSpriteFrameFromFile(const char *_plistPath, const char *_imagePath);
+    void addSpriteFrameFromFile(const char *plistPath, const char *imagePath);
     
 	
 	/**
@@ -158,15 +150,6 @@ private:
 
 private:
     static ArmatureDataManager *m_sSharedArmatureDataManager;
-
-    
-    /**
-	 *	@brief	save ArmatureFileInfo datas
-	 *  @key	std::string
-	 *  @value	ArmatureFileInfo*
-     */
-    cocos2d::CCDictionary *m_pArmatureFileInfoDic;
-    
 };
 
 }

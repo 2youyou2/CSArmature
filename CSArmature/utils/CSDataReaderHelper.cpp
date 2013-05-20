@@ -370,7 +370,6 @@ namespace cs {
 		}
 
 		return aniData;
-
 	}
 
 	MovementData *DataReaderHelper::decodeMovement(TiXmlElement *movementXML, ArmatureData *armatureData)

@@ -36,6 +36,10 @@ CCLayer *CreateLayer(int index)
 		pLayer = new TestUseMutiplePicture(); break;
 	case TEST_BOX2D_DETECTOR:
 		pLayer = new TestBox2DDetector(); break;
+	case TEST_BOUDINGBOX:
+		pLayer = new TestBoundingBox(); break;
+	case TEST_ANCHORPOINT:
+		pLayer = new TestAnchorPoint(); break;
 	default:
 		break;
 	}
@@ -99,14 +103,16 @@ void TestScene::onEnter()
 
 void TestScene::runThisTest()
 {
-	cs::ArmatureDataManager::sharedArmatureDataManager()->addArmatureFileInfo("Zombie_f/Zombie", "", "Armature/Example08.png", "Armature/Example08.plist", "Armature/Example08.xml");
-	cs::ArmatureDataManager::sharedArmatureDataManager()->addArmatureFileInfo("TestBone", "", "Armature/TestBone0.png", "Armature/TestBone0.plist", "Armature/TestBone.json");
-	cs::ArmatureDataManager::sharedArmatureDataManager()->addArmatureFileInfo("Cowboy", "", "Armature/Cowboy0.png", "Armature/Cowboy0.plist", "Armature/Cowboy.json");
-	cs::ArmatureDataManager::sharedArmatureDataManager()->addArmatureFileInfo("Knight_f/Knight", "", "Armature/knight.png", "Armature/knight.plist", "Armature/knight.xml");
-	cs::ArmatureDataManager::sharedArmatureDataManager()->addArmatureFileInfo("zamboni", "", "Armature/zamboni0.png", "Armature/zamboni0.plist", "Armature/zamboni.json");
-	cs::ArmatureDataManager::sharedArmatureDataManager()->addArmatureFileInfo("weapon", "", "Armature/weapon.png", "Armature/weapon.plist", "Armature/weapon.xml");
-	cs::ArmatureDataManager::sharedArmatureDataManager()->addArmatureFileInfo("robot", "", "Armature/robot.png", "Armature/robot.plist", "Armature/robot.xml");
+	cs::ArmatureDataManager::sharedArmatureDataManager()->addArmatureFileInfo("Armature/Example08.png", "Armature/Example08.plist", "Armature/Example08.xml");
+	cs::ArmatureDataManager::sharedArmatureDataManager()->addArmatureFileInfo("Armature/TestBone0.png", "Armature/TestBone0.plist", "Armature/TestBone.json");
+	cs::ArmatureDataManager::sharedArmatureDataManager()->addArmatureFileInfo("Armature/Cowboy0.png", "Armature/Cowboy0.plist", "Armature/Cowboy.json");
+	cs::ArmatureDataManager::sharedArmatureDataManager()->addArmatureFileInfo("Armature/knight.png", "Armature/knight.plist", "Armature/knight.xml");
+	cs::ArmatureDataManager::sharedArmatureDataManager()->addArmatureFileInfo("Armature/zamboni0.png", "Armature/zamboni0.plist", "Armature/zamboni.json");
+	cs::ArmatureDataManager::sharedArmatureDataManager()->addArmatureFileInfo("Armature/weapon.png", "Armature/weapon.plist", "Armature/weapon.xml");
+	cs::ArmatureDataManager::sharedArmatureDataManager()->addArmatureFileInfo("Armature/robot.png", "Armature/robot.plist", "Armature/robot.xml");
 	
+	cs::ArmatureDataManager::sharedArmatureDataManager()->addArmatureFileInfo("test0.png", "test0.plist", "test.json");
+
 	s_nActionIdx = -1;
 	addChild(NextTest());
 
@@ -575,4 +581,52 @@ void TestBox2DDetector::update(float delta)
 void TestBox2DDetector::onHit(Bone *bone, Bone *bone2)
 {
 	armature2->setVisible(false);
+}
+
+
+void TestBoundingBox::onEnter()
+{
+	TestLayer::onEnter();
+
+	armature = cs::Armature::create("Zombie_f/Zombie");
+	armature->getAnimation()->playByIndex(0);
+	armature->setPosition(VisibleRect::center());
+	addChild(armature);
+}
+std::string TestBoundingBox::title()
+{
+	return "Test BoundingBox";
+}
+void TestBoundingBox::draw()
+{
+	CC_NODE_DRAW_SETUP();
+
+	rect = CCRectApplyAffineTransform(armature->boundingBox(), armature->nodeToParentTransform());
+	
+	ccDrawColor4B(100, 100, 100, 255);
+	ccDrawRect(rect.origin, ccp(rect.getMaxX(), rect.getMaxY()));
+}
+
+
+
+void TestAnchorPoint::onEnter()
+{
+	TestLayer::onEnter();
+
+	for (int i = 0; i<4; i++)
+	{
+		Armature *armature = cs::Armature::create("Zombie_f/Zombie");
+		armature->getAnimation()->playByIndex(0);
+		armature->setPosition(VisibleRect::center());
+		addChild(armature, 0, i);
+	}
+
+	getChildByTag(0)->setAnchorPoint(ccp(0,0));
+	getChildByTag(1)->setAnchorPoint(ccp(0,1));
+	getChildByTag(2)->setAnchorPoint(ccp(1,0));
+	getChildByTag(3)->setAnchorPoint(ccp(1,1));
+}
+std::string TestAnchorPoint::title()
+{
+	return "Test Set AnchorPoint";
 }

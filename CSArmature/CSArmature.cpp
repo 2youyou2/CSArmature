@@ -161,13 +161,16 @@ bool Armature::init(const char *name)
                     MovementBoneData *movBoneData = movData->getMovementBoneData(bone->getName().c_str());
                     CC_BREAK_IF(!movBoneData || movBoneData->frameList.count() <= 0);
                     
-                    FrameData *_frameData = movBoneData->getFrameData(0);
-                    CC_BREAK_IF(!_frameData);
+                    FrameData *frameData = movBoneData->getFrameData(0);
+                    CC_BREAK_IF(!frameData);
                     
-                    bone->getTweenData()->copy(_frameData);
+                    bone->getTweenData()->copy(frameData);
+					bone->changeDisplayByIndex(frameData->displayIndex, false);
                 } while (0);
 			}
+			
 			update(0);
+			updateOffsetPoint();
         }
         else
         {
@@ -287,7 +290,96 @@ CCDictionary *Armature::getBoneDic()
 {
     return m_pBoneDic;
 }
+
+CCAffineTransform Armature::nodeToParentTransform()
+{
+	if (m_bTransformDirty) 
+	{
+
+		// Translate values
+		float x = m_obPosition.x;
+		float y = m_obPosition.y;
+
+		if (m_bIgnoreAnchorPointForPosition) 
+		{
+			x += m_obAnchorPointInPoints.x;
+			y += m_obAnchorPointInPoints.y;
+		}
+
+		// Rotation values
+		// Change rotation code to handle X and Y
+		// If we skew with the exact same value for both x and y then we're simply just rotating
+		float cx = 1, sx = 0, cy = 1, sy = 0;
+		if (m_fRotationX || m_fRotationY)
+		{
+			float radiansX = -CC_DEGREES_TO_RADIANS(m_fRotationX);
+			float radiansY = -CC_DEGREES_TO_RADIANS(m_fRotationY);
+			cx = cosf(radiansX);
+			sx = sinf(radiansX);
+			cy = cosf(radiansY);
+			sy = sinf(radiansY);
+		}
+
+		// Add offset point
+		x += cy * m_pOffsetPoint.x * m_fScaleX + -sx * m_pOffsetPoint.y * m_fScaleY;
+		y += sy * m_pOffsetPoint.x * m_fScaleX + cx * m_pOffsetPoint.y * m_fScaleY;
+
+		bool needsSkewMatrix = ( m_fSkewX || m_fSkewY );
+		
+		// optimization:
+		// inline anchor point calculation if skew is not needed
+		// Adjusted transform calculation for rotational skew
+		if (! needsSkewMatrix && !m_obAnchorPointInPoints.equals(CCPointZero))
+		{
+			x += cy * -m_obAnchorPointInPoints.x * m_fScaleX + -sx * -m_obAnchorPointInPoints.y * m_fScaleY;
+			y += sy * -m_obAnchorPointInPoints.x * m_fScaleX +  cx * -m_obAnchorPointInPoints.y * m_fScaleY;
+		}
+
+
+		// Build Transform Matrix
+		// Adjusted transform calculation for rotational skew
+		m_sTransform = CCAffineTransformMake( cy * m_fScaleX,  sy * m_fScaleX,
+			-sx * m_fScaleY, cx * m_fScaleY,
+			x, y );
+
+		// XXX: Try to inline skew
+		// If skew is needed, apply skew and then anchor point
+		if (needsSkewMatrix) 
+		{
+			CCAffineTransform skewMatrix = CCAffineTransformMake(1.0f, tanf(CC_DEGREES_TO_RADIANS(m_fSkewY)),
+				tanf(CC_DEGREES_TO_RADIANS(m_fSkewX)), 1.0f,
+				0.0f, 0.0f );
+			m_sTransform = CCAffineTransformConcat(skewMatrix, m_sTransform);
+
+			// adjust anchor point
+			if (!m_obAnchorPointInPoints.equals(CCPointZero))
+			{
+				m_sTransform = CCAffineTransformTranslate(m_sTransform, -m_obAnchorPointInPoints.x, -m_obAnchorPointInPoints.y);
+			}
+		}
+
+		if (m_bAdditionalTransformDirty)
+		{
+			m_sTransform = CCAffineTransformConcat(m_sTransform, m_sAdditionalTransform);
+			m_bAdditionalTransformDirty = false;
+		}
+
+		m_bTransformDirty = false;
+	}
+
+	return m_sTransform;
+}
     
+void Armature::updateOffsetPoint()
+{
+	// Set contentsize and Calculate anchor point. 
+	CCRect rect = boundingBox();
+	setContentSize(rect.size);
+	m_pOffsetPoint = ccp(-rect.origin.x,  -rect.origin.y);
+	setAnchorPoint(ccp(m_pOffsetPoint.x/rect.size.width, m_pOffsetPoint.y/rect.size.height));
+}
+
+
 void Armature::update(float dt)
 {
     m_pAnimation->update(dt);
@@ -336,7 +428,7 @@ void Armature::draw()
 			if (m_pAtlas->getCapacity() == m_pAtlas->getTotalQuads() && !m_pAtlas->resizeCapacity(m_pAtlas->getCapacity() * 2)) 
 				return;	
 
-			skin->updateTransform();
+			skin->draw();
 		}
 		else
 		{
@@ -440,6 +532,6 @@ Bone *Armature::getBoneAtPoint(float _x, float _y)
     }    
     return NULL;
 }
-    
+
 
 }

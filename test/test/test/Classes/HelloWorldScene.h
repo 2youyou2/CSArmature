@@ -42,6 +42,8 @@ enum {
 	TEST_PARTICLE_DISPLAY,
 	TEST_USE_DIFFERENT_PICTURE,
 	TEST_BOX2D_DETECTOR,
+	TEST_BOUDINGBOX,
+	TEST_ANCHORPOINT,
 
 	TEST_LAYER_COUNT
 };
@@ -169,5 +171,23 @@ public:
 
 	Armature *armature;
 	Armature *armature2;
+};
+
+class TestBoundingBox : public TestLayer
+{
+public:
+	virtual void onEnter();
+	virtual std::string title();
+	virtual void draw();
+
+	Armature *armature;
+	CCRect rect;
+};
+
+class TestAnchorPoint : public TestLayer
+{
+public:
+	virtual void onEnter();
+	virtual std::string title();
 };
 #endif  // __HELLOWORLD_SCENE_H__

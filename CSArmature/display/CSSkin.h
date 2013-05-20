@@ -42,10 +42,11 @@ public:
     Skin();
 
 	void updateTransform();
-	void updateSkinTransform();
+	void draw();
 
 	CC_PROPERTY_PASS_BY_REF(Node, m_sSkinData, SkinData);
 	CC_SYNTHESIZE(Bone*, m_pBone, Bone);
+
 protected:
 	cocos2d::CCAffineTransform m_tSkinTransform;
 };

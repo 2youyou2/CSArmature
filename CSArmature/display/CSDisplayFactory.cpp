@@ -83,6 +83,8 @@ void CS_DISPLAY_UPDATE(Bone *bone, DecorativeDisplay *decoDisplay, float dt, boo
 	
 	switch(decoDisplay->getDisplayData()->displayType)
 	{
+	case CS_DISPLAY_SPRITE:
+		CS_DISPLAY_SPRITE_UPDATE(bone, decoDisplay, dt, dirty); break;
 	case CS_DISPLAY_PARTICLE:
 		CS_DISPLAY_PARTICLE_UPDATE(bone, decoDisplay, dt, dirty); break; 
 	default:
@@ -153,6 +155,11 @@ void CS_DISPLAY_SPRITE_CREATE(Bone *bone, DecorativeDisplay *decoDisplay)
 #endif
 }
 
+void CS_DISPLAY_SPRITE_UPDATE(Bone *bone, DecorativeDisplay *decoDisplay, float dt, bool dirty)
+{
+	Skin *skin = (Skin*)decoDisplay->getDisplay();
+	skin->updateTransform();
+}
 
 
 void CS_DISPLAY_ARMATURE_ADD(Bone *bone, DecorativeDisplay *decoDisplay, DisplayData *displayData)

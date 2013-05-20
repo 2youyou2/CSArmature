@@ -59,7 +59,6 @@ ArmatureDataManager::ArmatureDataManager(void)
     m_pAnimationDatas = NULL;
     m_pArmarureDatas = NULL;
     m_pTextureDatas = NULL;
-    m_pArmatureFileInfoDic = NULL;
 }
 
 
@@ -69,7 +68,6 @@ ArmatureDataManager::~ArmatureDataManager(void)
     CC_SAFE_DELETE(m_pAnimationDatas);
     CC_SAFE_DELETE(m_pArmarureDatas);
     CC_SAFE_DELETE(m_pTextureDatas);
-    CC_SAFE_DELETE(m_pArmatureFileInfoDic);
 }
 
 bool ArmatureDataManager::init()
@@ -89,10 +87,6 @@ bool ArmatureDataManager::init()
         m_pTextureDatas = CCDictionary::create();
         CCAssert(m_pTextureDatas, "create ArmatureDataManager::m_pTextureDatas fail!");
         m_pTextureDatas->retain();
-        
-        m_pArmatureFileInfoDic = CCDictionary::create();
-        CCAssert(m_pArmatureFileInfoDic, "create ArmatureDataManager::m_pArmatureFileInfoDic fail!");
-        m_pArmatureFileInfoDic->retain();
         
         bRet = true;
     }
@@ -154,62 +148,21 @@ TextureData *ArmatureDataManager::getTextureData(const char* id)
     }
     return textureData;
 }
-    
-ArmatureFileInfo *ArmatureDataManager::getArmatureFileInfo(const char *id)
-{
-    ArmatureFileInfo *armatureFileInfo = NULL;
-    if (m_pArmatureFileInfoDic)
-    {
-        armatureFileInfo = (ArmatureFileInfo*)m_pArmatureFileInfoDic->objectForKey(id);
-    }
-    return armatureFileInfo;
-}
 
 
 
 void ArmatureDataManager::addArmatureFileInfo(const char *armatureName, const char *useExistFileInfo, const char *imagePath, const char *plistPath, const char *configFilePath)
 {
-    ArmatureFileInfo *fileInfo = (ArmatureFileInfo*)m_pArmatureFileInfoDic->objectForKey(armatureName);
-    
-    if(!fileInfo)
-    {
-        fileInfo = ArmatureFileInfo::create();
-        fileInfo->armatureName = armatureName;
-        fileInfo->configFilePath = configFilePath;
-        fileInfo->useExistFileInfo = useExistFileInfo;
-        
-
-        if (fileInfo->useExistFileInfo.compare("") != 0)
-        {
-            fileInfo = (ArmatureFileInfo*)m_pArmatureFileInfoDic->objectForKey(fileInfo->useExistFileInfo);
-        }
-        
-        
-        m_pArmatureFileInfoDic->setObject(fileInfo, fileInfo->armatureName);
-    }
-    
-    DataReaderHelper::addDataFromFile(configFilePath);
-    
-    for (std::vector<ImageInfo>::iterator it = fileInfo->imageInfoVector.begin(); it != fileInfo->imageInfoVector.end(); it++)
-    {
-        if (it->imagePath.compare(imagePath) == 0)
-        {
-            return;
-        }
-    }
-    
-    ImageInfo imageInfo;
-    
-    imageInfo.imagePath = imagePath;
-    imageInfo.plistPath = plistPath;
-    
-    addSpriteFrameFromFile(plistPath, imagePath);
-    
-    fileInfo->imageInfoVector.push_back(imageInfo);
-    
-    
+    addArmatureFileInfo(imagePath, plistPath, configFilePath);
 }
     
+void ArmatureDataManager::addArmatureFileInfo(const char *imagePath, const char *plistPath, const char *configFilePath)
+{
+
+	DataReaderHelper::addDataFromFile(configFilePath);
+	addSpriteFrameFromFile(plistPath, imagePath);
+}
+
 void ArmatureDataManager::addSpriteFrameFromFile(const char *plistPath, const char *imagePath)
 {
 //	if(Game::sharedGame()->isUsePackage())
@@ -238,10 +191,6 @@ void ArmatureDataManager::removeAll()
     if( m_pTextureDatas )
     {
         m_pTextureDatas->removeAllObjects();
-    }
-    if( m_pArmatureFileInfoDic )
-    {
-        m_pArmatureFileInfoDic->removeAllObjects();
     }
 
 	DataReaderHelper::clear();

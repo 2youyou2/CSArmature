@@ -69,7 +69,16 @@ namespace cs {
 	void Skin::setSkinData(const Node& var)
 	{
 		m_sSkinData = var;
-		updateSkinTransform();
+		
+		setScaleX(m_sSkinData.scaleX);
+		setScaleY(m_sSkinData.scaleY);
+
+		setScaleX(m_sSkinData.scaleX);
+		setScaleY(m_sSkinData.scaleY);
+		setRotation(CC_RADIANS_TO_DEGREES(m_sSkinData.skewX));
+		setPosition(ccp(m_sSkinData.x, m_sSkinData.y));
+
+		m_tSkinTransform = nodeToParentTransform();
 	}
 
 	const Node &Skin::getSkinData()
@@ -79,6 +88,11 @@ namespace cs {
 
 	void Skin::updateTransform()
 	{
+		m_sTransform = CCAffineTransformConcat(m_tSkinTransform, m_pBone->nodeToArmatureTransform());
+	}
+
+	void Skin::draw()
+	{
 		// If it is not visible, or one of its ancestors is not visible, then do nothing:
 		if( !m_bVisible)
 		{
@@ -86,9 +100,6 @@ namespace cs {
 		}
 		else 
 		{
-			CCAffineTransform t = m_pBone->nodeToArmatureTransform();
-			t = CCAffineTransformConcat(m_tSkinTransform, t);
-
 			//
 			// calculate the Quad based on the Affine Matrix
 			//
@@ -101,13 +112,13 @@ namespace cs {
 			float x2 = x1 + size.width;
 			float y2 = y1 + size.height;
 
-			float x = t.tx;
-			float y = t.ty;
+			float x = m_sTransform.tx;
+			float y = m_sTransform.ty;
 
-			float cr = t.a;
-			float sr = t.b;
-			float cr2 = t.d;
-			float sr2 = -t.c;
+			float cr = m_sTransform.a;
+			float sr = m_sTransform.b;
+			float cr2 = m_sTransform.d;
+			float sr2 = -m_sTransform.c;
 			float ax = x1 * cr - y1 * sr2 + x;
 			float ay = x1 * sr + y1 * cr2 + y;
 
@@ -131,18 +142,5 @@ namespace cs {
 		{
 			m_pobTextureAtlas->updateQuad(&m_sQuad, m_pobTextureAtlas->getTotalQuads());
 		}
-	}
-    
-	void Skin::updateSkinTransform()
-	{
-		setScaleX(m_sSkinData.scaleX);
-		setScaleY(m_sSkinData.scaleY);
-
-		setScaleX(m_sSkinData.scaleX);
-		setScaleY(m_sSkinData.scaleY);
-		setRotation(CC_RADIANS_TO_DEGREES(m_sSkinData.skewX));
-		setPosition(ccp(m_sSkinData.x, m_sSkinData.y));
-
-		m_tSkinTransform = nodeToParentTransform();
 	}
 }

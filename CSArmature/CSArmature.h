@@ -38,32 +38,6 @@
 
 namespace cs {
     
-typedef struct _ImageInfo
-{
-    std::string imagePath;
-    std::string plistPath;
-}ImageInfo;
-
-typedef struct _ArmatureFileInfo : public cocos2d::CCObject
-{
-    static _ArmatureFileInfo *create()
-    {
-        _ArmatureFileInfo *_afi = new _ArmatureFileInfo();
-        if(_afi)
-        {
-            _afi->autorelease();
-            return _afi;  
-        }
-        CC_SAFE_DELETE(_afi);
-        return NULL;
-    }
-
-    std::string armatureName;
-    std::string useExistFileInfo;
-    std::string configFilePath;
-    std::vector<ImageInfo> imageInfoVector;
-}ArmatureFileInfo;
-    
 class Armature : public cocos2d::CCNodeRGBA, public cocos2d::CCBlendProtocol 
 {
 
@@ -131,17 +105,26 @@ public:
      */
 	cocos2d::CCDictionary *getBoneDic();
 
+	/**
+     * This boundingBox will calculate all bones' boundingBox every time
+     */
 	virtual cocos2d::CCRect boundingBox();
     
-    Bone *getBoneAtPoint(float _x, float _y);
+    Bone *getBoneAtPoint(float x, float y);
     
 	virtual void visit();
     virtual void update(float dt);
 	virtual void draw();
 
+	virtual cocos2d::CCAffineTransform nodeToParentTransform();
+
+	/**
+	 * Set contentsize and Calculate anchor point. 
+     */
+	virtual void updateOffsetPoint();
+
 	inline void setBlendFunc(cocos2d::ccBlendFunc blendFunc) { m_sBlendFunc = blendFunc; }
 	inline cocos2d::ccBlendFunc getBlendFunc(void) { return m_sBlendFunc; }
-
 protected:
     
     /*
@@ -169,6 +152,8 @@ protected:
 	CC_SYNTHESIZE_PASS_BY_REF(std::string, m_strName, Name);
 
 	CC_SYNTHESIZE(cocos2d::CCTextureAtlas*, m_pAtlas, TextureAtlas);
+
+	cocos2d::CCPoint m_pOffsetPoint;
 };
 
 
