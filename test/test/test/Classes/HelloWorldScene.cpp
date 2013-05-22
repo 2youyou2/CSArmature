@@ -40,6 +40,8 @@ CCLayer *CreateLayer(int index)
 		pLayer = new TestBoundingBox(); break;
 	case TEST_ANCHORPOINT:
 		pLayer = new TestAnchorPoint(); break;
+	case TEST_ARMATURE_NESTING:
+		pLayer = new TestArmatureNesting(); break;
 	default:
 		break;
 	}
@@ -110,9 +112,9 @@ void TestScene::runThisTest()
 	cs::ArmatureDataManager::sharedArmatureDataManager()->addArmatureFileInfo("Armature/zamboni0.png", "Armature/zamboni0.plist", "Armature/zamboni.json");
 	cs::ArmatureDataManager::sharedArmatureDataManager()->addArmatureFileInfo("Armature/weapon.png", "Armature/weapon.plist", "Armature/weapon.xml");
 	cs::ArmatureDataManager::sharedArmatureDataManager()->addArmatureFileInfo("Armature/robot.png", "Armature/robot.plist", "Armature/robot.xml");
-	
-	cs::ArmatureDataManager::sharedArmatureDataManager()->addArmatureFileInfo("test0.png", "test0.plist", "test.json");
+	cs::ArmatureDataManager::sharedArmatureDataManager()->addArmatureFileInfo("Armature/cyborg.png", "Armature/cyborg.plist", "Armature/cyborg.xml");
 
+	
 	s_nActionIdx = -1;
 	addChild(NextTest());
 
@@ -527,7 +529,6 @@ bool TestUseMutiplePicture::ccTouchBegan(CCTouch *pTouch, CCEvent *pEvent)
 	armature->getBone("weapon")->changeDisplayByIndex(displayIndex, true);
 	return false;
 }
-
 void TestUseMutiplePicture::registerWithTouchDispatcher()
 {
 	CCDirector::sharedDirector()->getTouchDispatcher()->addTargetedDelegate(this, INT_MIN+1, true);
@@ -584,6 +585,8 @@ void TestBox2DDetector::onHit(Bone *bone, Bone *bone2)
 }
 
 
+
+
 void TestBoundingBox::onEnter()
 {
 	TestLayer::onEnter();
@@ -629,4 +632,36 @@ void TestAnchorPoint::onEnter()
 std::string TestAnchorPoint::title()
 {
 	return "Test Set AnchorPoint";
+}
+
+
+void TestArmatureNesting::onEnter()
+{
+	TestLayer::onEnter();
+	setTouchEnabled(true);
+
+	armature = cs::Armature::create("cyborg");
+	armature->getAnimation()->playByIndex(1);
+	armature->setPosition(VisibleRect::center());
+	armature->setScale(2);
+	armature->getAnimation()->setAnimationScale(0.4f);
+	addChild(armature);
+
+	weaponIndex = 0;
+}
+std::string TestArmatureNesting::title()
+{
+	return "Test Armature Nesting";
+}
+bool TestArmatureNesting::ccTouchBegan(CCTouch *pTouch, CCEvent *pEvent)
+{
+	weaponIndex = ++weaponIndex % 4;
+
+	armature->getBone("armInside")->getChildArmature()->getAnimation()->playByIndex(weaponIndex);
+	armature->getBone("armOutside")->getChildArmature()->getAnimation()->playByIndex(weaponIndex);
+	return false;
+}
+void TestArmatureNesting::registerWithTouchDispatcher()
+{
+	CCDirector::sharedDirector()->getTouchDispatcher()->addTargetedDelegate(this, INT_MIN+1, true);
 }

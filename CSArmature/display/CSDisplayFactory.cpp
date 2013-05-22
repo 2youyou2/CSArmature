@@ -46,6 +46,8 @@ void CS_DISPLAY_ADD(Bone *bone, DecorativeDisplay *decoDisplay, DisplayData *dis
 		CS_DISPLAY_SPRITE_ADD(bone, decoDisplay, displayData); break;
 	case  CS_DISPLAY_PARTICLE:
 		CS_DISPLAY_PARTICLE_ADD(bone, decoDisplay, displayData); break;
+	case  CS_DISPLAY_ARMATURE:
+		CS_DISPLAY_ARMATURE_ADD(bone, decoDisplay, displayData); break;
 	default:
 		break;
 	}
@@ -59,6 +61,8 @@ void CS_DISPLAY_CREATE(Bone *bone, DecorativeDisplay *decoDisplay)
 		CS_DISPLAY_SPRITE_CREATE(bone, decoDisplay); break;
 	case CS_DISPLAY_PARTICLE:
 		CS_DISPLAY_PARTICLE_CREATE(bone, decoDisplay); break; 
+	case CS_DISPLAY_ARMATURE:
+		CS_DISPLAY_ARMATURE_CREATE(bone, decoDisplay); break;
 	default:
 		break;
 	}
@@ -87,6 +91,8 @@ void CS_DISPLAY_UPDATE(Bone *bone, DecorativeDisplay *decoDisplay, float dt, boo
 		CS_DISPLAY_SPRITE_UPDATE(bone, decoDisplay, dt, dirty); break;
 	case CS_DISPLAY_PARTICLE:
 		CS_DISPLAY_PARTICLE_UPDATE(bone, decoDisplay, dt, dirty); break; 
+	case CS_DISPLAY_ARMATURE:
+		CS_DISPLAY_ARMATURE_UPDATE(bone, decoDisplay, dt, dirty); break;
 	default:
 		break;
 	}
@@ -174,7 +180,7 @@ void CS_DISPLAY_ARMATURE_CREATE(Bone *bone, DecorativeDisplay *decoDisplay)
 {
 	ArmatureDisplayData *displayData = (ArmatureDisplayData*)decoDisplay->getDisplayData();
     
-    Armature *armature = Armature::create(displayData->displayName.c_str());
+    Armature *armature = Armature::create(displayData->displayName.c_str(), bone);
     
     /*
      *  because this bone have called this name, so armature should change it's name, or it can't add to
@@ -184,7 +190,17 @@ void CS_DISPLAY_ARMATURE_CREATE(Bone *bone, DecorativeDisplay *decoDisplay)
     
 	decoDisplay->setDisplay(armature);
 }
+void CS_DISPLAY_ARMATURE_UPDATE(Bone *bone, DecorativeDisplay *decoDisplay, float dt, bool dirty)
+{
+	CS_RETURN_IF(!dirty);
 
+	Armature *armature = bone->getChildArmature();
+	if(armature)
+	{
+		armature->sortAllChildren();
+	 	armature->update(dt);
+	}
+}
 
 
 

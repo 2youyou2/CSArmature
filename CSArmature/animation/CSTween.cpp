@@ -4,6 +4,7 @@
 #include "CSUtilMath.h"
 #include "CSTweenFunction.h"
 #include "cocos2d.h"
+#include "CSAnimation.h"
 
 using namespace cocos2d;
 
@@ -35,6 +36,7 @@ Tween::Tween()
     ,m_iFromIndex(0)
     ,m_iToIndex(0)
     ,m_pEditKeyFrame(NULL)
+	,m_pAnimation(NULL)
 {
 
 }
@@ -64,6 +66,8 @@ bool Tween::init(Bone *bone)
         
         m_pBone = bone;
 		m_pTweenData = m_pBone->getTweenData();
+		
+		m_pAnimation = m_pBone->getArmature() != NULL ? m_pBone->getArmature()->getAnimation() : NULL;
 
         bRet = true;
     }
@@ -75,7 +79,6 @@ bool Tween::init(Bone *bone)
 
 void Tween::play(MovementBoneData *_movementBoneData, int _durationTo, int _durationTween,  int _loop, int _tweenEasing)
 {
-    
     ProcessBase::play(NULL, _durationTo, _durationTween, _loop, _tweenEasing);
    
 	m_eLoopType = (AnimationType)_loop;
@@ -99,6 +102,7 @@ void Tween::play(MovementBoneData *_movementBoneData, int _durationTo, int _dura
 		{
 			setBetween(_nextKeyFrame, _nextKeyFrame);
 		}else{
+			m_pTweenData->displayIndex = _nextKeyFrame->displayIndex;
 			setBetween(m_pTweenData, _nextKeyFrame);
 		}
         m_bIsTweenKeyFrame = true;
@@ -235,7 +239,6 @@ void Tween::updateHandler()
 	{
 		tweenNodeTo(0);
 	}
-
 }
 
 void Tween::setBetween(FrameData *from, FrameData *to)
@@ -289,12 +292,12 @@ void Tween::arriveKeyFrame(FrameData *keyFrameData)
 
 		if(keyFrameData->m_strEvent.length() != 0)
 		{
-			//m_pBone->dispatchEventWith(Event.BONE_EVENT_FRAME, m_pCurrentKeyFrame->event);
+			m_pAnimation->FrameEventSignal.emit(m_pBone, keyFrameData->m_strEvent.c_str());
 		}
-		if(keyFrameData->m_strSound.length() != 0)
-		{
-			//soundManager.dispatchEventWith(Event.SOUND_FRAME, m_pCurrentKeyFrame->sound);
-		}
+// 		if(keyFrameData->m_strSound.length() != 0)
+// 		{
+// 			//soundManager.dispatchEventWith(Event.SOUND_FRAME, m_pCurrentKeyFrame->sound);
+// 		}
 	}
 }
 

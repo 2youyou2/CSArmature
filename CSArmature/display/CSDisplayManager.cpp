@@ -120,7 +120,6 @@ void DisplayManager::removeDisplay(int index)
     {
         setDisplayRenderNode(NULL);
     }
-    
 }
     
 void DisplayManager::changeDisplayByIndex(int index, bool force)
@@ -156,6 +155,11 @@ void DisplayManager::setDisplayRenderNode(CCNode *displayRenderNode)
 {
     if (m_pDisplayRenderNode)
     {
+		if (dynamic_cast<Armature*>(m_pDisplayRenderNode) != NULL)
+		{
+			m_pBone->setChildArmature(NULL);
+		}
+
         m_pDisplayRenderNode->removeFromParentAndCleanup(true);
         m_pDisplayRenderNode->release();
     }
@@ -164,6 +168,10 @@ void DisplayManager::setDisplayRenderNode(CCNode *displayRenderNode)
 
     if(m_pDisplayRenderNode)
     {
+		if (dynamic_cast<Armature*>(m_pDisplayRenderNode) != NULL)
+		{
+			m_pBone->setChildArmature((Armature*)m_pDisplayRenderNode);
+		}
         m_pDisplayRenderNode->retain();
     }
 }

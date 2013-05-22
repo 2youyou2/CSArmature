@@ -567,6 +567,8 @@ namespace cs {
 			frameData->m_strSoundEffect = frameXML->Attribute(A_SOUND_EFFECT);
 		}
 
+
+
 		if (s_FlashToolVersion.compare(VERSION_2_0) == 0)
 		{
 			if(frameXML->QueryFloatAttribute(A_COCOS2DX_X, &_x) == TIXML_SUCCESS)
@@ -1007,6 +1009,12 @@ namespace cs {
 		frameData->tweenEasing = (TweenType)json.getItemIntValue(A_TWEEN_EASING, Linear);
 		frameData->displayIndex = json.getItemIntValue(A_DISPLAY_INDEX, 0);
 
+		const char *event= json.getItemStringValue(A_EVENT);
+		if (event != NULL)
+		{
+			frameData->m_strEvent = event;
+		}
+
 		return frameData;
 	}
 
@@ -1080,24 +1088,6 @@ namespace cs {
 			node->isUseColorInfo = true;
 		}
 	}
-
-	// std::string DataReaderHelper::convertFlashToSP(const char *fileName)
-	// {
-	// // 	clearJson();
-	// // 
-	// // 	addDataFromXML(fileName);
-	// // 
-	// // 	addAllArmatureDataToJsonList();
-	// // 	addAllAnimationDataToJsonList();
-	// // 	addAllTextureDataToJsonList();
-	// // 
-	// // 	deleteDictElements(ArmatureDataManager::sharedArmatureDataManager()->getArmarureDatas());
-	// // 	deleteDictElements(ArmatureDataManager::sharedArmatureDataManager()->getAnimationDatas());
-	// // 	deleteDictElements(ArmatureDataManager::sharedArmatureDataManager()->getTextureDatas());
-	// // 
-	// // 	return getExportJson();
-	// 	return "";
-	// }
 #pragma endregion
 
 }

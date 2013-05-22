@@ -34,6 +34,8 @@
 namespace cs {
 
 class Bone;
+class Animation;
+
 class CS_EXTERN Tween : public ProcessBase
 {
 public:
@@ -136,6 +138,7 @@ protected:
 
 	FrameData *m_pEditKeyFrame;
     
+	Animation *m_pAnimation;
 };
 
 }

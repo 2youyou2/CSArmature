@@ -76,13 +76,26 @@ Armature *Armature::create(const char* _name)
     return NULL;
 }
 
+Armature *Armature::create(const char* name, Bone *parentBone)
+{
+	Armature *armature = new Armature();
+
+	if (armature && armature->init(name, parentBone))
+	{
+		armature->autorelease();
+		return armature;
+	}
+	CC_SAFE_DELETE(armature);
+	return NULL;
+}
+
 Armature::Armature()
     :m_pAnimation(NULL)
     ,m_pBoneDic(NULL)
-    ,m_bBonesIndexChanged(false)
-	,m_pArmature(NULL)
 	,m_pAtlas(NULL)
 	,m_pBatchNode(NULL)
+	,m_pParentBone(NULL)
+	,m_pTopBoneList(NULL)
 {
 }
 
@@ -94,6 +107,11 @@ Armature::~Armature(void)
         m_pBoneDic->removeAllObjects();
         CC_SAFE_DELETE(m_pBoneDic);
     }
+	if (NULL != m_pTopBoneList)
+	{
+		m_pTopBoneList->removeAllObjects();
+		CC_SAFE_DELETE(m_pTopBoneList);
+	}
     
     CC_SAFE_DELETE(m_pAnimation);
 }
@@ -114,13 +132,16 @@ bool Armature::init(const char *name)
 
 		CC_SAFE_DELETE(m_pAnimation);
         m_pAnimation = Animation::create(this);
-        CCAssert(m_pAnimation, "create Armature::m_pAnimation fail!");
         m_pAnimation->retain();
 
 		CC_SAFE_DELETE(m_pBoneDic);
         m_pBoneDic	= CCDictionary::create();
-        CCAssert(m_pBoneDic, "create Armature::m_pBoneDic fail!");
         m_pBoneDic->retain();
+
+		CC_SAFE_DELETE(m_pTopBoneList);
+		m_pTopBoneList = CCArray::create();
+		m_pTopBoneList->retain();
+
 
 		m_sBlendFunc.src = CC_BLEND_SRC;
 		m_sBlendFunc.dst = CC_BLEND_DST;
@@ -203,6 +224,13 @@ bool Armature::init(const char *name)
     return bRet;
 }
 
+bool Armature::init(const char *name, Bone *parentBone)
+{
+	m_pParentBone = parentBone;
+	return init(name);
+}
+
+
 Bone *Armature::createBone(const char *boneName)
 {
 	Bone *existedBone = getBone(boneName);
@@ -240,8 +268,24 @@ void Armature::addBone(Bone *bone, const char *parentName)
     {
 		Bone *boneParent = (Bone*)m_pBoneDic->objectForKey(parentName);
         if (boneParent)
+		{
 			boneParent->addChildBone(bone);
+		}
+		else
+		{
+			if (m_pParentBone) 
+				m_pParentBone->addChildBone(bone);
+			else
+				m_pTopBoneList->addObject(bone);
+		}
     }
+	else
+	{
+		if (m_pParentBone) 
+			m_pParentBone->addChildBone(bone);
+		else
+			m_pTopBoneList->addObject(bone);
+	}
     
     bone->setArmature(this);
     
@@ -257,6 +301,10 @@ void Armature::removeBone(Bone *bone, bool recursion)
     bone->setArmature(NULL);
     bone->removeFromParent(recursion);
     
+	if (m_pTopBoneList->containsObject(bone))
+	{
+		m_pTopBoneList->removeObject(bone);
+	}
     m_pBoneDic->removeObjectForKey(bone->getName());
     m_pChildren->removeObject(bone);
 }
@@ -385,21 +433,20 @@ void Armature::update(float dt)
     m_pAnimation->update(dt);
 
 	CCObject *object = NULL;
-	CCARRAY_FOREACH(m_pChildren, object)
+	CCARRAY_FOREACH(m_pTopBoneList, object)
 	{
 		((Bone*)object)->update(dt);
-	}
-
-	CCARRAY_FOREACH(m_pChildren, object)
-	{
-		((Bone*)object)->setTransformDirty(false);
 	}
 }
 
 void Armature::draw()
 {
-	CC_NODE_DRAW_SETUP();
-	ccGLBlendFunc(m_sBlendFunc.src, m_sBlendFunc.dst);
+	if (m_pParentBone == NULL)
+	{
+		CC_NODE_DRAW_SETUP();
+		ccGLBlendFunc(m_sBlendFunc.src, m_sBlendFunc.dst);
+	}
+	
 
 	CCObject *object = NULL;
 	CCARRAY_FOREACH(m_pChildren, object)
@@ -412,40 +459,67 @@ void Armature::draw()
 		if (NULL == node)
 			continue;
 
-		Skin *skin = dynamic_cast<Skin*>(node);
-		if(skin != NULL)
+		switch(displayManager->getCurrentDecorativeDisplay()->getDisplayData()->displayType)
 		{
-			CCTextureAtlas *textureAtlas = skin->getTextureAtlas();
-			if(m_pAtlas != textureAtlas)
+		case CS_DISPLAY_SPRITE:
+			{
+				Skin *skin = dynamic_cast<Skin*>(node);
+
+				if(skin != NULL)
+				{
+					CCTextureAtlas *textureAtlas = skin->getTextureAtlas();
+					if(m_pAtlas != textureAtlas)
+					{
+						if (m_pAtlas) {
+							m_pAtlas->drawQuads();
+							m_pAtlas->removeAllQuads();
+						}
+					}
+
+					m_pAtlas = textureAtlas;
+					if (m_pAtlas->getCapacity() == m_pAtlas->getTotalQuads() && !m_pAtlas->resizeCapacity(m_pAtlas->getCapacity() * 2)) 
+						return;	
+
+					skin->draw();
+				}
+			}
+			break;
+		case CS_DISPLAY_ARMATURE:
+			{
+				Armature *armature = dynamic_cast<Armature*>(node);
+
+				if (armature != NULL)
+				{
+					CCTextureAtlas *textureAtlas = armature->getTextureAtlas();
+					
+					if(m_pAtlas != textureAtlas)
+					{
+						if (m_pAtlas) {
+							m_pAtlas->drawQuads();
+							m_pAtlas->removeAllQuads();
+						}
+					}
+
+					armature->draw();
+				}
+			}
+			break;
+		default:
 			{
 				if (m_pAtlas) {
 					m_pAtlas->drawQuads();
 					m_pAtlas->removeAllQuads();
 				}
+				node->visit();
+
+				CC_NODE_DRAW_SETUP();
+				ccGLBlendFunc(m_sBlendFunc.src, m_sBlendFunc.dst);
 			}
-
-			m_pAtlas = textureAtlas;
-			if (m_pAtlas->getCapacity() == m_pAtlas->getTotalQuads() && !m_pAtlas->resizeCapacity(m_pAtlas->getCapacity() * 2)) 
-				return;	
-
-			skin->draw();
-		}
-		else
-		{
-			if (m_pAtlas) {
-				m_pAtlas->drawQuads();
-				m_pAtlas->removeAllQuads();
-			}
-			//node->setAdditionalTransform(bone->nodeToArmatureTransform());
-// 			node->setPosition(100, 0);
- 			node->visit();
-
-			CC_NODE_DRAW_SETUP();
-			ccGLBlendFunc(m_sBlendFunc.src, m_sBlendFunc.dst);
+			break;
 		}
 	}
 
-	if(m_pAtlas && !m_pBatchNode)
+	if(m_pAtlas && !m_pBatchNode && m_pParentBone == NULL)
 	{
 		m_pAtlas->drawQuads();
 		m_pAtlas->removeAllQuads();
