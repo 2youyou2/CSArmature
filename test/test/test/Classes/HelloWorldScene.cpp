@@ -111,7 +111,6 @@ void TestScene::runThisTest()
 	cs::ArmatureDataManager::sharedArmatureDataManager()->addArmatureFileInfo("Armature/weapon.png", "Armature/weapon.plist", "Armature/weapon.xml");
 	cs::ArmatureDataManager::sharedArmatureDataManager()->addArmatureFileInfo("Armature/robot.png", "Armature/robot.plist", "Armature/robot.xml");
 	
-	cs::ArmatureDataManager::sharedArmatureDataManager()->addArmatureFileInfo("test0.png", "test0.plist", "test.json");
 
 	s_nActionIdx = -1;
 	addChild(NextTest());
