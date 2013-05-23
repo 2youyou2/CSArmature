@@ -28,7 +28,7 @@
 #define COCOSTUDIO_CSCONSTVALUE_H
 
 static const char *VERSION = "version";
-static const char *VERSION_2_0 = "2.0";
+static float VERSION_2_0 = 2.0f;
 
 static const char *SKELETON = "skeleton";
 

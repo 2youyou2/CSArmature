@@ -459,64 +459,107 @@ void Armature::draw()
 		if (NULL == node)
 			continue;
 
-		switch(displayManager->getCurrentDecorativeDisplay()->getDisplayData()->displayType)
+		if(Skin *skin = dynamic_cast<Skin*>(node))
 		{
-		case CS_DISPLAY_SPRITE:
-			{
-				Skin *skin = dynamic_cast<Skin*>(node);
-
-				if(skin != NULL)
-				{
-					CCTextureAtlas *textureAtlas = skin->getTextureAtlas();
-					if(m_pAtlas != textureAtlas)
-					{
-						if (m_pAtlas) {
-							m_pAtlas->drawQuads();
-							m_pAtlas->removeAllQuads();
-						}
-					}
-
-					m_pAtlas = textureAtlas;
-					if (m_pAtlas->getCapacity() == m_pAtlas->getTotalQuads() && !m_pAtlas->resizeCapacity(m_pAtlas->getCapacity() * 2)) 
-						return;	
-
-					skin->draw();
-				}
-			}
-			break;
-		case CS_DISPLAY_ARMATURE:
-			{
-				Armature *armature = dynamic_cast<Armature*>(node);
-
-				if (armature != NULL)
-				{
-					CCTextureAtlas *textureAtlas = armature->getTextureAtlas();
-					
-					if(m_pAtlas != textureAtlas)
-					{
-						if (m_pAtlas) {
-							m_pAtlas->drawQuads();
-							m_pAtlas->removeAllQuads();
-						}
-					}
-
-					armature->draw();
-				}
-			}
-			break;
-		default:
+			CCTextureAtlas *textureAtlas = skin->getTextureAtlas();
+			if(m_pAtlas != textureAtlas)
 			{
 				if (m_pAtlas) {
 					m_pAtlas->drawQuads();
 					m_pAtlas->removeAllQuads();
 				}
-				node->visit();
-
-				CC_NODE_DRAW_SETUP();
-				ccGLBlendFunc(m_sBlendFunc.src, m_sBlendFunc.dst);
 			}
-			break;
+
+			m_pAtlas = textureAtlas;
+			if (m_pAtlas->getCapacity() == m_pAtlas->getTotalQuads() && !m_pAtlas->resizeCapacity(m_pAtlas->getCapacity() * 2)) 
+				return;	
+
+			skin->draw();
 		}
+		else if(Armature *armature = dynamic_cast<Armature*>(node))
+		{
+			CCTextureAtlas *textureAtlas = armature->getTextureAtlas();
+
+			if(m_pAtlas != textureAtlas)
+			{
+				if (m_pAtlas) {
+					m_pAtlas->drawQuads();
+					m_pAtlas->removeAllQuads();
+				}
+			}
+
+			armature->draw();
+		}
+		else
+		{
+			if (m_pAtlas) {
+			 	m_pAtlas->drawQuads();
+			 	m_pAtlas->removeAllQuads();
+			}
+			node->visit();
+			 
+			CC_NODE_DRAW_SETUP();
+			ccGLBlendFunc(m_sBlendFunc.src, m_sBlendFunc.dst);
+		}
+
+// 		switch(displayManager->getCurrentDecorativeDisplay()->getDisplayData()->displayType)
+// 		{
+// 		case CS_DISPLAY_SPRITE:
+// 			{
+// 				Skin *skin = dynamic_cast<Skin*>(node);
+// 
+// 				if(skin != NULL)
+// 				{
+// 					CCTextureAtlas *textureAtlas = skin->getTextureAtlas();
+// 					if(m_pAtlas != textureAtlas)
+// 					{
+// 						if (m_pAtlas) {
+// 							m_pAtlas->drawQuads();
+// 							m_pAtlas->removeAllQuads();
+// 						}
+// 					}
+// 
+// 					m_pAtlas = textureAtlas;
+// 					if (m_pAtlas->getCapacity() == m_pAtlas->getTotalQuads() && !m_pAtlas->resizeCapacity(m_pAtlas->getCapacity() * 2)) 
+// 						return;	
+// 
+// 					skin->draw();
+// 				}
+// 			}
+// 			break;
+// 		case CS_DISPLAY_ARMATURE:
+// 			{
+// 				Armature *armature = dynamic_cast<Armature*>(node);
+// 
+// 				if (armature != NULL)
+// 				{
+// 					CCTextureAtlas *textureAtlas = armature->getTextureAtlas();
+// 					
+// 					if(m_pAtlas != textureAtlas)
+// 					{
+// 						if (m_pAtlas) {
+// 							m_pAtlas->drawQuads();
+// 							m_pAtlas->removeAllQuads();
+// 						}
+// 					}
+// 
+// 					armature->draw();
+// 				}
+// 			}
+// 			break;
+// 		default:
+// 			{
+// 				if (m_pAtlas) {
+// 					m_pAtlas->drawQuads();
+// 					m_pAtlas->removeAllQuads();
+// 				}
+// 				node->visit();
+// 
+// 				CC_NODE_DRAW_SETUP();
+// 				ccGLBlendFunc(m_sBlendFunc.src, m_sBlendFunc.dst);
+// 			}
+// 			break;
+// 		}
 	}
 
 	if(m_pAtlas && !m_pBatchNode && m_pParentBone == NULL)

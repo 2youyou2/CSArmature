@@ -113,6 +113,7 @@ void TestScene::runThisTest()
 	cs::ArmatureDataManager::sharedArmatureDataManager()->addArmatureFileInfo("Armature/weapon.png", "Armature/weapon.plist", "Armature/weapon.xml");
 	cs::ArmatureDataManager::sharedArmatureDataManager()->addArmatureFileInfo("Armature/robot.png", "Armature/robot.plist", "Armature/robot.xml");
 	cs::ArmatureDataManager::sharedArmatureDataManager()->addArmatureFileInfo("Armature/cyborg.png", "Armature/cyborg.plist", "Armature/cyborg.xml");
+	cs::ArmatureDataManager::sharedArmatureDataManager()->addArmatureFileInfo("Armature/Dragon.png", "Armature/Dragon.plist", "Armature/Dragon.xml");
 
 	
 	s_nActionIdx = -1;
@@ -215,9 +216,10 @@ void TestDragonBones20::onEnter()
 	TestLayer::onEnter();
 
 	cs::Armature *armature = NULL;
-	armature = cs::Armature::create("Zombie_f/Zombie");
-	armature->getAnimation()->playByIndex(0);
-	armature->setPosition(VisibleRect::center());
+	armature = cs::Armature::create("Dragon");
+	armature->getAnimation()->playByIndex(1);
+	armature->getAnimation()->setAnimationScale(0.4f);
+	armature->setPosition(VisibleRect::center().x, VisibleRect::center().y * 0.3f);
 	addChild(armature);
 
 }
@@ -616,7 +618,7 @@ void TestAnchorPoint::onEnter()
 {
 	TestLayer::onEnter();
 
-	for (int i = 0; i<4; i++)
+	for (int i = 0; i<5; i++)
 	{
 		Armature *armature = cs::Armature::create("Zombie_f/Zombie");
 		armature->getAnimation()->playByIndex(0);
