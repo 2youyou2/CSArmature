@@ -1,6 +1,13 @@
 CocoStudio website    : http://studio.cocos2d-x.org/<br>
 DragonBones Reference : http://dragonbones.github.io/getting_started_cn.html<br>
 
+20130524 Armature_v0.1.4<br>
+1.Fix if DragonBone export data include Parent-child hierarchy, the display is incorrect.<br>
+2.Support DragonBone 2.1<br>
+3.Support Armature Nesting<br>
+4.Support Armature boundingBox<br>
+5.Support Armature setAnchorPoint<br>
+
 20130514 Armature_v0.1.3<br>
 1. Adds support for .ExportJson file format.<br>
 2. Fix animation pause(), resume() bug.<br>
