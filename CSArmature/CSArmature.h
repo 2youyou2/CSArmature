@@ -54,7 +54,9 @@ public:
 	* @param  name Armature will use the name to find to the ArmatureData to initializes it.
 	* @return A initialized armature which is marked as "autorelease".
 	*/
-	static Armature *create(const char* name);
+	static Armature *create(const char *name);
+
+	static Armature *create(const char *name, Bone *parentBone);
 
 public:
     Armature();
@@ -71,6 +73,7 @@ public:
      */
     virtual bool init(const char *name);
 
+	virtual bool init(const char *name, Bone *parentBone);
     /**
      * Add a Bone to this Armature, 
      *
@@ -125,6 +128,7 @@ public:
 
 	inline void setBlendFunc(cocos2d::ccBlendFunc blendFunc) { m_sBlendFunc = blendFunc; }
 	inline cocos2d::ccBlendFunc getBlendFunc(void) { return m_sBlendFunc; }
+
 protected:
     
     /*
@@ -132,26 +136,26 @@ protected:
      */
 	Bone *createBone(const char *boneName );
     
-	
-	CC_SYNTHESIZE_RETAIN(Animation *, m_pAnimation, Animation);
 
-	CC_SYNTHESIZE_PASS_BY_REF(bool, m_bBonesIndexChanged, BonesIndexChanged);
+	CC_SYNTHESIZE_RETAIN(Animation *, m_pAnimation, Animation);
     
     CC_SYNTHESIZE(ArmatureData *, m_pArmatureData, ArmatureData);
 
-	CC_SYNTHESIZE(Armature*, m_pArmature, Armature);
-
 	CC_SYNTHESIZE(BatchNode*, m_pBatchNode, BatchNode);
-protected:
-    cocos2d::CCDictionary *m_pBoneDic;		//! The dictionary of the bones, include all bones in the armature, no matter it is the direct bone or the indirect bone. It is different from m_pChindren.
-
-    static std::map<int, Armature*> m_sArmatureIndexDic;	//! Use to save armature zorder info, 
-
-	cocos2d::ccBlendFunc        m_sBlendFunc;            /// It's required for CCTextureProtocol inheritance
 
 	CC_SYNTHESIZE_PASS_BY_REF(std::string, m_strName, Name);
 
 	CC_SYNTHESIZE(cocos2d::CCTextureAtlas*, m_pAtlas, TextureAtlas);
+
+	CC_SYNTHESIZE(Bone*, m_pParentBone, ParentBone);
+protected:
+    cocos2d::CCDictionary *m_pBoneDic;						//! The dictionary of the bones, include all bones in the armature, no matter it is the direct bone or the indirect bone. It is different from m_pChindren.
+
+	cocos2d::CCArray *m_pTopBoneList;
+
+    static std::map<int, Armature*> m_sArmatureIndexDic;	//! Use to save armature zorder info, 
+
+	cocos2d::ccBlendFunc        m_sBlendFunc;				//! It's required for CCTextureProtocol inheritance
 
 	cocos2d::CCPoint m_pOffsetPoint;
 };

@@ -170,21 +170,22 @@ void Bone::update(float delta)
 
 		m_tWorldTransform = CCAffineTransformConcat(nodeToParentTransform(), m_tWorldTransform);
 
-
 		if(m_pParent)
 		{
 			m_tWorldTransform = CCAffineTransformConcat(m_tWorldTransform, m_pParent->m_tWorldTransform);
 		}
-
-		
-		// 		if(m_pChildArmature)
-		// 		{
-		// 			m_pChildArmature->update(dt);
-		// 		}
-		
 	}
 
 	CS_DISPLAY_UPDATE(this, m_pDisplayManager->getCurrentDecorativeDisplay(), delta, m_bTransformDirty);
+
+	CCObject *object = NULL;
+	CCARRAY_FOREACH(m_pChildren, object)
+	{
+		Bone *childBone = (Bone*)object;
+		childBone->update(delta);
+	}
+
+	m_bTransformDirty = false;
 }
 
 
@@ -261,9 +262,9 @@ void Bone::removeFromParent(bool recursion)
 	}
 }
 
-void Bone::setParentBone(Bone *_parent)
+void Bone::setParentBone(Bone *parent)
 {
-    m_pParent = _parent;
+    m_pParent = parent;
 }
 
 Bone *Bone::getParentBone()
@@ -281,27 +282,12 @@ void Bone::childrenAlloc(void)
 
 void Bone::setChildArmature(Armature *armature)
 {
-// 	if(m_pChildArmature)
-// 	{
-// 		
-//         /*
-//          *  Remove child armature from armature's bone list
-//          */
-//         m_pChildArmature->getRootBone()->removeFromParent(true);
-// 
-// 		m_pChildArmature->getRootBone()->getDisplayManager()->setVisible(false);
-// 
-// 		m_pChildArmature->setArmature(NULL);
-// 	}
-// 
-// 	m_pChildArmature = armature;
-// 
-// 	if (m_pChildArmature)
-// 	{
-// 		m_pChildArmature->getRootBone()->getDisplayManager()->setVisible(true);
-// 		m_pChildArmature->setArmature(m_pArmature);
-// 	}
-// 	
+	if (m_pChildArmature != armature) 
+	{ 
+		CC_SAFE_RETAIN(armature); 
+		CC_SAFE_RELEASE(m_pChildArmature); 
+		m_pChildArmature = armature; 
+	} 
 }
 
 Armature *Bone::getChildArmature()

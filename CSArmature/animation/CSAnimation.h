@@ -37,6 +37,7 @@ namespace cs {
 
 
 class Armature;
+class Bone;
 
 
 class CS_EXTERN Animation : public ProcessBase
@@ -142,11 +143,11 @@ protected:
 
     MovementData *m_pMovementData;				//! MovementData save all MovementFrameDatas this animation used.
 
-	Armature *m_pArmature;				//! A weak reference of armature
+	Armature *m_pArmature;						//! A weak reference of armature
 
-	std::string m_strMovementID;		//! Current movment's name 
+	std::string m_strMovementID;				//! Current movment's name 
 
-    int m_iPrevFrameIndex;					//! Prev key frame index
+    int m_iPrevFrameIndex;						//! Prev key frame index
 	int m_iToIndex;								//! The frame index in MovementData->m_pMovFrameDataArr, it's different from m_iFrameIndex.
 
 	cocos2d::CCArray *m_pTweenList;
@@ -156,6 +157,8 @@ public:
 	 * The 1st param is the Armature. The 2nd param is Event Type, like START, COMPLETE. The 3rd param is Movement ID, also called Movement Name.
      */
 	sigslot::signal3<Armature*, const char*, const char*> MovementEventSignal;
+
+	sigslot::signal2<Bone*, const char*> FrameEventSignal;
 };
 
 }

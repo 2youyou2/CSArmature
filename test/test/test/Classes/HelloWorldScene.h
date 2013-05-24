@@ -44,6 +44,7 @@ enum {
 	TEST_BOX2D_DETECTOR,
 	TEST_BOUDINGBOX,
 	TEST_ANCHORPOINT,
+	TEST_ARMATURE_NESTING,
 
 	TEST_LAYER_COUNT
 };
@@ -189,5 +190,17 @@ class TestAnchorPoint : public TestLayer
 public:
 	virtual void onEnter();
 	virtual std::string title();
+};
+
+class TestArmatureNesting : public TestLayer
+{
+public:
+	virtual void onEnter();
+	virtual std::string title();
+	virtual bool ccTouchBegan(CCTouch *pTouch, CCEvent *pEvent);
+	virtual void registerWithTouchDispatcher();
+
+	Armature *armature;
+	int weaponIndex;
 };
 #endif  // __HELLOWORLD_SCENE_H__

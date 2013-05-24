@@ -4,6 +4,7 @@
 #include "CSArmatureDefine.h"
 #include "CSUtilMath.h"
 #include "CSConstValue.h"
+#include "CSDatas.h"
 
 using namespace cocos2d;
 using namespace std;
@@ -152,8 +153,9 @@ void Animation::play(const char *animationName, int durationTo, int durationTwee
 
     CCDictElement *element = NULL;
     CCDictionary *dict = m_pArmature->getBoneDic();
-    CCDICT_FOREACH(dict, element)
-    {
+
+	CCDICT_FOREACH(dict, element)
+	{
         Bone *bone = (Bone*)element->getObject();
         movementBoneData = (MovementBoneData*)m_pMovementData->movBoneDataDic.objectForKey(bone->getName());
 
@@ -173,8 +175,9 @@ void Animation::play(const char *animationName, int durationTo, int durationTwee
 			}
             
         }
-    }
-    
+	}
+
+	//m_pArmature->update(0);
 }
 
 
@@ -182,7 +185,6 @@ void Animation::playByIndex(int animationIndex, int durationTo, int durationTwee
 {
     std::vector<std::string> &movName = m_pAnimationData->movementNames;
     CC_ASSERT((animationIndex > -1) && (animationIndex < movName.size()));
-    
     
     std::string animationName = movName.at(animationIndex);
     play(animationName.c_str(), durationTo, durationTween, loop, tweenEasing);
@@ -264,25 +266,20 @@ void Animation::updateHandler()
 }
 
     
-void Animation::updateFrameData(float _currentPercent)
+void Animation::updateFrameData(float currentPercent)
 {
 	m_iPrevFrameIndex = m_iCurFrameIndex;
-    m_iCurFrameIndex = rawDuration * _currentPercent;
+    m_iCurFrameIndex = rawDuration * currentPercent;
     m_iCurFrameIndex = m_iCurFrameIndex % rawDuration;
-
-// 	if (m_iPrevFrameIndex != m_iCurFrameIndex)
-// 	{
-// 
-// 	}
     
-//    updateMovementFrameData(_currentPercent);
+    updateMovementFrameData(currentPercent);
 }
     
 void Animation::updateMovementFrameData(float _currentPercent)
 {
-//     int _length = m_pMovementData->movBoneDataDic.count();
+//     int length = m_pMovementData->movBoneDataDic.count();
 //     
-//     if(_length == 0){
+//     if(length == 0){
 //         return;
 //     }
 //     float _played = rawDuration * _currentPercent;

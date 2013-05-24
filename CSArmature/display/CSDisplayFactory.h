@@ -49,6 +49,7 @@ void CS_DISPLAY_SPRITE_UPDATE(Bone *bone, DecorativeDisplay *decoDisplay, float 
 
 void CS_DISPLAY_ARMATURE_ADD(Bone *bone, DecorativeDisplay *decoDisplay, DisplayData *displayData);
 void CS_DISPLAY_ARMATURE_CREATE(Bone *bone, DecorativeDisplay *decoDisplay);
+void CS_DISPLAY_ARMATURE_UPDATE(Bone *bone, DecorativeDisplay *decoDisplay, float dt, bool dirty);
 
 void CS_DISPLAY_PARTICLE_ADD(Bone *bone, DecorativeDisplay *decoDisplay, DisplayData *displayData);
 void CS_DISPLAY_PARTICLE_CREATE(Bone *bone, DecorativeDisplay *decoDisplay);

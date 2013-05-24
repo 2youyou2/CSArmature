@@ -37,7 +37,7 @@ namespace cs {
 
 	std::vector<std::string> DataReaderHelper::m_arrConfigFileList;
 	float DataReaderHelper::m_fPositionReadScale = 1;
-	static std::string s_FlashToolVersion = VERSION_2_0;
+	static float s_FlashToolVersion = VERSION_2_0;
 
 	void DataReaderHelper::setPositionReadScale(float scale)
 	{
@@ -140,7 +140,7 @@ namespace cs {
 		TiXmlElement	*root = document.RootElement();
 		CCAssert(root, "XML error  or  XML is empty.");
 
-		s_FlashToolVersion = root->Attribute(VERSION);
+		root->QueryFloatAttribute(VERSION, &s_FlashToolVersion);
 
 		/*
 		* Begin decode armature data from xml
@@ -567,7 +567,9 @@ namespace cs {
 			frameData->m_strSoundEffect = frameXML->Attribute(A_SOUND_EFFECT);
 		}
 
-		if (s_FlashToolVersion.compare(VERSION_2_0) == 0)
+
+
+		if (s_FlashToolVersion >= VERSION_2_0)
 		{
 			if(frameXML->QueryFloatAttribute(A_COCOS2DX_X, &_x) == TIXML_SUCCESS)
 			{
@@ -670,8 +672,18 @@ namespace cs {
 			*  recalculate frame data from parent frame data, use for translate matrix
 			*/
 			Node _helpNode;
-			parentFrameXml->QueryFloatAttribute(A_X, &_helpNode.x);
-			parentFrameXml->QueryFloatAttribute(A_Y, &_helpNode.y);
+			if (s_FlashToolVersion >= VERSION_2_0)
+			{
+				parentFrameXml->QueryFloatAttribute(A_COCOS2DX_X, &_helpNode.x);
+				parentFrameXml->QueryFloatAttribute(A_COCOS2DX_Y, &_helpNode.y);
+			}
+			else
+			{
+				parentFrameXml->QueryFloatAttribute(A_X, &_helpNode.x);
+				parentFrameXml->QueryFloatAttribute(A_Y, &_helpNode.y);
+			}
+			
+
 			parentFrameXml->QueryFloatAttribute(A_SKEW_X, &_helpNode.skewX);
 			parentFrameXml->QueryFloatAttribute(A_SKEW_Y, &_helpNode.skewY);
 
@@ -702,7 +714,7 @@ namespace cs {
 
 		float px, py, width, height = 0;
 
-		if(s_FlashToolVersion.compare(VERSION_2_0) == 0)
+		if(s_FlashToolVersion >= VERSION_2_0)
 		{
 			textureXML->QueryFloatAttribute(A_COCOS2D_PIVOT_X, &px);
 			textureXML->QueryFloatAttribute(A_COCOS2D_PIVOT_Y, &py);
@@ -1007,6 +1019,12 @@ namespace cs {
 		frameData->tweenEasing = (TweenType)json.getItemIntValue(A_TWEEN_EASING, Linear);
 		frameData->displayIndex = json.getItemIntValue(A_DISPLAY_INDEX, 0);
 
+		const char *event= json.getItemStringValue(A_EVENT);
+		if (event != NULL)
+		{
+			frameData->m_strEvent = event;
+		}
+
 		return frameData;
 	}
 
@@ -1080,24 +1098,6 @@ namespace cs {
 			node->isUseColorInfo = true;
 		}
 	}
-
-	// std::string DataReaderHelper::convertFlashToSP(const char *fileName)
-	// {
-	// // 	clearJson();
-	// // 
-	// // 	addDataFromXML(fileName);
-	// // 
-	// // 	addAllArmatureDataToJsonList();
-	// // 	addAllAnimationDataToJsonList();
-	// // 	addAllTextureDataToJsonList();
-	// // 
-	// // 	deleteDictElements(ArmatureDataManager::sharedArmatureDataManager()->getArmarureDatas());
-	// // 	deleteDictElements(ArmatureDataManager::sharedArmatureDataManager()->getAnimationDatas());
-	// // 	deleteDictElements(ArmatureDataManager::sharedArmatureDataManager()->getTextureDatas());
-	// // 
-	// // 	return getExportJson();
-	// 	return "";
-	// }
 #pragma endregion
 
 }
