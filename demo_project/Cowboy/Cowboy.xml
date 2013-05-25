@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<AnimationProject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Name>Cowboy</Name>
+  <ProjectDir>C:\Users\2youyou2\Desktop\Cowboy</ProjectDir>
+  <SceneJson>Cowboy.json</SceneJson>
+  <Resources>C:\Users\2youyou2\Desktop\Cowboy\Resources</Resources>
+  <fileList>
+    <string>Cowboy0.plist</string>
+  </fileList>
+  <CanvasSize>
+    <Width>0</Width>
+    <Height>0</Height>
+  </CanvasSize>
+  <JSFileList />
+</AnimationProject>
