@@ -7,6 +7,8 @@ DragonBones Reference : http://dragonbones.github.io/getting_started_cn.html<br>
 3.Support Armature Nesting<br>
 4.Support Armature boundingBox<br>
 5.Support Armature setAnchorPoint<br>
+6.Fix memory leak<br>
+7.Fix stack error if delete Armature immediately after creation<br>
 
 20130514 Armature_v0.1.3<br>
 1. Adds support for .ExportJson file format.<br>
