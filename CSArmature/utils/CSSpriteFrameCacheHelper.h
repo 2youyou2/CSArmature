@@ -332,6 +332,7 @@ class SpriteFrameCacheHelper
 public:
     static SpriteFrameCacheHelper *sharedSpriteFrameCacheHelper();
     
+	static void purgeSpriteFrameCacheHelper();
 public:
     
     /**
@@ -353,6 +354,7 @@ public:
 	
 private:
     SpriteFrameCacheHelper();
+	~SpriteFrameCacheHelper();
 
     std::map<std::string, std::string> m_Display2ImageMap;
 	cocos2d::CCDictionary *m_pDisplay2TextureAtlas;

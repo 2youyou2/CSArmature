@@ -385,6 +385,9 @@ namespace cs {
 		AnimationData(void);
 		~AnimationData(void);
 
+		void release();
+		void retain();
+
 		void addMovement(MovementData* movData);
 		MovementData *getMovement(const char *movementName);
 		int getMovementCount();

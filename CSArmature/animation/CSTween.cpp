@@ -45,7 +45,6 @@ Tween::Tween()
 Tween::~Tween(void)
 {
     CC_SAFE_DELETE( m_pFrom );
-    CC_SAFE_DELETE( m_pTweenData );
     CC_SAFE_DELETE( m_pBetween );
 }
 
@@ -55,14 +54,8 @@ bool Tween::init(Bone *bone)
     bool bRet = false;
     do
     {
-        m_pFrom = FrameData::create();
-        m_pFrom->retain();
-        
-		m_pTweenData = FrameData::create();
-        m_pTweenData->retain();
-
-        m_pBetween = FrameData::create();
-        m_pBetween->retain();
+        m_pFrom = new FrameData();
+        m_pBetween = new FrameData();
         
         m_pBone = bone;
 		m_pTweenData = m_pBone->getTweenData();

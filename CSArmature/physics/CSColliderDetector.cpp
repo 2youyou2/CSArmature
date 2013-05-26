@@ -130,6 +130,7 @@ void ColliderDetector::addContourData(ContourData *contourData)
 
  	ColliderBody *colliderBody = new ColliderBody(body, contourData);
     m_pColliderBodyList->addObject(colliderBody);
+	colliderBody->release();
 }
     
 void ColliderDetector::addContourDataList(CCArray *contourDataList)

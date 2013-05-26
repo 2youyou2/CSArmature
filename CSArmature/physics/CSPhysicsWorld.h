@@ -31,6 +31,7 @@
 #include "Box2D/Box2D.h"
 #include "sigslot.h"
 #include "CSBone.h"
+#include "GLES-Render.h"
 
 #include <list>
 using std::list;
@@ -89,6 +90,8 @@ class PhysicsWorld
 {
 public:
 	static PhysicsWorld *sharedPhysicsWorld();
+	static void purgePhysicsWorld();
+
 	void initNoGravityWorld();
 private:
 	PhysicsWorld();
@@ -101,6 +104,7 @@ private:
 
 	ContactListener *m_pContactListener;
 
+	GLESDebugDraw *m_pDebugDraw;
 public:
 	void update(float dt);
 	void drawDebug();

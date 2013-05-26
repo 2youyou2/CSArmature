@@ -1,5 +1,6 @@
 #include "HelloWorldScene.h"
 #include "CSPhysicsWorld.h"
+//#include "vld.h"
 
 using namespace cocos2d;
 
@@ -107,7 +108,7 @@ void TestScene::runThisTest()
 {
 	cs::ArmatureDataManager::sharedArmatureDataManager()->addArmatureFileInfo("Armature/Example08.png", "Armature/Example08.plist", "Armature/Example08.xml");
 	cs::ArmatureDataManager::sharedArmatureDataManager()->addArmatureFileInfo("Armature/TestBone0.png", "Armature/TestBone0.plist", "Armature/TestBone.json");
-	cs::ArmatureDataManager::sharedArmatureDataManager()->addArmatureFileInfo("Armature/Cowboy0.png", "Armature/Cowboy0.plist", "Armature/Cowboy.json");
+ 	cs::ArmatureDataManager::sharedArmatureDataManager()->addArmatureFileInfo("Armature/Cowboy0.png", "Armature/Cowboy0.plist", "Armature/Cowboy.json");
 	cs::ArmatureDataManager::sharedArmatureDataManager()->addArmatureFileInfo("Armature/knight.png", "Armature/knight.plist", "Armature/knight.xml");
 	cs::ArmatureDataManager::sharedArmatureDataManager()->addArmatureFileInfo("Armature/zamboni0.png", "Armature/zamboni0.plist", "Armature/zamboni.json");
 	cs::ArmatureDataManager::sharedArmatureDataManager()->addArmatureFileInfo("Armature/weapon.png", "Armature/weapon.plist", "Armature/weapon.xml");
@@ -118,8 +119,6 @@ void TestScene::runThisTest()
 	
 	s_nActionIdx = -1;
 	addChild(NextTest());
-
-	CCDirector::sharedDirector()->runWithScene(this);
 }
 
 void TestScene::draw()
@@ -293,16 +292,14 @@ std::string TestCSContertFromDragonBone::title()
 
 TestPerformance::~TestPerformance()
 {
-	for (std::vector<Armature*>::iterator it = armatureList.begin(); it != armatureList.end(); it++)
-	{
-		(*it)->removeFromParentAndCleanup(true);
-	}
 }
 void TestPerformance::onEnter()
 {
 	TestLayer::onEnter();
 
-	armatureCount = frames = times =  0;
+	armatureCount = frames = times = lastTimes = 0;
+	generated = false;
+
 	scheduleUpdate();
 }
 std::string TestPerformance::title()
@@ -322,23 +319,27 @@ void TestPerformance::update(float delta)
 	frames ++;
 	times += delta;
 
-	if (frames/ times > 58)
+	if (frames/times > 58)
 	{
 		cs::Armature *armature = NULL;
 		armature = new Armature();
 		armature->init("Knight_f/Knight");
 		armature->getAnimation()->playByIndex(0);
 		armature->setPosition(50 + armatureCount * 2, 150);
-		armatureList.push_back(armature);
 		addArmature(armature);
+		armature->release();
 
 		char pszCount[255];
 		sprintf(pszCount, "%s %i", subtitle().c_str(), armatureCount);
 		CCLabelTTF *label = (CCLabelTTF*)getChildByTag(10001);
 		label->setString(pszCount);
-
 	}
 }
+
+
+
+
+
 
 void TestChangeZorder::onEnter()
 {
@@ -367,12 +368,10 @@ void TestChangeZorder::onEnter()
 
 	currentTag = 0;
 }
-
 std::string TestChangeZorder::title()
 {
 	return "Test Change ZOrder Of Different Armature";
 }
-
 void TestChangeZorder::changeZorder(float dt)
 {
 	
@@ -397,7 +396,6 @@ void TestAnimationEvent::onEnter()
 	armature->setPosition(ccp(VisibleRect::left().x + 50, VisibleRect::left().y));
 	armature->getAnimation()->MovementEventSignal.connect(this, &TestAnimationEvent::animationEvent);
 	addChild(armature);
-	
 }
 std::string TestAnimationEvent::title()
 {

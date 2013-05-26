@@ -557,8 +557,8 @@ namespace sigslot {
                 
 				if((*it)->getdest() == pslot)
 				{
+					delete *it;
 					m_connected_slots.erase(it);
-					//			delete *it;
 				}
                 
 				it = itNext;
@@ -685,8 +685,8 @@ namespace sigslot {
                 
 				if((*it)->getdest() == pslot)
 				{
+					delete *it;
 					m_connected_slots.erase(it);
-					//			delete *it;
 				}
                 
 				it = itNext;
@@ -798,8 +798,8 @@ namespace sigslot {
                 
 				if((*it)->getdest() == pslot)
 				{
+					delete *it;
 					m_connected_slots.erase(it);
-					//			delete *it;
 				}
                 
 				it = itNext;
@@ -910,8 +910,8 @@ namespace sigslot {
                 
 				if((*it)->getdest() == pslot)
 				{
+					delete *it;
 					m_connected_slots.erase(it);
-					//			delete *it;
 				}
                 
 				it = itNext;
@@ -1022,8 +1022,8 @@ namespace sigslot {
                 
 				if((*it)->getdest() == pslot)
 				{
+					delete *it;
 					m_connected_slots.erase(it);
-					//			delete *it;
 				}
                 
 				it = itNext;
@@ -1136,8 +1136,8 @@ namespace sigslot {
                 
 				if((*it)->getdest() == pslot)
 				{
+					delete *it;
 					m_connected_slots.erase(it);
-					//			delete *it;
 				}
                 
 				it = itNext;
@@ -1250,8 +1250,8 @@ namespace sigslot {
                 
 				if((*it)->getdest() == pslot)
 				{
+					delete *it;
 					m_connected_slots.erase(it);
-					//			delete *it;
 				}
                 
 				it = itNext;
@@ -1364,8 +1364,8 @@ namespace sigslot {
                 
 				if((*it)->getdest() == pslot)
 				{
+					delete *it;
 					m_connected_slots.erase(it);
-					//			delete *it;
 				}
                 
 				it = itNext;
@@ -1479,8 +1479,8 @@ namespace sigslot {
                 
 				if((*it)->getdest() == pslot)
 				{
+					delete *it;
 					m_connected_slots.erase(it);
-					//			delete *it;
 				}
                 
 				it = itNext;
@@ -2106,6 +2106,11 @@ namespace sigslot {
 		signal3()
 		{
 			;
+		}
+
+		~signal3()
+		{
+
 		}
         
 		signal3(const signal3<arg1_type, arg2_type, arg3_type, mt_policy>& s)

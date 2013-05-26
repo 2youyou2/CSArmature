@@ -31,8 +31,8 @@
 #include "CSTransformHelp.h"
 #include "CSDataReaderHelper.h"
 #include "cocos2d.h"
-//#include "CSGame.h"
 #include "CSSpriteFrameCacheHelper.h"
+#include "CSPhysicsWorld.h"
 
 using namespace cocos2d;
 
@@ -64,10 +64,19 @@ ArmatureDataManager::ArmatureDataManager(void)
 
 ArmatureDataManager::~ArmatureDataManager(void)
 {
-    
+    removeAll();
+
     CC_SAFE_DELETE(m_pAnimationDatas);
     CC_SAFE_DELETE(m_pArmarureDatas);
     CC_SAFE_DELETE(m_pTextureDatas);
+}
+
+void ArmatureDataManager::purgeArmatureSystem()
+{
+	SpriteFrameCacheHelper::purgeSpriteFrameCacheHelper();
+	PhysicsWorld::purgePhysicsWorld();
+
+	CC_SAFE_RELEASE_NULL(m_sSharedArmatureDataManager);
 }
 
 bool ArmatureDataManager::init()

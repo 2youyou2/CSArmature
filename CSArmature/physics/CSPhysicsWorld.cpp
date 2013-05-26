@@ -26,7 +26,6 @@
 
 
 #include "CSPhysicsWorld.h"
-#include "GLES-Render.h"
 #include "CSArmatureDefine.h"
 
 namespace cs {
@@ -45,13 +44,23 @@ PhysicsWorld *PhysicsWorld::sharedPhysicsWorld()
 	return s_PhysicsWorld;
 }
 
+void PhysicsWorld::purgePhysicsWorld()
+{
+	delete s_PhysicsWorld;
+	s_PhysicsWorld = NULL;
+}
+
 PhysicsWorld::PhysicsWorld()
 	:m_pNoGravityWorld(NULL)
+	,m_pDebugDraw(NULL)
 {
 }
 
 PhysicsWorld::~PhysicsWorld()
 {
+	CC_SAFE_DELETE(m_pDebugDraw);
+	CC_SAFE_DELETE(m_pNoGravityWorld);
+	CC_SAFE_DELETE(m_pContactListener);
 }
 
 void PhysicsWorld::initNoGravityWorld()
@@ -66,8 +75,8 @@ void PhysicsWorld::initNoGravityWorld()
 
 
 #if ENABLE_PHYSICS_DEBUG
-	GLESDebugDraw *debugDraw = new GLESDebugDraw( PT_RATIO );
-	m_pNoGravityWorld->SetDebugDraw(debugDraw);
+	m_pDebugDraw = new GLESDebugDraw( PT_RATIO );
+	m_pNoGravityWorld->SetDebugDraw(m_pDebugDraw);
 
 	uint32 flags = 0;
 	flags += b2Draw::e_shapeBit;
@@ -75,7 +84,7 @@ void PhysicsWorld::initNoGravityWorld()
 	//        flags += b2Draw::e_aabbBit;
 	//        flags += b2Draw::e_pairBit;
 	//        flags += b2Draw::e_centerOfMassBit;
-	debugDraw->SetFlags(flags);
+	m_pDebugDraw->SetFlags(flags);
 #endif
 }
 

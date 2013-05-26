@@ -46,6 +46,11 @@ namespace cs {
 		return s_SpriteFrameCacheHelper;
 	}
 
+	void SpriteFrameCacheHelper::purgeSpriteFrameCacheHelper()
+	{
+		delete s_SpriteFrameCacheHelper;
+		s_SpriteFrameCacheHelper = NULL;
+	}
 
 	void SpriteFrameCacheHelper::addSpriteFrameFromFile(const char *_plistPath, const char *_imagePath)
 	{
@@ -210,5 +215,10 @@ namespace cs {
 	SpriteFrameCacheHelper::SpriteFrameCacheHelper()
 	{
 		m_pDisplay2TextureAtlas = new CCDictionary();
+	}
+
+	SpriteFrameCacheHelper::~SpriteFrameCacheHelper()
+	{
+		CC_SAFE_RELEASE_NULL(m_pDisplay2TextureAtlas);
 	}
 }

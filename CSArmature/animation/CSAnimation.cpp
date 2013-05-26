@@ -37,6 +37,7 @@ Animation::Animation()
 Animation::~Animation(void)
 {
 	CC_SAFE_RELEASE_NULL(m_pTweenList);
+	CC_SAFE_RELEASE_NULL(m_pAnimationData);
 }
 
 bool Animation::init(Armature *armature)
@@ -46,8 +47,8 @@ bool Animation::init(Armature *armature)
     {
         m_pArmature = armature;
         
-		m_pTweenList = CCArray::create();
-		m_pTweenList->retain();
+		m_pTweenList = new CCArray();
+		m_pTweenList->init();
 
         bRet = true;
     }

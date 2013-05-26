@@ -2,7 +2,7 @@
 #include "CCEGLView.h"
 #include "AppDelegate.h"
 #include "HelloWorldScene.h"
-
+#include "CSArmatureDataManager.h"
 
 USING_NS_CC;
 
@@ -12,6 +12,7 @@ AppDelegate::AppDelegate()
 
 AppDelegate::~AppDelegate()
 {
+	cs::ArmatureDataManager::sharedArmatureDataManager()->purgeArmatureSystem();
 }
 
 bool AppDelegate::applicationDidFinishLaunching()
@@ -33,6 +34,8 @@ bool AppDelegate::applicationDidFinishLaunching()
 
     // run
     pDirector->runWithScene(pScene);
+	pScene->release();
+
     return true;
 }
 

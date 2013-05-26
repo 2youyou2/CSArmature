@@ -800,6 +800,8 @@ namespace cs {
 			CSJsonDictionary *armatureDic = json.getSubItemFromArray(ARMATURE_DATA, i);
 			ArmatureData *armatureData = decodeArmature(*armatureDic);
 			ArmatureDataManager::sharedArmatureDataManager()->addArmatureData(armatureData->name.c_str(), armatureData);
+
+			delete armatureDic;
 		}
 
 		// Decode animations
@@ -809,6 +811,8 @@ namespace cs {
 			CSJsonDictionary *animationDic = json.getSubItemFromArray(ANIMATION_DATA, i);
 			AnimationData *animationData = decodeAnimation(*animationDic);
 			ArmatureDataManager::sharedArmatureDataManager()->addAnimationData(animationData->name.c_str(), animationData);
+
+			delete animationDic;
 		}
 
 		// Decode textures
@@ -818,6 +822,8 @@ namespace cs {
 			CSJsonDictionary *textureDic = json.getSubItemFromArray(TEXTURE_DATA, i);
 			TextureData *textureData = decodeTexture(*textureDic);
 			ArmatureDataManager::sharedArmatureDataManager()->addTextureData(textureData->name.c_str(), textureData);
+
+			delete textureDic;
 		}
 
 
@@ -838,6 +844,8 @@ namespace cs {
 		{
 			CSJsonDictionary *dic = json.getSubItemFromArray(BONE_DATA, i);
 			armatureData->addBoneData(decodeBone(*dic));
+
+			delete dic;
 		}
 
 		return armatureData;
@@ -867,6 +875,8 @@ namespace cs {
 		{
 			CSJsonDictionary *dic = json.getSubItemFromArray(DISPLAY_DATA, i);
 			boneData->addDisplayData(decodeBoneDisplay(*dic));
+
+			delete dic;
 		}
 
 		return boneData;
@@ -953,6 +963,8 @@ namespace cs {
 		{
 			CSJsonDictionary *dic = json.getSubItemFromArray(MOVEMENT_DATA, i);
 			aniData->addMovement(decodeMovement(*dic));
+
+			delete dic;
 		}
 
 		return aniData;
@@ -979,6 +991,8 @@ namespace cs {
 		{
 			CSJsonDictionary *dic = json.getSubItemFromArray(MOVEMENT_BONE_DATA, i);
 			movementData->addMovementBoneData(decodeMovementBone(*dic));
+
+			delete dic;
 		}
 
 		return movementData;
@@ -1004,6 +1018,8 @@ namespace cs {
 			FrameData *frameData = decodeFrame(*dic);
 			movementBoneData->addFrameData(frameData);
 			//movementBoneData->duration += frameData->duration;
+
+			delete dic;
 		}
 
 		return movementBoneData;
@@ -1048,6 +1064,8 @@ namespace cs {
 		{
 			CSJsonDictionary *dic = json.getSubItemFromArray(CONTOUR_DATA, i);
 			textureData->contourDataList.addObject(decodeContour(*dic));
+
+			delete dic;
 		}
 
 		return textureData;
@@ -1063,12 +1081,14 @@ namespace cs {
 			CSJsonDictionary *dic = json.getSubItemFromArray(VERTEX_POINT, i);
 
 			ContourVertex2 *vertex = new ContourVertex2(0, 0);
-			vertex->autorelease();
 
 			vertex->x = dic->getItemFloatValue(A_X, 0);
 			vertex->y = dic->getItemFloatValue(A_Y, 0);
 
 			contourData->vertexList.addObject(vertex);
+			vertex->release();
+		
+			delete dic;
 		}
 
 		return contourData;
@@ -1096,7 +1116,10 @@ namespace cs {
 			node->b = colorDic->getItemIntValue(A_BLUE, 255);
 
 			node->isUseColorInfo = true;
+			
+			delete colorDic;
 		}
+
 	}
 #pragma endregion
 

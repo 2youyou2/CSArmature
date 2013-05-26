@@ -359,6 +359,16 @@ namespace cs {
 	{
 	}
 
+	void AnimationData::release()
+	{
+		CCObject::release();
+	}
+
+	void AnimationData::retain()
+	{
+		CCObject::retain();
+	}
+
 	void AnimationData::addMovement(MovementData *movData)
 	{
 		movementDataDic.setObject(movData, movData->name);

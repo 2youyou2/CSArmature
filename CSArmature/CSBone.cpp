@@ -81,6 +81,7 @@ Bone::Bone()
 
 Bone::~Bone(void)
 {
+	CC_SAFE_DELETE(m_pTweenData);
     CC_SAFE_DELETE(m_pChildren);
     CC_SAFE_DELETE(m_pTween);
     CC_SAFE_DELETE(m_pUserData);
@@ -91,6 +92,7 @@ Bone::~Bone(void)
         m_pBoneData->release();
     }
     
+	CC_SAFE_RELEASE(m_pChildArmature); 
 }
 
 bool Bone::init()
@@ -111,17 +113,15 @@ bool Bone::init(const char *name)
         }
 
 		CC_SAFE_DELETE(m_pTweenData);
-		m_pTweenData = FrameData::create();
-		m_pTweenData->retain();
+		m_pTweenData = new FrameData();
 
         CC_SAFE_DELETE(m_pTween);
-		m_pTween = Tween::create(this);
-		m_pTween->retain();
-		//m_pTweenData = m_pTween->getTweenNode();
+		m_pTween = new Tween();
+		m_pTween->init(this);
         
         CC_SAFE_DELETE(m_pDisplayManager);
-        m_pDisplayManager = DisplayManager::create(this);
-        m_pDisplayManager->retain();
+        m_pDisplayManager = new DisplayManager();
+		m_pDisplayManager->init(this);
         
         
         bRet = true;

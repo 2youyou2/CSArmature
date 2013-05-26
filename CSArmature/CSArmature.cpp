@@ -131,16 +131,15 @@ bool Armature::init(const char *name)
         //cocos2d::CCLog("Armature (%s)  create.", name);
 
 		CC_SAFE_DELETE(m_pAnimation);
-        m_pAnimation = Animation::create(this);
-        m_pAnimation->retain();
+        m_pAnimation = new Animation();
+		m_pAnimation->init(this);
 
 		CC_SAFE_DELETE(m_pBoneDic);
-        m_pBoneDic	= CCDictionary::create();
-        m_pBoneDic->retain();
+        m_pBoneDic	= new CCDictionary();
 
 		CC_SAFE_DELETE(m_pTopBoneList);
-		m_pTopBoneList = CCArray::create();
-		m_pTopBoneList->retain();
+		m_pTopBoneList = new CCArray();
+		m_pTopBoneList->init();
 
 
 		m_sBlendFunc.src = CC_BLEND_SRC;

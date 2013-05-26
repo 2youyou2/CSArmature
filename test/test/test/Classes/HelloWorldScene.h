@@ -109,8 +109,8 @@ public:
 
 	int frames;
 	float times;
-
-	std::vector<Armature*> armatureList;
+	float lastTimes;
+	bool generated;
 };
 
 
@@ -127,6 +127,7 @@ class TestChangeZorder : public TestLayer
 class TestAnimationEvent : public TestLayer, public sigslot::has_slots<>
 {
 public:
+
 	virtual void onEnter();
 	virtual std::string title();
 	void animationEvent(Armature *armature, const char *movementType, const char *movementID);

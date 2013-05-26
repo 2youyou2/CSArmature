@@ -48,6 +48,8 @@ private:
     ~ArmatureDataManager(void);
 
 public:
+	virtual void purgeArmatureSystem();
+
 	/**
      * Init ArmatureDataManager
      */
