@@ -91,7 +91,8 @@ public:
     void updateTransform(cocos2d::CCAffineTransform &t);
 
 	void setColliderFilter(b2Filter &filter);
-    
+
+    void setActive(bool active);
 private:
     cocos2d::CCArray *m_pColliderBodyList;
     

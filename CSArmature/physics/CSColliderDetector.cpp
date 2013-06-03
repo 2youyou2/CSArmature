@@ -162,6 +162,15 @@ void ColliderDetector::setColliderFilter(b2Filter &filter)
 	}
 }
 
+void ColliderDetector::setActive(bool active)
+{
+	CCObject *object = NULL;
+	CCARRAY_FOREACH(m_pColliderBodyList, object)
+	{
+		ColliderBody *colliderBody = (ColliderBody*)object;
+		colliderBody->getB2Body()->SetActive(active);
+	}
+}
 
 CCPoint helpPoint;
 
